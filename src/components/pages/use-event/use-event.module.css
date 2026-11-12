@@ -1,0 +1,31 @@
+/* Event page: layout only. Colours and motion come from the shared tokens. */
+.head { padding-block: clamp(40px, 6vw, 88px) clamp(24px, 3vw, 40px); display: grid; gap: 16px; grid-template-columns: minmax(0, 1fr); position: relative; }
+.head h1 { animation: use-event-rise var(--dur-l) var(--ease-out) both; }
+.lead { max-width: 52ch; color: var(--muted); animation: use-event-rise var(--dur-l) var(--ease-out) 120ms both; }
+@keyframes use-event-rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+
+.sec { position: relative; border-top: var(--hair) solid var(--rule); padding-block: clamp(28px, 4vw, 56px); display: grid; gap: 20px; grid-template-columns: minmax(0, 1fr); }
+.sec::before, .sec::after { content: ''; position: absolute; top: calc(var(--node) / -2); width: var(--node); height: var(--node); background: var(--dark-blue); }
+.sec::before { left: 0; }
+.sec::after { right: 0; }
+.sechead { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+.sechead h2 { margin: 0; }
+.count { color: var(--muted); font-size: 13px; }
+
+.fig { margin: 0; display: grid; gap: 0; min-width: 0; }
+.fig > div { min-width: 0; }
+
+.badgeRow { display: grid; gap: 20px; grid-template-columns: minmax(0, 1fr); align-items: start; }
+.small { display: grid; gap: 20px; grid-template-columns: minmax(0, 1fr); }
+.row4, .row3, .row2 { display: grid; gap: 20px; grid-template-columns: minmax(0, 1fr); }
+
+@media (min-width: 640px) {
+  .small, .row2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .row3 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .row4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (min-width: 1000px) {
+  .badgeRow { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); }
+  .row3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .row4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
