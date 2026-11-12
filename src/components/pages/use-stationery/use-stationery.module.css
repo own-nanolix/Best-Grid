@@ -1,0 +1,38 @@
+/* Stationery page: page-only styles. Colours are shared tokens. */
+.hero { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: var(--gap); align-items: end; padding-top: clamp(28px, 4vw, 64px); padding-bottom: clamp(24px, 3vw, 44px); }
+.hero p { max-width: 52ch; }
+.section { padding-block: clamp(28px, 4vw, 64px); }
+.head { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); gap: var(--gap); align-items: end; padding-bottom: clamp(16px, 2vw, 28px); }
+.head p { max-width: 60ch; }
+
+/* plates: the opening one full width, then a 2-column grid, the spec column always on the right inside each plate */
+.plate { margin: 0; min-width: 0; }
+.plate > .stageBox { background: var(--stage); }
+.plate svg { display: block; width: 100%; height: auto; }
+.grid2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(16px, 2vw, 32px); }
+
+/* the slide strip scrolls inside its own box */
+.strip { display: flex; gap: 16px; overflow-x: auto; padding: 0 0 14px; scroll-snap-type: x proximity; outline-offset: 4px; }
+.strip > li { list-style: none; flex: 0 0 min(80vw, 520px); scroll-snap-align: start; min-width: 0; }
+.strip svg { display: block; width: 100%; height: auto; outline: var(--hair) solid var(--rule-soft); outline-offset: -1px; }
+.step { display: flex; justify-content: space-between; gap: 12px; padding-top: 10px; margin-top: 10px; border-top: var(--hair) solid var(--rule-soft); font-size: 13px; color: var(--muted); }
+.step b { font-weight: 400; color: var(--blue-ink); }
+
+/* flat print artwork on periwinkle */
+.flats { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 250px), 1fr)); gap: 16px; list-style: none; margin: 0; padding: 0; }
+.flat { margin: 0; background: var(--periwinkle); display: grid; place-items: center; padding: 22px; min-height: 300px; min-width: 0; }
+.flat svg { display: block; height: 240px; width: auto; max-width: 100%; filter: drop-shadow(0 6px 10px rgba(27, 32, 67, 0.22)); }
+.flatCap { margin: 8px 0 0; font-size: 13px; color: var(--muted); }
+
+@media (max-width: 900px) {
+  .hero, .head { grid-template-columns: minmax(0, 1fr); }
+  .grid2 { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 560px) {
+  .flat { min-height: 260px; padding: 16px; }
+  .flat svg { height: 200px; }
+}
+@media (max-width: 700px) {
+  .plate > .stageBox { overflow-x: auto; }
+  .plate svg { width: 760px; max-width: none; }
+}
