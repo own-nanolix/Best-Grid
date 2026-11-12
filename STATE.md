@@ -2,7 +2,7 @@
 
 Spec: `rule/Brand-site.md` (master spec) and `rule/10-best-grid.md` (this project's link and layout direction).
 Owner's later instructions: `STANDING-ORDERS.md` (they override the rule files where they conflict).
-The same pipeline was run first on Tectra (`../project-2`), UpCanopy (`../project-3`) and Sahra (`../project-4`);
+The same pipeline was run first on three sibling projects (`../project-2`, `../project-3`, `../project-4`);
 their fixes are applied here from the start.
 
 ## Project facts
@@ -29,7 +29,7 @@ their fixes are applied here from the start.
 - [x] 1. Check the project and the PC, tool files, `next.config` keys, `.gitignore` lines
 - [x] 2. Extract the case study
 - [x] 3. Study it and write `SOURCE.md`
-- [ ] 4. `LAYOUTS.md`, `pages.json`, shared system, 30 stub routes, `BRIEF.md`; dev server started
+- [x] 4. `LAYOUTS.md`, `pages.json`, shared system, 30 stub routes, `BRIEF.md` (dev server: address below; start it before wave 1)
 - [ ] 5. Build team, two waves; check reports 30 of 30 `ok`
 - [ ] 6. Review team; shared fixes applied
 - [ ] 7. Verify in the browser; SVG export
@@ -50,13 +50,21 @@ their fixes are applied here from the start.
   node explorer that uses only the published 2025 figures; 2023 and 2024 show an empty state.
 - PRODUCT_OBJECT = the project tube with its rolled connection-study drawing and label (m07). The page-30 card is
   the staff access card of m08 in three colourways.
-- Fonts: the only brand face is Neue Haas Unica W1G (commercial, Monotype), Regular named; the word-mark reads as
-  Medium. Closest free Google fonts: **Inter** (a neo-grotesk with the same Swiss proportions, a large x-height,
-  tabular figures for the MW numerals and an optical-size axis like the "Optical size" note on m03) for body and
-  headlines, and **Inter Tight** for display and the tightly spaced word-mark setting; fallback candidates
-  **Hanken Grotesk** and **Schibsted Grotesk**. Final choice in step 4, named in `BRIEF.md` and the report, with
-  "Neue Haas Unica W1G" first in the CSS stack and a system fallback last. The word-mark and mark are traced as SVG
-  paths, never typed.
+- Fonts (final, step 4): **Inter** (text; loaded with its optical-size axis) and **Inter Tight** (display sizes and
+  the word-mark), both through next/font/google as `--font-inter` / `--font-inter-tight`, with "Neue Haas Unica W1G"
+  first in both CSS stacks and Helvetica Neue / Arial / system-ui last. Why: rendered beside the type slide (m03) and
+  the word-mark crops, Inter has the same neo-grotesk construction (flat-sided "G" with a vertical stem, straight
+  "t", round "e"/"s" apertures), a large x-height and tabular figures; Hanken Grotesk reads rounder and geometric,
+  Schibsted Grotesk wider and softer. The typeface's product name is never printed on a page ("the brand typeface").
+- The mark is traced as SVG paths built from its own construction (Mark.jsx: bar B 5.23, pitch P 12.85, star edge
+  y = 0.45x - 1.6, chamfer x + y = 3.2, waist 20.9, diagonal half-width 3.71, corner radii 1.5 / 1.55 / 0.4 / 0.85);
+  the parameters were fitted to reference/logo_zoom.png by overlay: 97.4% pixel overlap (IoU), the rest is raster
+  anti-aliasing. SOURCE.md's first measurements (P 12.83, slope 0.4535, waist 21.2) are superseded by these.
+- The word-mark is set in the brand typeface, so it is SVG <text> in the display stack (WordmarkG), not traced:
+  Inter Tight weight 540, tracking -0.045 em, word gap set as dx 0.15 em, horizontal scale 1.1 so the footprint
+  matches the reference within 1% (letters touch as printed); "Grid" is slightly narrower than the brand cut's.
+- Lockups: the case study shows the mark and word-mark in separate grid cells only. Built: card-back corners
+  (m05), the nav cell (m16), the three-cell poster footer (m11) as rebuilds; row and stacked lockups as extensions.
 - No other company's name on any page (standing orders, point 4). Here it affects: the client label "RedLink
   Systems" on the tubes (left out); the typeface's product name on the type page (only in the CSS stack and the
   report); the PMS rows of the palette slide (left out, HEX/RGB/CMYK kept); browser chrome, laptop, phones and the
@@ -68,6 +76,26 @@ their fixes are applied here from the start.
   are extensions: they use the case study's own lines, labels, figures, contacts and palette; everything else is a
   quiet placeholder.
 
+- Landing ids: lp-home (m16 rebuilt and continued), lp-solar, lp-wind, lp-storage, lp-data-centers (the four
+  technology tiles of m16), lp-field ("Análisis · Criterio · Validación", m11), lp-annual-report ("Informe de
+  actividad anual", m02). Nav words of m16 link: Servicios -> lp-field, Clientes -> lp-data-centers, Nosotros ->
+  lp-annual-report, Únete -> lp-storage; the footer lists the tile words and the tube services.
+- Icons: 32 core icons plus utilities on one 24 grid, drawn as filled one-unit bars in the manner of m14 / m15
+  (square ends, stepped corners, open four-way crossings, 1-unit diagonals and arcs); the four case-study icons are
+  rebuilt separately on their own 32 grid (PIXEL32). No platform or social-network icons.
+- Accessibility inks: --blue-ink #3352c2 (small blue text on every light ground, 4.7:1 or more), --muted #4b5174,
+  --muted-on-dark #a9b2d6. Failing pairs kept only for 24 px and up: Active Blue on Light Blue (2.8:1), periwinkle
+  (2.4:1), paper (3.3:1), white (3.4:1); light type on Active Blue (2.8 to 3.4:1). Changes that alter the look: the
+  active year chip label is Dark Blue (printed white); small website body text uses the blue ink.
+- Mockup kit: dark stage #0c0e1f with one radial spotlight (StageG), light direction from the spot, contact and cast
+  shadows, materials (board, paper, card, fabric, metal, glass, ceramic, rubber, plastic), catalogue-plate parts
+  (CalloutG, DimensionG, SpecColumnG, PlateFrameG). Plate dimensions are our own production values in mm.
+- Device frames are neutral (round camera hole, plain window bar). Ready screens rebuilt from m16 and m17.
+- Starter files removed: src/app/layout.js and src/app/page.js (replaced by layout.jsx and (site)/page.jsx).
+  src/app/favicon.ico overwritten with the mark (16, 32, 48 px); src/app/icon.svg drawn from the mark.
+- SOURCE.md copy re-read against the full-size crops (cards, envelope, tube label, event screen, billboard, box,
+  badge): no differences found.
+
 ## Dev server
 
 http://localhost:3105 (start with `npx next dev -p 3105`; stop it before `npm run build`)
@@ -78,3 +106,6 @@ http://localhost:3105 (start with `npx next dev -p 3105`; stop it before `npm ru
 - Step 2 done: 23 images in reference/ (headed Chrome), tall images sliced.
 - Step 3 done: five still frames (`m10_1.png` to `m10_5.png`) cut from `m10.gif` (8 frames, 100 ms each); enlarged crops
   (`reference/crop_*.png`) and `reference/logo_zoom.png`; mark measured on m21; SOURCE.md written.
+- Step 4 done: LAYOUTS.md, pages.json, shared system, 30 stub routes, BRIEF.md. Lint clean; build passes; check
+  lists 30 stubs and "/". Plumbing (dock, index, reveal, toast, tools, device-frame structure) adapted from the sibling project ../project-3;
+  tokens, type, mark, lockups, icons, key art, mockup kit, screens, nav and footer are Best Grid's own.

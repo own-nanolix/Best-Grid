@@ -159,14 +159,14 @@ copies are `mNN_1.png` / `mNN_2.png`; enlarged crops are `reference/crop_*.png`;
   filled in two strengths of Active Blue and some half-size cells. Spanish.
 - **m18** Photograph: a woman in a blue roll-neck, portrait, then her hands holding a closed laptop by an office
   desk, framed on periwinkle. Not reproduced. No copy.
-- **m19** A long Active Blue billboard under a concrete canopy with two steel bollards: "Convertimos complejidad"
+- **m19** A long Active Blue billboard under a concrete overhang with two steel bollards: "Convertimos complejidad"
   (light grey) / "en avance. Dando estructura" / "a lo que hoy bloquea los proyectos" (Dark Blue); light mark;
   "Acceso y conexión a red eléctrica" / "en contextos de alta complejidad" (white); "@bestgrid" (light) /
   "bestgrid.com" (Dark Blue); a horizontal rule with a node; "Best Grid" very large in light grey;
   "Valle de Esteribar, Nº2 local 61." / "28692 Villanueva de la Cañada" / "[Madrid] España" (the accent on
   "Esteribar" is not visible here); right: a square photo of a pylon with glowing cyan lines on an orange sky.
   Spanish.
-- **m20** Photograph: a white production SUV with a dark roof in front of a board-marked concrete wall; the mark in
+- **m20** Photograph: a white production SUV with a dark top in front of a board-marked concrete wall; the mark in
   Dark Blue on the rear quarter and "…est Grid" in Dark Blue on the rear door. The vehicle maker's badges are
   visible but illegible. No other copy.
 - **m21** The mark alone, Active Blue on Dark Blue, centred, about 31% of the slide width. Source of `logo_zoom.png`.
@@ -175,7 +175,7 @@ copies are `mNN_1.png` / `mNN_2.png`; enlarged crops are `reference/crop_*.png`;
   trata de poder conectar." (Dark Blue); light mark top right; "Generar energía ya no es el reto." (white) /
   "Hacer viable su conexión a red sí lo es." (Dark Blue); "@bestgrid" / "bestgrid.com"; a rule with nodes;
   "Best Grid" large, light grey. Left screen: aerial photo of a solar tower field; right: a worker with a laptop
-  on a solar roof. Spanish.
+  on a building top covered with solar panels. Spanish.
 - **m23** The designer's sign-off mark "AeMe" in a black high-contrast serif on white. Credit only; not part of the
   brand.
 
