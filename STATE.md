@@ -132,3 +132,4 @@ http://localhost:3105 (start with `npx next dev -p 3105`; stop it before `npm ru
 - R2, `src/components/site/icons.js`: (a) turbine ring ends: `A(cx,cy,6k,7k,…)` with inner span ±29.5° and outer ±33.5°; (b) `wind: turbinePath(12, 12.75, 1)` (it now draws 0.9-unit bars); (c) `user` draws a person: replace with a badge shape `F(3,5,18,15)+R(10,3,4,2)+R(6,9,4,4)+H(12,9,6)+H(12,12,4)+H(6,16,12)`.
 - R2: private hexes remain in shared art (`BrandDefs`, `BaselineFieldG`, `NodeGridG`) and in the `.btn` hover rules in globals.css: switch to tokens.
 - R2 (SOURCE.md correction): the baseline field (m10) is a line pair every 0.63% in blocks of 18, not 0.55%; the animation's 8 frames run A|B, C|B, C|D, B|D, B|A, D|A, D|C, A|C.
+- R6, shared `Segmented` control (src/components/ui): it ignores arrow keys; add Left / Right (and Home / End) handling with roving focus.
