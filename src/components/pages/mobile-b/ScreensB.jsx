@@ -5,8 +5,8 @@ import Toggle, { Segmented } from '@/components/ui/Toggle';
 import Icon from '@/components/site/Icon';
 import { toast } from '@/components/site/Toast';
 import { copy } from '@/lib/site';
-import { seeded, r2 } from '@/lib/charts';
-import { CONTACT, PEOPLE, REPORT, BRAND } from '@/lib/brand';
+import { CONTACT, REPORT, BRAND } from '@/lib/brand';
+import { BadgeCard, CardFront } from './IdPieces';
 import { Bar, StatusBar, Mark } from './kit';
 import s from './mobile-b.module.css';
 export function Settings({ idp }) {
@@ -105,27 +105,8 @@ export function ShareScreen() {
     </div>
   );
 }
-function Barcode({ seed = 7, w = 120, h = 26 }) {
-  const rnd = seeded(seed);
-  const bars = [];
-  let x = 0;
-  while (x < w) {
-    const bw = 1 + Math.floor(rnd() * 3);
-    bars.push({ x, bw });
-    x += bw + 1 + Math.floor(rnd() * 3);
-  }
-  return (
-    <svg viewBox={`0 0 ${w} ${h}`} width="100%" height={h} aria-hidden="true" fill="var(--active-blue)" preserveAspectRatio="none">
-      {bars.map((b) => (
-        <rect key={b.x} x={r2(b.x)} y="0" width={b.bw} height={h} />
-      ))}
-    </svg>
-  );
-}
 export function Profile({ idp }) {
   const [view, setView] = useState('Badge');
-  const e = PEOPLE.elena;
-  const l = PEOPLE.lorena;
   return (
     <div className={s.scr}>
       <StatusBar />
@@ -134,34 +115,7 @@ export function Profile({ idp }) {
         <div style={{ margin: '4px 0 16px' }}>
           <Segmented id={`${idp}-view`} label="Profile view" options={['Badge', 'Card']} value={view} onChange={setView} />
         </div>
-        {view === 'Badge' ? (
-          <div className={`${s.badge} ${s.fade}`} style={{ width: 250, margin: '0 auto' }} key="badge">
-            <i className={s.badgeL} />
-            <span style={{ position: 'absolute', left: 12, top: 12, color: 'var(--blue-ink)', fontSize: 13 }}>{BRAND}</span>
-            <div lang="es" style={{ position: 'absolute', left: '33%', top: 40, right: 10, fontSize: 12, lineHeight: 1.25 }}>
-              <div style={{ fontSize: 15 }}>{e.name}</div>
-              <div style={{ marginTop: 6 }}>{e.roleRows.map((r) => <span key={r} style={{ display: 'block' }}>{r}</span>)}</div>
-              <div style={{ marginTop: 6 }}>{e.dept}</div>
-            </div>
-            <span lang="es" className={s.pale} aria-hidden="true">{e.numeral}</span>
-            <span lang="es" style={{ position: 'absolute', left: '33%', bottom: 66, fontSize: 11 }}>{e.id}</span>
-            <i style={{ position: 'absolute', left: 0, right: 0, bottom: 56, height: 1, background: 'var(--dark-blue)' }} />
-            <i className={s.nodeAt} style={{ left: '29%', bottom: 56 }} />
-            <div style={{ position: 'absolute', left: 12, right: 12, bottom: 24 }}><Barcode /></div>
-            <span lang="es" style={{ position: 'absolute', left: 12, bottom: 6, fontSize: 10 }}>{CONTACT.webAlt}</span>
-          </div>
-        ) : (
-          <div className={`${s.badge} ${s.fade}`} style={{ width: 340, aspectRatio: '85 / 55', margin: '0 auto', background: 'var(--paper)', color: 'var(--blue-ink)' }} key="card" lang="es">
-            <div style={{ padding: 16, fontSize: 15, lineHeight: 1.2 }}>
-              {l.nameRows.map((r) => <span key={r} style={{ display: 'block' }}>{r}</span>)}
-              <span style={{ display: 'block', marginTop: 10, fontSize: 11 }}>{CONTACT.phone}</span>
-              <i style={{ display: 'block', height: 1, background: 'var(--dark-blue)', margin: '10px 0' }} />
-              <span style={{ display: 'block', fontSize: 11 }}>{l.roleRows.join(' ')}</span>
-              <span style={{ display: 'block', fontSize: 11, marginTop: 6 }}>{l.email}</span>
-              <span style={{ display: 'block', fontSize: 11 }}>{CONTACT.web}</span>
-            </div>
-          </div>
-        )}
+        <div className={s.fade} key={view}>{view === 'Badge' ? <BadgeCard width={250} /> : <CardFront width={318} />}</div>
         <div style={{ display: 'grid', gap: 10, marginTop: 28 }}>
           <Bar w={80} /><Bar w={58} /><Bar w={70} />
         </div>

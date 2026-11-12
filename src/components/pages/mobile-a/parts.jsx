@@ -1,19 +1,30 @@
 // Small drawing parts shared by the nine screens. Every screen is an SVG group in the 390 x 844 artboard space.
 import { HEX, CAPACITY } from '@/lib/brand';
 import { r2 } from '@/lib/charts';
-import { StatusBarG } from '@/components/art/Devices';
 
 export const W = 390;
 export const H = 844;
-export const GROUND = '#dcdfe6'; // the phone screen ground sampled on m17
-export const SOFT = '#7c9cff';   // the lighter Active Blue of the node grid
+export const GROUND = 'var(--screen)'; // the phone screen ground sampled on m17 (shared token); set as style
 
-// The screen ground and the neutral status bar (9:41 and plain glyphs).
+// A neutral status bar: signal, network and battery glyphs only (positions measured on m17). No clock is shown.
+export function StatusBar({ fill = HEX.darkBlue }) {
+  return (
+    <g fill={fill} aria-hidden="true">
+      {[0, 1, 2, 3].map((i) => (
+        <rect key={i} x={280.5 + i * 4.9} y={r2(36.5 - (i + 1) * 2.3)} width="3.2" height={r2((i + 1) * 2.3)} />
+      ))}
+      <path d="M306 30.5a12 12 0 0 1 17.5 0l-1.9 2a9.3 9.3 0 0 0-13.7 0Z M309.6 34.1a7 7 0 0 1 10.3 0l-5.15 5.2Z" />
+      <rect x="334" y="30.6" width="21" height="8.6" rx="2" />
+    </g>
+  );
+}
+
+// The screen ground and the neutral status bar.
 export function Ground({ fill = GROUND, bar = HEX.darkBlue, children }) {
   return (
     <g>
-      <rect width={W} height={H} fill={fill} />
-      <StatusBarG fill={bar} />
+      <rect width={W} height={H} style={{ fill }} />
+      <StatusBar fill={bar} />
       {children}
     </g>
   );
@@ -63,7 +74,7 @@ export function Cell({ x, y, w, h, fill, line = HEX.darkBlue, o = 0.5, node = 6,
 export function YearChip({ cx, y, label, on, w = 52, h = 18 }) {
   return (
     <g>
-      <rect x={cx - w / 2} y={y} width={w} height={h} rx={h / 2} fill={on ? HEX.activeBlue : '#e8eaf0'} />
+      <rect x={cx - w / 2} y={y} width={w} height={h} rx={h / 2} fill={on ? HEX.activeBlue : undefined} style={on ? undefined : { fill: 'var(--chip-off)' }} />
       <text x={cx} y={y + h / 2 + 3.6} fontSize="10.5" fill={HEX.darkBlue} textAnchor="middle">{label}</text>
     </g>
   );

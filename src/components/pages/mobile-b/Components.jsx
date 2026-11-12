@@ -6,7 +6,7 @@ import Toggle from '@/components/ui/Toggle';
 import Button from '@/components/ui/Button';
 import Icon, { PixelIcon } from '@/components/site/Icon';
 import { CAPACITY, TECH } from '@/lib/brand';
-import { Bar, StatusBar, TabBar, Accordion } from './kit';
+import { Bar, StatusBar, TabBar, Accordion, useSheetDrag } from './kit';
 import { TABS, HELP } from './ScreensA';
 import { SCREENS } from './Stage';
 import s from './mobile-b.module.css';
@@ -128,8 +128,8 @@ function StatSpec() {
           ))}
         </div>
         <div className={s.stat}>
-          <span className="t-small">Rows shown</span>
-          <b>{TECH.length}</b>
+          <span className="t-small" lang="es">{TECH[3].label}</span>
+          <b lang="es">{TECH[3].value}</b>
         </div>
       </div>
     </div>
@@ -159,6 +159,7 @@ function AccSpec() {
 }
 function SheetSpec() {
   const [open, setOpen] = useState(false);
+  const { grip, sheetStyle } = useSheetDrag(() => setOpen(false));
   return (
     <div className={s.specimen}>
       <div className={s.demo} style={{ height: 300 }} onKeyDown={(e) => e.key === 'Escape' && setOpen(false)}>
@@ -166,8 +167,8 @@ function SheetSpec() {
           <Bar w={80} /><Bar w={60} /><Bar w={72} />
         </div>
         <div className={s.dim} data-open={open} onClick={() => setOpen(false)} aria-hidden="true" />
-        <div className={s.sheet} data-open={open} role="dialog" aria-label="Sheet specimen" inert={!open}>
-          <button type="button" className={s.grip} aria-label="Close sheet" onClick={() => setOpen(false)} />
+        <div className={s.sheet} style={sheetStyle} data-open={open} role="dialog" aria-label="Sheet specimen" inert={!open}>
+          <button type="button" className={s.grip} aria-label="Drag down or press to close" {...grip} />
           <div style={{ display: 'grid', gap: 12 }}><Bar w={70} /><Bar w={50} /></div>
         </div>
       </div>

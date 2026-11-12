@@ -26,11 +26,11 @@ export function TilesSheet() {
       ))}
       {TECH.map((t, i) => (
         <g key={t.key} lang="es" className="fill-in" style={{ '--i': i + 3 }}>
-          <g transform={`translate(${TILE_X[i] + 56} 46) scale(1.8)`}>
+          <g transform={`translate(${TILE_X[i] + 118} 46) scale(1.8)`}>
             <path d={PIXEL32[t.icon]} fill={HEX.darkBlue} />
           </g>
-          <text x={TILE_X[i] + 140} y="70" fontSize="15" fill={HEX.blueInk}>{t.label}</text>
-          <text x={TILE_X[i] + 140} y="92" fontSize="20" fill={HEX.blueInk} className="display">{t.value}</text>
+          <text x={TILE_X[i] + 202} y="70" fontSize="14" fill={HEX.blueInk}>{t.label}</text>
+          <text x={TILE_X[i] + 202} y="88" fontSize="14" fill={HEX.blueInk}>{t.value}</text>
         </g>
       ))}
     </Art>

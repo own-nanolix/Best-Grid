@@ -7,7 +7,7 @@ import Icon, { PixelIcon } from '@/components/site/Icon';
 import { toast } from '@/components/site/Toast';
 import { WordmarkG } from '@/components/art/Mark';
 import { LINES, TECH, CAPACITY, WEB_HERO } from '@/lib/brand';
-import { Bar, StatusBar, Mark, TabBar, Accordion, radioKeys } from './kit';
+import { Bar, StatusBar, Mark, TabBar, Accordion, radioKeys, useSheetDrag } from './kit';
 import s from './mobile-b.module.css';
 export const TABS = [
   { key: '13', label: 'Reader', icon: 'document' },
@@ -62,6 +62,7 @@ export function Switcher({ idp }) {
   const [tech, setTech] = useState(0);
   const [open, setOpen] = useState(true);
   const refs = useRef([]);
+  const { grip, sheetStyle } = useSheetDrag(() => setOpen(false));
   const t = TECH[tech];
   const onKey = (e) => {
     if (e.key === 'Escape' && open) {
@@ -86,8 +87,8 @@ export function Switcher({ idp }) {
         </div>
       </div>
       <div className={s.dim} data-open={open} onClick={() => setOpen(false)} aria-hidden="true" />
-      <div id={`${idp}-sheet`} className={s.sheet} data-open={open} role="dialog" aria-label="Technology" inert={!open}>
-        <button type="button" className={s.grip} aria-label="Close sheet" onClick={() => setOpen(false)} />
+      <div id={`${idp}-sheet`} className={s.sheet} style={sheetStyle} data-open={open} role="dialog" aria-label="Technology" inert={!open}>
+        <button type="button" className={s.grip} aria-label="Drag down or press to close" {...grip} />
         <div role="radiogroup" aria-label="Technology" onKeyDown={(e) => radioKeys(e, TECH.length, tech, setTech, refs)}>
           {TECH.map((x, i) => (
             <button

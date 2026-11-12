@@ -66,6 +66,7 @@
 .tiles { --cols: 4; }
 .tiles.tiles { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 @media (max-width: 760px) { .tiles.tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 520px) { .tile { grid-template-columns: minmax(0, 1fr); } }
 .tile { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 4px 14px; align-items: center; text-align: left; background: transparent; color: var(--dark-blue); font: inherit; cursor: pointer; border-radius: var(--r-0); transition: background-color var(--dur-s) var(--ease-out), color var(--dur-s) var(--ease-out); }
 .tile:hover { background: var(--periwinkle); }
 .tile:active { transform: translateY(1px); }

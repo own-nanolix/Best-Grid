@@ -3,26 +3,28 @@
 // with its printed figure, and a year with no published figures.
 import { HEX, CAPACITY, TECH } from '@/lib/brand';
 import { PIXEL32 } from '@/components/site/icons';
-import { ScreenCapacityG, ScreenNodesG } from '@/components/art/Devices';
+import { WordmarkG } from '@/components/art/Mark';
+import { CapacityFaithful, NodesFaithful } from './Faithful';
 import { Ground, Title, Bar, Node, Rule, Cell, YearChip } from './parts';
 
-// 01: m17 front phone, 2025 with its figures.
+// 01: m17 front phone, 2025 with its figures (measured rebuild in Faithful.jsx).
 export function CapacityScreen({ idp }) {
-  return <ScreenCapacityG idp={idp} year={CAPACITY.year} />;
+  return <CapacityFaithful idp={idp} />;
 }
 
 // 02: m17 back phone, the node grid (drawing only, no data).
 export function NodesScreen({ animate = false }) {
-  return <ScreenNodesG animate={animate} />;
+  return <NodesFaithful animate={animate} />;
 }
 
-// 03: the four technology tiles of the website as stacked ruled cells (m16): pixel icon, label, figure.
+// 03: the four technology tiles of the website as stacked ruled cells (m16): pixel icon, label, figure. The tiles
+// carry no heading on the website, so the screen is headed by the word-mark only.
 const TILE_Y = 132;
 const TILE_H = 150;
 export function TechScreen() {
   return (
     <Ground>
-      <Title rows={CAPACITY.titleRows} />
+      <WordmarkG x={36} y={96} size={24} fill={HEX.darkBlue} />
       {TECH.map((t, i) => {
         const y = TILE_Y + i * TILE_H;
         return (
@@ -52,7 +54,6 @@ export function TechDetailScreen() {
         <path d={PIXEL32[t.icon]} fill={HEX.darkBlue} />
       </g>
       <text x="34" y="436" fontSize="46" fill={HEX.activeBlue} letterSpacing="-1.2" className="display" lang="es">{t.value}</text>
-      <path d="M268 410l5 -8l5 8z" fill={HEX.activeBlue} />
       {[0, 1, 2, 3, 4].map((i) => (
         <g key={i}>
           <Rule x={36} y={474 + i * 52} w={317} o={0.3} />

@@ -19,8 +19,7 @@
 .scr:not([data-theme="dark"]) :global(.muted) { color: var(--muted); }
 .scr:not([data-theme="dark"]) :global(.ink), .scr:not([data-theme="dark"]) :global(.fieldset label), .scr:not([data-theme="dark"]) :global(.t-label) { color: var(--blue-ink); }
 .scr[data-theme="dark"] :global(.fieldset label) { color: var(--active-blue); }
-.sb { height: 56px; display: flex; align-items: center; justify-content: space-between; padding: 6px 34px 0; }
-.sbl { width: 44px; height: 8px; background: currentColor; opacity: 0.8; }
+.sb { height: 56px; display: flex; align-items: center; justify-content: flex-end; padding: 6px 34px 0; }
 .sbr { display: flex; align-items: center; gap: 10px; }
 .body { position: absolute; left: 0; right: 0; top: 56px; bottom: 0; padding: 18px 36px 0; overflow: hidden; }
 .h { font-family: var(--font-display); font-weight: 400; font-size: 28px; line-height: 1.12; letter-spacing: -0.012em; margin: 0 0 6px; }
@@ -78,11 +77,6 @@
 .sheet[data-open="true"] { transform: none; }
 .grip { display: block; width: 44px; height: 4px; margin: 0 auto 14px; background: var(--dark-blue); opacity: 0.4; border: 0; padding: 0; }
 .sheetBtn { min-height: 40px; }
-/* badge and card */
-.badge { position: relative; background: var(--card-grey); color: var(--dark-blue); aspect-ratio: 5 / 7; box-shadow: 0 0 0 var(--hair) var(--rule-soft); --line: var(--dark-blue); }
-.badgeL { position: absolute; left: 29%; top: 0; bottom: 0; width: var(--hair); background: var(--dark-blue); }
-.nodeAt { position: absolute; width: var(--node); height: var(--node); background: var(--dark-blue); transform: translate(-50%, -50%); }
-.pale { position: absolute; left: 5%; top: 40%; font-family: var(--font-display); font-size: 58px; line-height: 0.9; letter-spacing: -0.04em; color: var(--periwinkle); }
 .copyBtn { flex: none; }
 /* ---------- page sections ---------- */
 .stageGrid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(300px, 438px) minmax(0, 1fr); gap: clamp(20px, 3vw, 56px); align-items: start; }

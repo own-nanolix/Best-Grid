@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { Phone } from '@/components/ui/Devices';
 import Button from '@/components/ui/Button';
@@ -22,7 +22,8 @@ export const SCREENS = [
 ];
 export const COMPONENTS = ['Status bar', 'Nav', 'Tab bar', 'List row', 'Menu row', 'Card', 'Stat card', 'Input', 'Accordion', 'Sheet'];
 export const PATTERNS = ['Pull to refresh', 'Swipe between screens', 'Tap a row to expand', 'Bottom sheet', 'Tab bar change', 'Stepper', 'Long press and toggle'];
-const BLOCK = 'input, textarea, select, [role="dialog"], [role="radiogroup"], [role="tablist"], [contenteditable="true"]';
+// Keys stay with fields, sheets, radio groups and tab lists that use the arrows themselves.
+const BLOCK = 'input, textarea, select, [role="dialog"], [role="radiogroup"], [role="tablist"], [role="slider"], [role="listbox"], [contenteditable="true"]';
 function Spine({ title, items, id }) {
   return (
     <nav aria-label={title}>
@@ -49,13 +50,20 @@ export default function Showcase() {
     setDir(n >= index ? 1 : -1);
     setIndex(n);
   };
-  const onKey = (e) => {
-    if (e.shiftKey || e.ctrlKey || e.altKey || e.metaKey) return;
-    if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
-    if (e.target.closest && e.target.closest(BLOCK)) return;
-    e.preventDefault();
-    pick(index + (e.key === 'ArrowRight' ? 1 : -1));
-  };
+  // Left / Right step the screens from anywhere on the page; Shift + arrows belong to the site's dock.
+  useEffect(() => {
+    const onKey = (e) => {
+      if (e.defaultPrevented || e.shiftKey || e.ctrlKey || e.altKey || e.metaKey) return;
+      if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
+      if (e.target.closest && e.target.closest(BLOCK)) return;
+      e.preventDefault();
+      const d = e.key === 'ArrowRight' ? 1 : -1;
+      setDir(d);
+      setIndex((i) => Math.min(SCREENS.length - 1, Math.max(0, i + d)));
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, []);
   const cur = SCREENS[index];
   const Cur = cur.C;
   const go = (n) => {
@@ -66,7 +74,7 @@ export default function Showcase() {
     <>
       <section className="wrap band" aria-labelledby="mobile-b-live-h">
         <h2 id="mobile-b-live-h" className="t-h2" style={{ marginBottom: 28 }}>Live screens, 10 to 18.</h2>
-        <div className={s.stageGrid} onKeyDown={onKey}>
+        <div className={s.stageGrid}>
           <Spine title="Components" items={COMPONENTS} id={() => 'mobile-b-components'} />
           <div className={s.phoneBox}>
             <Phone exportName="mobile-b-phone-frame">

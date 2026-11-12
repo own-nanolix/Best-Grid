@@ -29,7 +29,6 @@ export function Bar({ w = 60 }) {
 export function StatusBar() {
   return (
     <div className={s.sb} aria-hidden="true">
-      <i className={s.sbl} />
       <div className={s.sbr}>
         <svg width="22" height="14" viewBox="0 0 22 14" fill="currentColor">
           {[0, 1, 2, 3].map((i) => (
@@ -88,6 +87,35 @@ export function Accordion({ idp, items, es = false, initial = 0 }) {
       })}
     </div>
   );
+}
+// A bottom sheet's drag handle: drag it down past 80 px (or press it, or Escape on the sheet) to close.
+// Returns the drag offset for the sheet's style and the props for the handle button.
+export function useSheetDrag(onClose) {
+  const [dy, setDy] = useState(0);
+  const from = useRef(null);
+  const moved = useRef(false);
+  const end = () => {
+    if (from.current === null) return;
+    from.current = null;
+    if (dy > 80) onClose();
+    setDy(0);
+  };
+  const grip = {
+    style: { touchAction: 'none', cursor: 'grab' },
+    onPointerDown: (e) => { from.current = e.clientY; moved.current = false; e.currentTarget.setPointerCapture(e.pointerId); },
+    onPointerMove: (e) => {
+      if (from.current === null) return;
+      const d = Math.max(0, e.clientY - from.current);
+      if (d > 4) moved.current = true;
+      setDy(d);
+    },
+    onPointerUp: end,
+    onPointerCancel: end,
+    onClick: () => { if (!moved.current) onClose(); },
+    onKeyDown: (e) => { if (e.key === 'ArrowDown') { e.preventDefault(); onClose(); } },
+  };
+  const sheetStyle = dy ? { transform: `translateY(${dy}px)`, transition: 'none' } : undefined;
+  return { grip, sheetStyle };
 }
 export function radioKeys(e, count, current, pick, refs) {
   let n = -1;

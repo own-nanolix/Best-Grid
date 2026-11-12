@@ -3,7 +3,7 @@
 import { HEX, CAPACITY, REPORT } from '@/lib/brand';
 import { r2, scale, seeded } from '@/lib/charts';
 import { MarkG, WordmarkG } from '@/components/art/Mark';
-import { Ground, Title, Bar, Node, Rule, YearChip, Total, SOFT } from './parts';
+import { Ground, Title, Bar, Node, Rule, YearChip, Total } from './parts';
 
 // The three published colours: name and HEX as printed on m04 (the matching-system codes are left out).
 const PALETTE_ROWS = [
@@ -13,10 +13,10 @@ const PALETTE_ROWS = [
 ];
 
 // 06: a list of nodes. "Nudos analizados 46" is the printed label and figure; each row is a quiet placeholder with a
-// small cell (empty, full or lighter) drawn from a seed: it marks a node, never a value.
+// small empty cell: it marks a row, never a node of its own or a value.
 export function NodeListScreen() {
   const rnd = seeded(9);
-  const rows = Array.from({ length: 11 }, () => ({ a: 70 + Math.floor(rnd() * 90), b: 40 + Math.floor(rnd() * 60), v: Math.floor(rnd() * 3) }));
+  const rows = Array.from({ length: 11 }, () => ({ a: 70 + Math.floor(rnd() * 90), b: 40 + Math.floor(rnd() * 60) }));
   const k = CAPACITY.kpis[1];
   return (
     <Ground>
@@ -29,7 +29,7 @@ export function NodeListScreen() {
           <g key={i}>
             <Rule x={0} y={y + 56} w={390} o={0.3} />
             <Node x={36} y={y + 56} s={6} />
-            <rect x="36" y={y + 14} width="28" height="28" fill={r.v === 0 ? 'none' : r.v === 1 ? HEX.activeBlue : SOFT} stroke={HEX.darkBlue} strokeOpacity="0.22" />
+            <rect x="36" y={y + 14} width="28" height="28" fill="none" stroke={HEX.darkBlue} strokeOpacity="0.22" />
             <Bar x={80} y={y + 17} w={r.a} h={9} o={0.14} />
             <Bar x={80} y={y + 33} w={r.b} h={6} o={0.08} />
             <rect x="321" y={y + 22} width="32" height="12" fill={HEX.darkBlue} opacity="0.1" />

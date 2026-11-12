@@ -30,7 +30,9 @@ function Fit({ name, children }) {
   );
 }
 
-const typing = (el) => !!el && (el.isContentEditable || ['INPUT', 'TEXTAREA', 'SELECT'].includes(el.tagName));
+// Keys stay with fields, sheets, radio groups and tab lists that use the arrows themselves.
+const BLOCK = 'input, textarea, select, [contenteditable="true"], [role="dialog"], [role="radiogroup"], [role="tablist"], [role="slider"], [role="listbox"], [role="menu"]';
+const typing = (el) => !!el && !!el.closest && !!el.closest(BLOCK);
 
 export default function MobileDemo() {
   const [cur, setCur] = useState(0);
@@ -49,9 +51,10 @@ export default function MobileDemo() {
   // Left / Right step the screens. Shift + arrows belong to the site's dock, so they are left alone.
   useEffect(() => {
     const onKey = (e) => {
-      if (e.shiftKey || e.altKey || e.ctrlKey || e.metaKey || typing(e.target)) return;
+      if (e.defaultPrevented || e.shiftKey || e.altKey || e.ctrlKey || e.metaKey || typing(e.target)) return;
       if (e.key === 'ArrowLeft') setCur((c) => Math.max(0, c - 1));
-      else if (e.key === 'ArrowRight') setCur((c) => Math.min(SCREENS.length - 1, c + 1));    };
+      else if (e.key === 'ArrowRight') setCur((c) => Math.min(SCREENS.length - 1, c + 1));
+    };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
   }, []);

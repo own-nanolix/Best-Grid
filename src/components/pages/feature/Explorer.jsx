@@ -12,7 +12,7 @@ import { Numeral } from '@/components/ui/Spec';
 import { CAPACITY, TECH } from '@/lib/brand';
 import { es } from '@/lib/charts';
 import { still } from '@/lib/site';
-import { GridSvg, ChartSvg, TreemapSvg } from './ExplorerArt';
+import { GridSvg, ChartSvg, TreemapSvg, CHART_TIP_X } from './ExplorerArt';
 import { NODE, Q, KPIS, PARTS, MAX_TECH, INIT, STEPS, TOUR, IDLE_TEXT, cellTip, STRENGTH, CELLS, partLine } from './data';
 import s from './feature.module.css';
 
@@ -126,7 +126,7 @@ export default function Explorer() {
         <div className={s.ctls} role="group" aria-label="Tour controls">
           <button type="button" className={`${s.ctl} ${s.ctlMain}`} onClick={toggle} aria-pressed={playing}>
             <Icon name={playing ? 'pause' : 'play'} size={18} />
-            <span>{playing ? 'Pause' : finished ? 'Play again' : 'Play'}</span>
+            <span>{playing ? 'Pause' : finished ? 'Play again' : step >= 0 ? 'Resume' : 'Play'}</span>
           </button>
           <button type="button" className={s.ctl} onClick={replay}>Replay</button>
           <button type="button" className={s.ctl} onClick={skip}>Skip to end</button>
@@ -195,7 +195,7 @@ export default function Explorer() {
             <div className={s.chartWrap}>
               <ChartSvg year={sel.year} q={sel.q} onPick={(i) => touch({ q: sel.q === i ? null : i })} onHover={setHovQ} />
               {qShown !== null && (
-                <Tip x={[19.3, 44.2, 69.2, 94.3][qShown]} y={26}>
+                <Tip x={CHART_TIP_X[qShown]} y={24}>
                   {has ? `${Q[qShown].q}: ${Q[qShown].value}` : `${Q[qShown].q}: no figure published`}
                 </Tip>
               )}

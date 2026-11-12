@@ -5,7 +5,7 @@ import Toggle from '@/components/ui/Toggle';
 import Icon, { PixelIcon } from '@/components/site/Icon';
 import { TECH, TUBE } from '@/lib/brand';
 import { clamp } from '@/lib/site';
-import { Bar, radioKeys } from './kit';
+import { Bar, radioKeys, useSheetDrag } from './kit';
 import { TABS } from './ScreensA';
 import { PATTERNS } from './Stage';
 import s from './mobile-b.module.css';
@@ -169,8 +169,7 @@ function Expand() {
 }
 function SheetDemo() {
   const [open, setOpen] = useState(false);
-  const [dy, setDy] = useState(0);
-  const from = useRef(null);
+  const { grip, sheetStyle } = useSheetDrag(() => setOpen(false));
   const trigger = useRef(null);
   const closeBtn = useRef(null);
   const was = useRef(false);
@@ -183,12 +182,6 @@ function SheetDemo() {
       trigger.current?.focus();
     }
   }, [open]);
-  const end = () => {
-    if (from.current === null) return;
-    from.current = null;
-    if (dy > 80) setOpen(false);
-    setDy(0);
-  };
   return (
     <div className={s.demo} onKeyDown={(e) => { if (e.key === 'Escape') setOpen(false); }}>
       <div style={{ padding: 16, display: 'grid', gap: 12 }}>
@@ -202,19 +195,9 @@ function SheetDemo() {
         role="dialog"
         aria-label="Sheet demo"
         inert={!open}
-        style={dy ? { transform: `translateY(${dy}px)`, transition: 'none' } : undefined}
+        style={sheetStyle}
       >
-        <button
-          type="button"
-          className={s.grip}
-          aria-label="Drag down to close"
-          style={{ touchAction: 'none', cursor: 'grab' }}
-          onPointerDown={(e) => { from.current = e.clientY; e.currentTarget.setPointerCapture(e.pointerId); }}
-          onPointerMove={(e) => { if (from.current !== null) setDy(Math.max(0, e.clientY - from.current)); }}
-          onPointerUp={end}
-          onPointerCancel={end}
-          onKeyDown={(e) => { if (e.key === 'ArrowDown') setOpen(false); }}
-        />
+        <button type="button" className={s.grip} aria-label="Drag down or press to close" {...grip} />
         <div style={{ display: 'grid', gap: 12, marginBottom: 16 }}><Bar w={70} /><Bar w={48} /><Bar w={60} /></div>
         <Button ref={closeBtn} size="sm" variant="outline" onClick={() => setOpen(false)}>Close</Button>
       </div>

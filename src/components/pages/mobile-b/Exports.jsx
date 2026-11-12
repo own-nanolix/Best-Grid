@@ -43,7 +43,6 @@ function StatusBarArt() {
     <Art viewBox="0 0 390 56" title="Status bar, neutral shapes" exportName="mobile-b-status-bar">
       <rect width="390" height="56" fill={SC} />
       <g fill={INK}>
-        <rect x="34" y="22" width="44" height="8" opacity="0.8" />
         {[0, 1, 2, 3].map((i) => <rect key={i} x={282 + i * 6} y={r2(32 - i * 3)} width="4" height={4 + i * 3} />)}
         <rect x="318" y="21" width="24" height="12" fill="none" stroke={INK} strokeWidth="1.5" />
         <rect x="321" y="24" width="14" height="6" />
@@ -125,7 +124,7 @@ function ReaderArt() {
     <Art viewBox="0 0 320 150" title="Reader progress row" exportName="mobile-b-reader-progress">
       <rect width="320" height="150" fill={SC} />
       {[0, 1, 2, 3, 4].map((i) => (
-        <rect key={i} className="fade-in" style={{ '--i': i }} x={r2(24 + i * 54)} y="28" width="48" height="8" fill={i < 2 ? AB : INK} opacity={i < 2 ? 1 : 0.25} />
+        <rect key={i} className="fade-in" style={{ '--i': i }} x={r2(24 + i * 54)} y="28" width="48" height="8" fill={i < 2 ? AB : INK} fillOpacity={i < 2 ? 1 : 0.25} />
       ))}
       <text x="24" y="62" fontSize="13" fill={INK}>2 / 5</text>
       {[0, 1, 2, 3].map((i) => <rect key={i} x="24" y={82 + i * 15} width={i === 3 ? 120 : 272} height="7" fill={INK} opacity="0.45" />)}
