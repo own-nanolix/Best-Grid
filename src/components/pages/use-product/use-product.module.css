@@ -1,0 +1,37 @@
+/* use-product: plates on their stage, laid out as a full row, pairs, a trio and a descending icon row. */
+.head { padding-block: 72px 40px; }
+.headGrid { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 48px; align-items: end; }
+.title { max-width: 14ch; }
+.band { padding-block: 40px 56px; border-top: var(--hair) solid var(--rule-soft); }
+.bandHead { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 48px; align-items: baseline; margin-bottom: 28px; }
+.no { font-variant-numeric: tabular-nums; }
+.full { display: block; }
+.pair { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 24px; }
+.pairWide { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 24px; }
+.trio { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+.fig { margin: 0; min-width: 0; }
+.fig figcaption { display: flex; justify-content: space-between; gap: 12px; padding: 10px 0 0; margin-top: 10px; border-top: var(--hair) solid var(--rule-soft); font-size: 13px; color: var(--muted); }
+.fig .mock { box-shadow: 0 0 0 var(--hair) var(--rule-soft); }
+.icons { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 0; margin: 32px 0 0; padding: 0; list-style: none; border-top: var(--hair) solid var(--rule); }
+.icons li { display: grid; gap: 10px; align-content: end; padding: 24px 28px 20px 0; margin-right: 28px; position: relative; min-width: 0; }
+.icons li::before { content: ''; position: absolute; top: -3px; left: 0; width: var(--node); height: var(--node); background: var(--dark-blue); }
+.iconPx { font-size: 28px; line-height: 1; letter-spacing: -0.01em; }
+.ladder { margin-top: 32px; padding: 32px; background: var(--paper); border: var(--hair) solid var(--rule-soft); overflow: hidden; }
+.ladder svg { display: block; }
+.notes { margin: 18px 0 0; max-width: 62ch; }
+
+@media (max-width: 1100px) {
+  .trio { grid-template-columns: minmax(0, 1fr); max-width: 640px; }
+}
+@media (max-width: 860px) {
+  .headGrid, .bandHead, .pair, .pairWide { grid-template-columns: minmax(0, 1fr); gap: 20px; }
+  .head { padding-block: 40px 24px; }
+  .band { padding-block: 28px 40px; }
+  .ladder { padding: 16px; }
+  .icons li { padding-right: 16px; margin-right: 12px; }
+}
+
+.sheet { display: grid; gap: 32px; }
+.big { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); margin: 0; padding: 0; list-style: none; border-top: var(--hair) solid var(--rule); border-bottom: var(--hair) solid var(--rule); }
+.big li { display: grid; gap: 8px; padding: 24px 20px 20px 0; min-width: 0; }
+@media (max-width: 860px) { .big { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
