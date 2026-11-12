@@ -25,8 +25,8 @@ export function ToteSingle() {
             </LitG>
           </At>
           <Co x={238} y={130} tx={110} ty={90} label="Handle" side="left" i={0} />
-          <Co x={230} y={250} tx={110} ty={190} label="Light canvas" side="left" i={1} />
-          <Co x={271} y={246} tx={110} ty={280} label="Printed mark" side="left" i={2} />
+          <Co x={252} y={250} tx={110} ty={190} label="Printed mark" side="left" i={1} />
+          <Co x={207} y={262} tx={110} ty={280} label="Light canvas" side="left" i={2} />
           <Dim x1={202} y1={348} x2={340} y2={348} value="380 mm" offset={16} i={3} />
         </>
       )}
@@ -46,9 +46,9 @@ export function MugSingle() {
               <Mug id={`${idp}-m`} m={idp} hl={0.3} base={HEX.lightBlue} ink={HEX.darkBlue} band={HEX.activeBlue} hand={-1} />
             </LitG>
           </At>
-          <Co x={122} y={226} tx={90} ty={90} label="Handle" side="left" i={0} />
-          <Co x={250} y={198} tx={90} ty={160} label="Wrap print" side="left" i={1} />
-          <Co x={290} y={275} tx={90} ty={230} label="Band" side="left" i={2} />
+          <Co x={174} y={150} tx={90} ty={90} label="Rim" side="left" i={0} />
+          <Co x={172} y={165} tx={90} ty={160} label="Wrap print" side="left" i={1} />
+          <Co x={126} y={232} tx={90} ty={230} label="Handle" side="left" i={2} />
           <Dim x1={329} y1={148} x2={329} y2={326} value="90 mm" offset={-20} i={3} />
         </>
       )}
@@ -68,10 +68,10 @@ export function BottleSingle() {
               <Bottle id={`${idp}-b`} m={idp} hl={0.3} base={HEX.darkBlue} ink={HEX.activeBlue} cap={NEUTRAL.steel} word={HEX.onBlue} />
             </LitG>
           </At>
-          <Co x={130} y={52} tx={270} ty={50} label="Steel cap" i={0} />
-          <Co x={160} y={150} tx={270} ty={140} label="Powder coat" i={1} />
-          <Co x={140} y={300} tx={270} ty={230} label="Wrap print" i={2} />
-          <Dim x1={200} y1={42} x2={200} y2={348} value="260 mm" offset={-20} i={3} />
+          <Co x={150} y={52} tx={270} ty={50} label="Steel cap" i={0} />
+          <Co x={172} y={150} tx={270} ty={140} label="Powder coat" i={1} />
+          <Co x={165} y={280} tx={270} ty={230} label="Wrap print" i={2} />
+          <Dim x1={80} y1={348} x2={80} y2={42} value="260 mm" offset={-26} i={3} />
         </>
       )}
     </Plate>
@@ -91,7 +91,7 @@ export function StickerSingle() {
           </At>
           <Co x={72} y={92} tx={290} ty={70} label="Die-cut mark" i={0} />
           <Co x={190} y={130} tx={290} ty={150} label="Word-mark" i={1} />
-          <Co x={134} y={330} tx={280} ty={260} label="Backing sheet" i={2} />
+          <Co x={226} y={290} tx={280} ty={260} label="Backing sheet" i={2} />
           <Dim x1={21} y1={366} x2={229} y2={366} value="140 mm" offset={12} i={3} />
         </>
       )}
@@ -110,9 +110,9 @@ export function PinSingle() {
               <PinCard id={`${idp}-p`} m={idp} sh={sh(270)} cd={{ x: -0.5, y: 0.4 }} />
             </LitG>
           </At>
-          <Co x={273} y={178} tx={90} ty={110} label="Enamel pin" side="left" i={0} />
-          <Co x={276} y={98} tx={90} ty={190} label="Hang slot" side="left" i={1} />
-          <Co x={318} y={300} tx={90} ty={280} label="Backing card" side="left" i={2} />
+          <Co x={276} y={98} tx={122} ty={110} label="Hang slot" side="left" i={0} />
+          <Co x={214} y={200} tx={122} ty={190} label="Enamel pin" side="left" i={1} />
+          <Co x={180} y={270} tx={122} ty={280} label="Backing card" side="left" i={2} />
           <Dim x1={188} y1={346} x2={352} y2={346} value="55 mm" offset={14} i={3} />
         </>
       )}
@@ -223,7 +223,7 @@ export function UmbrellaSingle() {
           <Co x={165} y={34} tx={300} ty={40} label="Tip" i={0} />
           <Co x={235} y={130} tx={300} ty={140} label="Panel" i={1} />
           <Co x={165} y={330} tx={300} ty={280} label="Shaft" i={2} />
-          <Dim x1={29} y1={170} x2={301} y2={170} value="1,050 mm" offset={36} i={3} />
+          <Dim x1={165} y1={170} x2={301} y2={170} value="R 525 mm" offset={36} i={3} />
         </>
       )}
     </Plate>
@@ -241,8 +241,8 @@ export function GiftFrontSingle() {
               <GiftFront id={`${idp}-f`} m={idp} sh={sh(200)} />
             </LitG>
           </At>
-          <Co x={290} y={110} tx={350} ty={50} label="Word-mark" side="left" i={0} />
-          <Co x={120} y={225} tx={50} ty={330} label="Embossed mark" side="right" i={1} />
+          <Co x={300} y={80} tx={290} ty={40} label="Word-mark" side="left" i={0} />
+          <Co x={60} y={232} tx={50} ty={330} label="Embossed mark" side="right" i={1} />
           <Dim x1={55} y1={270} x2={345} y2={270} value="85 mm" offset={30} i={2} />
         </>
       )}
@@ -261,9 +261,9 @@ export function GiftBackSingle() {
               <GiftBack id={`${idp}-b`} m={idp} sh={sh(200)} cd={{ x: -0.5, y: 0.4 }} />
             </LitG>
           </At>
-          <Co x={95} y={150} tx={50} ty={330} label="Value field" side="right" i={0} />
-          <Co x={200} y={190} tx={350} ty={50} label="Number field" side="left" i={1} />
-          <Dim x1={345} y1={100} x2={345} y2={240} value="55 mm" offset={-16} i={2} />
+          <Co x={83} y={175} tx={60} ty={50} label="Value field" side="right" i={0} />
+          <Co x={74} y={193} tx={50} ty={330} label="Number field" side="right" i={1} />
+          <Dim x1={345} y1={100} x2={345} y2={240} value="55 mm" offset={-30} i={2} />
         </>
       )}
     </Plate>

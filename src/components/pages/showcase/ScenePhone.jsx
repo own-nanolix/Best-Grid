@@ -6,7 +6,7 @@ import { PhoneG } from '@/components/art/Devices';
 import { ScreenCapacityG } from '@/components/art/Devices';
 import { HEX, CAPACITY } from '@/lib/brand';
 import { es, r2 } from '@/lib/charts';
-import { Leader, CardDefs, CardG, TreemapG } from './kit';
+import { Leader, CardDefs, CardG, TreemapG, NoClockG } from './kit';
 
 const W = 1600, H = 900, SPOT = { x: 0.2, y: 0.14 };
 const PX = 330, PY = 150, PW = 300, K = PW / 430;
@@ -37,6 +37,7 @@ export default function ScenePhone() {
           <rect x={PX - 16} y={PY + 40} width="3" height="520" fill="#ffffff" opacity="0.28" />
           <PhoneG idp={`${idp}-ph`} x={PX} y={PY} w={PW}>
             <ScreenCapacityG idp={`${idp}-scr`} year={CAPACITY.year} />
+            <NoClockG />
           </PhoneG>
           <clipPath id={`${idp}-glass-clip`}><rect x={PX + 20 * K} y={PY + 20 * K} width={390 * K} height={844 * K} rx={48 * K} /></clipPath>
           <rect x={PX} y={PY} width={PW} height="617" fill={`url(#${idp}-glass)`} opacity="0.55" clipPath={`url(#${idp}-glass-clip)`} className="mock-sheen" />

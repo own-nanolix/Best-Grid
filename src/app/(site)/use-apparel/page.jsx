@@ -3,8 +3,8 @@ import Reveal from '@/components/site/Reveal';
 import { SpecTable } from '@/components/ui/Spec';
 import Collection from '@/components/pages/use-apparel/Collection';
 import { TEES, TeePlate } from '@/components/pages/use-apparel/TeePlates';
-import { HOODS, HoodiePlate } from '@/components/pages/use-apparel/HoodiePlates';
-import { CAPS, CapPlate } from '@/components/pages/use-apparel/CapPlates';
+import { HOODS, VEST, HoodiePlate } from '@/components/pages/use-apparel/HoodiePlates';
+import { CAPS, HAT, CapPlate } from '@/components/pages/use-apparel/CapPlates';
 import { ChestDetail, TapeDetail, CordDetail } from '@/components/pages/use-apparel/Details';
 import SpecSheet, { AREAS } from '@/components/pages/use-apparel/SpecSheet';
 import { mm } from '@/components/pages/use-apparel/fabric';
@@ -42,7 +42,7 @@ export default function Page() {
         <header className={s.head}>
           <h1 className="t-h1" tabIndex={-1}>Apparel</h1>
           <p className={`t-lead muted ${s.lead}`}>
-            T-shirts, hoodies, a vest, caps and a hard hat, drawn empty in code on a dark stage and lit by one spotlight. The mark, the word-mark and the lattice are the brand&apos;s own; the millimetre values are production values of our own.
+            Three t-shirts, three hoodies and three caps, with a hi-vis vest and a hard hat as workwear, drawn empty in code on a dark stage and lit by one spotlight. The mark, the word-mark and the lattice are the brand&apos;s own; the millimetre values are production values of our own.
           </p>
           <div className={s.rule} />
           <span className={s.node} style={{ left: 0 }} aria-hidden="true" />
@@ -50,7 +50,7 @@ export default function Page() {
 
         <Reveal className={s.section} as="section" aria-labelledby="use-apparel-h-collection">
           <h2 className="t-h2" id="use-apparel-h-collection">Collection</h2>
-          <Fig name="Collection" note="Six garments and three caps">
+          <Fig name="Collection" note="Seven garments and four pieces of headwear">
             <Collection />
           </Fig>
         </Reveal>
@@ -67,7 +67,7 @@ export default function Page() {
         </Reveal>
 
         <Reveal className={s.section} as="section" aria-labelledby="use-apparel-h-hoods">
-          <h2 className="t-h2" id="use-apparel-h-hoods">Hoodies and workwear</h2>
+          <h2 className="t-h2" id="use-apparel-h-hoods">Hoodies</h2>
           <div className={s.grid3}>
             {HOODS.map((c) => (
               <Fig key={c.name} name={c.label} note="Three-quarter, in depth">
@@ -85,6 +85,18 @@ export default function Page() {
                 <CapPlate cfg={c} idp={`use-apparel-${c.name}`} />
               </Fig>
             ))}
+          </div>
+        </Reveal>
+
+        <Reveal className={s.section} as="section" aria-labelledby="use-apparel-h-work">
+          <h2 className="t-h2" id="use-apparel-h-work">Workwear</h2>
+          <div className={s.grid2}>
+            <Fig name={VEST.label} note="Three-quarter, in depth">
+              <HoodiePlate cfg={VEST} idp="use-apparel-vest" />
+            </Fig>
+            <Fig name={HAT.label} note="Profile">
+              <CapPlate cfg={HAT} idp="use-apparel-hard-hat" />
+            </Fig>
           </div>
         </Reveal>
 

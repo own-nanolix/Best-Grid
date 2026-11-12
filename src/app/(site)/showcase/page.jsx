@@ -37,7 +37,7 @@ const PLATES = [
     no: '03',
     title: 'Laptop on a plinth',
     Scene: SceneLaptop,
-    caption: 'Plate 03. The laptop shows the website; callouts on the left, dimensions down the plinth.',
+    caption: 'Plate 03. The laptop, turned 30 degrees, shows the website; callouts on the left, dimensions down the plinth.',
     notes: [
       ['Light', 'One spot, top right. The plinth top is lit, its right face brighter than its front, its cast shadow runs left.'],
       ['Materials', 'Active Blue aluminium body, Dark Blue anodised plinth, glass sheen across the display.'],
@@ -66,7 +66,7 @@ const ORDER = [
 const LIGHT = [
   { key: 'p1', head: '01 Phone with data cards', cells: ['Top left', 'Lower right', 'Object left, cards right, 60 : 40'] },
   { key: 'p2', head: '02 Line-up of eight phones', cells: ['Top centre', 'Outwards, both ways', 'Row of phones above a ruled row of callouts'] },
-  { key: 'p3', head: '03 Laptop on a plinth', cells: ['Top right', 'Left', 'Callouts left, object right, 60 : 40'] },
+  { key: 'p3', head: '03 Laptop on a plinth', cells: ['Top right', 'Left', 'Callouts left, object right, 55 : 45'] },
   { key: 'p4', head: '04 Event stage', cells: ['Overhead', 'Straight down', 'Wall above, deck below, spec column beneath'] },
 ];
 
@@ -82,7 +82,7 @@ const VALUES = [
   { key: 'phone', head: 'Phone', cells: ['Height 150 mm', 'Width 72 mm', 'Depth 8 mm'] },
   { key: 'laptop', head: 'Laptop', cells: ['Width 310 mm', 'Closed 14 mm', ''] },
   { key: 'plinth', head: 'Plinth', cells: ['300 × 300 mm', 'Height 120 mm', ''] },
-  { key: 'stage', head: 'Stage', cells: ['Wall 12 000 × 2 800 mm', 'Deck depth 6 000 mm', ''] },
+  { key: 'stage', head: 'Stage', cells: ['Wall 12 000 × 2 200 mm', 'Deck depth 6 000 mm', ''] },
 ];
 
 export default function Page() {

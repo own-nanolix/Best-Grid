@@ -21,9 +21,9 @@ export function PostStatement() {
       <Crossings xs={[90, 990]} ys={[150, 930]} c={d} s={9} />
       <In i={6}>
         <MarkG x={868} y={186} size={96} fill={l} />
-        <Lines rows={rows} x={90} y={340} size={66} lh={1.25} fills={[l, d, d]} />
+        <Lines rows={rows} x={120} y={340} size={56} lh={1.25} fills={[l, d, d]} />
       </In>
-      <Word x={90} y={880} size={190} fill={l} i={8} />
+      <Word x={120} y={880} size={190} fill={l} i={8} />
       <In i={10}>
         <text x="90" y="1000" fontSize="26" fill={d}>{CONTACT.web}</text>
         <text x="990" y="1000" fontSize="26" fill={d} textAnchor="end">{CONTACT.handle}</text>

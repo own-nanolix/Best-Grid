@@ -6,7 +6,26 @@ import { HEX, CAPACITY, TECH, CONTACT } from '@/lib/brand';
 import { PIXEL32 } from '@/components/site/icons';
 import { MarkG, WordmarkG } from '@/components/art/Mark';
 import { PLATE } from '@/components/art/Mockup';
-import { StatusBarG } from '@/components/art/Devices';
+
+// The status glyphs of a phone screen without a clock time (owner's rule: no clock times on showcase phones):
+// signal bars, a fan of arcs and a battery, in the 390-wide screen space.
+export function StatusGlyphsG({ w = 390, fill = HEX.darkBlue }) {
+  return (
+    <g fill={fill}>
+      {[0, 1, 2, 3].map((i) => (
+        <rect key={i} x={w - 108 + i * 6} y={r2(30 - i * 3)} width="4" height={r2(5 + i * 3)} />
+      ))}
+      <path d={`M${w - 76} 27a10 10 0 0 1 16 0l-2 2a7 7 0 0 0-12 0Z M${w - 72} 30.5a5 5 0 0 1 8 0l-4 4Z`} />
+      <rect x={w - 52} y="22" width="22" height="11" rx="2.5" />
+    </g>
+  );
+}
+
+// The shared ready screens print a clock time in their status bar; on the showcase phones it is covered with the
+// screen's own ground (place it after the screen, in screen space).
+export function NoClockG({ fill }) {
+  return <rect x="28" y="16" width="56" height="26" fill={fill} style={fill ? undefined : { fill: 'var(--screen)' }} />;
+}
 
 // A leader line from a node on the object (x, y) to the edge of a floating card (tx, ty): one elbow, drawn on.
 export function Leader({ x, y, tx, ty, i = 0, color = PLATE.line }) {
@@ -53,14 +72,14 @@ export function TreemapG() {
       <text x="10" y="20" fontSize="13" fill={HEX.white}>{CAPACITY.treemap.year}</text>
       <text x="10" y="36" fontSize="13" fill={HEX.white}>{CAPACITY.treemap.title}</text>
       <rect x="0" y="105" width="210" height="213" fill={HEX.activeBlue} />
-      <text x="10" y="124" fontSize="13" fill={HEX.darkBlue}>{P[0].labelRows[0]}</text>
-      <text x="10" y="140" fontSize="13" fill={HEX.darkBlue}>{P[0].labelRows[1]}</text>
+      <text x="10" y="124" fontSize="13" fill={HEX.white}>{P[0].labelRows[0]}</text>
+      <text x="10" y="140" fontSize="13" fill={HEX.white}>{P[0].labelRows[1]}</text>
       <text x="190" y="307" fontSize="78" fill={HEX.onBlue} textAnchor="end" letterSpacing="-2" className="display">68</text>
       <text x="191" y="260" fontSize="30" fill={HEX.onBlue}>%</text>
       <rect x="210" y="213" width="107" height="105" fill={HEX.activeBlue} />
       <rect x="210" y="213" width="107" height="105" fill={HEX.white} opacity="0.2" />
-      <text x="218" y="232" fontSize="13" fill={HEX.darkBlue}>{P[1].labelRows[0]}</text>
-      <text x="218" y="248" fontSize="13" fill={HEX.darkBlue}>{P[1].labelRows[1]}</text>
+      <text x="218" y="232" fontSize="13" fill={HEX.white}>{P[1].labelRows[0]}</text>
+      <text x="218" y="248" fontSize="13" fill={HEX.white}>{P[1].labelRows[1]}</text>
       <text x="298" y="307" fontSize="33" fill={HEX.onBlue} textAnchor="end" letterSpacing="-0.8" className="display">16</text>
       <text x="299" y="287" fontSize="13" fill={HEX.onBlue}>%</text>
     </g>
@@ -74,7 +93,7 @@ export function ScreenTechG({ tech }) {
   return (
     <g lang="es">
       <rect width="390" height="844" fill={HEX.darkBlue} />
-      <StatusBarG fill={HEX.lightBlue} />
+      <StatusGlyphsG fill={HEX.lightBlue} />
       <g transform="translate(55 190) scale(8.5)">
         <path d={PIXEL32[t.icon]} fill={HEX.activeBlue} />
       </g>
@@ -93,7 +112,7 @@ export function ScreenBrandG() {
   return (
     <g>
       <rect width="390" height="844" fill={HEX.activeBlue} />
-      <g fill={HEX.darkBlue}><StatusBarG /></g>
+      <StatusGlyphsG />
       <MarkG x={95} y={250} size={200} fill={HEX.darkBlue} />
       <WordmarkG x={195} y={560} size={64} fill={HEX.onBlue} anchor="middle" />
       <text x="195" y="760" fontSize="20" fill={HEX.darkBlue} textAnchor="middle">{CONTACT.web}</text>

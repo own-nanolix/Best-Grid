@@ -1,5 +1,5 @@
-// Three headwear plates in profile: the Dark Blue cap, the Light Blue cap and the hard hat (the head protection of
-// the case study's field poster, in the brand's colours). Visor and crown are dimensioned in plain mm.
+// Three cap plates in profile (Dark Blue, Light Blue, Active Blue) and, as an extra, the hard hat (the head
+// protection of the case study's field poster, in the brand's colours). Visor and crown are dimensioned in plain mm.
 import { CalloutG, DimensionG } from '@/components/art/Mockup';
 import { HEX } from '@/lib/brand';
 import { at } from './fabric';
@@ -16,7 +16,7 @@ export const CAPS = [
       { lx: 226, ly: 112, label: 'Eyelet' },
       { lx: 150, ly: 178, label: 'Front panel print', sub: `${mmC(60)} × ${mmC(60)} mm` },
       { lx: 240, ly: 246, label: 'Sweatband', sub: `${mmC(14)} mm` },
-      { lx: 70, ly: 274, label: 'Curved peak', sub: `${mmC(112)} mm long` },
+      { lx: 122, ly: 290, label: 'Curved peak', sub: `${mmC(112)} mm long` },
       { lx: 448, ly: 236, label: 'Strap' },
     ] },
   { name: 'cap-light', title: 'Light Blue six-panel cap in profile with the mark on the front panel', hat: false, body: HEX.lightBlue, ink: HEX.darkBlue, tone: HEX.darkBlue,
@@ -28,16 +28,27 @@ export const CAPS = [
       { lx: 60, ly: 276, label: 'Stitching rows', sub: 'Four rows' },
       { lx: 300, ly: 248, label: 'Sweatband', sub: `${mmC(14)} mm` },
     ] },
-  { name: 'hard-hat', title: 'Active Blue hard hat in profile with the mark and a reflective band', hat: true, body: HEX.activeBlue, ink: HEX.darkBlue, tone: '#ffffff',
-    t: { x: 150, y: 250, s: 1.12, rot: 0 }, side: 'right', tx: 640, spot: { x: 0.52, y: 0.04 }, no: '03', label: 'Hard hat',
+  { name: 'cap-active', title: 'Active Blue six-panel cap in profile with the mark on the front panel', hat: false, body: HEX.activeBlue, ink: HEX.darkBlue, tone: HEX.white,
+    t: { x: 70, y: 250, s: 0.98, rot: 0 }, side: 'right', tx: 590, spot: { x: 0.12, y: 0.24 }, no: '03', label: 'Active Blue cap',
+    calls: [
+      { lx: 262, ly: 84, label: 'Button' },
+      { lx: 150, ly: 178, label: 'Front panel print', sub: `${mmC(60)} × ${mmC(60)} mm` },
+      { lx: 300, ly: 200, label: 'Panel seam', sub: 'Six panels' },
+      { lx: 448, ly: 236, label: 'Strap', sub: 'Metal buckle' },
+      { lx: 122, ly: 290, label: 'Curved peak', sub: `${mmC(112)} mm long` },
+    ] },
+];
+
+// The extra headwear plate: the hard hat.
+export const HAT = { name: 'hard-hat', title: 'Active Blue hard hat in profile with the mark and a reflective band', hat: true, body: HEX.activeBlue, ink: HEX.darkBlue, tone: '#ffffff',
+    t: { x: 150, y: 250, s: 1.12, rot: 0 }, side: 'right', tx: 640, spot: { x: 0.52, y: 0.04 }, no: '04', label: 'Hard hat',
     calls: [
       { lx: 268, ly: 96, label: 'Shell ridge' },
       { lx: 150, ly: 180, label: 'Front print', sub: `${mmC(72)} × ${mmC(72)} mm` },
       { lx: 318, ly: 186, label: 'Vents', sub: 'Three slots' },
       { lx: 330, ly: 236, label: 'Reflective band', sub: `${mmC(16)} mm tape` },
       { lx: 90, ly: 262, label: 'Front peak' },
-    ] },
-];
+    ] };
 
 export function CapPlate({ cfg, idp }) {
   const { t } = cfg;
@@ -52,8 +63,7 @@ export function CapPlate({ cfg, idp }) {
         return (
           <>
             {cfg.hat ? <HardHat {...common} /> : <Cap {...common} />}
-            {cfg.calls.map((c, j) => {
-              const p = at(t, c.lx, c.ly);
+            {cfg.calls.map((c) => ({ c, p: at(t, c.lx, c.ly) })).sort((m, n) => m.p.y - n.p.y).map(({ c, p }, j) => {
               return <CalloutG key={c.label} x={p.x} y={p.y} tx={cfg.tx} ty={130 + j * 84} label={c.label} sub={c.sub} side={cfg.side} i={j + 1} size={19} />;
             })}
             <DimensionG x1={a.x} y1={a.y} x2={b.x} y2={b.y} value={`${mmC(254 - top)} mm`} offset={cfg.side === 'right' ? 28 : -28} i={8} size={15} />

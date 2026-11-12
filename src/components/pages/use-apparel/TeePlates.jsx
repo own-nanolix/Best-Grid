@@ -13,7 +13,7 @@ export const TEES = [
     calls: { front: [{ lx: 236, ly: 46, label: 'Collar', sub: `${mm(14)} mm rib` }, { lx: 262, ly: 78, label: 'Chest print', item: 0 }, { lx: 372, ly: 158, label: 'Sleeve hem', sub: `${mm(16)} mm hem` }],
       back: [{ lx: 200, ly: 172, label: 'Back print', item: 0 }, { lx: 200, ly: 58, label: 'Nape mark', item: 1 }, { lx: 104, ly: 336, label: 'Hem', sub: `${mm(16)} mm hem` }] } },
   { k: 'b', name: 'tee-active', title: 'T-shirt in Active Blue with the word-mark chest print and the large mark on the back', body: HEX.activeBlue, ink: HEX.lightBlue, ink2: HEX.darkBlue, tone: '#ffffff', order: 'fb', stagger: 22, spot: { x: 0.16, y: 0.16 }, no: '02', label: 'Active Blue',
-    calls: { front: [{ lx: 200, ly: 100, label: 'Chest word-mark', item: 0 }, { lx: 164, ly: 46, label: 'Collar', sub: `${mm(14)} mm rib` }, { lx: 40, ly: 150, label: 'Sleeve hem', sub: `${mm(16)} mm hem` }],
+    calls: { front: [{ lx: 146, ly: 98, label: 'Chest word-mark', item: 0 }, { lx: 164, ly: 46, label: 'Collar', sub: `${mm(14)} mm rib` }, { lx: 40, ly: 150, label: 'Sleeve hem', sub: `${mm(16)} mm hem` }],
       back: [{ lx: 200, ly: 148, label: 'Back mark', item: 0 }, { lx: 232, ly: 30, label: 'Back collar', sub: `${mm(12)} mm rib` }, { lx: 300, ly: 336, label: 'Hem', sub: `${mm(16)} mm hem` }] } },
   { k: 'c', name: 'tee-light', title: 'T-shirt in Light Blue with the lattice chest print and the mark on the back', body: HEX.lightBlue, ink: HEX.darkBlue, ink2: HEX.activeBlue, tone: HEX.darkBlue, order: 'bf', stagger: -18, spot: { x: 0.86, y: 0.14 }, no: '03', label: 'Light Blue',
     calls: { front: [{ lx: 200, ly: 168, label: 'Chest print', item: 0 }, { lx: 372, ly: 158, label: 'Sleeve hem', sub: `${mm(16)} mm hem` }, { lx: 300, ly: 336, label: 'Hem', sub: `${mm(16)} mm hem` }],
@@ -40,8 +40,7 @@ export function TeePlate({ cfg, idp }) {
             const a = at(t, 80, 350), b = at(t, 320, 350);
             return (
               <g key={view}>
-                {cfg.calls[view].map((c, j) => {
-                  const p = at(t, c.lx, c.ly);
+                {cfg.calls[view].map((c) => ({ c, p: at(t, c.lx, c.ly) })).sort((m, n) => m.p.y - n.p.y).map(({ c, p }, j) => {
                   const sub = c.item !== undefined ? dimsOf(art[view][c.item]) : c.sub;
                   return <CalloutG key={c.label} x={p.x} y={p.y} tx={tx} ty={170 + j * 96 + (i ? 20 : 0)} label={c.label} sub={sub} side={side} i={i * 3 + j + 1} size={19} />;
                 })}

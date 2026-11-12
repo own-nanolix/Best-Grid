@@ -1,9 +1,9 @@
 // The profile grid (3 x 3 square tiles, no platform chrome) and the m10 hard-cut poster cycle.
-import { HEX, LINES, POSTERS } from '@/lib/brand';
-import { r2 } from '@/lib/charts';
+import { HEX, LINES } from '@/lib/brand';
 import { MarkG, WordmarkG } from '@/components/art/Mark';
-import { CrossingBandsG, LatticeFieldG, NodeGridG, StarEchoG, BaselineFieldG } from '@/components/art/KeyArt';
-import { Lines, HL, VL, Nd, Crossings, Word } from './kit';
+import { CrossingBandsG, LatticeFieldG, NodeGridG, StarEchoG } from '@/components/art/KeyArt';
+import { POSTER_LIST, PH } from './Posters';
+import { Lines, HL, VL, Nd, Crossings } from './kit';
 
 const T = 360;
 
@@ -100,43 +100,21 @@ export function ProfileGrid() {
   );
 }
 
-// m10: one 3:4 sheet, the baseline field in its six columns, nodes at the live area, and the printed lines cutting
-// through at 100 ms a frame. The frames are the only children of the cycle group (the first one shows by default).
-const FRAMES = [
-  { rows: POSTERS.dataCentre.head, size: 52 },
-  { rows: POSTERS.dataCentre.body, size: 26 },
-  { rows: POSTERS.generation.head, size: 52 },
-  { rows: POSTERS.generation.body, size: 26 },
-  { rows: POSTERS.clarity.head, size: 52 },
-  { rows: POSTERS.clarity.body, size: 26 },
-  { rows: [POSTERS.field.head], size: 44 },
-  { rows: POSTERS.field.body, size: 22 },
-];
+// m10: one 3:4 sheet cycling the four poster layouts of m09 and m11 in the m10 state (paper, the baseline field, one
+// grey ink, photographs as flat blocks), hard cuts at 100 ms a frame. Frames 0, 2, 4, 6 and 7 follow the left sheet of
+// the stills m10_1 to m10_5 (data centre, field, generation, clarity, data centre); frames 1, 3 and 5 are not in the
+// stills and take the layouts of the right sheet (generation, clarity, field). The first frame shows by default.
+const CYCLE = ['data-centre', 'generation', 'field', 'clarity', 'generation', 'field', 'clarity', 'data-centre'];
 
 export function PosterCycle() {
-  const ink = HEX.muted, id = 'campaign-cycle';
+  const id = 'campaign-cycle';
   return (
     <g>
-      <rect width="1080" height="1440" fill={HEX.paper} />
-      <BaselineFieldG idp={id} x={72} y={76} w={936} h={1288} />
-      <VL x={72} y2={1440} c={ink} w={1} o={0.5} />
-      <VL x={1008} y2={1440} c={ink} w={1} o={0.5} i={1} />
-      <HL y={76} x2={1080} c={ink} w={1} o={0.5} i={2} />
-      <HL y={1364} x2={1080} c={ink} w={1} o={0.5} i={3} />
-      <Crossings xs={[72, 1008]} ys={[76, 1364]} c={ink} s={9} i={4} />
-      <MarkG x={110} y={110} size={64} fill={ink} />
-      <Word x={1008 - 40} y={204} size={77} anchor="end" fill={ink} i={6} />
-      <g>
-        {FRAMES.map((f, i) => {
-          const h = f.rows.length * f.size * 1.3 + 56;
-          return (
-            <g key={i} className="cut" style={{ '--f': i }}>
-              <rect x="110" y={r2(1010 - f.size - 28)} width="860" height={r2(h)} fill={HEX.paper} />
-              <Lines rows={f.rows} x={140} y={1010} size={f.size} lh={1.3} fill={ink} display={f.size > 30} />
-            </g>
-          );
-        })}
-      </g>
+      {CYCLE.map((key, i) => (
+        <g key={i} className="cut" style={{ '--f': i }}>
+          {POSTER_LIST.find((q) => q.key === key).node(`${id}-f${i}`, PH, true)}
+        </g>
+      ))}
     </g>
   );
 }

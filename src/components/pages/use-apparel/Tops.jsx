@@ -78,7 +78,7 @@ export const HOODIE_BOX = { w: 400, h: 446 };
 
 export function hoodieArt(kind, ink, ink2) {
   if (kind === 'lattice') return [{ k: 'lattice', cx: 200, cy: 268, kk: 1.5, rings: 3, fill: ink2 }];
-  if (kind === 'word') return [{ k: 'word', x: 200, y: 214, size: 31, fill: ink, anchor: 'middle' }];
+  if (kind === 'word') return [{ k: 'word', x: 200, y: 250, size: 31, fill: ink, anchor: 'middle' }];
   return [{ k: 'mark', x: 169, y: 150, size: 62, fill: ink }];
 }
 

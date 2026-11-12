@@ -6,7 +6,7 @@ import Art from '@/components/art/Art';
 import Button from '@/components/ui/Button';
 import { listV, itemV, tMove } from '@/lib/motion';
 import { POST_LIST, SQ } from './Posts';
-import { POSTER_LIST, PW, PH } from './Posters';
+import { POSTER_LIST, PW, PH, PH45 } from './Posters';
 import { STORY_LIST, SW, SH } from './Stories';
 import { Billboard, EventScreen, BILL, SCREEN } from './Wide';
 import { ProfileGrid, PosterCycle } from './Grid';
@@ -40,6 +40,9 @@ function Head({ n, title, lead }) {
 
 const list = { variants: listV, initial: 'hidden', animate: 'show' };
 
+// the three deliverable posters at 1080 x 1350, re-composed from the case-study sheets
+const POSTERS_45 = POSTER_LIST.filter((p) => p.key !== 'field');
+
 export default function Board() {
   const [n, setN] = useState(0);
   return (
@@ -70,11 +73,19 @@ export default function Board() {
 
         <section className="field-black band" aria-label="Posters">
           <div className="wrap">
-            <Head n="02" title="Posters" lead="The four sheets of the case study, rebuilt on a 3:4 sheet, then the billboard and the event screen." />
+            <Head n="02" title="Posters" lead="Three posters at 1080 × 1350, re-composed from the case-study sheets; then the four sheets rebuilt at their own 3:4, the billboard and the event screen." />
+            <motion.div className={s.posters3} {...list}>
+              {POSTERS_45.map((p) => (
+                <Piece key={p.key} name={`poster-${p.key}-4x5`} title={`${p.title}, 1080 × 1350`} box={[PW, PH45]} caption={p.title} note="1080 × 1350">
+                  {p.node(`campaign-poster45-${p.key}`, PH45)}
+                </Piece>
+              ))}
+            </motion.div>
+            <h3 className={`t-h3 ${s.subhead}`}>Case-study sheets, 3:4</h3>
             <motion.div className={s.posters} {...list}>
               {POSTER_LIST.map((p) => (
-                <Piece key={p.key} name={`poster-${p.key}`} title={p.title} box={[PW, PH]} caption={p.title} note={`Rebuild of ${p.from}`}>
-                  {p.node(`campaign-poster-${p.key}`)}
+                <Piece key={p.key} name={`poster-${p.key}`} title={`${p.title}, 3:4`} box={[PW, PH]} caption={p.title} note={`Rebuild of ${p.from}`}>
+                  {p.node(`campaign-poster-${p.key}`, PH)}
                 </Piece>
               ))}
             </motion.div>

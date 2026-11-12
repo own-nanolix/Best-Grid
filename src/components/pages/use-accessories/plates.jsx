@@ -32,10 +32,11 @@ export function TotesPlate() {
               <Tote id={`${idp}-t1`} m={idp} sh={sh(190)} fab="dark" drop={122} />
             </LitG>
           </At>
-          <Co x={238} y={231} tx={560} ty={150} label="Handle" sub="Stitched box, 4 points" i={0} />
-          <Co x={452} y={154} tx={560} ty={230} label="Hanging bar" i={1} />
-          <Co x={350} y={360} tx={560} ty={310} label="Canvas body" sub="Woven, natural weave" i={2} />
-          <Co x={398} y={259} tx={560} ty={390} label="Hem" sub="Double-folded, stitched" i={3} />
+          {/* every node on the right-hand tote's right side, in the order of the labels, so no leader crosses another */}
+          <Co x={452} y={154} tx={560} ty={150} label="Hanging bar" i={0} />
+          <Co x={400} y={196} tx={560} ty={230} label="Handle" sub="Stitched box, 4 points" i={1} />
+          <Co x={424} y={262} tx={560} ty={310} label="Hem" sub="Double-folded, stitched" i={2} />
+          <Co x={424} y={370} tx={560} ty={390} label="Canvas body" sub="Woven, natural weave" i={3} />
           <Dim x1={100} y1={155} x2={100} y2={255} value="250 mm" offset={26} i={4} />
           <Dim x1={108} y1={458} x2={272} y2={458} value="380 mm" offset={30} i={5} />
           <SpecColumnG x={520} y={455} w={190} title="Tote bag" size={14} rowH={36} rows={[{ k: 'Canvas', v: '280 g/m²' }, { k: 'Handles', v: '25 × 600 mm' }, { k: 'Print', v: '1 colour' }, { k: 'Size', v: '380 × 420 mm' }]} />
@@ -62,13 +63,14 @@ export function MugsPlate() {
               <Mug id={`${idp}-m1`} m={idp} hl={0.3} hand={-1} />
             </LitG>
           </At>
-          <Co x={190} y={328} tx={575} ty={150} label="Rim" sub="Rolled, glazed" i={0} />
-          <Co x={482} y={384} tx={575} ty={230} label="Handle" i={1} />
-          <Co x={350} y={377} tx={575} ty={310} label="Wrap print" sub="Wraps the body" i={2} />
-          <Co x={160} y={454} tx={575} ty={390} label="Pattern band" i={3} />
-          <Dim x1={239} y1={327} x2={239} y2={500} value="90 mm" offset={12} i={4} />
+          {/* nodes on the right-hand mug's right side, around its handle, top to bottom like the labels */}
+          <Co x={429} y={319} tx={575} ty={150} label="Rim" sub="Rolled, glazed" i={0} />
+          <Co x={415} y={334} tx={575} ty={230} label="Wrap print" sub="Wraps the body" i={1} />
+          <Co x={476} y={405} tx={575} ty={320} label="Handle" i={2} />
+          <Co x={426} y={465} tx={575} ty={482} label="Pattern band" i={3} />
+          <Dim x1={255} y1={500} x2={255} y2={322} value="90 mm" offset={-4} i={4} />
           <Dim x1={81} y1={322} x2={239} y2={322} value="Ø 80 mm" offset={-24} i={5} />
-          <SpecColumnG x={535} y={455} w={180} title="Mug" size={14} rowH={36} rows={[{ k: 'Body', v: 'Ceramic' }, { k: 'Volume', v: '300 ml' }, { k: 'Print', v: 'Wrap' }, { k: 'Handle', v: 'Left / right' }]} />
+          <SpecColumnG x={535} y={508} w={180} title="Mug" size={14} rowH={30} rows={[{ k: 'Body', v: 'Ceramic' }, { k: 'Volume', v: '300 ml' }, { k: 'Print', v: 'Wrap' }, { k: 'Handle', v: 'Left / right' }]} />
         </>
       )}
     </Plate>
@@ -92,12 +94,14 @@ export function BottlesPlate() {
               <Bottle id={`${idp}-b1`} m={idp} hl={0.75} />
             </LitG>
           </At>
-          <Co x={470} y={228} tx={240} ty={130} label="Cap" sub="Matt Dark Blue" side="left" i={0} />
-          <Co x={468} y={250} tx={240} ty={210} label="Neck" side="left" i={1} />
-          <Co x={440} y={330} tx={240} ty={300} label="Steel body" sub="Brushed finish" side="left" i={2} />
-          <Co x={462} y={470} tx={240} ty={390} label="Wrap print" side="left" i={3} />
-          <Co x={470} y={526} tx={240} ty={470} label="Base" side="left" i={4} />
-          <Dim x1={428} y1={212} x2={428} y2={520} value="260 mm" offset={22} i={5} />
+          {/* nodes on the standing bottle's left edge; the height is dimensioned along the leaning bottle, on the
+              far side, so no leader crosses it */}
+          <Co x={452} y={230} tx={240} ty={130} label="Cap" sub="Matt Dark Blue" side="left" i={0} />
+          <Co x={452} y={252} tx={240} ty={210} label="Neck" side="left" i={1} />
+          <Co x={430} y={330} tx={240} ty={300} label="Steel body" sub="Brushed finish" side="left" i={2} />
+          <Co x={430} y={470} tx={240} ty={390} label="Wrap print" side="left" i={3} />
+          <Co x={432} y={522} tx={240} ty={470} label="Base" side="left" i={4} />
+          <Dim x1={681} y1={512} x2={608} y2={221} value="260 mm" offset={22} i={5} />
           <SpecColumnG x={40} y={540} w={190} size={14} rowH={34} rows={[{ k: 'Volume', v: '500 ml' }, { k: 'Diameter', v: '70 mm' }]} />
         </>
       )}
@@ -195,11 +199,12 @@ export function CupPlate() {
               <Cup id={`${idp}-cup`} m={idp} hl={0.3} />
             </LitG>
           </At>
+          {/* nodes on the right-hand edges, top to bottom like the labels; the coaster's leader passes above the stack */}
           <Co x={196} y={262} tx={560} ty={160} label="Lid" sub="Sip hole, dark plastic" i={0} />
           <Co x={262} y={370} tx={560} ty={250} label="Printed sleeve" i={1} />
-          <Co x={150} y={420} tx={560} ty={340} label="Paper cup" i={2} />
-          <Co x={285} y={506} tx={560} ty={430} label="Coaster" sub="Cork back" i={3} />
-          <Co x={385} y={470} tx={560} ty={520} label="Coaster stack" i={4} />
+          <Co x={255} y={447} tx={560} ty={340} label="Paper cup" i={2} />
+          <Co x={284} y={456} tx={560} ty={430} label="Coaster" sub="Cork back" i={3} />
+          <Co x={451} y={522} tx={560} ty={522} label="Coaster stack" i={4} />
           <Dim x1={112} y1={244} x2={112} y2={482} value="112 mm" offset={24} i={5} />
           <Dim x1={95} y1={540} x2={285} y2={540} value="100 mm" offset={18} i={6} />
           <SpecColumnG x={520} y={560} w={190} size={14} rowH={32} rows={[{ k: 'Cup', v: '240 ml' }, { k: 'Coaster', v: '100 × 100 mm' }]} />
@@ -220,11 +225,12 @@ export function DeskPlate() {
           <LitG>
             <DeskMat id={`${idp}-d`} m={idp} ox={ox} oy={oy} />
           </LitG>
-          <Co x={P(500, 155, 5)[0]} y={P(500, 155, 5)[1]} tx={210} ty={110} label="Mouse pad" sub="220 × 190 mm" side="left" i={0} />
-          <Co x={P(220, 160)[0]} y={P(220, 160)[1]} tx={210} ty={190} label="Crossing bands" side="left" i={1} />
-          <Co x={P(720, 60)[0]} y={P(720, 60)[1]} tx={600} ty={250} label="Stitched edge" i={2} />
-          <Co x={P(60, 300)[0]} y={P(60, 300)[1]} tx={50} ty={500} label="Word-mark" side="right" i={3} />
-          <Co x={P(600, 20)[0]} y={P(600, 20)[1]} tx={600} ty={150} label="Woven top" i={4} />
+          {/* left: nodes by the upper-left edge; right: nodes by the upper-right edge, in label order (no crossings) */}
+          <Co x={P(10, 72)[0]} y={P(10, 72)[1]} tx={210} ty={190} label="Crossing bands" side="left" i={0} />
+          <Co x={P(40, 268)[0]} y={P(40, 268)[1]} tx={130} ty={262} label="Word-mark" side="left" i={1} />
+          <Co x={P(450, 118, 12)[0]} y={P(450, 118, 12)[1]} tx={600} ty={150} label="Mouse pad" sub="220 × 190 mm" i={2} />
+          <Co x={P(400, 8)[0]} y={P(400, 8)[1]} tx={600} ty={250} label="Stitched edge" i={3} />
+          <Co x={P(600, 40)[0]} y={P(600, 40)[1]} tx={600} ty={350} label="Woven top" i={4} />
           <Dim x1={P(0, 320)[0]} y1={P(0, 320)[1] + 5} x2={P(720, 320)[0]} y2={P(720, 320)[1] + 5} value="900 mm" offset={34} i={5} />
           <Dim x1={P(720, 320)[0]} y1={P(720, 320)[1] + 5} x2={P(720, 0)[0]} y2={P(720, 0)[1] + 5} value="400 mm" offset={34} i={6} />
         </>
@@ -252,14 +258,16 @@ export function UmbrellaPlate() {
           <At x={540} y={200} k={0.85}>
             <Sock id={`${idp}-s1`} m={idp} />
           </At>
-          <Co x={246} y={296} tx={345} ty={160} label="Rib" sub="Steel tip" i={0} />
-          <Co x={175} y={350} tx={345} ty={240} label="Hub" i={1} />
-          <Co x={195} y={426} tx={345} ty={320} label="Canvas panel" sub="Printed inside" i={2} />
-          <Co x={528} y={220} tx={470} ty={470} label="Ribbed cuff" side="left" i={3} />
-          <Co x={528} y={275} tx={470} ty={540} label="Jacquard mark" side="left" i={4} />
-          <Co x={540} y={425} tx={470} ty={610} label="Heel" side="left" i={5} />
-          <Dim x1={25} y1={520} x2={325} y2={520} value="1,050 mm" offset={20} i={6} />
-          <Dim x1={513} y1={200} x2={513} y2={440} value="240 mm" offset={22} i={7} />
+          {/* umbrella nodes on its right rim (the hub's leader runs out along the horizontal rib); sock nodes on the
+              front sock's left edge, running down to labels below the height dimension */}
+          <Co x={281} y={244} tx={345} ty={200} label="Rib" sub="Steel tip" i={0} />
+          <Co x={175} y={350} tx={345} ty={350} label="Hub" i={1} />
+          <Co x={295} y={400} tx={345} ty={408} label="Canvas panel" sub="Printed inside" i={2} />
+          <Co x={512} y={222} tx={470} ty={470} label="Ribbed cuff" side="left" i={3} />
+          <Co x={521} y={273} tx={470} ty={540} label="Jacquard mark" side="left" i={4} />
+          <Co x={510} y={406} tx={470} ty={610} label="Heel" side="left" i={5} />
+          <Dim x1={25} y1={520} x2={325} y2={520} value="1 050 mm" offset={20} i={6} />
+          <Dim x1={513} y1={200} x2={513} y2={440} value="240 mm" offset={40} i={7} />
         </>
       )}
     </Plate>
@@ -284,16 +292,18 @@ export function GiftPlate() {
           <At x={450} y={450} k={0.85} rot={-2}>
             <GiftBack id={`${idp}-b`} m={idp} sh={sh(450)} />
           </At>
-          <Co x={176} y={218} tx={575} ty={110} label="Card slots" i={0} />
-          <Co x={424} y={150} tx={575} ty={180} label="Crossing bands" i={1} />
-          <Co x={300} y={240} tx={575} ty={250} label="Fold" i={2} />
-          <Co x={205} y={420} tx={150} ty={610} label="Front" side="left" i={3} />
-          <Co x={393} y={442} tx={600} ty={400} label="Value field" i={4} />
-          <Co x={421} y={465} tx={600} ty={470} label="Number field" i={5} />
-          <Co x={386} y={483} tx={600} ty={540} label="Code field" i={6} />
+          {/* carrier callouts above it (each node just inside its top edge), the front's label between carrier and
+              card, the back's fields to the right in their own order; the carrier width is dimensioned below it */}
+          <Co x={104} y={162} tx={110} ty={78} label="Card slots" i={0} />
+          <Co x={300} y={124} tx={320} ty={78} label="Fold" i={1} />
+          <Co x={444} y={124} tx={470} ty={78} label="Crossing bands" i={2} />
+          <Co x={110} y={374} tx={110} ty={340} label="Front" i={3} />
+          <Co x={427} y={442} tx={600} ty={400} label="Value field" i={4} />
+          <Co x={528} y={465} tx={600} ty={470} label="Number field" i={5} />
+          <Co x={415} y={483} tx={600} ty={540} label="Code field" i={6} />
           <Dim x1={92} y1={510} x2={308} y2={510} value="85 mm" offset={22} i={7} />
           <Dim x1={92} y1={370} x2={92} y2={510} value="55 mm" offset={24} i={8} />
-          <Dim x1={538} y1={100} x2={62} y2={100} value="220 mm" offset={18} i={9} />
+          <Dim x1={62} y1={282} x2={538} y2={282} value="220 mm" offset={18} i={9} />
         </>
       )}
     </Plate>

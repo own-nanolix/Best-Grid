@@ -60,8 +60,8 @@ export default function SpecSheet({ idp = 'use-apparel-spec' }) {
       {dim(f([80, 350]), f([320, 350]), `${mm(240)} mm`, 30, 2)}
       {dim(f([320, 18]), f([320, 350]), `${mm(332)} mm`, -60, 3)}
       {dim(f([66, 50]), f([14, 150]), `${mm(113)} mm`, 22, 4)}
-      {dim(f([C.x, C.y]), f([C.x + C.w, C.y]), `${mm(C.w)} mm`, -16, 5)}
-      {dim(f([C.x + C.w + 10, 18]), f([C.x + C.w + 10, C.y]), `${mm(C.y - 18)} mm`, 16, 6)}
+      {dim(f([C.x, C.y + C.h]), f([C.x + C.w, C.y + C.h]), `${mm(C.w)} mm`, 16, 5)}
+      {dim(f([C.x + C.w, 18]), f([C.x + C.w, C.y]), `${mm(C.y - 18)} mm`, -22, 6)}
       {dim(b([B.x, B.y + B.h]), b([B.x + B.w, B.y + B.h]), `${mm(B.w)} mm`, 22, 5)}
       {dim(b([B.x, B.y]), b([B.x, B.y + B.h]), `${mm(B.h)} mm`, 18, 6)}
       {dim(b([N.x, N.y]), b([N.x + N.w, N.y]), `${mm(N.w)} mm`, -12, 7)}

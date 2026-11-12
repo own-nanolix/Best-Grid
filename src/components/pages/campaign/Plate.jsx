@@ -1,7 +1,7 @@
 // Mockup plate: three framed 3:4 posters hanging in a row from a rail, labels hanging below on leader lines,
 // a spec column on the right. One SVG: stage, rail, wires, frames, glass, posters, callouts. Light from the top spot.
 import { r2 } from '@/lib/charts';
-import { StageG, MaterialDefs, CastG, SheenG, CalloutG, DimensionG, SpecColumnG, PlateFrameG, castDir } from '@/components/art/Mockup';
+import { StageG, MaterialDefs, CastG, SheenG, CalloutG, DimensionG, SpecColumnG, PlateFrameG, castDir, PLATE } from '@/components/art/Mockup';
 import { PosterDataCentre, PosterGeneration, PosterField, PW } from './Posters';
 
 export const PLATE_W = 1600;
@@ -26,9 +26,9 @@ export function FramedPosters() {
       <rect x="90" y="108" width="1220" height="6" fill={`url(#${id}-metal)`} />
       {XS.map((x) => (
         <g key={x}>
-          <path d={`M${x + 40} ${FY}V111M${x + FW - 40} ${FY}V111`} stroke="#8b96c8" strokeWidth="0.9" fill="none" />
-          <rect x={x + 37} y="108" width="6" height="6" fill="#8b96c8" />
-          <rect x={x + FW - 43} y="108" width="6" height="6" fill="#8b96c8" />
+          <path d={`M${x + 40} ${FY}V111M${x + FW - 40} ${FY}V111`} stroke={PLATE.line} strokeWidth="0.9" fill="none" />
+          <rect x={x + 37} y="108" width="6" height="6" fill={PLATE.line} />
+          <rect x={x + FW - 43} y="108" width="6" height="6" fill={PLATE.line} />
         </g>
       ))}
       {SHEETS.map((s, i) => {

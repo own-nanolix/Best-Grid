@@ -5,7 +5,7 @@ import { StageG, MaterialDefs, ShadowG, LitG, DimensionG, PlateFrameG, castDir, 
 import { PhoneG, ScreenCapacityG, ScreenNodesG } from '@/components/art/Devices';
 import { CAPACITY, TECH } from '@/lib/brand';
 import { r2 } from '@/lib/charts';
-import { ScreenTechG, ScreenBrandG, ShelfG } from './kit';
+import { ScreenTechG, ScreenBrandG, ShelfG, NoClockG } from './kit';
 
 const W = 1600, H = 900, SPOT = { x: 0.5, y: 0.04 };
 const PW = 160, PH = 329, TOP = 120, SHELF = TOP + PH + 3;
@@ -14,9 +14,9 @@ const STEP = (1450 - 150) / 7;
 
 // the eight screens: the two printed phone screens, the empty year, the four technology tiles, the mark
 const SCREENS = [
-  { label: 'Capacity 2025', draw: (idp) => <ScreenCapacityG idp={idp} year={CAPACITY.year} /> },
-  { label: 'Node grid', draw: () => <ScreenNodesG /> },
-  { label: 'Empty year', draw: (idp) => <ScreenCapacityG idp={idp} year="2024" />, sub: '2024' },
+  { label: 'Capacity 2025', draw: (idp) => <><ScreenCapacityG idp={idp} year={CAPACITY.year} /><NoClockG /></> },
+  { label: 'Node grid', draw: () => <><ScreenNodesG /><NoClockG /></> },
+  { label: 'Empty year', draw: (idp) => <><ScreenCapacityG idp={idp} year="2024" /><NoClockG /></>, sub: '2024' },
   ...TECH.map((t) => ({ label: t.label, es: true, draw: () => <ScreenTechG tech={t.key} /> })),
   { label: 'Mark and address', draw: () => <ScreenBrandG /> },
 ];

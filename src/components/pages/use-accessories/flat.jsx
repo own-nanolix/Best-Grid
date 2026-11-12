@@ -1,5 +1,5 @@
 // Flat goods: sticker sheet, pin card, coasters, desk mat with mouse pad (isometric), mouse pad, gift cards, carrier.
-import { MARK_D, MarkG, MarkEmbossG, WordmarkG, LockupCornersG } from '@/components/art/Mark';
+import { MARK_D, MarkG, MarkEmbossG, WordmarkG } from '@/components/art/Mark';
 import { CrossingBandsG, LatticeFieldG, NodeGridG } from '@/components/art/KeyArt';
 import { CastG, SheenG } from '@/components/art/Mockup';
 import { HEX, LINES } from '@/lib/brand';
@@ -184,9 +184,11 @@ export function GiftFront({ id, m, sh, cd = CD }) {
       <CastG idp={id} d={`M${-w / 2} ${-h / 2}H${w / 2}V${h / 2}H${-w / 2}Z`} dir={cd} depth={12} />
       <rect x={-w / 2 + 1} y={-h / 2 + 3} width={w} height={h} fill="#0d1026" />
       <rect x={-w / 2} y={-h / 2} width={w} height={h} fill={url(m, 'plastic')} filter={url(m, 'fibre')} />
-      <LockupCornersG x={-w / 2} y={-h / 2} w={w} h={h} fill={HEX.onBlue} markFill={HEX.darkBlue} />
-      <MarkEmbossG idp={`${id}-e`} x={-w / 2 + w * 0.07} y={h / 2 - h * 0.2 - 34} size={34} paper={HEX.darkBlue} light="#5a64a6" shade={HEX.black} />
-      <text x={w / 2 - 17} y={h / 2 - 17} fontSize="8.5" fill={HEX.activeBlue} textAnchor="end" lang="es">{LINES.card}</text>
+      {/* as the card back of m05 (re-measured on crop_m05_cardback, as fractions of the card width): word-mark top
+          right, 51.5% wide, 3.4% in; blind-embossed mark bottom left, 10.8% wide; the line bottom right, 2% high */}
+      <WordmarkG x={r2(w / 2 - w * 0.034)} y={r2(-h / 2 + w * 0.1325)} size={r2(w * 0.1273)} fill={HEX.onBlue} anchor="end" />
+      <MarkEmbossG idp={`${id}-e`} x={r2(-w / 2 + w * 0.037)} y={r2(h / 2 - w * 0.153)} size={r2(w * 0.108)} paper={HEX.darkBlue} light={HEX.mutedOnDark} shade={HEX.black} />
+      <text x={r2(w / 2 - w * 0.035)} y={r2(h / 2 - w * 0.043)} fontSize={r2(w * 0.02)} fill={HEX.activeBlue} textAnchor="end" lang="es">{LINES.card}</text>
       <rect x={-w / 2} y={-h / 2} width={w} height={h} fill={sh} opacity="0.55" />
       <SheenG idp={m} d={`M${-w / 2} ${-h / 2}H${w / 2}V${h / 2}H${-w / 2}Z`} opacity={0.2} />
     </g>

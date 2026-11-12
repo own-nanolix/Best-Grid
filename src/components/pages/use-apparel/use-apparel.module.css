@@ -12,6 +12,7 @@
 .section h2 { margin: 0 0 20px; }
 
 .grid3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(16px, 2vw, 28px); align-items: start; }
+.grid2 { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 6fr); gap: clamp(16px, 2vw, 28px); align-items: start; }
 .fig { margin: 0; min-width: 0; }
 .fig .name { margin: 0; }
 
@@ -20,7 +21,7 @@
 .note { margin-top: 14px; max-width: 52ch; }
 
 @media (max-width: 1000px) {
-  .grid3 { grid-template-columns: minmax(0, 1fr); }
+  .grid3, .grid2 { grid-template-columns: minmax(0, 1fr); }
   .specRow { grid-template-columns: minmax(0, 1fr); }
 }
 

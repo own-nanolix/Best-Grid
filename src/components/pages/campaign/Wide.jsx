@@ -1,5 +1,5 @@
 // The two wide pieces of the case study as flat artwork: the billboard panel (m19) and the event screen (m22).
-// Their photographs become the sunset field with light trails and two stand-in fields.
+// Re-measured on m19_1 / crop_m19_txt and m22_1 / crop_m22_mid. Their photographs become the sunset field with light trails and two stand-in fields.
 import { HEX, LINES, CONTACT } from '@/lib/brand';
 import { MarkG } from '@/components/art/Mark';
 import { BrandDefs, TrailsG, LatticeFieldG, LatticeDefs, PhotoBlockG } from '@/components/art/KeyArt';
@@ -20,12 +20,12 @@ export function Billboard() {
       <HL y={327} x2={1060} c={l} w={1} o={0.55} i={2} />
       <Nd x={1060} y={327} c={l} s={7} i={3} />
       <In i={5}>
-        <Lines rows={LINES.box.rows} x={28} y={63} size={29.5} lh={1.26} fills={[l, d, d]} />
+        <Lines rows={LINES.box.rows} x={28} y={62} size={35} lh={1.06} fills={[l, d, d]} />
         <MarkG x={958} y={43} size={58} fill={l} />
-        <Lines rows={LINES.billboard.rows} x={32} y={276} size={16} lh={1.4} fill="#ffffff" display={false} />
+        <Lines rows={LINES.billboard.rows} x={32} y={276} size={16} lh={1.4} fills={[l, d]} display={false} />
         <text x="1015" y="276" fontSize="16" fill={l} textAnchor="end">{CONTACT.handle}</text>
         <text x="1015" y="298" fontSize="16" fill={d} textAnchor="end">{CONTACT.web}</text>
-        <Lines rows={CONTACT.address} x={895} y={456} size={11} lh={1.2} fill={d} display={false} />
+        <Lines rows={CONTACT.address} x={895} y={459} size={8.5} lh={1.3} fill={d} display={false} />
       </In>
       <Word x={28} y={480} size={151} fill={l} i={6} />
       <g className="fade-in" style={{ '--i': 8 }}>
@@ -55,13 +55,13 @@ export function EventScreen() {
         <rect x="1046" y="18" width="460" height="239" fill={`url(#${id}-lattice)`} opacity="0.3" />
       </g>
       <In i={7}>
-        <Lines rows={LINES.connect.rows} x={529} y={33} size={20} lh={1.35} fills={[l, d]} />
-        <MarkG x={977} y={17} size={33} fill={l} />
-        <Lines rows={LINES.viable.rows} x={529} y={170} size={11} lh={1.4} fills={[l, d]} display={false} />
-        <text x="1009" y="170" fontSize="11" fill={l} textAnchor="end">{CONTACT.handle}</text>
-        <text x="1009" y="184" fontSize="11" fill={d} textAnchor="end">{CONTACT.web}</text>
+        <Lines rows={LINES.connect.rows} x={531} y={37} size={21.5} lh={1.256} fills={[l, d]} />
+        <MarkG x={970} y={21} size={31} fill={l} />
+        <Lines rows={LINES.viable.rows} x={531} y={174} size={10} lh={1.2} fills={[l, d]} display={false} />
+        <text x="1001" y="174" fontSize="10" fill={l} textAnchor="end">{CONTACT.handle}</text>
+        <text x="1001" y="186" fontSize="10" fill={d} textAnchor="end">{CONTACT.web}</text>
       </In>
-      <Word x={529} y={255} size={48} fill={l} i={8} />
+      <Word x={530} y={255} size={46.5} fill={l} i={8} />
     </g>
   );
 }

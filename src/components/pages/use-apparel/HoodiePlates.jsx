@@ -1,5 +1,6 @@
-// Three hoodie-class plates: the high-visibility vest (the workwear of the case study's field poster, rebuilt in
-// the brand's colours), the Dark Blue hoodie with the chest mark and the Light Blue hoodie with the lattice print.
+// Three hoodie plates (the Dark Blue hoodie with the chest mark, the Light Blue hoodie with the lattice print, the
+// Active Blue hoodie with the word-mark) and, as an extra, the high-visibility vest (the workwear of the case study's
+// field poster, rebuilt in the brand's colours).
 // Each plate shows one piece in front and the other two overlapping behind it in depth, turned a few degrees.
 import { CalloutG, DimensionG } from '@/components/art/Mockup';
 import { HEX } from '@/lib/brand';
@@ -15,43 +16,56 @@ const PIECES = {
     w: 400, h: 436, hem: [80, 320, 436], width: `${mmH(240)} mm`,
     draw: (p) => <Vest {...p} />,
     calls: [
-      { lx: 136, ly: 120, label: 'Reflective brace', sub: `${mmH(28)} mm tape` },
-      { lx: 226, ly: 138, label: 'Chest mark', sub: `${mmH(38)} × ${mmH(38)} mm` },
-      { lx: 110, ly: 278, label: 'Reflective band', sub: `${mmH(32)} mm tape` },
-      { lx: 88, ly: 190, label: 'Binding', sub: `${mmH(8)} mm` },
-      { lx: 138, ly: 408, label: 'Flap pocket', sub: `${mmH(76)} mm` },
+      { lx: 126, ly: 64, label: 'Reflective brace', sub: `${mmH(28)} mm tape` },
+      { lx: 208, ly: 136, label: 'Chest mark', sub: `${mmH(38)} × ${mmH(38)} mm` },
+      { lx: 84, ly: 278, label: 'Reflective band', sub: `${mmH(32)} mm tape` },
+      { lx: 86, ly: 190, label: 'Binding', sub: `${mmH(8)} mm` },
+      { lx: 100, ly: 395, label: 'Flap pocket', sub: `${mmH(76)} mm` },
     ],
   },
   dark: {
     w: 400, h: 446, hem: [92, 308, 442], width: `${mmH(216)} mm`,
     draw: (p) => <Hoodie {...p} body={HEX.darkBlue} art={hoodieArt('mark', HEX.activeBlue, HEX.activeBlue)} />,
     calls: [
-      { lx: 200, ly: 10, label: 'Lined hood', sub: `${mmH(32)} mm collar band` },
-      { lx: 180, ly: 130, label: 'Drawcord', sub: 'Metal eyelets' },
-      { lx: 200, ly: 182, label: 'Chest mark', sub: `${mmH(62)} × ${mmH(62)} mm` },
-      { lx: 130, ly: 346, label: 'Kangaroo pocket', sub: `${mmH(168)} mm` },
-      { lx: 36, ly: 392, label: 'Ribbed cuff', sub: `${mmH(24)} mm` },
-      { lx: 130, ly: 428, label: 'Ribbed hem', sub: `${mmH(30)} mm` },
+      { lx: 140, ly: 20, label: 'Lined hood', sub: `${mmH(32)} mm collar band` },
+      { lx: 179, ly: 160, label: 'Drawcord', sub: 'Metal eyelets' },
+      { lx: 171, ly: 181, label: 'Chest mark', sub: `${mmH(62)} × ${mmH(62)} mm` },
+      { lx: 108, ly: 350, label: 'Kangaroo pocket', sub: `${mmH(168)} mm` },
+      { lx: 34, ly: 400, label: 'Ribbed cuff', sub: `${mmH(24)} mm` },
+      { lx: 96, ly: 428, label: 'Ribbed hem', sub: `${mmH(30)} mm` },
+    ],
+  },
+  active: {
+    w: 400, h: 446, hem: [92, 308, 442], width: `${mmH(216)} mm`,
+    draw: (p) => <Hoodie {...p} body={HEX.activeBlue} tone={HEX.darkBlue} cord={HEX.darkBlue} art={hoodieArt('word', HEX.lightBlue, HEX.lightBlue)} />,
+    calls: [
+      { lx: 140, ly: 20, label: 'Lined hood', sub: `${mmH(32)} mm collar band` },
+      { lx: 179, ly: 160, label: 'Drawcord', sub: 'Dark Blue cord' },
+      { lx: 136, ly: 262, label: 'Word-mark print', sub: `${mmH(124)} × ${mmH(23)} mm` },
+      { lx: 108, ly: 350, label: 'Kangaroo pocket', sub: `${mmH(168)} mm` },
+      { lx: 96, ly: 428, label: 'Ribbed hem', sub: `${mmH(30)} mm` },
     ],
   },
   light: {
     w: 400, h: 446, hem: [92, 308, 442], width: `${mmH(216)} mm`,
     draw: (p) => <Hoodie {...p} body={HEX.lightBlue} tone={HEX.darkBlue} cord={HEX.darkBlue} art={hoodieArt('lattice', HEX.darkBlue, HEX.activeBlue)} />,
     calls: [
-      { lx: 200, ly: 10, label: 'Lined hood', sub: `${mmH(32)} mm collar band` },
-      { lx: 180, ly: 130, label: 'Drawcord', sub: 'Metal eyelets' },
-      { lx: 200, ly: 252, label: 'Lattice print', sub: `${mmH(LAT)} × ${mmH(LAT)} mm` },
-      { lx: 36, ly: 392, label: 'Ribbed cuff', sub: `${mmH(24)} mm` },
-      { lx: 130, ly: 428, label: 'Ribbed hem', sub: `${mmH(30)} mm` },
+      { lx: 140, ly: 20, label: 'Lined hood', sub: `${mmH(32)} mm collar band` },
+      { lx: 179, ly: 160, label: 'Drawcord', sub: 'Metal eyelets' },
+      { lx: 140, ly: 268, label: 'Lattice print', sub: `${mmH(LAT)} × ${mmH(LAT)} mm` },
+      { lx: 34, ly: 400, label: 'Ribbed cuff', sub: `${mmH(24)} mm` },
+      { lx: 96, ly: 428, label: 'Ribbed hem', sub: `${mmH(30)} mm` },
     ],
   },
 };
 
 export const HOODS = [
-  { name: 'vest', title: 'High-visibility vest with reflective tape, with two hoodies behind', hero: 'vest', rest: ['dark', 'light'], mirror: false, spot: { x: 0.2, y: 0.1 }, no: '01', label: 'Hi-vis vest' },
-  { name: 'hoodie-dark', title: 'Dark Blue hoodie with the chest mark, with the vest and a hoodie behind', hero: 'dark', rest: ['vest', 'light'], mirror: true, spot: { x: 0.78, y: 0.14 }, no: '02', label: 'Dark Blue hoodie' },
-  { name: 'hoodie-light', title: 'Light Blue hoodie with the lattice print, with two pieces behind', hero: 'light', rest: ['dark', 'vest'], mirror: false, spot: { x: 0.55, y: 0.06 }, no: '03', label: 'Light Blue hoodie' },
+  { name: 'hoodie-dark', title: 'Dark Blue hoodie with the chest mark, with two hoodies behind', hero: 'dark', rest: ['light', 'active'], mirror: true, spot: { x: 0.78, y: 0.14 }, no: '01', label: 'Dark Blue hoodie' },
+  { name: 'hoodie-light', title: 'Light Blue hoodie with the lattice print, with two hoodies behind', hero: 'light', rest: ['active', 'dark'], mirror: false, spot: { x: 0.55, y: 0.06 }, no: '02', label: 'Light Blue hoodie' },
+  { name: 'hoodie-active', title: 'Active Blue hoodie with the word-mark, with two hoodies behind', hero: 'active', rest: ['dark', 'light'], mirror: true, spot: { x: 0.9, y: 0.3 }, no: '03', label: 'Active Blue hoodie' },
 ];
+// The extra workwear plate: the vest in front of two hoodies.
+export const VEST = { name: 'vest', title: 'High-visibility vest with reflective tape, with two hoodies behind', hero: 'vest', rest: ['dark', 'active'], mirror: false, spot: { x: 0.2, y: 0.1 }, no: '04', label: 'Hi-vis vest' };
 
 export function HoodiePlate({ cfg, idp }) {
   const base = [
@@ -78,9 +92,7 @@ export function HoodiePlate({ cfg, idp }) {
               const t = ts[i];
               return <g key={i}>{PIECES[t.pk].draw({ idp, id: `${idp}-p${i}`, t, spot, cast: cast(t.x + 150, t.y + 150, 22 + (2 - i) * 4), dim: i === 0 ? 0 : i === 1 ? 0.28 : 0.5 })}</g>;
             })}
-            {P.calls.map((c, j) => {
-              const lx = cfg.mirror ? 400 - c.lx : c.lx;
-              const p = at(hero, lx, c.ly);
+            {P.calls.map((c) => ({ c, p: at(hero, cfg.mirror ? 400 - c.lx : c.lx, c.ly) })).sort((m, n) => m.p.y - n.p.y).map(({ c, p }, j) => {
               return <CalloutG key={c.label} x={p.x} y={p.y} tx={tx} ty={170 + j * (480 / P.calls.length + 14)} label={c.label} sub={c.sub} side={side} i={j + 1} size={19} />;
             })}
             <DimensionG x1={a.x} y1={a.y} x2={b.x} y2={b.y} value={P.width} offset={30} i={8} size={15} />
