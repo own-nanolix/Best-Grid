@@ -1,0 +1,33 @@
+/* use-world: the scenes stacked full width, each a catalogue plate on the dark stage. Tokens only. */
+.head {
+  display: grid;
+  gap: 16px;
+  padding-block: clamp(32px, 5vw, 72px) clamp(20px, 3vw, 40px);
+  max-width: 60rem;
+}
+.scenes {
+  display: grid;
+  gap: clamp(36px, 5vw, 72px);
+  padding-bottom: clamp(48px, 7vw, 112px);
+}
+.plate {
+  margin: 0;
+  min-width: 0;
+}
+.name {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(20px, 2vw, 28px);
+  line-height: 1.15;
+  margin: 0 0 14px;
+  color: var(--dark-blue);
+}
+
+/* the raised logo's cast shadow sweeps into place with the light, landing on the finished artwork */
+.shadowSweep {
+  animation: use-world-sweep var(--dur-draw) var(--ease-out) 700ms both;
+}
+@keyframes use-world-sweep {
+  from { opacity: 0; transform: translate(26px, -10px); }
+  to { opacity: 1; transform: none; }
+}
