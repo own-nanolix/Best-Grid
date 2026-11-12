@@ -1,5 +1,6 @@
 // The closing band: the brand idea on Dark Blue, the event screen's two-tone pair, the mark echoed outward, and the
-// way on to the next chapter. The paragraph is ours, written only from what the case study shows.
+// way on to the next chapter. The paragraph is ours, written only from what the case study shows, and the page says
+// so: it is labelled as our note, never presented as the brand's copy.
 import Reveal from '@/components/site/Reveal';
 import Button from '@/components/ui/Button';
 import { TwoTone } from '@/components/ui/Card';
@@ -14,15 +15,20 @@ export default function Closing() {
       <div className={`wrap ${s.closingGrid}`}>
         <div className={s.closingText}>
           <Reveal>
-            <p className="t-label">The brand idea</p>
+            <p className="t-label">Our note</p>
           </Reveal>
           <Reveal delay={60}>
             <h2 id="strategy-idea-title" className="t-h2 t-balance">
-              A grid gathered into one node.
+              The brand idea, as we read it.
             </h2>
           </Reveal>
           <Reveal delay={120}>
-            <p className="t-lead">{BRAND_IDEA}</p>
+            <figure className={s.ourNote}>
+              <p className="t-lead">{BRAND_IDEA}</p>
+              <figcaption className="t-small muted">
+                Our summary, written from the case study for this site. It is not the brand&apos;s copy.
+              </figcaption>
+            </figure>
           </Reveal>
           <Reveal delay={180}>
             <TwoTone rows={LINES.connect.rows} tone={LINES.connect.tone} as="p" lightClass="tone-light" darkClass="blue" lang="es" className="t-h2" />

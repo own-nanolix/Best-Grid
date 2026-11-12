@@ -8,6 +8,7 @@ import { HEX, SPECS } from '@/lib/brand';
 const W = 1600;
 const X = [122, 1478];
 const T = SPECS.type;
+const SPECIMEN_DX = [12, -1, 13];
 
 function Line({ cls, i, animate, ...p }) {
   return <rect fill={HEX.darkBlue} {...p} {...(animate ? { className: cls, style: { '--i': i } } : {})} />;
@@ -44,8 +45,12 @@ export function TypeSlide({ animate = true }) {
         <text x="800" y="1074">{T.weight}</text>
         <text x="1244" y="1076">{T.optical}</text>
       </g>
+      {/* gaps between the four glyphs set to the slide's (measured on m03: 16, 45 and 43 units) */}
       <text x="792" y="872" textAnchor="middle" fontSize="500" letterSpacing="-14" fill={HEX.darkBlue} className="display slide-up" style={animate ? { '--i': 8 } : undefined}>
-        {T.specimen}
+        {T.specimen[0]}
+        {[...T.specimen.slice(1)].map((g, i) => (
+          <tspan key={g} dx={SPECIMEN_DX[i]}>{g}</tspan>
+        ))}
       </text>
     </Art>
   );
@@ -64,7 +69,7 @@ export function GlyphSlice({ animate = true }) {
       {X.map((x, i) => (
         <NodeG key={x} cx={x} cy={860} s={11} fill={HEX.darkBlue} {...a('snap', 3 + i)} />
       ))}
-      <text x="800" y="640" textAnchor="middle" fontSize="490" letterSpacing="-12" fill={HEX.darkBlue} className="display fade-in" style={animate ? { '--i': 5 } : undefined} lang="es">
+      <text x="791" y="640" textAnchor="middle" fontSize="490" letterSpacing="-16" fill={HEX.darkBlue} className="display fade-in" style={animate ? { '--i': 5 } : undefined} lang="es">
         {T.glyphs}
       </text>
     </Art>

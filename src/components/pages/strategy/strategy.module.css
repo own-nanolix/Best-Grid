@@ -191,6 +191,7 @@
 }
 .closingText > * + * { margin-top: clamp(16px, 2vw, 28px); }
 .closingText :global(.t-lead) { max-width: 34em; }
+.ourNote { margin: 0; padding-left: 18px; border-left: var(--hair) solid var(--rule-blue); display: grid; gap: 10px; }
 .closingArt { width: 100%; max-width: 560px; margin-inline: auto; }
 .closingArt > svg { width: 100%; height: auto; }
 

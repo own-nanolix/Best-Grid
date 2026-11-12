@@ -31,9 +31,7 @@ export default function Page() {
           <div className={s.heroText}>
             <span className="t-label">Color system</span>
             <h1 className="t-display t-balance" tabIndex={-1}>
-              Three blues,
-              <br />
-              one system.
+              Colour.
             </h1>
             <p className="t-lead muted">
               The colour slide of the case study, rebuilt, then carried further: scales with their contrast, tints and

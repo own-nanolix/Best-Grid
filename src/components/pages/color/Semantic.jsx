@@ -20,7 +20,7 @@ function Preview({ mode }) {
       <text x="52" y="74" fontSize="13" fill={t('color-text-muted')}>{BRAND}</text>
       <text x="52" y="128" fontSize="36" className="display" letterSpacing="-0.8" fill={t('color-text')}>Surface and type</text>
       <text x="52" y="162" fontSize="15" fill={t('color-text-muted')}>Muted caption on the surface</text>
-      <text x="52" y="200" fontSize="15" fill={t('color-link')} textDecoration="underline">A link in blue ink</text>
+      <text x="52" y="200" fontSize="15" fill={t('color-link')} textDecoration="underline">A link</text>
       <rect x="28" y="268" width="150" height="44" fill={t('color-accent')} className="fill-in" style={{ '--i': 3 }} />
       <text x="48" y="296" fontSize="15" fill={t('color-on-accent')}>Accent button</text>
       <rect x="28" y="332" width={W - 56} height="1.2" fill={t('color-rule')} className="extend-x" style={{ '--i': 4 }} />

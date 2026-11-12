@@ -57,8 +57,8 @@ export default function Tangle() {
         <rect key={`j${y}`} x={JOIN - 3} y={y - 3} width="6" height="6" fill={HEX.activeBlue} className="snap" style={{ '--i': 12 + i }} />
       ))}
       <g fill={HEX.muted} fontSize="18" className="fade-in" style={{ '--i': 30 }}>
-        <text x={24} y={478}>Complexity</text>
-        <text x={COLS[0]} y={478}>Structure</text>
+        <text x={24} y={478}>Tangled strands</text>
+        <text x={COLS[0]} y={478}>Ruled grid</text>
       </g>
     </Art>
   );

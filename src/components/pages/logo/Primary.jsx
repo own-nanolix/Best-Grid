@@ -5,9 +5,10 @@ import { HEX } from '@/lib/brand';
 import { r2 } from '@/lib/charts';
 import s from './logo.module.css';
 
-// m21: the mark alone, Active Blue on Dark Blue, centred, about 31% of the slide width.
+// m21: the mark alone, Active Blue on Dark Blue, centred, 31% of the slide width, on the slide's own 3:4 portrait
+// sheet (3283 x 4376 in the case study).
 export function MarkPlate() {
-  const W = 1600, H = 900, size = r2(W * 0.31);
+  const W = 1200, H = 1600, size = r2(W * 0.31);
   return (
     <Art viewBox={`0 0 ${W} ${H}`} title="Primary mark: Active Blue on Dark Blue, 31% of the width" exportName="logo-mark-primary" className={s.plate}>
       <rect width={W} height={H} fill={HEX.darkBlue} />
@@ -42,21 +43,21 @@ export function LockupPlate() {
   );
 }
 
-// The primary section: mark plate over the word-mark and lockup plates.
+// The primary section: the portrait mark plate beside the word-mark and lockup plates.
 export default function Primary() {
   return (
-    <div className="stack-lg">
+    <div className={s.primary}>
       <Reveal>
         <figure className={s.fig}>
           <MarkPlate />
           <figcaption className={s.cap}><span>Mark</span><span>Active Blue on Dark Blue, 31% of the width</span></figcaption>
         </figure>
       </Reveal>
-      <div className={s.pair}>
+      <div className={s.primaryStack}>
         <Reveal>
           <figure className={s.fig}>
             <WordmarkPlate />
-            <figcaption className={s.cap}><span>Word-mark</span><span>Brand typeface, medium cut, letters touching</span></figcaption>
+            <figcaption className={s.cap}><span>Word-mark</span><span>Brand typeface, medium cut, tight spacing</span></figcaption>
           </figure>
         </Reveal>
         <Reveal delay={80}>

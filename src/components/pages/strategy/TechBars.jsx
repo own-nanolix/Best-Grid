@@ -18,7 +18,7 @@ const x = scale(0, Math.max(...TECH.map((t) => t.mw)), 0, BAR_MAX);
 
 export default function TechBars() {
   return (
-    <Art viewBox={`0 0 ${W} ${H}`} title="Managed capacity per technology: Fotovoltaico 12.157, Eólico 2.794, Almacenamiento 3.433, Data Centers 2.083 MW" exportName="strategy-technology-bars">
+    <Art viewBox={`0 0 ${W} ${H}`} title="The four technology tiles of the website as bars: Fotovoltaico 12.157, Eólico 2.794, Almacenamiento 3.433, Data Centers 2.083 MW" exportName="strategy-technology-bars">
       <rect width={W} height={H} fill={HEX.paper} />
       {TECH.map((t, i) => {
         const y = TOP + i * ROW;

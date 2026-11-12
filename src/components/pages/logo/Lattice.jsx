@@ -1,5 +1,5 @@
 import Art from '@/components/art/Art';
-import { MarkG, MARK, NodeG, LockupCornersG } from '@/components/art/Mark';
+import { MarkG, MARK, NodeG, WordmarkFitG } from '@/components/art/Mark';
 import { GuidesG, LatticeFieldG, LatticeDefs, CrossingBandsG, StarEchoG } from '@/components/art/KeyArt';
 import Reveal from '@/components/site/Reveal';
 import { HEX } from '@/lib/brand';
@@ -59,15 +59,22 @@ export function Echo() {
   );
 }
 
-// The crossing bands of the folder (m05): two straight bands with large fillets, the word-mark top right, the mark
-// bottom left. Measured: bands at 72 and -21 degrees, crossing at 48% / 46%, band 2% of the width.
+// The crossing bands of the folder (m05), re-measured on reference/crop_m05_folder.png (1000 x 1442): one band falls
+// from the top edge at 27% of the width towards the lower right (72 degrees from horizontal), the other rises from
+// the left edge at 58% of the height towards the upper right (21 degrees); they cross at 48.5% / 45.8% with large
+// fillets; band 2.2% of the width. In crossingPath angles rise counter-clockwise, so the falling band is -72 and the
+// rising one +21. The word-mark sits top right (right edge at 92.8%, baseline at 7.5%, 38.3% of the width wide) and
+// the mark bottom left (7.8% from the left, 91% down, 7.9% of the width).
+const BANDS = { cx: 0.485, cy: 0.458, a1: -72, a2: 21, band: 0.022, r: 0.045 };
 export function Bands() {
   const W = 600, H = 860;
+  const ms = r2(W * 0.079);
   return (
     <Art viewBox={`0 0 ${W} ${H}`} title="Crossing bands on a Dark Blue folder panel" exportName="logo-bands-cross" className={s.plate}>
       <rect width={W} height={H} fill={HEX.darkBlue} />
-      <CrossingBandsG idp="logo-bands" w={W} h={H} />
-      <LockupCornersG w={W} h={H} fill={HEX.onBlue} />
+      <CrossingBandsG idp="logo-bands" w={W} h={H} {...BANDS} />
+      <WordmarkFitG x={r2(W * 0.928)} y={r2(H * 0.075)} w={r2(W * 0.383)} anchor="end" fill={HEX.onBlue} />
+      <MarkG x={r2(W * 0.078)} y={r2(H * 0.91)} size={ms} fill={HEX.onBlue} />
     </Art>
   );
 }

@@ -1,6 +1,7 @@
 // Typography data. Sizes come from SOURCE.md ("suggested site scale"); the poster measurements were taken from the
 // right-hand poster of m11. Vertical metrics are those of the closest free match the site sets the type in.
 import { LINES, CONTACT } from '@/lib/brand';
+import { WORDMARK } from '@/components/art/Mark';
 
 // Vertical metrics, in em, of the face the site sets the type in (cap height, x-height, ascender, descender).
 export const METRICS = { cap: 0.727, x: 0.546, asc: 0.76, desc: 0.21 };
@@ -37,7 +38,7 @@ export const POSTER = {
   frame: { x0: 48, x1: 672, y0: 51 },
   foot: { y0: 837, y1: 909, xs: [48, 255, 465, 672] },
   parts: [
-    { n: 1, name: 'Word-mark', size: 55, lh: null, ls: -0.045, weight: 'Medium', align: 'Centre', note: 'Letters touching, narrow word space' },
+    { n: 1, name: 'Word-mark', size: 55, lh: null, ls: WORDMARK.tracking, weight: 'Medium', align: 'Centre', note: 'Tight spacing, narrow word space' },
     { n: 2, name: 'Headline', size: 38.5, lh: 1.17, ls: -0.01, weight: 'Regular', align: 'Centre', note: LINES.clarity.rows.join(' / ') },
     { n: 3, name: 'Body', size: 12, lh: 1.25, ls: 0, weight: 'Regular', align: 'Centre', note: 'Three lines' },
     { n: 4, name: 'Footer', size: 8, lh: 1, ls: 0, weight: 'Regular', align: 'Centre', note: CONTACT.web },

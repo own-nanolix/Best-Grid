@@ -63,15 +63,24 @@ export function ClearSpaceLockup() {
   );
 }
 
-// One minimum-size plate: the mark alone at `px` user units on a 200 square, with its size written under it.
+// One minimum-size plate, drawn at its true size: one viewBox unit is one CSS pixel, so the mark measures `px` on
+// screen. Around it the clear-space zone (2P on each side, dashed), its corner nodes, then the size and its name.
 export function MinPlate({ px, note }) {
+  const pad = r2((CLEAR * px) / 100);
+  const zone = r2(px + 2 * pad);
+  const w = Math.max(zone, 88);
+  const h = r2(zone + 44);
+  const zx = r2((w - zone) / 2);
   return (
-    <Art viewBox="0 0 200 200" title={`Minimum size: mark at ${px} px`} exportName={`logo-min-size-${px}`} className={s.plate}>
-      <rect width="200" height="200" fill={HEX.paper} />
-      <path d={`M0 ${100}H200M100 0V200`} stroke={HEX.darkBlue} strokeWidth="0.5" opacity="0.18" />
-      <MarkG x={r2(100 - px / 2)} y={r2(92 - px / 2)} size={px} fill={HEX.darkBlue} />
-      <text x="100" y="172" fontSize="15" textAnchor="middle" fill={HEX.darkBlue}>{px} px</text>
-      <text x="100" y="190" fontSize="12" textAnchor="middle" fill={HEX.darkBlue}>{note}</text>
+    <Art viewBox={`0 0 ${w} ${h}`} title={`Minimum size: mark at ${px} px`} exportName={`logo-min-size-${px}`} className={s.sizeArt} style={{ width: w }}>
+      <rect width={w} height={h} fill={HEX.paper} />
+      <rect x={zx} y={0} width={zone} height={zone} fill="none" stroke={HEX.activeBlue} strokeWidth="1" strokeDasharray="3 3" />
+      {[[zx, 0], [zx + zone, 0], [zx, zone], [zx + zone, zone]].map(([x, y]) => (
+        <NodeG key={`${x}-${y}`} cx={r2(x)} cy={r2(y)} s={4} fill={HEX.darkBlue} />
+      ))}
+      <MarkG x={r2(zx + pad)} y={pad} size={px} fill={HEX.darkBlue} />
+      <text x={r2(w / 2)} y={r2(zone + 20)} fontSize="13" textAnchor="middle" fill={HEX.darkBlue}>{px} px</text>
+      <text x={r2(w / 2)} y={r2(zone + 37)} fontSize="11" textAnchor="middle" fill={HEX.muted}>{note}</text>
     </Art>
   );
 }
@@ -94,7 +103,7 @@ export default function ClearSpace() {
         </Reveal>
       </div>
       <Reveal>
-        <div className={`cells ${s.sizes}`} style={{ '--cols': 4, '--line': 'var(--rule)' }}>
+        <div className={`cells ${s.sizes}`} style={{ '--cols': 4, '--line': 'var(--rule)', '--steps': MIN_SIZES.map((m) => `minmax(0, ${m.px}fr)`).join(' ') }}>
           {MIN_SIZES.map((m) => (
             <figure key={m.px} className={s.size}>
               <MinPlate {...m} />

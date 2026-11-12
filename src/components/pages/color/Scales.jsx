@@ -58,16 +58,20 @@ export function SwatchCards() {
       {PALETTE.map((p, i) => {
         const light = i === 2;
         const ink = light ? HEX.darkBlue : HEX.onBlue;
+        // small type on Active Blue is Dark Blue (light grey-white reads 2.8:1 there); the large hex keeps its colour
+        const small = i === 1 ? HEX.darkBlue : ink;
         const x = i * cw;
         return (
           <g key={p.token}>
             <rect x={r2(x + 24)} y="24" width={r2(cw - 48)} height={H - 48} fill={p.hex} className="fill-in" style={{ '--i': i * 3 }} />
             <g fill={ink} className="fade-in" style={{ '--i': i * 3 + 4 }}>
-              <text x={r2(x + 52)} y="84" fontSize="22">{p.name}</text>
+              <text x={r2(x + 52)} y="84" fontSize="22" fill={small}>{p.name}</text>
               <text x={r2(x + 52)} y="318" fontSize="74" className="display" letterSpacing="-2">{p.hex}</text>
-              <text x={r2(x + 52)} y="372" fontSize="20">RGB {rgbBars(p.hex)}</text>
-              <text x={r2(x + 52)} y="402" fontSize="20" xmlSpace="preserve">CMYK {p.cmyk}</text>
-              <text x={r2(x + 52)} y="432" fontSize="20">HEX {p.hex}</text>
+              <g fill={small}>
+                <text x={r2(x + 52)} y="372" fontSize="20">RGB {rgbBars(p.hex)}</text>
+                <text x={r2(x + 52)} y="402" fontSize="20" xmlSpace="preserve">CMYK {p.cmyk}</text>
+                <text x={r2(x + 52)} y="432" fontSize="20">HEX {p.hex}</text>
+              </g>
             </g>
           </g>
         );

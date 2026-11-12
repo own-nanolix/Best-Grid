@@ -21,14 +21,17 @@
 .cap span:first-child { color: var(--blue-ink); }
 .capStack { display: grid; gap: 4px; padding: 10px 0 0; margin-top: 10px; border-top: var(--hair) solid var(--rule-soft); }
 
+.primary { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: var(--gap); align-items: start; }
+.primaryStack { display: grid; gap: var(--gap); align-content: start; }
 .pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--gap); }
 .constr { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: clamp(20px, 3vw, 48px); align-items: start; }
 .ratios { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--gap); padding-top: 18px; border-top: var(--hair) solid var(--rule); }
 
 .sizes { --cell-pad: 0; }
+.sizes:global(.cells) { grid-template-columns: var(--steps); }
 .sizes > * { padding: clamp(10px, 1.4vw, 20px); }
-.size { margin: 0; }
-.size svg { width: 100%; max-width: 200px; margin-inline: auto; }
+.size { margin: 0; display: grid; place-items: end center; min-height: 200px; }
+.sizeArt { display: block; max-width: 100%; height: auto; }
 
 .colours { gap: clamp(20px, 3vw, 40px); }
 .swatches { list-style: none; padding: 0; margin: 6px 0 0; display: grid; gap: 6px; }
@@ -47,9 +50,11 @@
 .note { margin: 0; padding-top: 14px; border-top: var(--hair) solid var(--rule); display: grid; gap: 6px; }
 
 @media (max-width: 900px) {
-  .heroGrid, .constr { grid-template-columns: minmax(0, 1fr); }
+  .heroGrid, .constr, .primary { grid-template-columns: minmax(0, 1fr); }
   .headGrid { grid-template-columns: minmax(0, 1fr); gap: 8px; }
   .family { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .sizes:global(.cells) { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .size { min-height: 0; }
   .latRow { grid-template-columns: minmax(0, 1fr); }
   .close { grid-template-columns: minmax(0, 1fr); }
 }

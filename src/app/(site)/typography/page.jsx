@@ -45,9 +45,7 @@ export default function Page() {
           <div className={s.heroText}>
             <span className="t-label">Typographic system</span>
             <h1 className="t-display t-balance" tabIndex={-1}>
-              One grotesk,
-              <br />
-              two voices.
+              Typography.
             </h1>
             <p className="t-lead muted">
               The type slide of the case study, rebuilt, then carried further: the face in its text and display voices,
@@ -56,7 +54,7 @@ export default function Page() {
             <dl className={s.facts}>
               <div><dt>Face</dt><dd>The brand typeface</dd></div>
               <div><dt>Weight published</dt><dd>Regular</dd></div>
-              <div><dt>Specimen size</dt><dd lang="es">Optical size: 600 pt</dd></div>
+              <div><dt>Specimen size</dt><dd>Optical size: 600 pt</dd></div>
             </dl>
             <p className={s.note}>
               The face is a commercial grotesk and is never named on the pages. Everything here is set in the closest
