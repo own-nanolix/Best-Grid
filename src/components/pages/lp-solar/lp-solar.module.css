@@ -1,0 +1,185 @@
+/* Solar landing: page-only styles. Colour and motion come from the shared tokens. */
+
+/* ---------- Entrance: the text of the hero rises in order, once the guides have started ---------- */
+.enter {
+  animation: lp-solar-rise var(--dur-l) var(--ease-out) both;
+  animation-delay: calc(var(--i, 0) * 90ms + 120ms);
+}
+@keyframes lp-solar-rise {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes lp-solar-bar {
+  from { transform: scaleX(0); }
+  to { transform: none; }
+}
+
+/* ---------- Hero: 7 : 5 ---------- */
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  min-height: min(88vh, 880px);
+  border-bottom: var(--hair) solid var(--rule);
+  position: relative;
+  background: var(--light-blue);
+}
+.heroText {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: clamp(14px, 1.8vw, 26px);
+  padding: clamp(32px, 5vw, 84px) var(--pad);
+  min-width: 0;
+}
+.heroText h1 { max-width: 100%; overflow-wrap: anywhere; }
+.chipBar {
+  display: inline-block;
+  width: 36px;
+  height: 6px;
+  margin-right: 12px;
+  vertical-align: middle;
+  background: var(--active-blue);
+  transform-origin: 0 50%;
+  animation: lp-solar-bar var(--dur-l) var(--ease-line) both;
+  animation-delay: 200ms;
+}
+.bigFigure {
+  display: flex;
+  align-items: baseline;
+  gap: 0.14em;
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(76px, 12.4vw, 190px);
+  line-height: 0.84;
+  letter-spacing: -0.045em;
+  font-variant-numeric: tabular-nums;
+  color: var(--dark-blue);
+  max-width: 100%;
+}
+.unit {
+  font-size: 0.34em;
+  letter-spacing: 0;
+  color: var(--blue-ink);
+}
+.lead { max-width: 30em; margin: 0; }
+.heroNode {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: var(--node);
+  height: var(--node);
+  background: var(--rule);
+  transform: translate(50%, 50%);
+  z-index: 2;
+}
+.heroArt {
+  background: var(--dark-blue);
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  min-width: 0;
+}
+.heroArt svg { width: 100%; height: auto; max-height: 880px; }
+
+/* ---------- Split rows ---------- */
+.row { border-bottom: var(--hair) solid var(--rule); }
+.row :global(.split-text) > div > * + * { margin-top: clamp(14px, 1.6vw, 24px); }
+.measure { max-width: 34em; margin: 0; }
+.artPeri { background: var(--periwinkle); }
+
+/* ---------- Three service cells ---------- */
+.services { padding-block: clamp(48px, 7vw, 110px); border-bottom: var(--hair) solid var(--rule); }
+.servicesHead { margin-bottom: clamp(24px, 3vw, 48px); }
+.serviceCell {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  min-height: clamp(180px, 20vw, 300px);
+  justify-content: space-between;
+  transition: background-color var(--dur-s) var(--ease-out);
+}
+.serviceCell:hover { background: var(--paper); }
+.cellNo { align-self: flex-end; }
+
+/* ---------- Poster ---------- */
+.poster { padding-block: clamp(56px, 8vw, 128px); }
+.posterGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  gap: clamp(24px, 5vw, 96px);
+  align-items: center;
+}
+.posterText { display: flex; flex-direction: column; gap: 22px; }
+.facts {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin: 0;
+  border-top: var(--hair) solid var(--rule-blue);
+}
+.facts > div { padding: 16px 12px 16px 0; border-bottom: var(--hair) solid var(--rule-blue); }
+.facts dt { font-size: 13px; color: var(--active-blue); }
+.facts dd { margin: 10px 0 0; }
+.posterSheet {
+  width: 100%;
+  max-width: 520px;
+  justify-self: center;
+  box-shadow: 0 0 0 var(--hair) var(--rule-blue);
+}
+.posterSheet svg { width: 100%; height: auto; }
+
+/* ---------- Technology tiles ---------- */
+.tiles { padding-block: clamp(40px, 6vw, 96px); border-bottom: var(--hair) solid var(--rule); }
+.tiles h2 { margin-bottom: 16px; }
+.tile {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  color: var(--dark-blue);
+  text-decoration: none;
+  margin: calc(var(--cell-pad, 20px) * -1);
+  padding: clamp(14px, 1.6vw, 24px);
+  min-height: clamp(96px, 9vw, 136px);
+  transition: background-color var(--dur-s) var(--ease-out);
+}
+.tile:hover { background: var(--periwinkle); }
+.tile:active { background: var(--stat-cell); }
+.tile:focus-visible { outline: 2px solid var(--dark-blue); outline-offset: -4px; }
+.tileText { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+
+/* ---------- Closing band ---------- */
+.close { padding-block: clamp(56px, 8vw, 128px); }
+.closeGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  gap: clamp(24px, 5vw, 96px);
+  align-items: end;
+}
+.closeSide { display: flex; flex-direction: column; gap: 14px; align-items: flex-start; }
+
+/* ---------- Narrow screens ---------- */
+@media (max-width: 900px) {
+  .hero { grid-template-columns: minmax(0, 1fr); min-height: 0; }
+  .heroNode { display: none; }
+  .heroArt { order: 2; }
+  .posterGrid, .closeGrid { grid-template-columns: minmax(0, 1fr); }
+  .posterSheet { order: 2; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .enter, .chipBar { animation-duration: 1ms; animation-delay: 0ms; }
+}
+
+/* ---------- Module rules ---------- */
+.rules { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); margin: 0; border-top: var(--hair) solid var(--rule); }
+.rules > div { padding: 14px 12px 14px 0; border-bottom: var(--hair) solid var(--rule); }
+.rules dt { font-size: 13px; color: var(--blue-ink); }
+.rules dd { margin: 8px 0 0; }
+
+/* ---------- Crossing bands band ---------- */
+.bands { border-bottom: var(--hair) solid var(--rule-blue); overflow: hidden; }
+.bands svg { width: 100%; height: auto; min-height: 200px; }
+
+/* ---------- Spec sheet ---------- */
+.spec { padding-block: clamp(40px, 6vw, 96px); border-bottom: var(--hair) solid var(--rule); }
+.spec h2 { margin-bottom: 14px; }
