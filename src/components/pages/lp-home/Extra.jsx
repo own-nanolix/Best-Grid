@@ -100,11 +100,11 @@ export function RowReport() {
   return (
     <SplitRow as="section" aria-labelledby="lp-home-report-title" ratio={[1, 1]} className={s.row} artClass={`${s.ground} field-periwinkle`} art={<div className={s.posterBox}><ReportCover /></div>}>
       <Reveal className={s.copy}>
-        <p className="t-label">Annual report</p>
-        <Rows rows={REPORT.titleRows} as="h2" id="lp-home-report-title" lang="es" className="t-h2" />
+        <p className="t-label">Print</p>
+        <h2 id="lp-home-report-title" className="t-h2">{REPORT.name}</h2>
         <p lang="es" className="t-lead">{REPORT.lineRows.join(' ')}</p>
-        <p className={s.links} lang="es">
-          <Link href="/lp-annual-report/" className="link">{REPORT.titleRows.join(' ')}</Link>
+        <p className={s.links}>
+          <Link href="/lp-annual-report/" className="link">{REPORT.name}</Link>
         </p>
       </Reveal>
     </SplitRow>

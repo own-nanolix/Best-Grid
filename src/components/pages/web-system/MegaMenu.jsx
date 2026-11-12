@@ -86,7 +86,7 @@ export default function MegaMenu() {
         <div className={s.megaCol}>
           <p className={s.megaHead}>{NAV[2]}</p>
           <ul className={s.megaList}>
-            <li><Link href="/lp-annual-report/">{REPORT.titleRows.join(' ')}</Link></li>
+            <li><Link href="/lp-annual-report/">{REPORT.name}</Link></li>
             <li><Link href="/lp-home/">{LINES.web.text}</Link></li>
           </ul>
         </div>

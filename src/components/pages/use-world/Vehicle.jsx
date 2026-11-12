@@ -116,7 +116,7 @@ export default function Vehicle() {
       <DimensionG x1={1010} y1={GROUND} x2={1010} y2={290} value="1 670 mm" offset={-22} i={1} />
 
       <CalloutsG>
-        <CalloutG x={866} y={464} tx={1000} ty={720} side="left" label="Mark on the rear quarter" i={3} />
+        <CalloutG x={866} y={464} tx={880} ty={720} side="left" label="Mark on the rear quarter" i={3} />
         <CalloutG x={650} y={496} tx={450} ty={645} side="left" label="Word-mark on the rear door" i={4} />
         <CalloutG x={600} y={296} tx={500} ty={210} side="left" label="Roof panel, Dark Blue" i={5} />
       </CalloutsG>

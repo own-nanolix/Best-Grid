@@ -48,7 +48,7 @@ export function Construction() {
     <section className={`${s.trio} field-light`} aria-labelledby="lp-wind-trio">
       <div className={s.trioGrid}>
         <Reveal className={`${s.trioText} ${s.trioLeft}`}>
-          <p className="t-label">Eólico</p>
+          <p className="t-label" lang="es">Eólico</p>
           <h2 id="lp-wind-trio" className="t-h2" lang="es">
             <Rows rows={LINES.posterRightTag.rows} />
           </h2>

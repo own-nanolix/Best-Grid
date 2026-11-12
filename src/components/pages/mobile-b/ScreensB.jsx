@@ -48,7 +48,7 @@ export function Documents() {
               <Mark size={30} />
             </div>
             <div className={s.grow}>
-              <span lang="es" style={{ fontSize: 17 }}>{REPORT.titleRows.join(' ')}</span>
+              <span style={{ fontSize: 17 }}>{REPORT.name}</span>
               <span className={`${s.val} muted`} lang="es">{REPORT.spine} · {REPORT.range}</span>
             </div>
           </li>

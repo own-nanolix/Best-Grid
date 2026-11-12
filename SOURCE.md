@@ -352,7 +352,7 @@ misuse; gradients and key art from the lattice and the crossing bands; 28 more p
 illustrations; charts beyond the area chart, treemap and node grid; the motion system; strategy (from the page
 description and the poster lines only); web system; lp-home (rebuild of m16, continued) and six landing pages
 (suggested ids: lp-solar, lp-wind, lp-storage, lp-data-centers from the four stat tiles; lp-field from "Análisis ·
-Criterio · Validación"; lp-annual-report from "Informe de actividad anual"); the dashboard, both mobile pages and the
+Criterio · Validación"; lp-annual-report from the m02 report cover; named in running text "Annual report", because the full phrase is never printed); the dashboard, both mobile pages and the
 feature demo; showcase; campaign; apparel, accessories, packaging, event, world and product.
 
 ## What the case study does NOT contain (never invent these)
@@ -412,7 +412,7 @@ pylons, panels and racks in the icon stroke; the fog and sunset gradients; the b
 
 ## Illegible or uncertain
 
-- Report cover title and year run off the image: "de activida[d]", "202[5]" (completed from "IDAA" and "[24 – 25]").
+- Report cover title and year run off the image: "de activida[d]", "202[5]". Decision: the full phrase "Informe de actividad anual" is printed nowhere (only on that cover, cut). "actividad" is printed in full in "Distribución de actividad en nudos de red" (m16, m17) and 2025 in full on the website and dashboard (chips, treemap, m09 date), so the DRAWN covers set "de actividad" and "2025" in full and crop them with a clipPath at the cover edge. Running text (footer links, list rows, headings) calls the report "Annual report"; spec rows say only "2024" for the cover year.
 - "nfo@bestgrid.com" (m05 envelope) and "ingo@bestgrid.com" (m10, m11) are misprints of "info@bestgrid.com" (m05
   letterhead): use "info@bestgrid.com" and list it.
 - Light Blue's printed RGB repeats Active Blue's ("89 | 131 | 255"); the spec table uses 228, 231, 239 from the HEX.

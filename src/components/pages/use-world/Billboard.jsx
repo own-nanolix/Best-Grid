@@ -87,9 +87,9 @@ export default function Billboard() {
 
       <CalloutsG>
         <CalloutG x={BX + 110} y={BY + BH - 8} tx={300} ty={850} side="left" label="Printed vinyl face" i={2} />
-        <CalloutG x={BX + BW - 40} y={BY + BH + 11} tx={1190} ty={790} label="Steel angle frame" i={3} />
+        <CalloutG x={BX + BW - 40} y={BY + BH + 11} tx={1190} ty={790} side="left" label="Steel angle frame" i={3} />
         <CalloutG x={BX + Math.round(1222 * K)} y={720} tx={1010} ty={850} side="left" label="Stainless bollard, 90 mm" i={4} />
-        <CalloutG x={BX + 540} y={190} tx={600} ty={88} label="Concrete overhang" i={5} />
+        <CalloutG x={BX + 540} y={190} tx={600} ty={88} side="left" label="Concrete overhang" i={5} />
       </CalloutsG>
     </Plate>
   );

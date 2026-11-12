@@ -34,7 +34,7 @@ their fixes are applied here from the start.
 - [x] 6. Review team; shared fixes applied
 - [x] 7. Verify in the browser; SVG export
 - [x] 8. `REPORT.md` and `README.md`
-- [ ] 9. Final independent review, then one push (standing orders, points 5 and 6)
+- [x] 9. Final independent review done, fixes applied, pushed once (needs a Vercel import by the owner)
 
 ## Decisions
 
@@ -145,3 +145,4 @@ http://localhost:3105 (start with `npx next dev -p 3105`; stop it before `npm ru
 - 8 reviewers (Opus) reviewed and fixed all 30 pages; each committed locally. All pending shared fixes above were applied by a fixer (Sonnet): the treemap remainder carries no figure, seven icons corrected (the `user` icon no longer draws a person), shared colours moved to tokens (44 page files derived from tokens), keyframes no longer override opacity attributes, the shared status bar draws no clock, shared phone screens use the measured geometry, LandingNav re-measured against the website image, word-mark spacing corrected, callout lines sorted so they never cross (28 mockup files), `Segmented` takes arrow keys, SOURCE.md corrections.
 - The starter images in `public/` were replaced with the brand's mark and the two named after other companies were renamed `mark-a.svg` and `mark-b.svg`. Stray screenshots and an empty stray file left in the project root by agents were moved out of the project (some had been committed and remain in local history, which is never rewritten).
 - Step 7: lint clean; build passes; check --strict 30 of 30 ok; audit 30 of 30 clean at 1440 and 390 px on the built site, no console errors; export-svg wrote 419 SVGs with 0 warnings.
+- Final review (Opus, independent): 3 must-fix and 6 should-fix findings; fixed: crossing callout lines (measured by script, now 0 on all nine mockup pages), the report cover handled one way, index overlay focus, a console error, a plain heading on lp-annual-report, lang attributes, the report. Left and recorded in REPORT.md: callouts on both sides on about 30 plates, favicon.ico, the mark copies in public/. Lint clean, build passes, check --strict 30 of 30, audit 30 of 30, 419 SVGs with 0 warnings.

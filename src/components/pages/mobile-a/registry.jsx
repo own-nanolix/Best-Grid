@@ -10,7 +10,7 @@ export const SCREENS = [
   { name: 'Technology detail', uses: 'Fotovoltaico · 12.157 MW', Draw: TechDetailScreen },
   { name: 'Year without figures', uses: '2023 · 2024 · 2025', Draw: YearEmptyScreen },
   { name: 'Node list', uses: 'Nudos analizados · 46', Draw: NodeListScreen },
-  { name: 'Report cover', uses: 'Informe de actividad anual', Draw: ReportScreen },
+  { name: 'Report cover', uses: 'Annual report', Draw: ReportScreen },
   { name: 'Brand and palette', uses: 'HEX #1b2043 · #5983ff · #e4e7ef', Draw: BrandScreen },
   { name: 'Quarters', uses: 'Q1 3.200 · Q2 4.100 · Q3 5.200 · Q4 2.920 MW', Draw: QuartersScreen },
 ].map((s, i) => ({ ...s, n: String(i + 1).padStart(2, '0') }));

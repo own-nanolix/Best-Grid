@@ -12,7 +12,7 @@ const TILE_X = [0, 374, 720, 1065, 1440];
 
 export function TilesSheet() {
   return (
-    <Art viewBox="0 0 1440 150" title="Technology tiles: fotovoltaico, eólico, almacenamiento, data centers" exportName="feature-tiles" style={SVG}>
+    <Art viewBox="0 0 1440 150" title="Technology tiles: solar, wind, storage and data centres, each with its capacity in MW" exportName="feature-tiles" style={SVG}>
       <rect width="1440" height="150" fill={HEX.lightBlue} />
       <rect x="1065" y="32" width="375" height="86" fill={HEX.statCell} className="fill-in" style={{ '--i': 6 }} />
       <rect x="0" y="32" width="1440" height="1" fill={HEX.darkBlue} opacity="0.5" className="extend-x" />

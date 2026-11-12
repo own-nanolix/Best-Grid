@@ -29,7 +29,7 @@ export function GridSvg({ cell, hov, onHover, onPick }) {
     return { r: Math.min(rows - 1, Math.max(0, r)), c: Math.min(cols - 1, Math.max(0, c)) };
   };
   return (
-    <Art viewBox={`0 0 ${W} ${H}`} title="Node grid: distribución de actividad en nudos de red" exportName="feature-node-grid" style={SVG}>
+    <Art viewBox={`0 0 ${W} ${H}`} title="Node grid: a field of square cells, one per grid node, with clusters of filled cells" exportName="feature-node-grid" style={SVG}>
       <rect width={W} height={H} style={{ fill: 'var(--screen)' }} />
       {CELLS.map(({ r, c, q, v }) => {
         const x = c * size, y = r * size;
@@ -81,7 +81,7 @@ export function ChartSvg({ year, q, onPick, onHover }) {
   const top = yOf(Q[mi].mw);
   const mid = (i) => (i === 0 ? X0 : r2((XS[i - 1] + XS[i]) / 2));
   return (
-    <Art viewBox={`0 0 ${W} ${H}`} title={`Capacidad gestionada en puntos críticos de la red, ${year}`} exportName="feature-chart" style={SVG}>
+    <Art viewBox={`0 0 ${W} ${H}`} title={`Chart of managed capacity at critical points of the grid, ${year}`} exportName="feature-chart" style={SVG}>
       <rect width={W} height={H} style={{ fill: 'var(--screen)' }} />
       <text fontSize="20" fill={HEX.darkBlue} lang="es" className="display">
         <tspan x={X0} y="34">{CAPACITY.titleRows[0]}</tspan>
@@ -190,7 +190,7 @@ export function TreemapSvg({ year, part, onPick, onHover }) {
     />
   );
   return (
-    <Art viewBox="0 0 316 318" title={`Capacidad gestionada, ${year}: treemap`} exportName="feature-treemap" style={SVG}>
+    <Art viewBox="0 0 316 318" title={`Treemap of managed capacity, ${year}`} exportName="feature-treemap" style={SVG}>
       <rect width="316" height="318" fill={HEX.darkBlue} />
       {has ? (
         <g lang="es" key="on">

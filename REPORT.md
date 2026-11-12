@@ -119,7 +119,7 @@ Added by us, as partners, in the designer's language: logo clear space, minimum 
 - **Computed values (labelled as computed on the pages):** colour ladders mixed in code from the published colours; contrast ratios; sums, means, deltas and shares in the charts; Light Blue's RGB (228, 231, 239) from its HEX. Sampled, not published: the light grey-white, warm grey and the photograph tones.
 - **Figures:** only the figures the case study prints are used, each beside what it is printed for. Every one was re-read from enlarged crops in the review round: tiles 12.157 / 2.794 / 3.433 / 2.083 MW; quarters 3.200 / 4.100 / 5.200 / 2.920 MW; Total anual 15.420 MW; axis 1.000 to 7.000 MW; KPIs 128, 46, 72; treemap 68 % and 16 %. The four quarters add up to the printed annual total exactly. The four technology tiles add up to 20.467 MW, which is not the annual total: the pages show both as printed and say so. The years 2023 and 2024 have no printed figures and show an empty state. The treemap's unlabelled part stays unlabelled. Node-grid cells carry no figures.
 - **Colour slide:** the slide prints an RGB line for Light Blue that repeats Active Blue's. The site shows the value computed from the published HEX (228, 231, 239) and says so.
-- **Report cover:** the title and year run off the image in the case study. They are cropped by the edge in the same way and never completed.
+- **Report cover:** the title and year run off the image in the case study ("de activida", "202"). "actividad" and "2025" are printed in full elsewhere in the case study, so drawn covers set them in full and crop them at the cover edge with a clip path, as the image does. The full phrase "Informe de actividad anual" is printed nowhere, so running text calls the piece "Annual report".
 - **E-mail:** printed with typing slips in two places in the case study ("nfo@", "ingo@"); the site uses info@bestgrid.com. "Esteribar" is set as "Esteríbar".
 - **Left out or replaced:** the client named on the tube label reads "Client name"; another company's colour-system codes (the PMS rows) are left out; the typeface's product name and foundry and the free substitute fonts are not named on pages (pages say "the brand typeface"); the publishing platform, design tools and social networks are not named; device frames and the vehicle are neutral; phone status bars carry no clock time.
 - **Illegible values left as placeholders:** none were left illegible after the review round beyond the report cover's cropped title and year (above).
@@ -155,8 +155,8 @@ Not verified:
 
 ## Agents
 
-- **Case study and SOURCE.md:** one agent, on Opus, read the case study and wrote SOURCE.md.
-- **Shared system (step 4):** one agent, on Opus.
+- **Case study and SOURCE.md:** one agent, on Opus, read the case study and wrote SOURCE.md. This is a deviation: the spec says the lead does this itself. The lead checked the result against the logo and the built pages.
+- **Shared system (step 4):** one agent, on Opus (the same deviation: the spec gives this to the lead).
 - **Builders:** 24, on Sonnet. Wave 1: 12 builders, 17 pages. Wave 2: 12 builders, 13 pages. None failed, and no page came back under 600 lines, so none was sent back and no agent was relaunched.
 - **Reviewers:** 8, on Opus. Each reviewed and fixed its own pages.
 - **Fixer:** 1, on Sonnet, applied the shared fixes the reviewers recommended: the treemap's unlabelled part without a figure, seven icons corrected, shared colours moved to tokens, keyframes that no longer override opacity attributes, a status bar without a clock, measured phone screens, the landing nav re-measured, the word-mark spacing, callout lines sorted so they never cross, arrow keys on the segmented control, and SOURCE.md corrections.
@@ -171,7 +171,7 @@ Not verified:
 4. Site words are English; brand copy stays in Spanish exactly as printed, marked `lang="es"`; no new Spanish copy was written.
 5. Figures: only the figures the case study prints are used, each beside what it is printed for; every one was re-read from enlarged crops in the review round (tiles 12.157 / 2.794 / 3.433 / 2.083 MW; quarters 3.200 / 4.100 / 5.200 / 2.920 MW; Total anual 15.420 MW; axis 1.000 to 7.000 MW; KPIs 128, 46, 72; treemap 68 % and 16 %). The quarters sum to the printed annual total exactly; the four technology tiles sum to 20.467 MW, which is not the annual total, and the pages show both as printed and say so. Computed values (sums, means, deltas, shares) are labelled as computed. Years without printed figures show an empty state. The treemap's unlabelled part stays unlabelled.
 6. The colour slide prints an RGB line for Light Blue that repeats Active Blue's: the site shows the value computed from the published HEX (228, 231, 239) and says so.
-7. The report cover's title and year run off the image in the case study: they are cropped by the edge the same way and never completed.
+7. The report cover's title and year run off the image in the case study. Drawn covers set "actividad" and "2025" in full (both are printed in full elsewhere in the case study) and crop them at the cover edge; running text calls the piece "Annual report", because the full Spanish title is printed nowhere.
 8. The e-mail is printed with typing slips in two places in the case study; the site uses the correct form info@bestgrid.com.
 9. Photographs and people are never reproduced or drawn; the vest and hard hat seen in a photograph are drawn empty, in the brand's blues; the `user` icon is a badge, not a person.
 10. HERO_FEATURE is capacity at critical grid nodes (a working node explorer); PRODUCT_OBJECT is the project tube with its rolled drawing.
@@ -180,4 +180,37 @@ Not verified:
 
 ## Final review
 
-Findings and fixes: to be completed
+An independent reviewer (Opus) who had not seen the work read both rule files and the standing orders, read the
+code, looked at all 30 pages at 1440 and 390 px after a slow scroll (no sideways scroll), used the dock, its
+keyboard shortcuts, the index and the 404 page, exercised the node explorer's tour, the dashboard's command bar,
+tablists, a form and controls on 20 pages, re-read the printed figures from its own crops and checked about 30
+places where a figure is shown (all correct, computed values labelled, empty states for years without data), and
+compared the mark, word-mark, colour slide, type slide, website hero, phone screen, posters, billboard, vehicle,
+tube, badge and report with their reference images.
+
+Found and fixed before the push:
+- Callout leader lines still crossed on 10 mockup plates. A script now measures crossings on all nine mockup
+  pages; the shared callout helper picks a slot order with no crossings, and the count is 0 on every page.
+- The report cover's cut-off title and year were handled two ways (see "Report cover" above): now one way.
+- Closing the index overlay dropped keyboard focus: it now returns to the Index button.
+- A React "key" console error on use-product: fixed; all 30 pages load with no console errors or warnings.
+- lp-annual-report's heading wrapped the cover artwork: it now has a plain text heading.
+- Two brand lines lacked `lang="es"` and one artwork title lower-cased brand copy: fixed.
+- This report: the wording above, the agents deviation, and this section.
+
+Noted and left:
+- `src/app/favicon.ico` is kept (drawn from the mark) for browsers that ask for that path, beside `icon.svg`; it is
+  the one raster file in the project. `public/` holds five copies of the brand mark under the starter template's
+  slots (`file.svg`, `globe.svg`, `window.svg`, `mark-a.svg`, `mark-b.svg`); no page uses them and files are never
+  deleted.
+- The local commit history keeps four screenshots that agents had left in the project and that were later moved
+  out; history is never rewritten, so they go to GitHub with it. They are not in the built site.
+- About 30 mockup plates put callouts on both sides of the object (two tees that fill the width, wide objects such
+  as the vehicle and billboard, and others), where the layout direction says object one side, callouts the other.
+  Lines do not cross on any of them.
+- The dashboard's placeholder rows ("Row 01", "Field 01") and the colour page's equal-bands proportion bar are
+  labelled as placeholders. The word-mark's letters touch less than in the reference because it is set in the
+  free match.
+
+After the fixes: eslint clean, build passes, `check.mjs --strict` 30 of 30 ok, `audit.mjs` 30 of 30 clean at 1440
+and 390 px, `export-svg.mjs` re-run with 0 warnings.

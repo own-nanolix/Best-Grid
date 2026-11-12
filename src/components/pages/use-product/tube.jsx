@@ -1,6 +1,7 @@
 // The project tube of m07 as drawn objects: standing (TubeG), lying (LyingTubeG) and end-on (EndViewG), plus the grey
 // label (LabelContentG). Units: 2.5 units = 1 mm, so the tube is 120 mm across (R 150) and 306 mm long (764).
 // Light comes from the spot: 'shade' (light from the left) or 'shade-r' (from the right) is laid over every body.
+import { Fragment } from 'react';
 import { r2 } from '@/lib/charts';
 import { HEX, TUBE, mixHex } from '@/lib/brand';
 import { MarkG, WordmarkG, WordmarkVerticalG } from '@/components/art/Mark';
@@ -35,7 +36,7 @@ export function LabelContentG({ ink = HEX.blueInk }) {
       <MarkG x={152.5} y={27.5} size={19} fill={ink} />
       <g lang="es">
         {L(16, 164, 7, TUBE.project, { fontStyle: 'italic' })}
-        {TUBE.services.map((s, i) => L(48.2 + i * 6.7, 171, 5.1, s, { key: s }))}
+        {TUBE.services.map((s, i) => <Fragment key={s}>{L(48.2 + i * 6.7, 171, 5.1, s)}</Fragment>)}
         {L(77.5, 171, 5.1, TUBE.lineRows[0])}
         {L(83.7, 171, 5.1, TUBE.lineRows[1])}
         {L(127.3, 170, 9.4, TUBE.date, { letterSpacing: -0.2 })}

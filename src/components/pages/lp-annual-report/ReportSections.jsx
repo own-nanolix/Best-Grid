@@ -6,6 +6,7 @@ import Chip from '@/components/ui/Chip';
 import Button from '@/components/ui/Button';
 import { Rows } from '@/components/ui/Card';
 import { SpecTable, Cells } from '@/components/ui/Spec';
+import { pageById } from '@/lib/pages';
 import { REPORT, TECH, CAPACITY, FIGURES, CONTACT } from '@/lib/brand';
 import { CoverArt, StackArt, SpinesArt, LineArt, QuartersArt, ColorwaysArt, TreemapArt } from './ReportArt';
 import RequestForm from './RequestForm';
@@ -21,7 +22,7 @@ function Eyebrow({ n, children }) {
   );
 }
 
-// The hero: the cover itself. The h1 is the cover artwork; the title runs off its edge as printed.
+// The hero: a plain text h1 (the page title, visually hidden) and the cover artwork beside it as its own labelled image.
 export function ReportHero() {
   return (
     <section className={`field-active ${s.hero}`} aria-label="Annual report">
@@ -32,9 +33,10 @@ export function ReportHero() {
           <p className={s.heroRange}>{REPORT.range}</p>
         </div>
       </div>
-      <h1 className={s.heroCover} tabIndex={-1}>
+      <h1 className="sr-only">{pageById('lp-annual-report').title}</h1>
+      <div className={s.heroCover}>
         <CoverArt />
-      </h1>
+      </div>
     </section>
   );
 }
@@ -100,8 +102,8 @@ export function WalkRows() {
       <SplitRow as="section" aria-labelledby="lp-annual-report-ways-h" ratio={[6, 6]} flip ruled className={s.rowSec} art={<ColorwaysArt />} tone="light">
         <Reveal><Eyebrow n="02">Colourways</Eyebrow></Reveal>
         <Reveal delay={60}><h2 id="lp-annual-report-ways-h" className={s.title}>Two covers</h2></Reveal>
-        <Reveal delay={120}><Rows rows={REPORT.titleRows.slice(0, 1)} as="p" lang="es" className={s.big} /></Reveal>
-        <p className={`${s.note} muted`}>Active Blue with Dark Blue type, and Dark Blue with light grey type. The title and the year run off the edge of each cover.</p>
+        <Reveal delay={120}><p className={s.big} lang="es">{REPORT.short}</p></Reveal>
+        <p className={`${s.note} muted`}>Active Blue with Dark Blue type, and Dark Blue with light grey type. The title and the second year run off the edge of each cover.</p>
       </SplitRow>
 
       <SplitRow as="section" aria-labelledby="lp-annual-report-spine-h" ratio={[6, 6]} flip ruled className={s.rowSec} art={<SpinesArt />} tone="periwinkle">
@@ -198,7 +200,7 @@ export function PrintedFacts() {
     { k: 'Spine', v: REPORT.spine },
     { k: 'Range', v: REPORT.range },
     { k: 'Short name', v: REPORT.short },
-    { k: 'Years on the cover', v: REPORT.years.join(' / ') },
+    { k: 'Year on the cover', v: REPORT.years[0] },
     { k: 'Signature', v: REPORT.signature },
     { k: 'Line', v: REPORT.lineRows.join(' ') },
   ];
@@ -213,12 +215,12 @@ export function PrintedFacts() {
             {facts.map((f) => (
               <div key={f.k}>
                 <dt>{f.k}</dt>
-                <dd className="t-h3" lang="es">{f.v === REPORT.years.join(' / ') ? `${REPORT.years[0]} / 202` : f.v}</dd>
+                <dd className="t-h3" lang="es">{f.v}</dd>
               </div>
             ))}
           </dl>
         </Reveal>
-        <p className={`${s.note} muted`}>The second year is cut by the edge of the cover and is shown only as far as it can be read.</p>
+        <p className={`${s.note} muted`}>The title and a second year are cut by the edge of the cover. The cover draws the word for activity in full, as the node grid title prints it, and 2025 in full, as the dashboard prints it, and crops both at the cover edge.</p>
       </div>
     </section>
   );

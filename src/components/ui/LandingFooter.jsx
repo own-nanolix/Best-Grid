@@ -48,7 +48,7 @@ export default function LandingFooter({ className = '' }) {
               <span style={{ display: 'block' }}>{CONTACT.email}</span>
             </address>
             <p style={{ marginTop: 10, fontSize: 14 }}>
-              <Link href={`/${NAV_TARGETS.Nosotros}/`}>{REPORT.titleRows.join(' ')}</Link>
+              <Link href={`/${NAV_TARGETS.Nosotros}/`}>{REPORT.name}</Link>
             </p>
           </div>
         </div>

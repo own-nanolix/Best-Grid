@@ -5,10 +5,10 @@ import { StageG, MaterialDefs, ShadowG, CalloutG, LitG, PlateFrameG, PLATE, Call
 import { HEX, REPORT, CAPACITY, LINES } from '@/lib/brand';
 import { scale, r2 } from '@/lib/charts';
 
-// The report cover (m02), flat. Active Blue, Dark Blue type: "Informe" / "de activida…" / "anual" very large,
-// the two-line line and the signature, "2024" / "202…" stacked bottom right. As on the case study's cover, the title
-// and the second year run off the edge and are shown only as far as they are legible: nothing is completed.
-// The SVG's own edge is the cut.
+// The report cover (m02), flat. Active Blue, Dark Blue type: "Informe" / "de actividad" / "anual" very large,
+// the two-line line and the signature, "2024" / "2025" stacked bottom right. As on the case study's cover, the title
+// and the second year run off the edge: "actividad" and 2025 are set in full (the case study prints both in full
+// elsewhere) and cropped by a clipPath at the cover's edge.
 export function CoverArt() {
   const W = 1200, H = 1060;
   const F = 255; // "de activida" ends at the cover's edge, where the image cuts it
@@ -16,10 +16,11 @@ export function CoverArt() {
   return (
     <Art viewBox={`0 0 ${W} ${H}`} title="Annual report cover, Active Blue: the title and the year run off the edge" exportName="lp-annual-report-cover">
       <rect width={W} height={H} fill={HEX.activeBlue} />
-      <g fill={HEX.darkBlue} lang="es">
+      <clipPath id="lp-annual-report-cover-clip"><rect width={W} height={H} /></clipPath>
+      <g fill={HEX.darkBlue} lang="es" clipPath="url(#lp-annual-report-cover-clip)">
         <g className="display" fontSize={F} style={t}>
           <text x="80" y="236" className="slide-up" style={{ ...t, '--i': 2 }}>Informe</text>
-          <text x="80" y="492" className="slide-up" style={{ ...t, '--i': 4 }}>de activida</text>
+          <text x="80" y="492" className="slide-up" style={{ ...t, '--i': 4 }}>de actividad</text>
           <text x="80" y="748" className="slide-up" style={{ ...t, '--i': 6 }}>anual</text>
         </g>
         <g className="fade-in" style={{ '--i': 14 }} fontSize="25">
@@ -30,7 +31,7 @@ export function CoverArt() {
         </g>
         <g className="display fade-in" fontSize="150" style={{ '--i': 18, ...t }}>
           <text x="860" y="940">{REPORT.years[0]}</text>
-          <text x="947" y="1060">202</text>
+          <text x="947" y="1060">{REPORT.years[1]}</text>
         </g>
       </g>
     </Art>
@@ -59,7 +60,7 @@ function Book({ ox, oy, W, Hh, T, cover, spine, ink, mark, idp, k }) {
       <g transform={`matrix(0.866 -0.5 0.866 0.5 ${ox} ${oy})`} clipPath={`url(#${idp}-clip-${k})`} fill={ink} lang="es">
         <g className="display" fontSize={F} style={{ fontFamily: 'var(--font-display)', letterSpacing: '-0.025em' }}>
           <text x="22" y="76">Informe</text>
-          <text x="22" y="142">de activida</text>
+          <text x="22" y="142">de actividad</text>
           <text x="22" y="208">anual</text>
         </g>
         <g fontSize="10.5">
@@ -70,7 +71,7 @@ function Book({ ox, oy, W, Hh, T, cover, spine, ink, mark, idp, k }) {
         </g>
         <g className="display" fontSize="50" style={{ fontFamily: 'var(--font-display)' }}>
           <text x="206" y="400">{REPORT.years[0]}</text>
-          <text x="235" y="452">202</text>
+          <text x="235" y="452">{REPORT.years[1]}</text>
         </g>
       </g>
       {/* the spine: the mark at the head, IDAA, [24 – 25], BGS */}
@@ -229,7 +230,7 @@ export function ColorwaysArt() {
           <g clipPath={`url(#lp-annual-report-colourways-clip-${i})`} fill={w.ink} lang="es">
             <g className="display" fontSize="91" style={{ fontFamily: 'var(--font-display)', letterSpacing: '-0.025em' }}>
               <text x="34" y="120">Informe</text>
-              <text x="34" y="214">de activida</text>
+              <text x="34" y="214">de actividad</text>
               <text x="34" y="308">anual</text>
             </g>
             <g fontSize="15">

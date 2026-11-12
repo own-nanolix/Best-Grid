@@ -1,5 +1,6 @@
 // Extensions in the case study's language: notebooks, the pen, the tri-fold panels and the report. Grid cells and
 // hairlines, the mark, the lattice, the two blues and Light Blue. Fields the case study does not print are pale bars.
+import { useId } from 'react';
 import { r2 } from '@/lib/charts';
 import { HEX, CONTACT, LINES, REPORT } from '@/lib/brand';
 import { MarkG, WordmarkFitG, WordmarkG } from '@/components/art/Mark';
@@ -105,18 +106,22 @@ export function PanelG({ kind, fill, filter }) {
 }
 
 // Report cover, 420 x 590 (220 x 310 mm), as m02: the title in three lines, the closing line, "Best Grid Solutions" and
-// the years bottom right. The title and the years are drawn as printed and run off the cover's frame on the plate.
+// the years bottom right. The title and the years are set in full and cropped by a clipPath at the cover edge, as they run off the cover's frame on the plate.
 export const REPORT_FACE = { w: 420, h: 590 };
 export function ReportCoverG({ tone = 'active', fill, filter }) {
   const { w, h } = REPORT_FACE, on = tone === 'active';
-  const ink = on ? D : L;
+  const ink = on ? D : L, cid = 'use-stationery-rc' + useId().replace(/[^a-zA-Z0-9]/g, '');
   return (
     <g lang="es">
       <Sheet w={w} h={h} fill={fill || (on ? A : D)} filter={filter} />
-      <Rows rows={['Informe', 'de activida', 'anual']} x={34} y={96} size={58} lh={1.1} fill={ink} />
+      <clipPath id={cid}><rect width={w} height={h} /></clipPath>
+      <g clipPath={`url(#${cid})`}>
+      <Rows rows={REPORT.titleRows} x={34} y={96} size={58} lh={1.1} fill={ink} />
       <Rows rows={REPORT.lineRows} x={34} y={330} size={12} lh={1.3} fill={ink} />
       <text x="34" y="376" fontSize="12" fill={ink}>{REPORT.signature}</text>
-      <Rows rows={['2024', '202']} x={200} y={480} size={72} lh={1.05} fill={ink} />
+      <Rows rows={[REPORT.years[0]]} x={200} y={480} size={72} lh={1.05} fill={ink} />
+      <Rows rows={[REPORT.years[1]]} x={287} y={556} size={72} lh={1.05} fill={ink} />
+      </g>
     </g>
   );
 }

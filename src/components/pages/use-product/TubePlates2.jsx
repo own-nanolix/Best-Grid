@@ -8,7 +8,7 @@ import { Plate, labelRows } from './plate';
 import { TubeG, LyingTubeG, LabelContentG, T } from './tube';
 import { DrawingG, DRAWING } from './drawing';
 
-const Callouts = ({ rows, tx, side }) => labelRows(rows, tx, side).map((r) => <CalloutG key={r.label} {...r} />);
+const Callouts = ({ rows, tx, side }) => <CalloutsG>{labelRows(rows, tx, side).map((r) => <CalloutG key={r.label} {...r} />)}</CalloutsG>;
 
 // Plate 04: tube lying open, the rolled drawing half out and unrolled onto the floor.
 export function OpenPlate() {

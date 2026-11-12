@@ -254,9 +254,40 @@ export function lineup(n, x0, x1, y = 0) {
 }
 
 // Ordering for callouts, so leader lines never cross: wrap a run of <CalloutG> (or any element with x, y, tx, ty and
-// an optional side) in <CalloutsG>. Within each group that shares a side and a label column (same tx), the callouts
-// are sorted by the y of their target on the object and given the label slots (the ty values) in that same order.
-// Callouts that are not numeric, or sit alone in their column, pass through unchanged.
+// an optional side) in <CalloutsG>. Within each group that shares a side and a label column (same tx), the label slots
+// (the ty values) are handed out so that no two leader lines of the group cross: every assignment of slots to targets
+// is tried (a minimum-length matching never crosses, so one is always found), fewest crossings first, then the
+// shortest total leader. Groups of more than 8 fall back to sorting by the target's y. Callouts that are not numeric,
+// or sit alone in their column, pass through unchanged.
+const segsOf = (n, ty) => {
+  const ex = n.side === 'left' ? n.tx + 24 : n.tx - 24;
+  return [[n.x, n.y, ex, ty], [ex, ty, n.tx, ty]];
+};
+const segCross = (a, b) => {
+  const o = (px, py, qx, qy, rx, ry) => (qx - px) * (ry - py) - (qy - py) * (rx - px);
+  const d1 = o(a[0], a[1], a[2], a[3], b[0], b[1]), d2 = o(a[0], a[1], a[2], a[3], b[2], b[3]);
+  const d3 = o(b[0], b[1], b[2], b[3], a[0], a[1]), d4 = o(b[0], b[1], b[2], b[3], a[2], a[3]);
+  return d1 * d2 < -1e-6 && d3 * d4 < -1e-6;
+};
+function bestSlots(nodes, slots) {
+  const n = nodes.length, perm = [], used = Array(n).fill(false);
+  let best = null;
+  const walk = (k) => {
+    if (k === n) {
+      const segs = perm.map((si, i) => segsOf(nodes[i], slots[si]));
+      let cross = 0, len = 0;
+      for (let i = 0; i < n; i++) {
+        len += Math.hypot(segs[i][0][2] - segs[i][0][0], segs[i][0][3] - segs[i][0][1]);
+        for (let j = i + 1; j < n; j++) for (const a of segs[i]) for (const b of segs[j]) if (segCross(a, b)) cross++;
+      }
+      if (!best || cross < best.cross || (cross === best.cross && len < best.len - 1e-6)) best = { cross, len, perm: [...perm] };
+      return;
+    }
+    for (let s = 0; s < n; s++) { if (used[s]) continue; used[s] = true; perm[k] = s; walk(k + 1); used[s] = false; }
+  };
+  walk(0);
+  return best.perm.map((si) => slots[si]);
+}
 export function CalloutsG({ children }) {
   const kids = Children.toArray(children);
   const num = (v) => (typeof v === 'number' ? v : typeof v === 'string' && v.trim() !== '' ? Number(v) : NaN);
@@ -271,9 +302,14 @@ export function CalloutsG({ children }) {
   const slot = info.map((n) => (n ? n.ty : null));
   for (const idx of groups.values()) {
     if (idx.length < 2) continue;
-    const byY = [...idx].sort((a, b) => info[a].y - info[b].y || info[a].x - info[b].x || a - b);
     const slots = idx.map((i) => info[i].ty).sort((a, b) => a - b);
-    byY.forEach((i, k) => { slot[i] = slots[k]; });
+    if (idx.length <= 8) {
+      const res = bestSlots(idx.map((i) => info[i]), slots);
+      idx.forEach((i, k) => { slot[i] = res[k]; });
+    } else {
+      const byY = [...idx].sort((a, b) => info[a].y - info[b].y || info[a].x - info[b].x || a - b);
+      byY.forEach((i, k) => { slot[i] = slots[k]; });
+    }
   }
   return <>{kids.map((k, i) => (info[i] && slot[i] !== info[i].ty ? cloneElement(k, { ty: slot[i] }) : k))}</>;
 }

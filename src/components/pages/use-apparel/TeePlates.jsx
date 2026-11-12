@@ -1,6 +1,6 @@
 // Three t-shirt plates (front and back side by side, flat lay). Each colourway is made by the same Tee function
 // from a colour set; the plates differ in order, stagger, spotlight and callouts. Print placements are dimensioned.
-import { CalloutG, DimensionG } from '@/components/art/Mockup';
+import { CalloutG, CalloutsG, DimensionG } from '@/components/art/Mockup';
 import { HEX } from '@/lib/brand';
 import { at, mm } from './fabric';
 import Plate, { dimsOf } from './Plate';
@@ -40,10 +40,10 @@ export function TeePlate({ cfg, idp }) {
             const a = at(t, 80, 350), b = at(t, 320, 350);
             return (
               <g key={view}>
-                {cfg.calls[view].map((c) => ({ c, p: at(t, c.lx, c.ly) })).sort((m, n) => m.p.y - n.p.y).map(({ c, p }, j) => {
+                <CalloutsG>{cfg.calls[view].map((c) => ({ c, p: at(t, c.lx, c.ly) })).sort((m, n) => m.p.y - n.p.y).map(({ c, p }, j) => {
                   const sub = c.item !== undefined ? dimsOf(art[view][c.item]) : c.sub;
                   return <CalloutG key={c.label} x={p.x} y={p.y} tx={tx} ty={170 + j * 96 + (i ? 20 : 0)} label={c.label} sub={sub} side={side} i={i * 3 + j + 1} size={19} />;
-                })}
+                })}</CalloutsG>
                 <DimensionG x1={a.x} y1={a.y} x2={b.x} y2={b.y} value={`${mm(240)} mm`} offset={30} i={7} size={15} />
               </g>
             );

@@ -2,7 +2,7 @@
 // Active Blue hoodie with the word-mark) and, as an extra, the high-visibility vest (the workwear of the case study's
 // field poster, rebuilt in the brand's colours).
 // Each plate shows one piece in front and the other two overlapping behind it in depth, turned a few degrees.
-import { CalloutG, DimensionG } from '@/components/art/Mockup';
+import { CalloutG, CalloutsG, DimensionG } from '@/components/art/Mockup';
 import { HEX } from '@/lib/brand';
 import { at } from './fabric';
 import Plate, { mmH } from './Plate';
@@ -92,9 +92,9 @@ export function HoodiePlate({ cfg, idp }) {
               const t = ts[i];
               return <g key={i}>{PIECES[t.pk].draw({ idp, id: `${idp}-p${i}`, t, spot, cast: cast(t.x + 150, t.y + 150, 22 + (2 - i) * 4), dim: i === 0 ? 0 : i === 1 ? 0.28 : 0.5 })}</g>;
             })}
-            {P.calls.map((c) => ({ c, p: at(hero, cfg.mirror ? 400 - c.lx : c.lx, c.ly) })).sort((m, n) => m.p.y - n.p.y).map(({ c, p }, j) => {
+            <CalloutsG>{P.calls.map((c) => ({ c, p: at(hero, cfg.mirror ? 400 - c.lx : c.lx, c.ly) })).sort((m, n) => m.p.y - n.p.y).map(({ c, p }, j) => {
               return <CalloutG key={c.label} x={p.x} y={p.y} tx={tx} ty={170 + j * (480 / P.calls.length + 14)} label={c.label} sub={c.sub} side={side} i={j + 1} size={19} />;
-            })}
+            })}</CalloutsG>
             <DimensionG x1={a.x} y1={a.y} x2={b.x} y2={b.y} value={P.width} offset={30} i={8} size={15} />
           </>
         );

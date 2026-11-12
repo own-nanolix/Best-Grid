@@ -1,9 +1,9 @@
 // Plates 1 to 3: the three tubes as in m07, the standing tube turning to the light, the tube lying and end-on.
-import { CalloutG, DimensionG, SpecColumnG, ShadowG, LitG } from '@/components/art/Mockup';
+import { CalloutG, CalloutsG, DimensionG, SpecColumnG, ShadowG, LitG } from '@/components/art/Mockup';
 import { Plate, labelRows } from './plate';
 import { TubeG, LyingTubeG, EndViewG, T } from './tube';
 
-const Callouts = ({ rows, tx, side }) => labelRows(rows, tx, side).map((r) => <CalloutG key={r.label} {...r} />);
+const Callouts = ({ rows, tx, side }) => <CalloutsG>{labelRows(rows, tx, side).map((r) => <CalloutG key={r.label} {...r} />)}</CalloutsG>;
 
 // Production values of our own, in mm (plain, not published).
 export const TUBE_SPEC = [

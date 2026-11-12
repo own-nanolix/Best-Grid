@@ -1,6 +1,6 @@
 // Three cap plates in profile (Dark Blue, Light Blue, Active Blue) and, as an extra, the hard hat (the head
 // protection of the case study's field poster, in the brand's colours). Visor and crown are dimensioned in plain mm.
-import { CalloutG, DimensionG } from '@/components/art/Mockup';
+import { CalloutG, CalloutsG, DimensionG } from '@/components/art/Mockup';
 import { HEX } from '@/lib/brand';
 import { at } from './fabric';
 import { Cap, HardHat } from './Caps';
@@ -63,9 +63,9 @@ export function CapPlate({ cfg, idp }) {
         return (
           <>
             {cfg.hat ? <HardHat {...common} /> : <Cap {...common} />}
-            {cfg.calls.map((c) => ({ c, p: at(t, c.lx, c.ly) })).sort((m, n) => m.p.y - n.p.y).map(({ c, p }, j) => {
+            <CalloutsG>{cfg.calls.map((c) => ({ c, p: at(t, c.lx, c.ly) })).sort((m, n) => m.p.y - n.p.y).map(({ c, p }, j) => {
               return <CalloutG key={c.label} x={p.x} y={p.y} tx={cfg.tx} ty={130 + j * 84} label={c.label} sub={c.sub} side={cfg.side} i={j + 1} size={19} />;
-            })}
+            })}</CalloutsG>
             <DimensionG x1={a.x} y1={a.y} x2={b.x} y2={b.y} value={`${mmC(254 - top)} mm`} offset={cfg.side === 'right' ? 28 : -28} i={8} size={15} />
             <DimensionG x1={p0.x} y1={p0.y} x2={p1.x} y2={p1.y} value={`${mmC(cfg.hat ? 46 : 112)} mm`} offset={26} i={9} size={15} />
           </>

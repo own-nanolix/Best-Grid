@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { AnimatePresence } from 'framer-motion';
@@ -17,7 +17,11 @@ export default function Dock() {
   const prev = previous(id);
   const nxt = next(id);
   const [open, setOpen] = useState(false);
-  const close = () => setOpen(false);
+  const indexBtn = useRef(null);
+  const close = () => {
+    setOpen(false);
+    if (indexBtn.current) indexBtn.current.focus({ preventScroll: true }); // focus returns to the Index button
+  };
 
   useEffect(() => {
     if (!window.location.search.includes('index=1')) return undefined;
@@ -50,7 +54,7 @@ export default function Dock() {
         <Link href={href(nxt.id)} aria-label={`Next page: ${nxt.title}`} title="Next (Shift + Right)">
           <Icon name="chevron-right" size={20} />
         </Link>
-        <button type="button" className="site-dock-index" onClick={() => setOpen(true)} aria-haspopup="dialog" aria-expanded={open}>
+        <button ref={indexBtn} type="button" className="site-dock-index" onClick={() => setOpen(true)} aria-haspopup="dialog" aria-expanded={open}>
           <Icon name="index" size={18} />
           Index
         </button>

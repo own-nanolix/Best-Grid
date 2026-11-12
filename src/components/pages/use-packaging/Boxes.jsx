@@ -173,7 +173,7 @@ export function ProductLid() {
                 left: (
                   <g>
                     {[190, 290].map((x) => <rect key={x} x={x} y="0" width="1" height="140" fill={HEX.darkBlue} opacity="0.45" />)}
-                    <g fontSize="9.4">
+                    <g fontSize="9.4" lang="es">
                       <text x="16" y="50" fill={HEX.warmGrey}>{box[0]}</text>
                       <text x="16" y="63" fill={INK}>{box[1]}</text>
                       <text x="16" y="76" fill={INK}>{box[2]}</text>

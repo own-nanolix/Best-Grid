@@ -1,6 +1,6 @@
 // Three close-up plates built from the same garment functions at a larger scale and cropped to the plate:
 // the chest print on the t-shirt, the reflective tape of the vest and the drawcord and eyelets of the hoodie.
-import { CalloutG, DimensionG } from '@/components/art/Mockup';
+import { CalloutG, CalloutsG, DimensionG } from '@/components/art/Mockup';
 import { HEX } from '@/lib/brand';
 import { at, mm } from './fabric';
 import Plate, { dimsOf, mmH } from './Plate';
@@ -21,10 +21,10 @@ function Crop({ id, children }) {
 }
 
 function Calls({ t, list, i0 = 1 }) {
-  return list.map((c, j) => {
+  return <CalloutsG>{list.map((c, j) => {
     const p = at(t, c.lx, c.ly);
     return <CalloutG key={c.label} x={p.x} y={p.y} tx={600} ty={150 + j * 108} label={c.label} sub={c.sub} i={i0 + j} size={19} />;
-  });
+  })}</CalloutsG>;
 }
 
 export function ChestDetail({ idp }) {

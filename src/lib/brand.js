@@ -214,10 +214,15 @@ export const CAPACITY = {
 // Print pieces.
 // m02 annual report
 export const REPORT = {
-  titleRows: ['Informe', 'de actividad', 'anual'], // the cover cuts "activida[d]": completed
+  // The cover prints "Informe" / "de activida[d]" / "anual", the last letter cut by the image edge. The case study
+  // prints no full "Informe de actividad anual" anywhere; "actividad" is printed in full in the node grid title
+  // ("Distribución de actividad en nudos de red") and 2025 in full on the dashboard. So the DRAWN cover sets these
+  // two in full and crops them with a clipPath at the cover's edge; running text never quotes the cut title.
+  titleRows: ['Informe', 'de actividad', 'anual'], // artwork only
+  name: 'Annual report', // plain English site label for every text mention
   lineRows: LINES.report.rows,
   signature: BRAND_FULL,
-  years: ['2024', '2025'], // "202[5]" completed from the spine
+  years: ['2024', '2025'], // artwork only: the cover prints "2024" and a cut "202[5]"
   spine: 'IDAA',
   range: '[24 – 25]',
   short: BRAND_SHORT,
