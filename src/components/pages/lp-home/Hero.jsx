@@ -59,8 +59,8 @@ export default function Hero() {
         <Rows rows={LINES.web.rows} as="h1" id="lp-home-title" tabIndex={-1} lang="es" className={`${s.h1} slide-up`} style={{ '--i': 2 }} />
         <p lang="es" className={`${s.body} ink slide-up`} style={{ '--i': 5 }}>{WEB_HERO.body}</p>
         <div className={`${s.btns} slide-up`} style={{ '--i': 8 }}>
-          <Button href="/lp-field/" lang="es">{BUTTONS.evaluate}</Button>
-          <Button href="/lp-data-centers/" variant="outline" lang="es">{BUTTONS.services}</Button>
+          <Button href="/lp-field/" size="sm" lang="es">{BUTTONS.evaluate}</Button>
+          <Button href="/lp-data-centers/" variant="outline" size="sm" lang="es">{BUTTONS.services}</Button>
         </div>
       </div>
       <div className={s.heroSlider}>

@@ -31,39 +31,67 @@ function ReportCover() {
       <Lines rows={REPORT.titleRows} x={110} y={140} size={48} lh={1.06} fill={HEX.darkBlue} display className="fade-in" style={{ '--i': 6 }} />
       <Lines rows={REPORT.lineRows} x={110} y={330} size={13} lh={1.4} fill={HEX.darkBlue} />
       <text x="110" y="560" fontSize="12" fill={HEX.darkBlue}>{BRAND_FULL}</text>
-      <text x="394" y="500" fontSize="60" textAnchor="end" fill={HEX.darkBlue} className="display" letterSpacing="-1.5">{REPORT.years[0]}</text>
-      <text x="394" y="560" fontSize="60" textAnchor="end" fill={HEX.darkBlue} className="display" letterSpacing="-1.5">{REPORT.years[1]}</text>
+      <text x="394" y="508" fontSize="48" textAnchor="end" fill={HEX.darkBlue} className="display" letterSpacing="-0.6">{REPORT.years[0]}</text>
+      <text x="394" y="560" fontSize="48" textAnchor="end" fill={HEX.darkBlue} className="display" letterSpacing="-0.6">{REPORT.years[1]}</text>
     </Art>
   );
 }
 
-// m07: the project tube, Dark Blue body, Active Blue lid with the mark, grey label with the printed services.
-// The label's client company is a neutral quiet bar.
+// m07: the project tube seen from above at an angle, as the middle tube: Dark Blue body, Active Blue lid with the
+// Dark Blue mark, the word-mark set vertically on the body in light grey, and the grey label with its copy set
+// vertically (reading upwards), a column rule with a node and the mark in the top-right cell, as printed. The
+// label's client company is replaced by a quiet placeholder bar (another company's name is never shown).
 function TubeArt() {
-  const rows = TUBE.services;
+  const idp = 'lp-home-tube';
+  // label layout measured on crop_m07_label (1120 x 1170 label units), drawn at k = 0.15
+  const k = 0.15;
+  const col = (x, y, size, text, extra = {}) => (
+    <text key={text} transform={`translate(${x} ${y}) rotate(-90)`} fontSize={size} fill={HEX.blueInk} {...extra}>{text}</text>
+  );
   return (
     <Art viewBox="0 0 360 640" title="Project tube with label" exportName="lp-home-tube" lang="es">
-      <rect width="360" height="640" fill={HEX.periwinkle} />
-      <ellipse cx="180" cy="596" rx="110" ry="12" fill="#000000" opacity="0.18" />
-      <rect x="80" y="96" width="200" height="500" fill={HEX.darkBlue} />
-      <rect x="80" y="96" width="34" height="500" fill="#000000" opacity="0.18" />
-      <rect x="70" y="40" width="220" height="64" fill={HEX.activeBlue} />
-      <MarkG x={150} y={50} size={44} fill={HEX.darkBlue} />
-      <WordmarkG x={104} y={190} size={26} fill={HEX.onBlue} />
-      <GuidesG w={360} h={640} xs={[104, 256]} ys={[214, 560]} stroke={HEX.activeBlue} weight={0.8} animate />
-      <rect x="118" y="238" width="124" height="296" fill={HEX.labelGrey} className="fill-in" style={{ '--i': 8 }} />
-      <g className="fade-in" style={{ '--i': 10 }}>
-        <text x="128" y="262" fontSize="12" fontStyle="italic" fill={HEX.blueInk}>{TUBE.project}</text>
-        <rect x="128" y="272" width="64" height="5" fill={HEX.darkBlue} opacity="0.25" />
-        {rows.map((r, i) => (
-          <text key={r} x="128" y={308 + i * 18} fontSize="9" fill={HEX.darkBlue}>{r}</text>
-        ))}
-        <Lines rows={TUBE.lineRows.map((r) => r.replace('Trabajamos en los puntos donde la red', 'Trabajamos en los puntos'))} x={128} y={386} size={8.5} lh={1.4} fill={HEX.darkBlue} />
-        <text x="128" y="484" fontSize="10" fill={HEX.darkBlue}>{TUBE.date}</text>
-        <text x="128" y="518" fontSize="9" fill={HEX.blueInk}>{TUBE.web}</text>
+      <defs>
+        <linearGradient id={`${idp}-body`} x1="0" x2="1" y1="0" y2="0">
+          <stop offset="0" stopColor="#000000" stopOpacity="0.35" />
+          <stop offset="0.35" stopColor="#000000" stopOpacity="0" />
+          <stop offset="0.8" stopColor="#000000" stopOpacity="0.1" />
+          <stop offset="1" stopColor="#000000" stopOpacity="0.45" />
+        </linearGradient>
+        <linearGradient id={`${idp}-label`} x1="0" x2="1" y1="0" y2="0">
+          <stop offset="0" stopColor="#ffffff" stopOpacity="0.18" />
+          <stop offset="0.6" stopColor="#ffffff" stopOpacity="0" />
+          <stop offset="1" stopColor="#000000" stopOpacity="0.16" />
+        </linearGradient>
+      </defs>
+      <rect width="360" height="640" fill={HEX.periwinkleMock} />
+      <rect x="50" y="150" width="260" height="490" fill={HEX.darkBlue} />
+      <rect x="50" y="150" width="260" height="490" fill={`url(#${idp}-body)`} />
+      <g transform="translate(116 760) rotate(-90)">
+        <WordmarkG x={0} y={0} size={84} fill={HEX.onBlue} opacity="0.92" />
       </g>
-      <NodeG cx={104} cy={214} s={6} fill={HEX.activeBlue} className="snap" style={{ '--i': 12 }} />
-      <NodeG cx={256} cy={560} s={6} fill={HEX.activeBlue} className="snap" style={{ '--i': 13 }} />
+      <ellipse cx="180" cy="150" rx="130" ry="56" fill="#10142c" />
+      <ellipse cx="180" cy="146" rx="122" ry="50" fill={HEX.activeBlue} />
+      <ellipse cx="180" cy="150" rx="114" ry="44" fill="#4a73ef" />
+      <g transform="translate(180 150) scale(1 0.42) rotate(0)">
+        <MarkG x={-58} y={-58} size={116} fill={HEX.darkBlue} />
+      </g>
+      <rect x="50" y="214" width="0.8" height="426" fill={HEX.activeBlue} opacity="0.7" className="extend-y" />
+      <g transform="translate(130 236)">
+        <rect width={1120 * k} height={1170 * k} fill={HEX.labelGrey} className="fill-in" style={{ '--i': 8 }} />
+        <rect width={1120 * k} height={1170 * k} fill={`url(#${idp}-label)`} />
+        <g transform={`scale(${k})`} className="fade-in" style={{ '--i': 10 }}>
+          <rect x="875" y="0" width="5" height="1170" fill={HEX.activeBlue} />
+          <rect x="878" y="348" width="242" height="5" fill={HEX.activeBlue} />
+          <NodeG cx={878} cy={350} s={24} fill={HEX.activeBlue} />
+          <MarkG x={935} y={110} size={120} fill={HEX.blueInk} />
+          {col(150, 1100, 40, TUBE.project, { fontStyle: 'italic' })}
+          <rect x="188" y="560" width="58" height="540" fill={HEX.blueInk} opacity="0.22" />
+          {TUBE.services.map((r, i) => col(355 + i * 46, 1100, 32, r))}
+          {TUBE.lineRows.map((r, i) => col(535 + i * 46, 1100, 32, r))}
+          {col(865, 1100, 74, TUBE.date)}
+          {col(1060, 1100, 44, TUBE.web)}
+        </g>
+      </g>
     </Art>
   );
 }
@@ -119,6 +147,7 @@ export function RowNodes() {
       <Reveal className={s.copy}>
         <p className="t-label">Node grid</p>
         <Rows rows={CAPACITY.nodesTitleRows} as="h2" id="lp-home-nodes-title" lang="es" className="t-h2" />
+        <p lang="es" className="t-small dark">{CAPACITY.treemap.year} · {CAPACITY.treemap.title}</p>
         <dl lang="es" className={s.shares}>
           {parts.map((p) => (
             <div key={p.key}>

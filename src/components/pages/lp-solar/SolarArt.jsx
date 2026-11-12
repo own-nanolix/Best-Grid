@@ -1,7 +1,7 @@
 import Art from '@/components/art/Art';
 import { GuidesG, NodeG, NodeGridG, IconArtG, PhotoBlockG, CrossingBandsG } from '@/components/art/KeyArt';
 import { MarkG, WordmarkG } from '@/components/art/Mark';
-import { HEX } from '@/lib/brand';
+import { HEX, LINES, CONTACT } from '@/lib/brand';
 import { PIXEL32 } from '@/components/site/icons';
 import { r2, range } from './helpers';
 
@@ -78,10 +78,6 @@ export function PanelCells() {
         ))}
       </g>
       <IconArtG name="sun" x={sun.x - 28} y={sun.y - 28} size={56} fill={HEX.darkBlue} className="fade-in" />
-      <g fill={HEX.darkBlue} fontSize="13">
-        <text x="40" y="574">Fewer rays</text>
-        <text x="680" y="574" textAnchor="end">More rays</text>
-      </g>
     </Art>
   );
 }
@@ -140,57 +136,56 @@ export function RouteArt() {
 // ---------------------------------------------------------------------------------------------------------------
 // 4. The node grid of the case study (the m17 back screen) on Dark Blue: the brand's structure made visible.
 export function NodesArt() {
-  const W = 720, H = 540, size = 40, cols = 16, rows = 11;
+  const W = 720, H = 512, size = 40, cols = 16, rows = 11;
   return (
     <Art viewBox={`0 0 ${W} ${H}`} title="Node grid with clusters in two strengths" exportName="lp-solar-nodes">
       <rect width={W} height={H} fill={HEX.darkBlue} />
       <NodeGridG x={40} y={36} cols={cols} rows={rows} size={size} seed={11} clusters={13} line="rgba(228,231,239,0.22)" animate />
       <GuidesG w={W} h={H} xs={[40, 680]} ys={[36, 476]} stroke={HEX.activeBlue} weight={1} animate />
-      <g fontSize="13" fill={HEX.activeBlue}>
-        <rect x="40" y="498" width="14" height="14" fill={HEX.activeBlue} />
-        <text x="62" y="510" fill={HEX.lightBlue}>Full</text>
-        <rect x="112" y="498" width="14" height="14" fill="#7c9cff" />
-        <text x="134" y="510" fill={HEX.lightBlue}>Soft</text>
-      </g>
     </Art>
   );
 }
 
 // ---------------------------------------------------------------------------------------------------------------
-// 5. The right poster of m09 rebuilt (Light Blue, 3:4): the mark in a narrow column, the line, the body, the two
-//    square photographs as flat Dark Blue blocks at 75% (stand-ins: a solar field and a turbine, in line art).
+// 5. The right poster of m09 rebuilt (Light Blue, 3:4) on the geometry measured from m09 (the sheet scaled to
+//    600 x 800): the column rule at x 122.5 above the cross rule at y 461.7, the photo rule at x 300 below it; the
+//    mark in the narrow column, the line (size 33) and the body (size 10) in Active Blue, "bestgrid.com" in the
+//    narrow column and the tag beside the word-mark on one baseline; the two photographs as flat Dark Blue blocks
+//    at 75% (stand-ins: a panel and a turbine in the icon stroke). Small type uses the accessible Active Blue ink.
 export function PosterArt() {
   const W = 600, H = 800;
+  const ink = HEX.blueInk;
   return (
     <Art viewBox={`0 0 ${W} ${H}`} title="Generation poster, Light Blue sheet in 3:4" exportName="lp-solar-poster" lang="es">
       <rect width={W} height={H} fill={HEX.lightBlue} />
-      <rect x="116" y="0" width="1" height={H} fill={HEX.darkBlue} className="extend-y" />
-      <rect x="0" y="440" width={W} height="1" fill={HEX.darkBlue} className="extend-x" style={{ '--i': 2 }} />
-      <NodeG cx="116.5" cy="440.5" fill={HEX.darkBlue} className="snap" style={{ '--i': 4 }} />
-      <MarkG x="40" y="40" size="44" fill={HEX.darkBlue} className="fade-in" />
-      <g fill={HEX.darkBlue} className="slide-up" style={{ '--i': 3 }}>
-        <text x="140" y="104" fontSize="30" className="display">Convertimos la</text>
-        <text x="140" y="140" fontSize="30" className="display">complejidad técnica</text>
-        <text x="140" y="176" fontSize="30" className="display">en proyectos que avanzan.</text>
+      <rect x="122.1" y="0" width="0.8" height="461.7" fill={HEX.activeBlue} className="extend-y" />
+      <rect x="299.6" y="461.7" width="0.8" height={H - 461.7} fill={HEX.activeBlue} className="extend-y" style={{ '--i': 1 }} />
+      <rect x="0" y="461.3" width={W} height="0.8" fill={HEX.activeBlue} className="extend-x" style={{ '--i': 2 }} />
+      <NodeG cx="122.5" cy="461.7" s={4} fill={HEX.activeBlue} className="snap" style={{ '--i': 4 }} />
+      <NodeG cx="300" cy="461.7" s={4} fill={HEX.activeBlue} className="snap" style={{ '--i': 5 }} />
+      <MarkG x="45" y="41" size="31.7" fill={HEX.activeBlue} className="fade-in" />
+      <g fill={HEX.activeBlue} className="slide-up" style={{ '--i': 3 }}>
+        {LINES.posterRight.rows.map((t, i) => (
+          <text key={t} x="169.2" y={r2(65.8 + i * 37.5)} fontSize="33" className="display">{t}</text>
+        ))}
       </g>
-      <g fill={HEX.darkBlue} fontSize="13" className="slide-up" style={{ '--i': 6 }}>
-        <text x="140" y="238">Intervenimos en la conexión a red de proyectos</text>
-        <text x="140" y="257">energéticos, estructurando decisiones en puntos</text>
-        <text x="140" y="276">donde la viabilidad no es evidente.</text>
-        <text x="140" y="326">bestgrid.com</text>
+      <g fill={ink} fontSize="10" className="slide-up" style={{ '--i': 6 }}>
+        {LINES.posterRightBody.rows.map((t, i) => (
+          <text key={t} x="169.2" y={r2(191.7 + i * 12.5)}>{t}</text>
+        ))}
       </g>
-      <g fill={HEX.darkBlue} fontSize="13" className="fade-in" style={{ '--i': 8 }}>
-        <text x="140" y="402">Acceso y conexión a red</text>
-        <text x="140" y="421">en generación eólica y solar</text>
+      <g fill={ink} fontSize="7.5" className="fade-in" style={{ '--i': 8 }}>
+        <text x="39.2" y="432.5">{CONTACT.web}</text>
+        <text x="169.2" y="421.7">{LINES.posterRightTag.rows[0]}</text>
+        <text x="169.2" y="431.7">{LINES.posterRightTag.rows[1]}</text>
       </g>
-      {[140, 360].map((x, i) => (
+      <WordmarkG x="560" y="432.5" size="43" fill={HEX.activeBlue} anchor="end" />
+      {[15, 315].map((x, i) => (
         <g key={x} className="fill-in" style={{ '--i': i * 2 + 6 }}>
-          <PhotoBlockG x={x} y="470" w="200" h="200" />
-          <IconArtG name={i ? 'wind' : 'solar'} x={x + 52} y="522" size={96} fill={HEX.lightBlue} />
+          <PhotoBlockG x={x} y="477.5" w="270" h="306.7" />
+          <IconArtG name={i ? 'wind' : 'solar'} px x={x + 75} y="571" size={120} fill={HEX.activeBlue} />
         </g>
       ))}
-      <WordmarkG x="560" y="758" size="34" fill={HEX.activeBlue} anchor="end" />
-      <MarkG x="40" y="716" size="44" fill={HEX.darkBlue} />
     </Art>
   );
 }

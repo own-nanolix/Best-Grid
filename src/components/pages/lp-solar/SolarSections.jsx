@@ -21,7 +21,7 @@ export function SolarHero() {
       <div className={s.heroText}>
         <p className={`t-label ${s.enter}`} style={{ '--i': 0 }}>
           <span className={s.chipBar} aria-hidden="true" />
-          Technology 01 of 04
+          Technology
         </p>
         <h1 id="lp-solar-h1" tabIndex={-1} className={`t-display ${s.enter}`} style={{ '--i': 1 }} lang="es">
           {tile.label}
@@ -222,7 +222,7 @@ export function BandsSection() {
 export function PanelSpec() {
   const rows = [
     { key: 'cells', head: 'Cells', num: '4 x 4', cells: ['Four across and four down, each a ruled cell'] },
-    { key: 'size', head: 'Panel', num: '21 x 16', cells: ['Units, centred in the 32 x 32 box'] },
+    { key: 'size', head: 'Drawing', num: '21 x 16', cells: ['Units of the 32 x 32 drawing grid: the icon as drawn here, panel and stand, centred'] },
     { key: 'frame', head: 'Frame', num: '1', cells: ['Unit: one thirty-second of the frame, square ends, stepped corners'] },
     { key: 'stand', head: 'Stand', num: '1', cells: ['A single bar under the panel, with a foot of two bars and an open crossing'] },
   ];

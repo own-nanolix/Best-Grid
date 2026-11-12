@@ -4,7 +4,6 @@ import { PixelIcon } from '@/components/site/Icon';
 import Button from '@/components/ui/Button';
 import SplitRow from '@/components/ui/SplitRow';
 import { Rows, TwoTone } from '@/components/ui/Card';
-import { SpecTable } from '@/components/ui/Spec';
 import Link from 'next/link';
 import { BUTTONS, CONTACT, LINES, TECH } from '@/lib/brand';
 import { FogHero, TurbineBuild, WindFarm, Collector, FieldBlock, RotorCycle, ClarityPoster } from './WindArt';
@@ -34,10 +33,9 @@ export function WindHero() {
         </svg>
       </div>
       <div className={s.foot}>
-        <p className={`t-label ${s.tag}`}>Technology 02 of 04</p>
         <div className="row">
           <Button href="/lp-field/" lang="es">{BUTTONS.evaluate}</Button>
-          <Button href="/lp-home/" variant="outline" lang="es">{BUTTONS.services}</Button>
+          <Button href="/lp-home/" variant="ghost" lang="es">{BUTTONS.services}</Button>
         </div>
       </div>
     </header>
@@ -159,19 +157,27 @@ export function WindContact() {
   );
 }
 
-// Construction facts of the turbine icon (m14), as a spec sheet with oversized numerals.
+// Construction facts of the turbine icon (m14): four numeral cells in one ruled row, each numeral over its part.
 export function TurbineSpec() {
   const rows = [
-    { key: 'hub', head: 'Hub ring', num: '3', cells: ['Diameter in units, with a 1 x 1 square inside'] },
-    { key: 'blades', head: 'Blades', num: '3', cells: ['At 120 degrees, two converging bars each, a 1 x 1 square at the tip'] },
-    { key: 'ring', head: 'Outer ring', num: '7', cells: ['Radius in units, 1 unit thick, cut where the blades pass'] },
-    { key: 'bar', head: 'Bar', num: '1', cells: ['Unit: one thirty-second of the frame, square ends'] },
+    { key: 'hub', head: 'Hub ring', num: '3', note: 'Diameter in units, with a 1 x 1 square inside' },
+    { key: 'blades', head: 'Blades', num: '3', note: 'At 120 degrees, two converging bars each, a 1 x 1 square at the tip' },
+    { key: 'ring', head: 'Outer ring', num: '7', note: 'Radius in units, 1 unit thick, cut where the blades pass' },
+    { key: 'bar', head: 'Bar', num: '1', note: 'Unit: one thirty-second of the frame, square ends' },
   ];
   return (
     <section className={`${s.spec} field-paper`} aria-labelledby="lp-wind-spec">
       <div className="wrap">
         <h2 id="lp-wind-spec" className="t-label">Turbine construction, 32 x 32</h2>
-        <SpecTable rows={rows} numFirst />
+        <div className={s.specRow}>
+          {rows.map((r, i) => (
+            <Reveal key={r.key} delay={i * 60} className={s.specCell}>
+              <p className={s.specNum} aria-hidden="true">{r.num}</p>
+              <h3 className="t-h3">{r.head}</h3>
+              <p className="t-small muted"><span className="sr-only">{r.num}: </span>{r.note}</p>
+            </Reveal>
+          ))}
+        </div>
       </div>
     </section>
   );
@@ -192,22 +198,23 @@ export function RotorRow() {
   );
 }
 
-// The four technology tiles of the website (m16), this page's tile highlighted.
+// The four technology tiles of the website (m16), set as a ledger of four ruled rows (icon, name, figure right);
+// this page's row is filled as the website fills its highlighted tile.
 const PAGES = { solar: 'lp-solar', wind: 'lp-wind', storage: 'lp-storage', dc: 'lp-data-centers' };
 export function WindTiles() {
   return (
     <section className={`${s.tiles} field-light`} aria-label="Technologies">
-      <div className={`wrap ${s.tileGrid}`}>
+      <ul className={`wrap ${s.ledger}`}>
         {TECH.map((t) => (
-          <Link key={t.key} href={`/${PAGES[t.key]}/`} className={`${s.tile} ${t.key === 'wind' ? 'cell-fill' : ''}`} aria-current={t.key === 'wind' ? 'page' : undefined} lang="es">
-            <PixelIcon name={t.icon} size={56} />
-            <span className={s.tileText}>
-              <span className="t-small ink">{t.label}</span>
-              <span className="t-h3">{t.value}</span>
-            </span>
-          </Link>
+          <li key={t.key}>
+            <Link href={`/${PAGES[t.key]}/`} className={`${s.tile} ${t.key === 'wind' ? 'cell-fill' : ''}`} aria-current={t.key === 'wind' ? 'page' : undefined} lang="es">
+              <PixelIcon name={t.icon} size={48} />
+              <span className="t-lead ink">{t.label}</span>
+              <span className={`t-h3 ${s.tileValue}`}>{t.value}</span>
+            </Link>
+          </li>
         ))}
-      </div>
+      </ul>
     </section>
   );
 }
@@ -226,7 +233,8 @@ export function PosterRow() {
   );
 }
 
-// A narrow closing strip: the two buttons of the website (m16) over a hairline with nodes at its ends.
+// A narrow closing strip, centred on one axis: the envelope's two-tone line, the two buttons of the website (m16)
+// side by side beneath it and the web address, under a hairline with nodes at its ends.
 export function WindClose() {
   return (
     <section className={`${s.close} field-active`} aria-labelledby="lp-wind-close">
@@ -239,8 +247,8 @@ export function WindClose() {
         <Reveal delay={120} className={s.closeSide}>
           <Button href="/lp-field/" variant="dark" lang="es">{BUTTONS.evaluate}</Button>
           <Button href="/lp-home/" variant="ghost" lang="es">{BUTTONS.services}</Button>
-          <p className="t-small" lang="es">{CONTACT.web}</p>
         </Reveal>
+        <p className="t-small" lang="es">{CONTACT.web}</p>
       </div>
       <span className={`${s.nodeDot} ${s.cl}`} aria-hidden="true" />
       <span className={`${s.nodeDot} ${s.cr}`} aria-hidden="true" />

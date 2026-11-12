@@ -45,114 +45,160 @@ function RacksG({ x, y, w, h, seed = 3, tone = HEX.activeBlue }) {
   );
 }
 
-// m09 left: the data-centre poster (photo stand-in, Active Blue guide frame, headline, body, tag).
+// Geometry below is measured on m09 / m11 (each sheet 720 x 960 px in the readable copy, scaled to 600 x 800):
+// guides at x 40 / 560, the word-mark about 172 wide (size 43), headlines size 33 at a 37.5 pitch, body size 10
+// at a 12.5 pitch, micro lines size 7.5. Small type uses the accessible Active Blue ink (rule 9).
+const WM = 43;
+const HEAD = 33;
+
+// m09 left: the data-centre poster (photo stand-in, Active Blue guide frame with nodes, Active Blue type).
 export function PosterDataCentre() {
   const p = POSTERS.dataCentre;
   return (
     <Art viewBox={`0 0 ${W} ${H}`} title="Poster: data-centre line" exportName="lp-home-poster-data-centre" lang="es">
       <rect width={W} height={H} fill={HEX.black} />
       <PhotoBlockG x={0} y={0} w={W} h={H} />
-      <g opacity="0.9">
-        <RacksG x={0} y={110} w={210} h={560} seed={4} />
-        <RacksG x={390} y={110} w={210} h={560} seed={9} />
+      <g opacity="0.6">
+        <RacksG x={0} y={60} w={220} h={700} seed={4} />
+        <RacksG x={380} y={60} w={220} h={700} seed={9} />
       </g>
-      <rect x={210} y={110} width={180} height={560} fill={HEX.darkBlue} opacity="0.45" />
-      <GuidesG w={W} h={H} xs={[M, W - M]} ys={[M, H - M]} stroke={HEX.activeBlue} animate />
-      <WordmarkG x={M + 14} y={M + 34} size={22} fill={HEX.activeBlue} />
-      <Lines rows={p.head} x={M + 14} y={440} size={40} fill={HEX.onBlue} display className="fade-in" style={{ '--i': 6 }} />
-      <Lines rows={p.body} x={M + 14} y={560} size={14} lh={1.35} fill={HEX.onBlue} className="fade-in" style={{ '--i': 8 }} />
-      <text x={M + 14} y={656} fontSize="12" fill={HEX.activeBlue}>{p.tag}</text>
-      <MarkG x={M + 14} y={H - M - 52} size={32} fill={HEX.onBlue} />
-      <text x={W - M - 14} y={H - M - 22} fontSize="13" fill={HEX.onBlue} textAnchor="end">{p.web}</text>
+      <rect x={220} y={60} width={160} height={700} fill={HEX.darkBlue} opacity="0.45" />
+      <GuidesG w={W} h={H} xs={[M, W - M]} ys={[42.5, 697.5, 757.5]} stroke={HEX.activeBlue} weight={0.8} node={5} animate />
+      <WordmarkG x={80} y={112.5} size={WM} fill={HEX.activeBlue} />
+      <Lines rows={p.head} x={81.7} y={476.7} size={HEAD} lh={1.136} fill={HEX.activeBlue} display className="fade-in" style={{ '--i': 6 }} />
+      <Lines rows={p.body} x={81.7} y={592.5} size={12.5} lh={1.2} fill={HEX.activeBlue} className="fade-in" style={{ '--i': 8 }} />
+      <text x={83} y={666.7} fontSize="7.5" fill={HEX.activeBlue}>{p.tag}</text>
+      <MarkG x={81} y={712.5} size={30} fill={HEX.activeBlue} />
+      <text x={518} y={731.7} fontSize="7.5" fill={HEX.activeBlue} textAnchor="end">{p.web}</text>
     </Art>
   );
 }
 
-// m09 right: the generation poster (Light Blue, mark in a narrow column, two square photo stand-ins below).
+// m09 right: the generation poster (Light Blue, the mark in a narrow column, Active Blue type, two photo cells).
 export function PosterGeneration() {
   const p = POSTERS.generation;
   return (
     <Art viewBox={`0 0 ${W} ${H}`} title="Poster: generation line" exportName="lp-home-poster-generation" lang="es">
       <rect width={W} height={H} fill={HEX.lightBlue} />
-      <GuidesG w={W} h={H} xs={[M + 60]} ys={[M + 20, 470]} stroke={HEX.darkBlue} weight={0.8} animate />
-      <MarkG x={M + 8} y={M + 44} size={34} fill={HEX.darkBlue} />
-      <Lines rows={p.head} x={M + 84} y={M + 64} size={34} fill={HEX.darkBlue} display className="fade-in" style={{ '--i': 6 }} />
-      <Lines rows={p.body} x={M + 84} y={M + 190} size={12.5} lh={1.4} fill={HEX.darkBlue} className="fade-in" style={{ '--i': 8 }} />
-      <text x={M + 84} y={M + 286} fontSize="12" fill={HEX.blueInk}>{p.web}</text>
-      <Lines rows={p.tag} x={M + 84} y={M + 330} size={12.5} lh={1.35} fill={HEX.darkBlue} />
-      <WordmarkG x={W - M} y={M + 440} size={30} fill={HEX.darkBlue} anchor="end" />
-      <PhotoBlockG x={M} y={490} w={250} h={250} />
-      <PhotoBlockG x={M + 270} y={490} w={250} h={250} />
-      <IconArtG name="solar" px x={M + 65} y={555} size={120} fill={HEX.activeBlue} />
-      <IconArtG name="wind" px x={M + 335} y={555} size={120} fill={HEX.activeBlue} />
+      <rect x={122.1} y={0} width={0.8} height={461.7} fill={HEX.activeBlue} className="extend-y" />
+      <rect x={299.6} y={461.7} width={0.8} height={338.3} fill={HEX.activeBlue} className="extend-y" style={{ '--i': 1 }} />
+      <rect x={0} y={461.3} width={W} height={0.8} fill={HEX.activeBlue} className="extend-x" style={{ '--i': 2 }} />
+      <NodeG cx={122.5} cy={461.7} s={4} fill={HEX.activeBlue} className="snap" style={{ '--i': 4 }} />
+      <NodeG cx={300} cy={461.7} s={4} fill={HEX.activeBlue} className="snap" style={{ '--i': 5 }} />
+      <MarkG x={45} y={41} size={31.7} fill={HEX.activeBlue} />
+      <Lines rows={p.head} x={169.2} y={65.8} size={HEAD} lh={1.136} fill={HEX.activeBlue} display className="fade-in" style={{ '--i': 6 }} />
+      <Lines rows={p.body} x={169.2} y={191.7} size={10} lh={1.25} fill={HEX.blueInk} className="fade-in" style={{ '--i': 8 }} />
+      <text x={39.2} y={432.5} fontSize="7.5" fill={HEX.blueInk}>{p.web}</text>
+      <Lines rows={p.tag} x={169.2} y={421.7} size={7.5} lh={1.33} fill={HEX.blueInk} />
+      <WordmarkG x={560} y={432.5} size={WM} fill={HEX.activeBlue} anchor="end" />
+      <PhotoBlockG x={15} y={477.5} w={270} h={306.7} />
+      <PhotoBlockG x={315} y={477.5} w={270} h={306.7} />
+      <IconArtG name="solar" px x={90} y={571} size={120} fill={HEX.activeBlue} />
+      <IconArtG name="wind" px x={390} y={571} size={120} fill={HEX.activeBlue} />
     </Art>
   );
 }
 
-// m11 left: the field poster (Dark Blue, light guide frame, square photo stand-in with the three words over it).
+// m11 left: the field poster (Dark Blue, light guide frame, a square photo stand-in with the three words over it;
+// the photograph shows a person and is never drawn: a turbine in the icon stroke stands in).
 export function PosterField() {
   const p = POSTERS.field;
   const words = LINES.fieldWords;
   return (
     <Art viewBox={`0 0 ${W} ${H}`} title="Poster: field line" exportName="lp-home-poster-field" lang="es">
       <rect width={W} height={H} fill={HEX.darkBlue} />
-      <GuidesG w={W} h={H} xs={[M, W - M]} ys={[M, H - M]} stroke={HEX.onBlue} weight={0.8} animate />
-      <WordmarkG x={W / 2} y={M + 34} size={22} fill={HEX.white} anchor="middle" />
-      <PhotoBlockG x={M} y={110} w={W - 2 * M} h={W - 2 * M} fill={HEX.black} opacity="0.5" />
-      <IconArtG name="wind" px x={190} y={190} size={220} fill={HEX.activeBlue} />
-      <text x={W / 2} y={460} fontSize="22" fill={HEX.white} textAnchor="middle" className="display">{words.join(' · ')}</text>
-      <Lines rows={p.body} x={W / 2} y={620} size={14} lh={1.4} fill={HEX.onBlue} anchor="middle" className="fade-in" style={{ '--i': 8 }} />
-      <text x={M + 14} y={H - M - 16} fontSize="12" fill={HEX.onBlue}>{p.email}</text>
-      <text x={W - M - 14} y={H - M - 16} fontSize="12" fill={HEX.onBlue} textAnchor="end">{p.web}</text>
+      <GuidesG w={W} h={H} xs={[M, W - M]} ys={[132.5, 666.7]} nodes={[[M, 132.5], [300, 132.5], [W - M, 132.5], [M, 666.7], [300, 666.7], [W - M, 666.7]]} stroke={HEX.onBlue} weight={0.8} node={5} animate />
+      <rect x={299.6} y={132.5} width={0.8} height={30} fill={HEX.onBlue} />
+      <rect x={299.6} y={637.5} width={0.8} height={29.2} fill={HEX.onBlue} />
+      <WordmarkG x={300} y={98.3} size={WM} fill={HEX.onBlue} anchor="middle" />
+      <PhotoBlockG x={62.5} y={162.5} w={475} h={475} fill={HEX.black} opacity="0.4" />
+      <IconArtG name="wind" px x={190} y={230} size={220} fill={HEX.activeBlue} />
+      <text x={300} y={602.5} fontSize="25" fill={HEX.white} textAnchor="middle" className="display">{words.join(' · ')}</text>
+      <Lines rows={p.body} x={300} y={730.8} size={10} lh={1.25} fill={HEX.onBlue} anchor="middle" className="fade-in" style={{ '--i': 8 }} />
+      <text x={62.5} y={757.5} fontSize="7.5" fill={HEX.onBlue}>{p.email}</text>
+      <text x={537.5} y={757.5} fontSize="7.5" fill={HEX.onBlue} textAnchor="end">{p.web}</text>
     </Art>
   );
 }
 
-// m11 right: the clarity poster (Active Blue, Dark Blue type, three-cell footer).
+// m11 right: the clarity poster (Active Blue, Dark Blue type, a three-cell ruled footer: web | mark | web).
 export function PosterClarity() {
   const p = POSTERS.clarity;
+  const cells = [40, 212.5, 387.5, 560];
   return (
     <Art viewBox={`0 0 ${W} ${H}`} title="Poster: clarity line" exportName="lp-home-poster-clarity" lang="es">
       <rect width={W} height={H} fill={HEX.activeBlue} />
-      <GuidesG w={W} h={H} xs={[M, W - M]} ys={[M, H - 110]} stroke={HEX.darkBlue} weight={0.8} animate />
-      <WordmarkG x={W / 2} y={M + 40} size={22} fill={HEX.darkBlue} anchor="middle" />
-      <Lines rows={p.head} x={W / 2} y={330} size={46} fill={HEX.darkBlue} anchor="middle" display className="fade-in" style={{ '--i': 6 }} />
-      <Lines rows={p.body} x={W / 2} y={540} size={14} lh={1.4} fill={HEX.darkBlue} anchor="middle" />
-      <rect x={M + (W - 2 * M) / 3} y={H - 110} width="0.8" height={70} fill={HEX.darkBlue} />
-      <rect x={M + (2 * (W - 2 * M)) / 3} y={H - 110} width="0.8" height={70} fill={HEX.darkBlue} />
-      <text x={M + (W - 2 * M) / 6} y={H - 70} fontSize="13" fill={HEX.darkBlue} textAnchor="middle">{p.web}</text>
-      <MarkG x={W / 2 - 14} y={H - 92} size={28} fill={HEX.darkBlue} />
-      <text x={M + (5 * (W - 2 * M)) / 6} y={H - 70} fontSize="13" fill={HEX.darkBlue} textAnchor="middle">{p.web}</text>
+      <GuidesG w={W} h={H} xs={[M, W - M]} ys={[42.5, 697.5, 757.5]} nodes={[[M, 42.5], [W - M, 42.5], ...cells.flatMap((x) => [[x, 697.5], [x, 757.5]])]} stroke={HEX.darkBlue} weight={0.8} node={5} animate />
+      <rect x={212.1} y={697.5} width="0.8" height={60} fill={HEX.darkBlue} />
+      <rect x={387.1} y={697.5} width="0.8" height={60} fill={HEX.darkBlue} />
+      <WordmarkG x={300} y={127.5} size={WM} fill={HEX.darkBlue} anchor="middle" />
+      <Lines rows={p.head} x={300} y={326.7} size={HEAD} lh={1.136} fill={HEX.darkBlue} anchor="middle" display className="fade-in" style={{ '--i': 6 }} />
+      <Lines rows={p.body} x={300} y={591.7} size={10} lh={1.25} fill={HEX.darkBlue} anchor="middle" />
+      <text x={126.25} y={731.7} fontSize="7.5" fill={HEX.darkBlue} textAnchor="middle">{p.web}</text>
+      <MarkG x={284.5} y={712} size={31} fill={HEX.darkBlue} />
+      <text x={473.75} y={731.7} fontSize="7.5" fill={HEX.darkBlue} textAnchor="middle">{p.web}</text>
     </Art>
   );
 }
 
-// m22: the event screen, one long Active Blue LED wall over a stage; the audience and speaker are not drawn.
+// m22: the event hall's long Active Blue LED wall in three panels: a photo panel left (a solar tower field), the
+// text panel in the middle, a photo panel right (a roof of solar panels). Photographs, the audience and the
+// speaker are never drawn: flat Dark Blue photo blocks with line art stand in. The middle panel is laid out on
+// the coordinates of crop_m22_mid (1565 x 823 panel units): two-tone pair top left, the mark top right, the
+// small two-tone pair and the handle above a light rule with end nodes, the word-mark large below it.
 export function EventScreen() {
   const idp = 'lp-home-ev';
+  const k = 384 / 1565;
   return (
-    <Art viewBox="0 0 1200 560" title="Event screen: connect line" exportName="lp-home-event-screen" lang="es">
+    <Art viewBox="0 0 1200 520" title="Event screen: connect line" exportName="lp-home-event-screen" lang="es">
       <BrandDefs idp={idp} />
-      <rect width="1200" height="560" fill={HEX.black} />
-      {[90, 320, 600, 880, 1110].map((x) => (
-        <rect key={x} x={x} y="0" width="1.2" height="64" fill={HEX.activeBlue} opacity="0.4" />
+      <rect width="1200" height="520" fill={HEX.black} />
+      {/* the lighting truss */}
+      {[20, 52].map((y) => (
+        <rect key={y} x="0" y={y} width="1200" height="1.2" fill={HEX.activeBlue} opacity="0.35" />
       ))}
-      <rect x="0" y="62" width="1200" height="1.2" fill={HEX.activeBlue} opacity="0.5" />
-      <rect x="0" y="22" width="1200" height="1.2" fill={HEX.activeBlue} opacity="0.35" />
-      <rect x="60" y="100" width="1080" height="330" fill={HEX.activeBlue} filter={`url(#${idp}-grain)`} />
-      <g className="fade-in" style={{ '--i': 4 }}>
-        <text x="110" y="190" fontSize="44" className="display" fill={HEX.white} letterSpacing="-0.5">{LINES.connect.rows[0]}</text>
-        <text x="110" y="244" fontSize="44" className="display" fill={HEX.darkBlue} letterSpacing="-0.5">{LINES.connect.rows[1]}</text>
-        <text x="110" y="330" fontSize="20" fill={HEX.white}>{LINES.viable.rows[0]}</text>
-        <text x="110" y="358" fontSize="20" fill={HEX.darkBlue}>{LINES.viable.rows[1]}</text>
+      {Array.from({ length: 31 }, (_, i) => (
+        <path key={i} d={`M${i * 40} 20.6L${i * 40 + 20} 52.6L${i * 40 + 40} 20.6`} fill="none" stroke={HEX.activeBlue} strokeOpacity="0.25" strokeWidth="1" />
+      ))}
+      {[260, 940].map((x) => (
+        <g key={x}>
+          <rect x={x - 1} y="53" width="2" height="22" fill="#2a2f52" />
+          <rect x={x - 12} y="75" width="24" height="20" fill="#2a2f52" />
+        </g>
+      ))}
+      {/* the wall: three panels */}
+      <rect x="24" y="144" width="1152" height="214" fill="#0b0d18" />
+      <rect x="30" y="150" width="377" height="202" fill={HEX.activeBlue} filter={`url(#${idp}-grain)`} />
+      <PhotoBlockG x={36} y={156} w={365} h={190} />
+      <IconArtG name="solar" px x={158} y={186} size={130} fill={HEX.activeBlue} />
+      <rect x="803" y="150" width="367" height="202" fill={HEX.activeBlue} filter={`url(#${idp}-grain)`} />
+      <PhotoBlockG x={809} y={156} w={355} h={190} />
+      <g fill={HEX.activeBlue} opacity="0.8">
+        {Array.from({ length: 5 }, (_, r) =>
+          Array.from({ length: 9 }, (_, c) => <rect key={`${r}-${c}`} x={830 + c * 36} y={250 + r * 18} width="32" height="15" fill="none" stroke={HEX.activeBlue} strokeWidth="1" />),
+        )}
       </g>
-      <MarkG x={1040} y={124} size={44} fill={HEX.onBlue} />
-      <text x="110" y="408" fontSize="13" fill={HEX.darkBlue}>{CONTACT.handle}   {CONTACT.web}</text>
-      <rect x="60" y="388" width="1080" height="1" fill={HEX.darkBlue} opacity="0.6" />
-      <NodeG cx={60} cy={388.5} s={8} fill={HEX.white} className="snap" style={{ '--i': 10 }} />
-      <NodeG cx={1140} cy={388.5} s={8} fill={HEX.white} className="snap" style={{ '--i': 11 }} />
-      <rect x="0" y="430" width="1200" height="130" fill="#0b0d18" />
-      <WordmarkG x={600} y={510} size={64} fill={HEX.onBlue} anchor="middle" />
+      <g transform={`translate(413 150) scale(${k.toFixed(4)})`}>
+        <rect width="1565" height="823" fill={HEX.activeBlue} filter={`url(#${idp}-grain)`} />
+        <rect x="0" y="0" width="3" height="823" fill={HEX.onBlue} />
+        <rect x="1562" y="0" width="3" height="823" fill={HEX.onBlue} />
+        <rect x="0" y="616.5" width="1565" height="3" fill={HEX.onBlue} className="extend-x" />
+        <NodeG cx={1.5} cy={618} s={14} fill={HEX.onBlue} className="snap" style={{ '--i': 10 }} />
+        <NodeG cx={1563.5} cy={618} s={14} fill={HEX.onBlue} className="snap" style={{ '--i': 11 }} />
+        <g className="fade-in" style={{ '--i': 4 }}>
+          <text x="55" y="105" fontSize="70" className="display" fill={HEX.onBlue}>{LINES.connect.rows[0]}</text>
+          <text x="55" y="187" fontSize="70" className="display" fill={HEX.darkBlue}>{LINES.connect.rows[1]}</text>
+          <text x="55" y="527" fontSize="27" fill={HEX.onBlue}>{LINES.viable.rows[0]}</text>
+          <text x="55" y="563" fontSize="27" fill={HEX.darkBlue}>{LINES.viable.rows[1]}</text>
+          <text x="1509" y="527" fontSize="27" fill={HEX.onBlue} textAnchor="end">{CONTACT.handle}</text>
+          <text x="1509" y="563" fontSize="27" fill={HEX.darkBlue} textAnchor="end">{CONTACT.web}</text>
+        </g>
+        <MarkG x={1415} y={55} size={95} fill={HEX.onBlue} />
+        <WordmarkG x={52} y={777} size={146} fill={HEX.onBlue} />
+      </g>
+      {/* the stage */}
+      <rect x="0" y="372" width="1200" height="148" fill="#070912" />
+      <rect x="0" y="372" width="1200" height="1.2" fill={HEX.activeBlue} opacity="0.3" />
     </Art>
   );
 }

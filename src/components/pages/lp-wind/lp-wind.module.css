@@ -15,7 +15,8 @@
   min-height: clamp(560px, 92vh, 960px);
   overflow: hidden;
   color: var(--dark-blue);
-  background: var(--fog);
+  /* the fog drawing covers the hero; underneath, the colour of its lower end, where the buttons sit */
+  background: var(--plum);
 }
 .fog { position: absolute; inset: 0; animation: lp-wind-fade var(--dur-draw) var(--ease-out) both; }
 .fog svg { width: 100%; height: 100%; }
@@ -53,10 +54,13 @@
 }
 .band::before { top: 0; }
 .band::after { bottom: 0; animation-delay: 80ms; }
+/* m01 prints the line and the mark in light grey-white over the fog. The line is set as large type here (24 px at
+   least), so it keeps the original colour (rule 9: only text under 24 px needs 4.5:1). */
 .line {
   margin: 0;
   font-weight: 400;
-  font-size: clamp(16px, 1.75vw, 26px);
+  color: var(--on-blue);
+  font-size: clamp(24px, 1.75vw, 26px);
   line-height: 1.28;
   max-width: 28em;
   animation: lp-wind-rise var(--dur-l) var(--ease-out) both;
@@ -66,7 +70,7 @@
   width: clamp(36px, 3.4vw, 52px);
   height: auto;
   flex: none;
-  color: var(--dark-blue);
+  color: var(--on-blue);
   animation: lp-wind-fade var(--dur-l) var(--ease-out) both;
   animation-delay: 900ms;
 }
@@ -94,7 +98,9 @@
   gap: 14px;
   padding: 0 9.4% clamp(28px, 4vw, 56px);
 }
-.tag { color: var(--dark-blue); }
+/* the foot sits on the dark plum end of the fog: light type there (contrast), the second button as a light ghost */
+.foot { color: var(--on-blue); }
+.tag { color: var(--on-blue); }
 
 /* ---------- Three-column split ---------- */
 .trio { border-bottom: var(--hair) solid var(--rule); }
@@ -173,24 +179,25 @@
 
 /* ---------- Technology tiles ---------- */
 .tiles { border-bottom: var(--hair) solid var(--rule); }
-.tileGrid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); padding-inline: 0; border-left: var(--hair) solid var(--rule); }
+.ledger { list-style: none; margin: 0 auto; padding-block: clamp(32px, 5vw, 72px); }
+.ledger li { border-top: var(--hair) solid var(--rule); }
+.ledger li:last-child { border-bottom: var(--hair) solid var(--rule); }
 .tile {
-  display: flex;
+  display: grid;
+  grid-template-columns: 48px minmax(0, 1fr) auto;
   align-items: center;
-  gap: 16px;
-  padding: clamp(18px, 2vw, 32px);
+  gap: clamp(16px, 3vw, 48px);
+  padding: 14px clamp(12px, 2vw, 24px);
   color: var(--dark-blue);
   text-decoration: none;
-  border-right: var(--hair) solid var(--rule);
-  min-height: 112px;
+  min-height: 76px;
   transition: background-color var(--dur-s) var(--ease-out);
 }
 .tile:hover { background: var(--periwinkle); }
 .tile:active { background: var(--stat-cell); }
 .tile:focus-visible { outline: 2px solid var(--dark-blue); outline-offset: -4px; }
-.tileText { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
-@media (max-width: 900px) { .tileGrid { grid-template-columns: repeat(2, minmax(0, 1fr)); } .tile { border-bottom: var(--hair) solid var(--rule); } }
-@media (max-width: 560px) { .tileGrid { grid-template-columns: minmax(0, 1fr); } }
+.tileValue { margin: 0; white-space: nowrap; }
+.tile :global(.t-lead) { margin: 0; }
 
 /* ---------- Poster on black ---------- */
 .posterArt { padding: clamp(24px, 4vw, 64px); }
@@ -198,9 +205,25 @@
 
 /* ---------- Closing strip ---------- */
 .close { --line: var(--dark-blue); position: relative; padding-block: clamp(40px, 6vw, 96px); border-top: var(--hair) solid var(--dark-blue); }
-.closeGrid { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: clamp(24px, 5vw, 96px); align-items: end; }
-.closeSide { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; }
+.closeGrid { display: flex; flex-direction: column; align-items: center; text-align: center; gap: clamp(20px, 3vw, 36px); }
+.closeGrid > p { margin: 0; }
+.closeSide { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
 .cl, .cr { top: 0; animation: none; background: var(--dark-blue); }
 .cl { left: 4.3%; }
 .cr { left: 97.5%; }
-@media (max-width: 900px) { .closeGrid { grid-template-columns: minmax(0, 1fr); } }
+
+
+/* the hero's nodes sit on light guides, light as printed on m01 */
+.band .nodeDot { background: var(--paper); }
+
+/* the turbine's construction as one ruled row of four numeral cells */
+.specRow { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-top: var(--hair) solid var(--rule); border-bottom: var(--hair) solid var(--rule); }
+.specCell { display: flex; flex-direction: column; gap: 10px; padding: clamp(16px, 2vw, 28px) clamp(12px, 1.6vw, 24px) clamp(20px, 2.4vw, 32px); border-left: var(--hair) solid var(--rule); min-width: 0; }
+.specCell:first-child { border-left: 0; padding-left: 0; }
+.specCell > * { margin: 0; }
+.specNum { font-family: var(--font-display); font-size: clamp(64px, 8vw, 128px); line-height: 0.86; letter-spacing: -0.035em; }
+@media (max-width: 900px) {
+  .specRow { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .specCell:nth-child(3) { border-left: 0; padding-left: 0; }
+  .specCell:nth-child(n + 3) { border-top: var(--hair) solid var(--rule); }
+}

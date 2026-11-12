@@ -1,8 +1,8 @@
 import Art from '@/components/art/Art';
-import { MarkG } from '@/components/art/Mark';
+import { MarkG, WordmarkG } from '@/components/art/Mark';
 import { BrandDefs, FogFieldG, GuidesG, IconArtG, NodeG, PhotoBlockG } from '@/components/art/KeyArt';
 import { turbinePath } from '@/components/site/icons';
-import { HEX } from '@/lib/brand';
+import { HEX, LINES, CONTACT } from '@/lib/brand';
 import { r2 } from '@/lib/charts';
 import { range } from '@/lib/site';
 
@@ -180,32 +180,35 @@ export function RotorCycle() {
 }
 
 // ---------------------------------------------------------------------------------------------------------------
-// 7. The right poster of m11 rebuilt (Active Blue, Dark Blue type, 3:4): the clarity line centred, the body below,
-//    the three-cell footer "bestgrid.com" | mark | "bestgrid.com".
+// 7. The right poster of m11 rebuilt (Active Blue, Dark Blue type, 3:4), on the geometry measured from m11 (the
+//    sheet scaled to 600 x 800): guides at x 40 / 560 and y 42.5 / 697.5 / 757.5, the word-mark about 172 wide,
+//    the clarity line centred at size 33, the body at size 10, the three-cell footer "bestgrid.com" | mark |
+//    "bestgrid.com" with cell rules at 212.5 and 387.5.
 export function ClarityPoster() {
   const W = 600, H = 800;
-  const head = ['Los proyectos', 'avanzan cuando la', 'estructura es clara.'];
-  const body = ['Aportamos claridad en la conexión a red,', 'estructurando decisiones en puntos donde', 'el sistema deja de ser evidente.'];
+  const cells = [40, 212.5, 387.5, 560];
   return (
     <Art viewBox={`0 0 ${W} ${H}`} title="Clarity poster, Active Blue sheet in 3:4" exportName="lp-wind-poster" lang="es">
       <rect width={W} height={H} fill={HEX.activeBlue} />
-      <GuidesG w={W} h={H} xs={[40, 560]} ys={[40, 680, 760]} stroke={HEX.darkBlue} animate nodes={[[40, 40], [560, 40], [40, 680], [560, 680], [200, 680], [400, 680], [200, 760], [400, 760]]} />
-      <text x="300" y="108" fontSize="22" textAnchor="middle" fill={HEX.darkBlue} className="display fade-in" style={{ '--i': 3 }}>Best Grid</text>
+      <GuidesG w={W} h={H} xs={[40, 560]} ys={[42.5, 697.5, 757.5]} stroke={HEX.darkBlue} weight={0.8} node={5} animate nodes={[[40, 42.5], [560, 42.5], ...cells.flatMap((x) => [[x, 697.5], [x, 757.5]])]} />
+      <rect x="212.1" y="697.5" width="0.8" height="60" fill={HEX.darkBlue} />
+      <rect x="387.1" y="697.5" width="0.8" height="60" fill={HEX.darkBlue} />
+      <WordmarkG x={300} y={127.5} size={43} fill={HEX.darkBlue} anchor="middle" className="fade-in" style={{ '--i': 3 }} />
       <g fill={HEX.darkBlue} textAnchor="middle" className="slide-up" style={{ '--i': 5 }}>
-        {head.map((t, i) => (
-          <text key={t} x="300" y={r2(330 + i * 50)} fontSize="42" className="display">{t}</text>
+        {LINES.clarity.rows.map((t, i) => (
+          <text key={t} x="300" y={r2(326.7 + i * 37.5)} fontSize="33" className="display">{t}</text>
         ))}
       </g>
-      <g fill={HEX.darkBlue} textAnchor="middle" fontSize="14" className="fade-in" style={{ '--i': 9 }}>
-        {body.map((t, i) => (
-          <text key={t} x="300" y={r2(520 + i * 20)}>{t}</text>
+      <g fill={HEX.darkBlue} textAnchor="middle" fontSize="10" className="fade-in" style={{ '--i': 9 }}>
+        {LINES.clarityBody.rows.map((t, i) => (
+          <text key={t} x="300" y={r2(591.7 + i * 12.5)}>{t}</text>
         ))}
       </g>
-      <g fill={HEX.darkBlue} fontSize="13" textAnchor="middle">
-        <text x="120" y="725">bestgrid.com</text>
-        <text x="480" y="725">bestgrid.com</text>
+      <g fill={HEX.darkBlue} fontSize="7.5" textAnchor="middle">
+        <text x="126.25" y="731.7">{CONTACT.web}</text>
+        <text x="473.75" y="731.7">{CONTACT.web}</text>
       </g>
-      <MarkG x="276" y="696" size="48" fill={HEX.darkBlue} />
+      <MarkG x={284.5} y={712} size={31} fill={HEX.darkBlue} />
     </Art>
   );
 }

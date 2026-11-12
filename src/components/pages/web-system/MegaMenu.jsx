@@ -70,7 +70,7 @@ export default function MegaMenu() {
           <p className={s.megaHead}>{NAV[0]}</p>
           <ul className={s.megaList}>
             {TUBE.services.map((t) => (
-              <li key={t}><span>{t}</span></li>
+              <li key={t}><Link href="/lp-field/">{t}</Link></li>
             ))}
             <li><Link href="/lp-field/">{LINES.field}</Link></li>
           </ul>
@@ -90,7 +90,7 @@ export default function MegaMenu() {
             <li><Link href="/lp-home/">{LINES.web.text}</Link></li>
           </ul>
         </div>
-        <div className={`${s.megaCol} ${s.megaArtCell}`} aria-hidden="false">
+        <div className={`${s.megaCol} ${s.megaArtCell}`}>
           <MegaArt />
         </div>
       </div>
