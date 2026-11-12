@@ -124,3 +124,8 @@ http://localhost:3105 (start with `npx next dev -p 3105`; stop it before `npm ru
 - logo: the word-mark's letters touch less than in the reference.
 - showcase: plate 3's callout lines cross the laptop. use-apparel: confirm 3 hoodies (the vest is counted as one of the three hoodie-class pieces). use-world: the vehicle was not re-compared with m20 after the last tweak.
 - Wave 2 done: 12 builders, 13 pages, each committed locally. Lint clean, build passes, check --strict 30 of 30 ok; every page is over 600 lines, so no page was sent back. Step 6 started: 8 reviewers launched (Opus).
+
+## Pending shared fixes from the review round (lead applies once all 8 reviewers are back)
+
+- R3, `src/lib/brand.js`: the treemap's unlabelled remainder must carry `pct: null`, not the computed 16 (the case study prints no figure for it).
+- R3 (for the report): every printed figure was re-read from enlarged crops and matches (tiles 12.157 / 2.794 / 3.433 / 2.083 MW; quarters 3.200 / 4.100 / 5.200 / 2.920 MW; Total anual 15.420 MW; axis 1.000 to 7.000 MW; KPIs 128, 46, 72; treemap 68% and 16%). The quarters sum to the printed annual total exactly; the four technology tiles sum to 20.467 MW, which is not the annual total: the pages show both as printed and say so.
