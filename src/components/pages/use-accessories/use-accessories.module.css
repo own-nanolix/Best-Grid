@@ -1,0 +1,51 @@
+/* Accessories: page-only styles. Colour and motion come from the shared tokens. */
+.head {
+  padding: 56px 0 32px;
+  display: grid;
+  gap: 16px;
+  max-width: 62ch;
+}
+.enter {
+  animation: use-accessories-rise var(--dur-l) var(--ease-out) both;
+  animation-delay: calc(var(--i, 0) * 90ms + 100ms);
+}
+@keyframes use-accessories-rise {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: none; }
+}
+
+/* A 4-column grid of plates: the large ones span 2 x 2, the small ones fill around them. */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-auto-flow: dense;
+  gap: 16px;
+  padding-bottom: 72px;
+}
+.cell { display: flex; flex-direction: column; min-width: 0; margin: 0; }
+.large { grid-column: span 2; grid-row: span 2; }
+.right { grid-column: 3 / span 2; }
+.cell > div:first-child { flex: 1; display: flex; align-items: center; }
+.cap { color: var(--muted); }
+
+.note {
+  grid-row: span 2;
+  border: var(--hair) solid var(--rule);
+  padding: 20px;
+  display: grid;
+  align-content: start;
+  gap: 12px;
+  background: var(--paper);
+}
+
+@media (max-width: 1000px) {
+  .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .large { grid-row: span 1; }
+  .right { grid-column: span 2; }
+  .note { grid-row: span 1; }
+}
+@media (max-width: 600px) {
+  .grid { grid-template-columns: minmax(0, 1fr); }
+  .large, .right, .note { grid-column: auto; }
+  .head { padding-top: 32px; }
+}
