@@ -39,26 +39,15 @@
 .rowBody { font-size: clamp(15px, 1.2vw, 18px); line-height: 1.4; max-width: 34em; }
 .note { font-size: 12px; max-width: 30em; }
 
-/* ---------- Charge demo (an illustration; cells fill as the control moves) ---------- */
-.demo { background: var(--dark-blue); color: var(--light-blue); --line: var(--rule-blue); border-block: var(--hair) solid var(--line); }
-.demoGrid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 0; }
-.demoText { padding: clamp(28px, 5vw, 80px) var(--pad); display: grid; gap: 22px; align-content: center; border-right: var(--hair) solid var(--line); min-width: 0; }
-.demoArt { padding: clamp(14px, 3vw, 48px); min-width: 0; display: grid; align-items: center; }
-.demoArt svg { width: 100%; height: auto; display: block; }
-.control { display: grid; gap: 10px; }
-.control label { font-size: 13px; color: var(--active-blue); }
+/* ---------- Bank demo (an illustration): head, the wide drawing, a ruled control strip ---------- */
 .range { -webkit-appearance: none; appearance: none; width: 100%; height: 36px; background: transparent; cursor: pointer; margin: 0; }
-.range::-webkit-slider-runnable-track { height: var(--hair); background: var(--active-blue); }
-.range::-moz-range-track { height: var(--hair); background: var(--active-blue); }
-.range::-webkit-slider-thumb { -webkit-appearance: none; width: 20px; height: 20px; margin-top: -10px; background: var(--active-blue); border: 0; border-radius: 0; transition: transform var(--dur-xs) var(--ease-out); }
-.range::-moz-range-thumb { width: 20px; height: 20px; background: var(--active-blue); border: 0; border-radius: 0; }
+.range::-webkit-slider-runnable-track { height: var(--hair); background: var(--dark-blue); }
+.range::-moz-range-track { height: var(--hair); background: var(--dark-blue); }
+.range::-webkit-slider-thumb { -webkit-appearance: none; width: 20px; height: 20px; margin-top: -10px; background: var(--dark-blue); border: 0; border-radius: 0; transition: transform var(--dur-xs) var(--ease-out); }
+.range::-moz-range-thumb { width: 20px; height: 20px; background: var(--dark-blue); border: 0; border-radius: 0; }
 .range:hover::-webkit-slider-thumb { transform: scale(1.15); }
 .range:active::-webkit-slider-thumb { transform: scale(0.95); }
-.range:focus-visible { outline: 2px solid var(--active-blue); outline-offset: 4px; }
-.readout { display: flex; justify-content: space-between; gap: 12px; font-size: 13px; color: var(--muted-on-dark); font-variant-numeric: tabular-nums; }
-.readout strong { color: var(--light-blue); font-weight: 400; }
-.steps { display: flex; flex-wrap: wrap; gap: 8px; }
-
+.range:focus-visible { outline: 2px solid var(--dark-blue); outline-offset: 4px; }
 /* ---------- The 3.433 MW tile ---------- */
 .tile { --line: var(--rule); padding: clamp(40px, 6vw, 96px) 0 0; }
 .tileCells { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 5fr) minmax(0, 3fr); border-top: var(--hair) solid var(--line); border-bottom: var(--hair) solid var(--line); position: relative; }
@@ -66,8 +55,9 @@
 .tileCells > *:last-child { border-right: 0; }
 .tileIcon { padding: clamp(10px, 2vw, 32px); display: grid; place-items: center; }
 .tileIcon svg { width: 100%; height: auto; max-height: 360px; }
-.tileFig { background: var(--stat-cell); padding: clamp(24px, 3.4vw, 56px); display: grid; gap: 14px; align-content: center; }
-.tileLabel { display: flex; align-items: center; gap: 12px; font-size: 15px; }
+.tileFig { padding: clamp(24px, 3.4vw, 56px); display: grid; gap: 14px; align-content: center; }
+.tileLabel { display: flex; align-items: center; gap: 12px; font-size: 15px; color: var(--blue-ink); }
+.tileValue { color: var(--active-blue); }
 .tileLine { padding: clamp(18px, 2.4vw, 36px); display: grid; align-content: end; gap: 12px; }
 .tileCells > *::before { content: ""; position: absolute; left: 0; top: 0; width: var(--node); height: var(--node); background: var(--line); transform: translate(-50%, -50%); }
 .tileCells > *:first-child::before { display: none; }
@@ -95,8 +85,8 @@
 
 @media (max-width: 900px) {
   .heroBand { grid-template-columns: minmax(0, 1fr); }
-  .demoGrid, .closingGrid, .stripHead { grid-template-columns: minmax(0, 1fr); }
-  .demoText, .closingMain { border-right: 0; border-bottom: var(--hair) solid var(--line); }
+  .closingGrid, .stripHead { grid-template-columns: minmax(0, 1fr); }
+  .closingMain { border-right: 0; border-bottom: var(--hair) solid var(--line); }
   .tileCells { grid-template-columns: minmax(0, 1fr); }
   .tileCells > * { border-right: 0; border-bottom: var(--hair) solid var(--line); }
   .tileCells > *:last-child { border-bottom: 0; }
@@ -112,12 +102,25 @@
   .heroLine { animation: none; }
 }
 
-/* ---------- The wide row of banks ---------- */
-.bankRow { --line: var(--rule); padding: clamp(56px, 8vw, 120px) 0 0; }
-.bankHead { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: var(--gap); align-items: end; padding-bottom: clamp(20px, 3vw, 40px); }
-.bankArt { border-block: var(--hair) solid var(--line); background: var(--periwinkle); }
+/* ---------- The bank demo ---------- */
+.bankRow { --line: var(--rule); border-block: var(--hair) solid var(--line); }
+.bankHead { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 5fr) minmax(0, 2fr); gap: var(--gap); align-items: end; padding: clamp(40px, 6vw, 96px) var(--pad) clamp(20px, 3vw, 40px); }
+.bankHeadText { display: grid; gap: 14px; }
+.bankArt { border-block: var(--hair) solid var(--line); }
 .bankArt svg { width: 100%; height: auto; display: block; }
-@media (max-width: 900px) { .bankHead { grid-template-columns: minmax(0, 1fr); } }
+.bankControls { display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 5fr) minmax(0, 4fr); }
+.bankCell { position: relative; min-width: 0; padding: clamp(16px, 2.2vw, 32px) var(--pad); border-right: var(--hair) solid var(--line); display: grid; gap: 8px; align-content: center; }
+.bankCell:last-child { border-right: 0; }
+.bankCell + .bankCell::before { content: ""; position: absolute; left: 0; top: 0; width: var(--node); height: var(--node); background: var(--line); transform: translate(-50%, -50%); }
+.bankNum { font-family: var(--font-display); font-size: clamp(40px, 4.4vw, 68px); line-height: 1; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+.bankBtns { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.bankBtns :global(.btn:disabled) { opacity: 0.45; cursor: not-allowed; }
+@media (max-width: 900px) {
+  .bankHead, .bankControls { grid-template-columns: minmax(0, 1fr); }
+  .bankCell { border-right: 0; border-bottom: var(--hair) solid var(--line); }
+  .bankCell:last-child { border-bottom: 0; }
+  .bankCell + .bankCell::before { display: none; }
+}
 
 /* ---------- The poster footer (m11): three ruled cells ---------- */
 .posterFoot { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-top: var(--hair) solid var(--line); font-size: 12px; color: var(--muted-on-dark); }
@@ -137,16 +140,10 @@
 .sibLink:hover svg:last-child { transform: translateX(6px); }
 @media (max-width: 900px) { .sibCells { grid-template-columns: minmax(0, 1fr); } }
 
-/* ---------- Demo legend ---------- */
-.legend { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px 24px; font-size: 13px; color: var(--muted-on-dark); }
-.legend li { display: inline-flex; align-items: center; gap: 10px; }
-.swatchOn, .swatchOff { display: inline-block; width: 14px; height: 14px; }
-.swatchOn { background: var(--active-blue); }
-.swatchOff { box-shadow: inset 0 0 0 var(--hair) var(--active-blue); }
 .stripCell:focus-within { outline: 2px solid var(--dark-blue); outline-offset: -2px; }
 .sibLink:focus-visible { outline: 2px solid var(--dark-blue); outline-offset: -4px; }
 
 /* Section order of the page, for reference:
    nav, hero (headline band over three tall cells), row A (two text rows, tall artwork), row B (flipped),
-   charge demo (Dark Blue), bank row (wide artwork), tile (3.433 MW), strip of four, other technologies,
+   bank demo (periwinkle: head, wide drawing, ruled control strip), tile (3.433 MW), strip of four, other technologies,
    closing band with the poster footer, footer. Artwork is exportable SVG; the demo is labelled an illustration. */

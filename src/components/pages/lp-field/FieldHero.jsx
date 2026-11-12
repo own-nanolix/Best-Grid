@@ -44,9 +44,7 @@ export default function FieldHero() {
           <div className={s.foot}>
             <p className={`${s.body} ${s.rise}`} style={{ '--i': 3 }} lang="es">
               {LINES.fieldBody.rows.map((r) => (
-                <span key={r} style={{ display: 'block' }}>
-                  {r}
-                </span>
+                <span key={r}>{r} </span>
               ))}
             </p>
             <div className={s.meta} lang="es">

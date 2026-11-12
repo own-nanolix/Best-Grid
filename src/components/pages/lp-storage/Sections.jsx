@@ -6,7 +6,7 @@ import Button from '@/components/ui/Button';
 import SplitRow from '@/components/ui/SplitRow';
 import { Rows } from '@/components/ui/Card';
 import { LINES, TECH, TUBE, WEB_HERO, BUTTONS, CONTACT } from '@/lib/brand';
-import { HeroCellArt, ModuleGridArt, ConnectionArt, TileIconArt, BankRowArt } from './StorageArt';
+import { HeroCellArt, ModuleGridArt, ConnectionArt, TileIconArt } from './StorageArt';
 import s from './lp-storage.module.css';
 
 const STORAGE = TECH.find((t) => t.key === 'storage');
@@ -132,12 +132,12 @@ export function Tile() {
         <div className={s.tileIcon}>
           <TileIconArt />
         </div>
-        <div className={`${s.tileFig} cell-fill`}>
+        <div className={s.tileFig}>
           <p className={s.tileLabel} lang="es">
             <PixelIcon name={STORAGE.icon} size={32} />
             {STORAGE.label}
           </p>
-          <CountUp value={STORAGE.value} lang="es" className="t-num t-num-l" />
+          <CountUp value={STORAGE.value} lang="es" className={`t-num t-num-l ${s.tileValue}`} />
         </div>
         <div className={s.tileLine}>
           <p className="t-small muted" lang="es">{LINES.clarity.rows.join(' ')}</p>
@@ -210,27 +210,6 @@ export function Closing() {
         </div>
       </div>
       <PosterFooter />
-    </section>
-  );
-}
-
-// ---------- 7. A wide row of banks on one busbar ----------
-export function BankRow() {
-  return (
-    <section className={`${s.bankRow} field-light`} aria-labelledby="lp-storage-banks-h">
-      <div className="wrap">
-        <div className={s.bankHead}>
-          <Reveal>
-            <h2 id="lp-storage-banks-h" className="t-h2">Many modules, one connection.</h2>
-          </Reveal>
-          <Reveal delay={80}>
-            <p className="t-body muted" lang="es" style={{ maxWidth: '28em' }}>{LINES.card}</p>
-          </Reveal>
-        </div>
-      </div>
-      <Reveal className={s.bankArt} from="none">
-        <BankRowArt />
-      </Reveal>
     </section>
   );
 }

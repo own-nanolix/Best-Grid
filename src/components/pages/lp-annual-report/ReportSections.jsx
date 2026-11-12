@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import Icon from '@/components/site/Icon';
 import Reveal from '@/components/site/Reveal';
 import CountUp from '@/components/site/CountUp';
 import SplitRow from '@/components/ui/SplitRow';
@@ -56,23 +55,23 @@ export function FiguresSection() {
         <Reveal>
           <div className={s.figHead}>
             <h2 id="lp-annual-report-figures" className={s.title}>Figures</h2>
-            <div className={s.chipRow} role="group" aria-label="Year">
-              {CAPACITY.years.map((y) => (
-                <Chip key={y} tone={y === CAPACITY.year ? 'active' : undefined} aria-current={y === CAPACITY.year ? 'true' : undefined}>{y}</Chip>
-              ))}
-            </div>
           </div>
         </Reveal>
         <div className={s.figGrid}>
           <Reveal>
             <SpecTable
-              caption="Managed capacity by technology"
+              caption="Technology tiles, as printed on the website"
               rows={TECH.map((t) => ({ key: t.key, head: <span lang="es">{t.label}</span>, num: unit(t.value) }))}
             />
           </Reveal>
           <Reveal delay={80}>
+            <div className={s.chipRow} role="group" aria-label="Year on the dashboard">
+              {CAPACITY.years.map((y) => (
+                <Chip key={y} tone={y === CAPACITY.year ? 'active' : undefined} aria-current={y === CAPACITY.year ? 'true' : undefined}>{y}</Chip>
+              ))}
+            </div>
             <SpecTable
-              caption="Total and activity"
+              caption="The dashboard, 2025"
               rows={[
                 { key: 'total', head: <span lang="es">{CAPACITY.totalLabel}</span>, num: unit(CAPACITY.totalValue) },
                 ...kpi.map((k) => ({ key: k.label, head: <span lang="es">{k.label}</span>, num: <span lang="es">{k.value}</span> })),
@@ -81,7 +80,7 @@ export function FiguresSection() {
             />
           </Reveal>
         </div>
-        <p className={s.empty}>Figures are shown for 2025 only. 2023 and 2024 have none to show.</p>
+        <p className={s.empty}>The dashboard prints figures for 2025 only; 2023 and 2024 have none to show. The website tiles carry no year.</p>
       </div>
     </section>
   );
@@ -220,38 +219,6 @@ export function PrintedFacts() {
           </dl>
         </Reveal>
         <p className={`${s.note} muted`}>The second year is cut by the edge of the cover and is shown only as far as it can be read.</p>
-      </div>
-    </section>
-  );
-}
-
-const CONTENTS = [
-  { n: '01', name: 'Cover', note: 'Title, line, signature, years', icon: 'document' },
-  { n: '02', name: 'Spine', note: 'Mark, IDAA, range, BGS', icon: 'layers' },
-  { n: '03', name: 'Figures', note: 'Technology, total, activity', icon: 'chart' },
-  { n: '04', name: 'Capacity', note: 'Quarters and the 2025 treemap', icon: 'grid' },
-];
-
-// The walk through the report as a ruled strip of four cells.
-export function ContentsStrip() {
-  return (
-    <section className="field-light band" aria-labelledby="lp-annual-report-contents">
-      <div className="wrap stack-lg">
-        <Reveal>
-          <h2 id="lp-annual-report-contents" className={s.title}>In the report</h2>
-        </Reveal>
-        <Cells cols={4}>
-          {CONTENTS.map((c, i) => (
-            <Reveal key={c.n} delay={i * 60} className={s.hoverLift}>
-              <div className={s.formHead}>
-                <span className="t-label">{c.n}</span>
-                <Icon name={c.icon} size={26} />
-              </div>
-              <p className={s.big} style={{ fontSize: 'clamp(26px, 2.4vw, 36px)', marginTop: 28 }}>{c.name}</p>
-              <p className="t-small muted">{c.note}</p>
-            </Reveal>
-          ))}
-        </Cells>
       </div>
     </section>
   );

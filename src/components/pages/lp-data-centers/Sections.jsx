@@ -6,6 +6,8 @@ import Button from '@/components/ui/Button';
 import SplitRow from '@/components/ui/SplitRow';
 import { Rows, TwoTone } from '@/components/ui/Card';
 import { SpecTable } from '@/components/ui/Spec';
+import Art from '@/components/art/Art';
+import { WordmarkFitG } from '@/components/art/Mark';
 import { LINES, TECH, BUTTONS, CONTACT } from '@/lib/brand';
 import { RackFieldArt, RackRowArt, HallPlanArt, RouteArt, StackArt, AisleArt, CrossingArt } from './DcArt';
 import s from './lp-data-centers.module.css';
@@ -22,8 +24,13 @@ export function Hero() {
   return (
     <header className={s.hero}>
       <div className={s.heroText}>
+        <div className={`${s.heroMark} slide-up`} style={{ '--i': 0 }}>
+          <Art viewBox="0 0 400 100" title="Best Grid word-mark" exportName="lp-data-centers-wordmark">
+            <WordmarkFitG x={0} y={80} w={400} fill="currentColor" />
+          </Art>
+        </div>
         <div className={s.heroCopy}>
-          <h1 tabIndex={-1} className="slide-up" lang="es" style={{ '--i': 0 }}>
+          <h1 tabIndex={-1} className="slide-up" lang="es" style={{ '--i': 2 }}>
             <Rows rows={LINES.posterLeft.rows} as="span" />
           </h1>
           <p className={`${s.heroTag} slide-up`} lang="es" style={{ '--i': 5 }}>{LINES.posterLeftTag}</p>
@@ -33,6 +40,8 @@ export function Hero() {
           </div>
         </div>
         <div className={s.heroFoot}>
+          <span className={s.heroNodeL} aria-hidden="true" />
+          <span className={s.heroNodeR} aria-hidden="true" />
           {MARK}
           <span lang="es">{CONTACT.web}</span>
         </div>
@@ -117,7 +126,7 @@ export function StatCell() {
           <div className={s.statArt}>
             <StackArt />
           </div>
-          <CountUp value={DC.value} lang="es" className="t-num t-num-l" />
+          <CountUp value={DC.value} lang="es" className={`t-num t-num-l ${s.statValue}`} />
         </div>
         <div className={s.statSide}>
           {others.map((t) => (
@@ -254,7 +263,7 @@ export function Drawings() {
         </Reveal>
         <Reveal delay={80}>
           <SpecTable
-            caption="Every drawing is an exportable SVG; none carries a capacity, a place or a name"
+            caption="Seven drawings, in the order they appear"
             columns={['No.', 'Drawing', 'Shows', 'Where']}
             rows={DRAWINGS.map(([name, shows, where], i) => ({ key: name, head: name, num: `0${i + 1}`, cells: [shows, where] }))}
             numFirst

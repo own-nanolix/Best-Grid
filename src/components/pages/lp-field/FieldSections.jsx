@@ -7,7 +7,7 @@ import SplitRow from '@/components/ui/SplitRow';
 import { Rows, TwoTone } from '@/components/ui/Card';
 import { Cells } from '@/components/ui/Spec';
 import { LINES, TUBE, CAPACITY, BUTTONS, NAV, PEOPLE } from '@/lib/brand';
-import { TubeArt, VehicleArt, BillboardArt, BadgeArt, NodesArt } from './FieldArt';
+import { TubeArt, VehicleArt, BillboardArt, BadgeArt, NodesArt, LabelFlatArt } from './FieldArt';
 import s from './lp-field.module.css';
 
 function Eyebrow({ n, children }) {
@@ -45,7 +45,7 @@ export function WordRows() {
             ))}
           </ul>
         </Reveal>
-        <p className={`${s.note} muted`}>The tube carries the rolled connection study. Active Blue rigid card, grey label.</p>
+        <p className={`${s.note} muted`}>The tube carries the rolled connection study: Active Blue rigid card, the mark on the lid, a grey label.</p>
       </SplitRow>
 
       <SplitRow as="section" aria-labelledby="lp-field-criterio" ratio={[5, 7]} flip ruled tone="periwinkle" className={s.rowSec}
@@ -59,7 +59,7 @@ export function WordRows() {
         <Reveal delay={120}>
           <Rows rows={LINES.clarityBody.rows} as="p" lang="es" className={s.lede} />
         </Reveal>
-        <p className={`${s.note} muted`}>A neutral body, drawn without any maker details. The mark sits on the rear quarter, the word-mark on the door.</p>
+        <p className={`${s.note} muted`}>White body, Dark Blue roof: the mark on the rear quarter, the word-mark on the rear door.</p>
       </SplitRow>
 
       <SplitRow as="section" aria-labelledby="lp-field-validacion" ratio={[5, 7]} ruled tone="dark" className={s.rowSec}
@@ -117,30 +117,30 @@ export function FieldBand() {
   );
 }
 
-// The three services of the tube label as ruled cells.
-export function ServiceCells() {
-  const icons = ['plug', 'study', 'node'];
+// The tube label laid flat, large: every printed line as on the tube, in a wide plate under a ruled head.
+export function LabelRow() {
   return (
-    <section className="field-light band" aria-labelledby="lp-field-servicios">
-      <div className="wrap stack-lg">
+    <section className={`field-dark ${s.labelSec}`} aria-labelledby="lp-field-label-h">
+      <div className={s.labelHead}>
         <Reveal>
-          <h2 id="lp-field-servicios" className="t-h1" lang="es">{NAV[0]}</h2>
+          <Eyebrow n="05">Project label</Eyebrow>
         </Reveal>
-        <Cells cols={3}>
-          {TUBE.services.map((t, i) => (
-            <Reveal key={t} delay={i * 80} className={s.hoverLift}>
-              <div className={s.cellHead}>
-                <span className="t-label">{`0${i + 1}`}</span>
-                <Icon name={icons[i]} size={28} />
-              </div>
-              <p className={s.cellText} lang="es">{t}</p>
-            </Reveal>
-          ))}
-        </Cells>
-        <Reveal>
-          <p className="t-small muted" lang="es">{TUBE.project} · {TUBE.date}</p>
+        <Reveal delay={60}>
+          <h2 id="lp-field-label-h" className={s.labelTitle} lang="es">{TUBE.project}</h2>
+        </Reveal>
+        <Reveal delay={120}>
+          <p className={s.labelMeta} lang="es">
+            <span>{TUBE.date}</span>
+            <span>{TUBE.web}</span>
+          </p>
+        </Reveal>
+        <Reveal delay={160}>
+          <p className={`${s.note} ${s.noteDark}`}>Set vertically on the tube; turned here a quarter so it reads across.</p>
         </Reveal>
       </div>
+      <Reveal className={s.labelArt} from="none">
+        <LabelFlatArt />
+      </Reveal>
     </section>
   );
 }
@@ -152,7 +152,7 @@ export function NodesRow() {
     <SplitRow as="section" aria-labelledby="lp-field-nodes-h" ratio={[5, 7]} flip ruled tone="paper" className={s.rowSec}
       art={<NodesArt />} artClass="">
       <Reveal>
-        <Eyebrow n="05">Node grid</Eyebrow>
+        <Eyebrow n="06">Node grid</Eyebrow>
       </Reveal>
       <Reveal delay={60}>
         <h2 id="lp-field-nodes-h" className="t-h1" lang="es">
@@ -167,7 +167,7 @@ export function NodesRow() {
           <span className="t-body" lang="es">{kpi.label}</span>
         </div>
       </Reveal>
-      <p className={`${s.note} muted`}>Cells are drawing only: they carry no figures. The count is the one printed in the case study.</p>
+      <p className={`${s.note} muted`}>The cells are a drawing and carry no values; the count beside them is the one printed on the dashboard.</p>
     </SplitRow>
   );
 }

@@ -11,7 +11,7 @@ import { scale, r2 } from '@/lib/charts';
 // The SVG's own edge is the cut.
 export function CoverArt() {
   const W = 1200, H = 1060;
-  const F = 262;
+  const F = 255; // "de activida" ends at the cover's edge, where the image cuts it
   const t = { fontFamily: 'var(--font-display)', letterSpacing: '-0.025em' };
   return (
     <Art viewBox={`0 0 ${W} ${H}`} title="Annual report cover, Active Blue: the title and the year run off the edge" exportName="lp-annual-report-cover">
@@ -29,8 +29,8 @@ export function CoverArt() {
           <text x="84" y="956">{REPORT.signature}</text>
         </g>
         <g className="display fade-in" fontSize="150" style={{ '--i': 18, ...t }}>
-          <text x="740" y="940">{REPORT.years[0]}</text>
-          <text x="960" y="1060">202</text>
+          <text x="860" y="940">{REPORT.years[0]}</text>
+          <text x="947" y="1060">202</text>
         </g>
       </g>
     </Art>
@@ -45,7 +45,7 @@ function Book({ ox, oy, W, Hh, T, cover, spine, ink, mark, idp, k }) {
   const pts = (list) => list.map((p) => p.join(',')).join(' ');
   const o = P(0, 0), a = P(W, 0), b = P(W, Hh), c = P(0, Hh);
   const dn = (p) => [p[0], p[1] + T];
-  const F = 58;
+  const F = 68;
   return (
     <g>
       <polygon points={pts([o, c, dn(c), dn(o)])} fill={spine} />
@@ -58,9 +58,9 @@ function Book({ ox, oy, W, Hh, T, cover, spine, ink, mark, idp, k }) {
       </clipPath>
       <g transform={`matrix(0.866 -0.5 0.866 0.5 ${ox} ${oy})`} clipPath={`url(#${idp}-clip-${k})`} fill={ink} lang="es">
         <g className="display" fontSize={F} style={{ fontFamily: 'var(--font-display)', letterSpacing: '-0.025em' }}>
-          <text x="22" y="72">Informe</text>
-          <text x="22" y="130">de activida</text>
-          <text x="22" y="188">anual</text>
+          <text x="22" y="76">Informe</text>
+          <text x="22" y="142">de activida</text>
+          <text x="22" y="208">anual</text>
         </g>
         <g fontSize="10.5">
           {REPORT.lineRows.map((r, i) => (
@@ -69,8 +69,8 @@ function Book({ ox, oy, W, Hh, T, cover, spine, ink, mark, idp, k }) {
           <text x="22" y="340">{REPORT.signature}</text>
         </g>
         <g className="display" fontSize="50" style={{ fontFamily: 'var(--font-display)' }}>
-          <text x="170" y="400">{REPORT.years[0]}</text>
-          <text x="262" y="452">202</text>
+          <text x="206" y="400">{REPORT.years[0]}</text>
+          <text x="235" y="452">202</text>
         </g>
       </g>
       {/* the spine: the mark at the head, IDAA, [24 – 25], BGS */}
@@ -225,7 +225,7 @@ export function ColorwaysArt() {
           </clipPath>
           <rect width={cw} height={ch} fill={w.fill} />
           <g clipPath={`url(#lp-annual-report-colourways-clip-${i})`} fill={w.ink} lang="es">
-            <g className="display" fontSize="96" style={{ fontFamily: 'var(--font-display)', letterSpacing: '-0.025em' }}>
+            <g className="display" fontSize="91" style={{ fontFamily: 'var(--font-display)', letterSpacing: '-0.025em' }}>
               <text x="34" y="120">Informe</text>
               <text x="34" y="214">de activida</text>
               <text x="34" y="308">anual</text>
@@ -237,8 +237,8 @@ export function ColorwaysArt() {
               <text x="36" y="462">{REPORT.signature}</text>
             </g>
             <g className="display" fontSize="76" style={{ fontFamily: 'var(--font-display)' }}>
-              <text x="216" y="512">{REPORT.years[0]}</text>
-              <text x="346" y="584">202</text>
+              <text x="258" y="512">{REPORT.years[0]}</text>
+              <text x="306" y="584">202</text>
             </g>
           </g>
         </g>
@@ -247,30 +247,35 @@ export function ColorwaysArt() {
   );
 }
 
-// The treemap of the dashboard (m17): the 2025 field in Dark Blue, "Desarrollo durante el año" 68% in Active Blue,
-// "Capacidad consolidada" 16% in a lighter Active Blue; the Dark Blue remainder carries no label and no figure.
+// The treemap of the dashboard (m17), re-measured from m17_2: a square Dark Blue field headed "2025" /
+// "Capacidad gestionada"; "Desarrollo durante el año" 68% in Active Blue at the bottom left (66% of the width, the
+// lower 67% of the height); "Capacidad consolidada" 16% in a lighter Active Blue at the bottom right (34% x 33%).
+// The Dark Blue remainder carries no label and no figure. Large numerals keep the printed light type; the small
+// labels on the blue blocks are Dark Blue for contrast (rule 9).
 export function TreemapArt() {
-  const W = 800, H = 540;
+  const S = 680;
   const [dev, cons] = CAPACITY.treemap.parts;
-  const x0 = 24, y0 = 130, hh = H - y0 - 24, tw = W - 48;
-  const wDev = r2(tw * dev.pct / 100), wCons = r2(tw * cons.pct / 100);
+  const wDev = r2(S * 0.662), hDev = r2(S * 0.672), hCons = r2(S * 0.333);
+  const blocks = [
+    { p: dev, x: 0, y: S - hDev, w: wDev, h: hDev, fill: HEX.activeBlue, num: 150, sup: 56 },
+    { p: cons, x: wDev, y: S - hCons, w: S - wDev, h: hCons, fill: '#7c9cff', num: 70, sup: 28 },
+  ];
   return (
-    <Art viewBox={`0 0 ${W} ${H}`} title="Treemap, 2025 capacity managed: 68% and 16%, the remainder unlabelled" exportName="lp-annual-report-treemap">
-      <rect width={W} height={H} fill={HEX.darkBlue} />
-      <g lang="es" fill={HEX.onBlue}>
-        <text x={x0} y="60" fontSize="28" className="display">{CAPACITY.treemap.year}</text>
-        <text x={x0} y="96" fontSize="18" fill={HEX.mutedOnDark}>{CAPACITY.treemap.title}</text>
+    <Art viewBox={`0 0 ${S} ${S}`} title="Treemap, 2025 capacity managed: 68% and 16%, the remainder unlabelled" exportName="lp-annual-report-treemap">
+      <rect width={S} height={S} fill={HEX.darkBlue} />
+      <g lang="es" fill={HEX.onBlue} fontSize="15">
+        <text x="16" y="30">{CAPACITY.treemap.year}</text>
+        <text x="16" y="49">{CAPACITY.treemap.title}</text>
       </g>
-      {[[dev, x0, wDev, HEX.activeBlue, 0], [cons, x0 + wDev, wCons, '#7c9cff', 1]].map(([p, x, w, fill, i]) => (
+      {blocks.map(({ p, x, y, w, h, fill, num, sup }, i) => (
         <g key={p.key} lang="es" className="fill-in" style={{ '--i': i * 4 }}>
-          <rect x={x} y={y0} width={w} height={hh} fill={fill} />
-          <rect x={x} y={y0} width={w} height="1" fill={HEX.darkBlue} />
+          <rect x={x} y={y} width={w} height={h} fill={fill} />
           {p.labelRows.map((t, k) => (
-            <text key={t} x={x + 16} y={y0 + 30 + k * 22} fontSize={i ? 15 : 20} fill={HEX.darkBlue}>{t}</text>
+            <text key={t} x={x + 16} y={y + 28 + k * 17} fontSize="14" fill={HEX.darkBlue}>{t}</text>
           ))}
-          <text x={x + w - 14} y={y0 + hh - 16} textAnchor="end" fontSize={i ? 54 : 150} fill={HEX.darkBlue} className="display">
+          <text x={r2(x + w - 16)} y={r2(y + h - 22)} textAnchor="end" fontSize={num} fill={HEX.onBlue} className="display">
             {p.pct}
-            <tspan fontSize={i ? 24 : 56} dy={i ? -24 : -72}>%</tspan>
+            <tspan fontSize={sup} dy={-(num * 0.42)}>%</tspan>
           </text>
         </g>
       ))}

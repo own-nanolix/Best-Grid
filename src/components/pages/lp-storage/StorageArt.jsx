@@ -118,42 +118,24 @@ export function TileIconArt() {
   );
 }
 
-// Demo: 8 x 4 module cells; the first `lit` fill from the bottom row, left to right. Newly lit cells remount and
-// play the shared fade-in keyframe, so a cell always lands on its filled state.
-export function ChargeArt({ lit }) {
-  const cols = 8, rows = 4, size = 62, gap = 6, x0 = 44, y0 = 40;
-  const cells = range(cols * rows).map((n) => {
-    const r = rows - 1 - Math.floor(n / cols);
-    const c = n % cols;
-    return { n, x: x0 + c * (size + gap), y: y0 + r * (size + gap) };
-  });
-  return (
-    <Art viewBox="0 0 600 340" title={`Module cells lit: ${lit} of 32 (illustration, no capacity)`} exportName="lp-storage-charge-grid">
-      <GuidesG w={600} h={340} xs={[20, 580]} ys={[20, 320]} stroke={BLUE} weight={1} node={6} />
-      {cells.map(({ n, x, y }) => (
-        <g key={`${n}-${n < lit ? 'on' : 'off'}`}>
-          <rect x={x} y={y} width={size} height={size} fill={n < lit ? BLUE : 'none'} stroke={BLUE} strokeOpacity={n < lit ? 0 : 0.45} strokeWidth="1" className={n < lit ? 'fade-in' : undefined} />
-        </g>
-      ))}
-    </Art>
-  );
-}
-
-// A row of banks on one busbar running to a single node and a pylon: many modules, one connection. Illustration only.
-const BANK_LIT = [3, 5, 8, 2, 6, 8, 4, 7];
-export function BankRowArt() {
+/// The demo's drawing: eight banks of eight module cells on one busbar running to a single node and a pylon. `lit`
+// cells (0 to 64) fill bank by bank, from the bottom of each bank. Illustration only: no capacities are drawn.
+export const BANKS = 8;
+export const PER_BANK = 8;
+export function BankRowArt({ lit = 0 }) {
   const w = 1600, h = 440, bw = 104, bh = 220, gap = 62, x0 = 70, top = 70;
   const busY = top + bh + 56;
-  const lastX = x0 + (BANK_LIT.length - 1) * (bw + gap) + bw / 2;
+  const lastX = x0 + (BANKS - 1) * (bw + gap) + bw / 2;
   return (
-    <Art viewBox={`0 0 ${w} ${h}`} title="A row of battery banks on one busbar, running to a single grid node (illustration)" exportName="lp-storage-bank-row">
+    <Art viewBox={`0 0 ${w} ${h}`} title={`Eight battery banks on one busbar to a single grid node: ${lit} of ${BANKS * PER_BANK} module cells lit (illustration, no capacity)`} exportName="lp-storage-bank-row">
       <GuidesG w={w} h={h} xs={[30, w - 30]} ys={[30, h - 30]} stroke={INK} weight={1} node={6} animate />
-      {BANK_LIT.map((lit, i) => {
+      {range(BANKS).map((i) => {
         const x = x0 + i * (bw + gap);
+        const n = Math.max(0, Math.min(PER_BANK, lit - i * PER_BANK));
         return (
           <g key={i}>
-            <BatteryBodyG x={x} y={top} w={bw} h={bh} u={8} rows={8} lit={lit} order={i * 2} />
-            <rect x={x + bw / 2 - 2} y={top + bh} width="4" height={busY - top - bh} fill={BLUE} className="extend-y" style={{ '--i': 10 + i }} />
+            <BatteryBodyG x={x} y={top} w={bw} h={bh} u={8} rows={PER_BANK} lit={n} order={i * 2} />
+            <rect x={x + bw / 2 - 2} y={top + bh} width="4" height={busY - top - bh} fill={n ? BLUE : INK} opacity={n ? 1 : 0.35} className="extend-y" style={{ '--i': 10 + i }} />
           </g>
         );
       })}
