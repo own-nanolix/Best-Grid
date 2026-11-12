@@ -1,0 +1,53 @@
+/* lp-annual-report: the report of the case study (m02). Hero is the cover itself on Active Blue: the title runs
+   off the right edge of the cover as printed. Sections walk through the report: figures, cover and spines, the
+   line, the quarters, the "[24 – 25]" band and the request form. */
+
+.hero { position: relative; display: flex; justify-content: flex-end; align-items: stretch; overflow: clip; min-height: min(92vh, 880px); }
+.heroAside { flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; justify-content: space-between; padding: clamp(24px, 3vw, 48px) var(--pad); position: relative; border-right: var(--hair) solid var(--dark-blue); }
+.heroAside::after { content: ""; position: absolute; right: 0; top: 0; width: var(--node); height: var(--node); background: var(--dark-blue); transform: translate(50%, -50%); animation: lp-annual-report-snap var(--dur-xs) var(--ease-out) 700ms both; }
+.heroAside::before { content: ""; position: absolute; right: -0.5px; top: 0; bottom: 0; width: var(--hair); background: var(--dark-blue); transform-origin: 50% 0; animation: lp-annual-report-extend-y var(--dur-draw) var(--ease-line) both; }
+.heroId { font-family: var(--font-display); font-size: clamp(28px, 3vw, 44px); line-height: 1; margin: 0; letter-spacing: -0.02em; }
+.heroRange { font-size: 15px; margin: 8px 0 0; }
+.heroCover { margin: 0; flex: 0 0 auto; width: min(100%, calc(min(92vh, 880px) * 1200 / 1060)); }
+.heroCover > svg { width: 100%; height: auto; }
+
+.noscroll { overflow: clip; }
+
+.eyebrow { display: flex; align-items: center; gap: 12px; font-size: 13px; }
+.eyebrow b { font-weight: 400; font-variant-numeric: tabular-nums; }
+.eyebrow i { display: inline-block; width: 36px; height: var(--hair); background: currentColor; }
+.title { font-family: var(--font-display); font-weight: 400; font-size: clamp(36px, 4.4vw, 64px); line-height: 1.04; letter-spacing: -0.022em; margin: 0; }
+.lede { max-width: 28em; font-size: clamp(17px, 1.4vw, 20px); line-height: 1.35; margin: 0; }
+.note { font-size: 13px; line-height: 1.35; margin: 0; }
+.big { font-family: var(--font-display); font-size: clamp(44px, 5vw, 80px); line-height: 0.95; letter-spacing: -0.03em; margin: 0; }
+.rowSec { position: relative; }
+
+.figGrid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(28px, 5vw, 80px); align-items: start; }
+.figHead { display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; flex-wrap: wrap; }
+.chipRow { display: flex; gap: 8px; align-items: center; }
+.empty { font-size: 13px; color: var(--muted); }
+@media (max-width: 900px) { .figGrid { grid-template-columns: minmax(0, 1fr); } .heroAside { display: none; } .hero { min-height: 0; } .heroCover { width: 100%; } }
+
+/* the "[24 – 25]" band */
+.band { position: relative; overflow: clip; padding-block: clamp(56px, 9vw, 140px); }
+.bandLine { position: absolute; left: 0; right: 0; height: var(--hair); background: var(--line); transform-origin: 0 50%; animation: lp-annual-report-extend var(--dur-draw) var(--ease-line) both; }
+.bandNum { font-family: var(--font-display); font-size: clamp(56px, 13vw, 210px); line-height: 0.9; letter-spacing: -0.04em; margin: 0; white-space: nowrap; color: var(--active-blue); }
+.bandRow { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
+.bandId { font-size: clamp(20px, 2vw, 28px); margin: 0; color: var(--light-blue); }
+
+/* the request form */
+.form { display: grid; gap: 18px; max-width: 520px; }
+.formHead { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
+.err { color: var(--red-ink); font-size: 13px; }
+.status { border: var(--hair) solid var(--dark-blue); padding: 16px 18px 16px 34px; position: relative; font-size: 15px; line-height: 1.4; background: var(--paper); animation: lp-annual-report-rise var(--dur-m) var(--ease-out) both; }
+.status::before { content: ""; position: absolute; left: 14px; top: 22px; width: var(--node); height: var(--node); background: var(--dark-blue); }
+.formSide { display: grid; gap: 14px; align-content: start; }
+.contactRow { display: flex; gap: 12px; flex-wrap: wrap; font-size: 15px; }
+
+.hoverLift { transition: transform var(--dur-s) var(--ease-out); }
+.hoverLift:hover { transform: translateY(-3px); }
+
+@keyframes lp-annual-report-extend { from { transform: scaleX(0); } to { transform: none; } }
+@keyframes lp-annual-report-extend-y { from { transform: scaleY(0); } to { transform: none; } }
+@keyframes lp-annual-report-snap { from { opacity: 0; scale: 0.3; } to { opacity: 1; scale: 1; } }
+@keyframes lp-annual-report-rise { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
