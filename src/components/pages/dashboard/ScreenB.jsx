@@ -4,11 +4,10 @@ import Icon from '@/components/site/Icon';
 import { CAPACITY } from '@/lib/brand';
 import { Board, Top } from './Chrome';
 import { NodeGridPlot, Empty } from './charts';
-import { CELLS, GRID, LEVELS } from './data';
+import { CELLS, LEVELS } from './data';
 import s from './dashboard.module.css';
 
 const LAYERS = [{ lvl: -1, icon: 'grid', label: 'All cells' }, { lvl: 2, icon: 'node', label: 'Full cells' }, { lvl: 1, icon: 'layers', label: 'Strong cells' }, { lvl: 0, icon: 'plus', label: 'Empty cells' }];
-export const count = (lvl) => CELLS.filter((c) => c.lvl === lvl).length;
 
 export default function ScreenB({ st, k }) {
   const c = CELLS[st.cell];
@@ -27,8 +26,8 @@ export default function ScreenB({ st, k }) {
           <p className={s.mapTitle} lang="es">{CAPACITY.nodesTitle}</p>
           {st.year === CAPACITY.year ? <NodeGridPlot sel={st.cell} only={st.layer} onPick={(i) => st.set({ cell: i })} /> : <Empty year={st.year} />}
           <div className={s.legend}>
-            {[2, 1, 0].map((l) => <span key={l}><i className={s[`sw${l}`]} />{LEVELS[l]} <b>{count(l)}</b></span>)}
-            <span>{GRID.cols} x {GRID.rows} cells</span>
+            {[2, 1, 0].map((l) => <span key={l}><i className={s[`sw${l}`]} />{LEVELS[l]}</span>)}
+            <span>Drawing only: no per-node figures are published.</span>
           </div>
         </section>
         <aside className={s.bSide} aria-label="Cell detail">

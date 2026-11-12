@@ -21,7 +21,7 @@ function Area({ year }) {
   const peak = Q.find((q) => q.peak);
   const pi = Q.indexOf(peak);
   return (
-    <Chart name="area-capacity" title={`Capacidad gestionada en puntos críticos de la red, ${year}`} w={640} h={440} bg={HEX.cardGrey}>
+    <Chart name="area-capacity" title={`Capacidad gestionada en puntos críticos de la red, ${year}`} w={640} h={480} bg={HEX.cardGrey}>
       <T es size={24} x="32" y="52">
         <tspan x="32">{CAPACITY.titleRows[0]}</tspan>
         <tspan x="32" dy="29">{CAPACITY.titleRows[1]}</tspan>
@@ -58,18 +58,18 @@ function Area({ year }) {
         <g key={q.q} {...bind(has ? `${q.q}: ${q.value}` : `${q.q}: no figure published`)}>
           <rect x={XS[i] - 4} y={YB - 3} width="8" height="8" fill={HEX.darkBlue} className="snap" style={{ '--i': i }} />
           <T size={12} x={XS[i]} y={YB + 26} anchor={i === 3 ? 'end' : 'middle'}>{q.q}</T>
-          {has && <T size={17} x={XS[i]} y={YB + 48} anchor={i === 3 ? 'end' : i === 0 ? 'start' : 'middle'} className="fade-in" style={{ '--i': i + 6 }}>{q.value}</T>}
+          {has && <T size={17} x={XS[i] + (i < 2 ? -4 : 4)} y={YB + 48} anchor={i < 2 ? 'start' : 'end'} className="fade-in" style={{ '--i': i + 6 }}>{q.value}</T>}
           <rect x={XS[i] - 44} y={YT} width="88" height={YB - YT + 56} fill="transparent" />
         </g>
       ))}
-      <T es size={14} x="32" y="366">{CAPACITY.totalLabel}</T>
+      <T es size={14} x="32" y="398">{CAPACITY.totalLabel}</T>
       {has ? (
         <g className="fade-in" style={{ '--i': 8 }}>
-          <T size={60} x="28" y="418" fill={HEX.activeBlue} letterSpacing="-2" className="display">{CAPACITY.totalValue}</T>
-          <path d="M322 384l9 -14l9 14z" fill={HEX.activeBlue} />
+          <T size={60} x="28" y="456" fill={HEX.activeBlue} letterSpacing="-2" className="display">{CAPACITY.totalValue}</T>
+          <path d="M322 422l9 -14l9 14z" fill={HEX.activeBlue} />
         </g>
       ) : (
-        <rect x="32" y="376" width="300" height="40" fill={HEX.darkBlue} opacity="0.1" />
+        <rect x="32" y="412" width="300" height="40" fill={HEX.darkBlue} opacity="0.1" />
       )}
     </Chart>
   );

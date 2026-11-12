@@ -52,11 +52,11 @@ function SitePages() {
   const hover = useHover();
   const starts = GROUPS.map((_, gi) => GROUPS.slice(0, gi).reduce((a, g) => a + g.n, 0));
   return (
-    <Chart name="structure-pages" title="Structure: the 30 pages by group" w={600} h={300}>
+    <Chart name="structure-pages" title="Structure: the 30 pages by group" w={1200} h={220}>
       {GROUPS.map((g, gi) => (
         <g key={g.name} {...bind(`${g.name}: ${g.n} pages`)}>
           {g.pages.map((p, pi) => {
-            const i = starts[gi] + pi, c = i % 10, r = Math.floor(i / 10);
+            const i = starts[gi] + pi, c = i % 15, r = Math.floor(i / 15);
             return (
               <rect key={p.id} x={30 + c * 54} y={30 + r * 54} width="44" height="44" fill={GROUP_FILL[gi].fill} stroke={GROUP_FILL[gi].stroke} strokeWidth="1" className="fill-in" style={{ '--i': i % 12 }} {...hover(`${p.title}: at least ${p.minExports} exports`)} />
             );
@@ -65,11 +65,11 @@ function SitePages() {
       ))}
       {GROUPS.map((g, gi) => (
         <g key={g.name}>
-          <rect x={30 + (gi % 2) * 280} y={206 + Math.floor(gi / 2) * 36} width="14" height="14" fill={GROUP_FILL[gi].fill} stroke={GROUP_FILL[gi].stroke} />
-          <T size={13} x={54 + (gi % 2) * 280} y={218 + Math.floor(gi / 2) * 36}>{g.name}, {g.n} pages</T>
+          <rect x="880" y={30 + gi * 34} width="16" height="16" fill={GROUP_FILL[gi].fill} stroke={GROUP_FILL[gi].stroke} />
+          <T size={17} x="908" y={44 + gi * 34}>{g.name}, {g.n} pages</T>
         </g>
       ))}
-      <T size={12} x="30" y="288" fill={MUTED}>30 pages, {GROUPS.length} groups, at least {MIN_EXPORTS} exportable SVGs in all</T>
+      <T size={16} x="30" y="190" fill={MUTED}>30 pages, {GROUPS.length} groups, at least {MIN_EXPORTS} exportable SVGs in all (counted from the page list)</T>
     </Chart>
   );
 }
@@ -85,7 +85,7 @@ export const MarkHolesCard = () => (
   </ChartCard>
 );
 export const SitePagesCard = () => (
-  <ChartCard id="dataviz-structure" kind="Structure" title="Pages by group" span={6} caption="Each cell is one page of this site; the tooltip gives its minimum number of exportable graphics." source="the site's page list">
+  <ChartCard id="dataviz-structure" kind="Structure" title="Pages by group" span={12} caption="Each cell is one page of this site; the tooltip gives its minimum number of exportable graphics." source="the site's page list">
     <SitePages />
   </ChartCard>
 );

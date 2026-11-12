@@ -15,7 +15,7 @@ function StatTotal() {
       <T size={22} x="192" y="104">MW</T>
       <path d="M240 66l8 -13l8 13z" fill={BLUE} className="snap" />
       <rect x="20" y="132" width="260" height="1" fill={INK} className="extend-x" />
-      <T size={12} x="20" y="156" fill={MUTED}>Sum of Q1 to Q4</T>
+      <T size={12} x="20" y="156" fill={MUTED}>Printed; equals Q1 to Q4 added</T>
     </Chart>
   );
 }
@@ -108,7 +108,7 @@ export function KpiTiles() {
 // ---- Sparklines: the printed figures again, as four tiny forms ----
 export function Sparklines() {
   const q = scale(0, AXIS_MAX, 52, 8);
-  const xs = [0, 1, 2, 3].map((i) => 124 + i * 28);
+  const xs = [0, 1, 2, 3].map((i) => 102 + i * 22);
   const cum = scale(0, TOTAL, 52, 8);
   const row = (i) => 8 + i * 62;
   const techMax = TECH_SORTED[0].mw;
@@ -123,18 +123,18 @@ export function Sparklines() {
       <g transform={`translate(0 ${row(0)})`}>
         <path d={linePath(Q.map((v, i) => [xs[i], q(v.mw)]))} fill="none" stroke={BLUE} strokeWidth="2" pathLength="1" className="draw" style={{ '--len': 1 }} />
         <Node x={xs[3]} y={q(Q[3].mw)} />
-        <T size={12} x="284" y="34" anchor="end">{Q[3].value}</T>
+        <T size={12} x="284" y="34" anchor="end">{Q[3].q} {Q[3].value}</T>
       </g>
       <g transform={`translate(0 ${row(1)})`}>
         {Q.map((v, i) => <rect key={v.q} x={xs[i] - 8} y={q(v.mw)} width="16" height={r2(52 - q(v.mw))} fill={i === 2 ? BLUE : INK} className="rise" style={{ '--i': i }} />)}
-        <T size={12} x="284" y="34" anchor="end">{Q[2].value}</T>
+        <T size={12} x="284" y="34" anchor="end">{Q[2].q} {Q[2].value}</T>
       </g>
       <g transform={`translate(0 ${row(2)})`}>
         <path d={stepPath(CUM.map((v, i) => [xs[i], cum(v)]))} fill="none" stroke={INK} strokeWidth="2" pathLength="1" className="draw" style={{ '--len': 1 }} />
         <T size={12} x="284" y="34" anchor="end">{CAPACITY.totalValue}</T>
       </g>
       <g transform={`translate(0 ${row(3)})`}>
-        {TECH_SORTED.map((t, i) => <rect key={t.key} x="124" y={6 + i * 12} width={r2((t.mw / techMax) * 80)} height="8" fill={i ? INK : BLUE} className="grow-x" style={{ '--i': i }} />)}
+        {TECH_SORTED.map((t, i) => <rect key={t.key} x="102" y={6 + i * 12} width={r2((t.mw / techMax) * 72)} height="8" fill={i ? INK : BLUE} className="grow-x" style={{ '--i': i }} />)}
         <T size={12} x="284" y="34" anchor="end">{TECH_SORTED[0].value}</T>
       </g>
     </Chart>

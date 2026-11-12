@@ -37,7 +37,7 @@ export function Frame({ w, h, hits = [], children, className = '' }) {
 
 // m17 area chart: Active Blue at about 45% in soft vertical bands, grey gridlines, nodes on the baseline, a marker.
 function areaGeom(w, h, compact) {
-  const L = compact ? 10 : 78, R = compact ? 10 : 22, T = compact ? 12 : 26, B = compact ? 22 : 40;
+  const L = compact ? 10 : 78, R = compact ? 10 : 22, T = compact ? 12 : 26, B = compact ? 26 : 50;
   const pw = w - L - R, ph = h - T - B, y = scale(0, CAPACITY.axisMax, T + ph, T);
   const xs = CAPACITY.quarters.map((_, i) => r2(L + pw * (0.08 + (0.84 * i) / 3)));
   return { L, R, T, B, pw, ph, y, xs, base: T + ph };
@@ -69,8 +69,9 @@ export function AreaChart({ idp, w = 640, h = 300, active = 2, compact, exportNa
       {CAPACITY.quarters.map((q, i) => (
         <g key={q.q}>
           <rect x={g.xs[i] - 3} y={g.base - 3} width="6" height="6" fill={HEX.darkBlue} className="snap" style={{ '--i': i }} />
-          {!compact && <text x={g.xs[i]} y={h - 12} textAnchor="middle" fontSize="12" fill={HEX.darkBlue}>{q.q}</text>}
-          {!compact && <text x={g.xs[i]} y={g.y(q.mw) - 10} textAnchor="middle" fontSize="12" fill={HEX.darkBlue} fontWeight={i === active ? 600 : 400}>{q.value}</text>}
+          {/* as on the phone: the quarter centred under its node, the printed value under it (left, left, right, right) */}
+          <text x={g.xs[i]} y={g.base + 16} textAnchor="middle" fontSize="11" fill={HEX.darkBlue}>{q.q}</text>
+          {!compact && <text x={g.xs[i] + (i < 2 ? -4 : 4)} y={g.base + 36} textAnchor={i < 2 ? 'start' : 'end'} fontSize="14" fill={HEX.darkBlue} fontWeight={i === active ? 600 : 400} lang="es">{q.value}</text>}
         </g>
       ))}
     </Svg>
@@ -86,9 +87,22 @@ export function AreaPlot({ onPick, active = 2, ...rest }) {
 }
 
 // m17 treemap: Dark Blue field, Active Blue and a lighter Active Blue block, oversized numerals bottom right.
-export function TreemapChart({ idp, w = 400, h = 300, sel, onPick, exportName }) {
+// faithful: the m17 layout as measured (the Dark Blue field fills the top 32.8% and the space beside the
+// Desarrollo block above Capacidad consolidada; Desarrollo is 66.1% wide; Capacidad consolidada starts at 66.7% of
+// the height). The phone's blocks are not drawn to area, so neither are these. Otherwise: blocks drawn to area,
+// the unlabelled remainder taking what is left after 68% and 16%.
+function faithfulBlocks(w, h) {
+  const [dev, cons, rest] = CAPACITY.treemap.parts;
+  const yd = r2(h * 0.328), xd = r2(w * 0.661), yc = r2(h * 0.667);
+  return [
+    { ...rest, x: xd, y: yd, w: w - xd, h: yc - yd },
+    { ...dev, x: 0, y: yd, w: xd, h: h - yd },
+    { ...cons, x: xd, y: yc, w: w - xd, h: h - yc },
+  ];
+}
+export function TreemapChart({ idp, w = 400, h = 300, sel, onPick, exportName, faithful }) {
   const top = 74;
-  const blocks = treemap(CAPACITY.treemap.parts.map((p) => ({ ...p, value: p.pct })), 0, top, w, h - top, 4);
+  const blocks = faithful ? faithfulBlocks(w, h) : treemap(CAPACITY.treemap.parts.map((p) => ({ ...p, value: p.pct })), 0, top, w, h - top, 4);
   const hits = blocks.map((b) => ({ id: b.key, label: b.unlabelled ? 'Unlabelled remainder' : `${b.labelRows.join(' ')} ${b.pct}%`, x: b.x, y: b.y, w: b.w, h: b.h, on: sel === b.key, onClick: () => onPick && onPick(b.key) }));
   return (
     <Frame w={w} h={h} hits={hits}>
@@ -98,15 +112,19 @@ export function TreemapChart({ idp, w = 400, h = 300, sel, onPick, exportName })
         <text x="16" y="52" fontSize="17" fill={HEX.onBlue} lang="es">{CAPACITY.treemap.title}</text>
         {blocks.map((b, i) => (
           <g key={b.key} className="fill-in" style={{ '--i': i }}>
-            {b.unlabelled ? <rect x={b.x} y={b.y} width={b.w} height={b.h} fill={HEX.darkBlue} stroke={HEX.activeBlue} strokeOpacity="0.5" />
+            {b.unlabelled ? <rect x={b.x} y={b.y} width={b.w} height={b.h} fill={HEX.darkBlue} stroke={faithful ? 'none' : HEX.activeBlue} strokeOpacity="0.5" />
               : <rect x={b.x} y={b.y} width={b.w} height={b.h} fill={HEX.activeBlue} />}
-            {b.key === 'cons' && <rect x={b.x} y={b.y} width={b.w} height={b.h} fill={HEX.white} fillOpacity="0.3" />}
+            {b.key === 'cons' && <rect x={b.x} y={b.y} width={b.w} height={b.h} fill={HEX.white} fillOpacity="0.2" />}
+            {/* small labels: Dark Blue for contrast (printed light); the oversized numerals keep the printed light grey */}
             {b.labelRows.map((t, j) => <text key={t} x={b.x + 14} y={b.y + 26 + j * 16} fontSize={b.key === 'dev' ? 15 : 12} fill={HEX.darkBlue} lang="es">{t}</text>)}
-            {!b.unlabelled && (
-              <text className="display" x={b.x + b.w - 14} y={b.y + b.h - 14} textAnchor="end" fontSize={b.key === 'dev' ? 76 : 40} letterSpacing="-2" fill={HEX.darkBlue}>
-                {b.pct}<tspan fontSize={b.key === 'dev' ? 30 : 18} dy={b.key === 'dev' ? -34 : -14}>%</tspan>
-              </text>
-            )}
+            {!b.unlabelled && (() => {
+              const big = faithful ? r2(w * (b.key === 'dev' ? 0.2 : 0.085)) : b.key === 'dev' ? 76 : 40;
+              return (
+                <text className="display" x={b.x + b.w - 14} y={b.y + b.h - big * 0.18} textAnchor="end" fontSize={big} letterSpacing="-2" fill={HEX.onBlue}>
+                  {b.pct}<tspan fontSize={r2(big * 0.42)} dy={r2(-big * 0.44)}>%</tspan>
+                </text>
+              );
+            })()}
             {sel === b.key && <rect x={b.x + 1} y={b.y + 1} width={b.w - 2} height={b.h - 2} fill="none" stroke={HEX.white} strokeWidth="2" />}
           </g>
         ))}

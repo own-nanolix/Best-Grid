@@ -3,8 +3,8 @@
 import { HEX, CAPACITY } from '@/lib/brand';
 import { r2, scale, stepPath, arcPath, es } from '@/lib/charts';
 import { MarkG } from '@/components/art/Mark';
-import { Q, DELTAS, QMEAN, AXIS_MAX, PEAK, TECH_SHARES, PARTS, signed, mwf, INK, BLUE, MUTED } from './data';
-import { ChartCard, Chart, T, Legend, useTip, useHover } from './kit';
+import { Q, DELTAS, QMEAN, AXIS_MAX, PEAK, TECH_SHARES, TECH_SUM, PARTS, signed, mwf, INK, BLUE, MUTED } from './data';
+import { ChartCard, Chart, T, Legend, useTip } from './kit';
 
 const GRID = { fill: INK, opacity: 0.14 };
 
@@ -61,27 +61,30 @@ function Columns() {
 
 // 3. Share (faithful): the m17 treemap, "2025 / Capacidad gestionada": 68%, 16% and the unlabelled remainder.
 function Treemap() {
-  const hover = useHover();
+  const bind = useTip();
   const [dev, cons] = PARTS;
-  const W = 600, H = 300, cut = [0.662, 0.33, 0.67];
-  const dx = r2(W * cut[0]);
+  // Measured on m17 (676 x 679 px, drawn square here): Desarrollo 66.1% wide below the top 32.8%; Capacidad
+  // consolidada from 66.7% of the height. The printed blocks are not drawn to area, so neither are these.
+  const W = 600, H = 600, cut = [0.661, 0.328, 0.667];
+  const dx = r2(W * cut[0]), yd = r2(H * cut[1]), yc = r2(H * cut[2]);
+  // Small labels: Dark Blue on Active Blue for contrast (printed light); the oversized numerals keep the printed light grey.
   return (
     <Chart name="share-treemap" title="Share: Capacidad gestionada 2025 as a treemap" w={W} h={H} bg={INK}>
-      <T es size={17} x="20" y="34" fill={HEX.lightBlue}>{CAPACITY.treemap.year}</T>
-      <T es size={17} x="20" y="56" fill={HEX.lightBlue}>Capacidad gestionada</T>
-      <rect x={dx} y="0" width={W - dx} height={H} fill={INK} {...hover('The Dark Blue remainder: no label and no figure published')} />
-      <g {...hover(`${dev.labelRows.join(' ')}: ${dev.pct}%`, true)}>
-        <rect x="0" y={H * cut[1]} width={dx} height={H * (1 - cut[1])} fill={BLUE} className="fill-in" style={{ '--i': 0 }} />
-        {dev.labelRows.map((t, i) => <T key={t} es size={16} x="18" y={H * cut[1] + 28 + i * 20} className="fade-in" style={{ '--i': 6 }}>{t}</T>)}
-        <T size={72} x={dx - 60} y={H - 18} anchor="end" className="display fade-in" style={{ '--i': 7 }}>{dev.pct}</T>
-        <T size={30} x={dx - 16} y={H - 60} anchor="end" className="fade-in" style={{ '--i': 7 }}>%</T>
+      <T es size={12} x="20" y="30" fill={HEX.lightBlue}>{CAPACITY.treemap.year}</T>
+      <T es size={12} x="20" y="48" fill={HEX.lightBlue}>Capacidad gestionada</T>
+      <rect x={dx} y={yd} width={W - dx} height={yc - yd} fill={INK} {...bind('The Dark Blue remainder: no label and no figure published')} />
+      <g {...bind(`${dev.labelRows.join(' ')}: ${dev.pct}%`, true)}>
+        <rect x="0" y={yd} width={dx} height={H - yd} fill={BLUE} className="fill-in" style={{ '--i': 0 }} />
+        {dev.labelRows.map((t, i) => <T key={t} es size={12} x="18" y={yd + 26 + i * 16} className="fade-in" style={{ '--i': 6 }}>{t}</T>)}
+        <T size={125} x={dx - 62} y={H - 22} anchor="end" fill={HEX.onBlue} letterSpacing="-4" className="display fade-in" style={{ '--i': 7 }}>{dev.pct}</T>
+        <T size={48} x={dx - 16} y={H - 112} anchor="end" fill={HEX.onBlue} className="fade-in" style={{ '--i': 7 }}>%</T>
       </g>
-      <g {...hover(`${cons.labelRows.join(' ')}: ${cons.pct}%`, true)}>
-        <rect x={dx} y={H * cut[2]} width={W - dx} height={H * (1 - cut[2])} fill={BLUE} className="fill-in" style={{ '--i': 2 }} />
-        <rect x={dx} y={H * cut[2]} width={W - dx} height={H * (1 - cut[2])} fill={HEX.white} fillOpacity="0.22" className="fill-in" style={{ '--i': 2 }} />
-        {cons.labelRows.map((t, i) => <T key={t} es size={12} x={dx + 16} y={H * cut[2] + 26 + i * 17} className="fade-in" style={{ '--i': 7 }}>{t}</T>)}
-        <T size={38} x={W - 36} y={H - 16} anchor="end" className="display fade-in" style={{ '--i': 8 }}>{cons.pct}</T>
-        <T size={18} x={W - 14} y={H - 36} anchor="end" className="fade-in" style={{ '--i': 8 }}>%</T>
+      <g {...bind(`${cons.labelRows.join(' ')}: ${cons.pct}%`, true)}>
+        <rect x={dx} y={yc} width={W - dx} height={H - yc} fill={BLUE} className="fill-in" style={{ '--i': 2 }} />
+        <rect x={dx} y={yc} width={W - dx} height={H - yc} fill={HEX.white} fillOpacity="0.2" className="fill-in" style={{ '--i': 2 }} />
+        {cons.labelRows.map((t, i) => <T key={t} es size={11} x={dx + 14} y={yc + 24 + i * 14} className="fade-in" style={{ '--i': 7 }}>{t}</T>)}
+        <T size={62} x={W - 36} y={H - 18} anchor="end" fill={HEX.onBlue} letterSpacing="-2" className="display fade-in" style={{ '--i': 8 }}>{cons.pct}</T>
+        <T size={26} x={W - 10} y={H - 62} anchor="end" fill={HEX.onBlue} className="fade-in" style={{ '--i': 8 }}>%</T>
       </g>
     </Chart>
   );
@@ -180,12 +183,12 @@ export const ColumnsCard = () => (
   </ChartCard>
 );
 export const TreemapCard = () => (
-  <ChartCard id="dataviz-share" kind="Share" title="Treemap" span={6} caption="The case study's own treemap: 2025 Capacidad gestionada. The Dark Blue remainder has no label and no figure in the case study, so it has none here." source="phone dashboard, treemap">
+  <ChartCard id="dataviz-share" kind="Share" title="Treemap" span="6r" caption="The case study's own treemap, laid out as printed: 2025 Capacidad gestionada. The Dark Blue remainder has no label and no figure in the case study, so it has none here." source="phone dashboard, treemap">
     <Treemap />
   </ChartCard>
 );
 export const RingCard = () => (
-  <ChartCard id="dataviz-ring" kind="Share" title="Ring of technologies" caption="Each technology as a share of the four website tiles added together; percentages are computed and rounded." source="website tiles, computed shares">
+  <ChartCard id="dataviz-ring" kind="Share" title="Ring of technologies" caption={`Each technology as a share of the four website tiles added together (${mwf(TECH_SUM)}, computed; the case study does not relate this to the 15.420 MW Total anual). Percentages are computed and rounded.`} source="website tiles, computed shares">
     <Ring />
   </ChartCard>
 );
@@ -195,7 +198,7 @@ export const StripCard = () => (
   </ChartCard>
 );
 export const BulletCard = () => (
-  <ChartCard id="dataviz-bullet" kind="Comparison" title="Bullet bars" caption="Each quarter as a share of the Q3 peak; the tick marks 5.200 MW and the track is the printed axis." source="phone dashboard, quarters">
+  <ChartCard id="dataviz-bullet" kind="Comparison" title="Bullet bars" caption="Each quarter as a share of the Q3 peak (computed, rounded); the tick marks 5.200 MW and the track is the printed axis." source="phone dashboard, quarters">
     <Bullet />
   </ChartCard>
 );

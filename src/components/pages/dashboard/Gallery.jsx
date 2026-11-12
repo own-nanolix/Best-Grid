@@ -24,8 +24,8 @@ export default function Gallery() {
         <p className="t-small muted">Compact area, as in the quarter cells.</p>
       </Reveal>
       <Reveal delay={120}>
-        <TreemapChart idp="dashboard-g-tm" exportName="dashboard-treemap" sel={part} onPick={setPart} />
-        <p className="t-small muted">Treemap, 2025.</p>
+        <TreemapChart idp="dashboard-g-tm" exportName="dashboard-treemap" w={400} h={400} faithful sel={part} onPick={setPart} />
+        <p className="t-small muted">Treemap, 2025, laid out as printed. The Dark Blue remainder has no label and no figure.</p>
       </Reveal>
       <Reveal delay={60} className={s.gWide}>
         <div className={s.gNode}><NodeGrid exportName="dashboard-node-grid" /></div>

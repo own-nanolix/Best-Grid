@@ -56,12 +56,14 @@ export default function Sheet() {
         </div>
       </Demo>
       <Demo title="Table header" states="unsorted, ascending, descending">
-        <div className={s.headRow} role="row">
-          {['Name', 'Kind', 'Value'].map((l, i) => (
-            <div key={l} role="columnheader" aria-sort={heads[i]}>
-              <button type="button" onClick={() => setHeads(heads.map((h, j) => (j === i ? cycle(h) : 'none')))}>{l}{GLYPH[heads[i]]}<Icon name="sort" size={14} /></button>
-            </div>
-          ))}
+        <div role="table" aria-label="Table header demo">
+          <div className={s.headRow} role="row">
+            {['Name', 'Kind', 'Value'].map((l, i) => (
+              <div key={l} role="columnheader" aria-sort={heads[i]}>
+                <button type="button" onClick={() => setHeads(heads.map((h, j) => (j === i ? cycle(h) : 'none')))}>{l}{GLYPH[heads[i]]}<Icon name="sort" size={14} /></button>
+              </div>
+            ))}
+          </div>
         </div>
       </Demo>
       <Demo title="Table row" states="default, hover, selected">
@@ -87,7 +89,7 @@ export default function Sheet() {
           <Icon name="search" size={20} /><span className="sr-only">Search technologies</span>
           <input id="dashboard-sheet-search" className={s.searchIn} value={q} placeholder="Search technologies" onChange={(e) => setQ(e.target.value)} />
         </label>
-        <p className="t-small" lang="es">{hits.map((t) => t.label).join(' · ')}</p>
+        {hits.length ? <p className="t-small" lang="es" aria-live="polite">{hits.map((t) => t.label).join(' · ')}</p> : <p className="t-small muted" aria-live="polite">No technology matches the search.</p>}
       </Demo>
       <Demo title="Date range" states="full year, first half, second half">
         <div className={s.rangeDemo}>

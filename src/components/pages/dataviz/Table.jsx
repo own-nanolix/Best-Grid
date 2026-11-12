@@ -32,7 +32,7 @@ export default function DataTable() {
   return (
     <div className="spec-wrap">
       <table className={`spec ${s.table}`}>
-        <caption>Six printed figures, sorted by {sort.key === 'mw' ? 'figure' : 'label'}. Click a heading to sort.</caption>
+        <caption>Six printed figures, sorted by {sort.key === 'mw' ? 'figure' : 'label'}. Click a heading to sort. Each row is shown as printed: the four technology tiles add up to {es(TECH.reduce((a, t) => a + t.mw, 0))} MW (computed), not to the <span lang="es">Total anual</span>.</caption>
         <thead>
           <tr>
             {head('label', 'Label')}

@@ -26,7 +26,7 @@ export function Overview({ st, k }) {
         <table className={s.table}>
           <thead><tr><th scope="col">Option</th><th scope="col">Lead element</th><th scope="col">Main control</th></tr></thead>
           <tbody>
-            {[['A', 'Data table', 'Command bar and sortable headers'], ['B', 'Node grid', 'Rail layers and cell picking'], ['C', 'Four area charts', 'Quarter cells'], ['D', 'Treemap', 'Legend rows'], ['E', 'Area chart and KPI cells', 'Quarter strip']].map((r) => (
+            {[['A', 'Data table', 'Command bar and sortable headers'], ['B', 'Node grid', 'Rail layers and cell picking'], ['C', 'Four area charts', 'Quarter cells'], ['D', 'Treemap', 'Legend rows'], ['E', 'Area chart, KPI cells and treemap', 'Quarter nodes on the chart']].map((r) => (
               <tr key={r[0]}><th scope="row">{r[0]}</th><td>{r[1]}</td><td>{r[2]}</td></tr>
             ))}
           </tbody>
@@ -38,7 +38,6 @@ export function Overview({ st, k }) {
 
 export function NodeScreen({ st, k }) {
   const c = CELLS[st.cell];
-  const near = CELLS.filter((o) => o.i !== c.i && Math.abs(o.col - c.col) <= 1 && Math.abs(o.row - c.row) <= 1);
   return (
     <Board id="node" k={k} label="Inner screen: node detail">
       <Top st={st} label="Node detail" />
@@ -53,8 +52,6 @@ export function NodeScreen({ st, k }) {
             <div><dt>Row</dt><dd>{c.row + 1}</dd></div>
             <div><dt>Column</dt><dd>{c.col + 1}</dd></div>
             <div><dt>Fill</dt><dd>{LEVELS[c.lvl]}</dd></div>
-            <div><dt>Neighbours</dt><dd>{near.length}</dd></div>
-            {[2, 1, 0].map((l) => <div key={l}><dt>{LEVELS[l]} neighbours</dt><dd>{near.filter((o) => o.lvl === l).length}</dd></div>)}
           </dl>
           {[1, 2, 3, 4].map((n) => <div key={n} className={s.field}><span>Row 0{n}</span><span className="ph" style={{ width: 40 + n * 22 }} /></div>)}
         </div>

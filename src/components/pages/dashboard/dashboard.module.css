@@ -135,8 +135,8 @@
 .techTile[aria-pressed="true"] { background: var(--stat-cell); box-shadow: inset 0 0 0 var(--hair) var(--dark-blue); }
 
 /* E: the phone dashboard grown */
-.eBody { flex: 1; min-height: 0; padding: 28px 32px; display: grid; grid-template-columns: minmax(0, 1fr) 520px; grid-template-rows: auto auto 1fr; gap: 20px 32px; }
-.eChart { grid-row: 1 / 3; display: grid; gap: 14px; align-content: start; }
+.eBody { flex: 1; min-height: 0; padding: 28px 32px; display: grid; grid-template-columns: minmax(0, 1fr) 560px; grid-template-rows: auto auto auto 1fr; gap: 20px 32px; }
+.eChart { grid-column: 1; display: grid; gap: 14px; align-content: start; }
 .eQuarters { display: grid; grid-template-columns: repeat(4, 1fr); border-top: var(--hair) solid var(--rule); border-left: var(--hair) solid var(--rule); margin-left: 78px; }
 .eQuarters button { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; padding: 14px 16px; border: 0; border-right: var(--hair) solid var(--rule); border-bottom: var(--hair) solid var(--rule); background: transparent; font-size: 14px; transition: background-color var(--dur-s) var(--ease-out); }
 .eQuarters b { font-weight: 400; font-family: var(--font-display); font-size: 20px; }
@@ -144,15 +144,19 @@
 .eQuarters button:active { background: var(--periwinkle); }
 .eQuarters button[aria-pressed="true"] { background: var(--stat-cell); }
 .eQuarters button:disabled { opacity: 0.5; pointer-events: none; }
-.eTotal { display: grid; gap: 8px; align-content: start; }
-.totalNum { font-size: 104px; margin: 0; display: flex; align-items: flex-start; gap: 14px; color: var(--dark-blue); }
-.totalNum svg { color: var(--blue-ink); margin-top: 14px; }
-.eKpis { display: grid; grid-template-columns: repeat(3, 1fr); border-top: var(--hair) solid var(--rule); border-left: var(--hair) solid var(--rule); grid-column: 1; align-self: start; }
+.eTotal { grid-column: 1; display: grid; gap: 4px; align-content: start; }
+.totalNum { font-size: 104px; line-height: 1; margin: 0; display: flex; align-items: flex-start; gap: 14px; color: var(--active-blue); }
+.totalNum svg { color: var(--active-blue); margin-top: 6px; }
+.eKpis { display: grid; grid-template-columns: repeat(3, 1fr); border-top: var(--hair) solid var(--rule); border-left: var(--hair) solid var(--rule); grid-column: 1; align-self: start; position: relative; }
+.eKpis::before, .eKpis::after { content: ""; position: absolute; left: 0; width: var(--node); height: var(--node); background: var(--dark-blue); transform: translate(-50%, -50%); }
+.eKpis::before { top: 0; }
+.eKpis::after { bottom: 0; transform: translate(-50%, 50%); }
+.kpi::before { content: ""; position: absolute; right: 0; top: 0; width: var(--node); height: var(--node); background: var(--dark-blue); transform: translate(50%, -50%); }
 .cHead :global(.t-label) { font-size: 22px; }
 .kpi { border-right: var(--hair) solid var(--rule); border-bottom: var(--hair) solid var(--rule); padding: 18px 20px; display: grid; gap: 14px; font-size: 14px; position: relative; }
 .kpi::after { content: ""; position: absolute; right: 0; bottom: 0; width: var(--node); height: var(--node); background: var(--dark-blue); transform: translate(50%, 50%); }
-.kpi b { font-size: 84px; color: var(--blue-ink); font-weight: 400; }
-.eTree { grid-column: 2; grid-row: 2 / 4; }
+.kpi b { font-size: 84px; line-height: 1; color: var(--active-blue); font-weight: 400; }
+.eTree { grid-column: 2; grid-row: 1 / 5; align-self: start; }
 
 /* Overview and inner screens */
 .ovBody { padding: 32px; display: grid; gap: 28px; align-content: start; }
