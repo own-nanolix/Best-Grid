@@ -111,3 +111,14 @@ http://localhost:3105 (start with `npx next dev -p 3105`; stop it before `npm ru
   tokens, type, mark, lockups, icons, key art, mockup kit, screens, nav and footer are Best Grid's own.
 - Step 4 committed. Step 5 started: wave 1 launched (B1 to B12, Sonnet). If a session ends here, trust only `npm run build` and `node tools/check.mjs`.
 - Wave 1 done: 12 builders, 17 pages, each committed locally; lint clean, build passes, check 17 of 30 ok; no page under 650 lines. Shared fix: the dark landing nav's current-page link keeps light text. Wave 2 launched (B13 to B24, Sonnet).
+
+## Notes for the review round
+
+- campaign: the builder made the four posters 1080 x 1440 (the case-study sheets are 3:4); the spec asks for 3 posters at 1080 x 1350. The reviewer must make at least three posters 1080 x 1350 (the faithful 3:4 rebuilds may stay as extra plates).
+- mobile-a: screens 1 and 2 were not compared with their references; screen 1's active chip label is white as printed (the shared system decided Dark Blue for contrast).
+- gradients: a brand line crosses the dark band on the bands plate; the stop-1 node and label are clipped on the Sunset anatomy drawing; the four "faithful" fields were not checked against the references.
+- lp-solar, lp-wind: figures were read from m16 at normal size, not from a crop.
+- overview: the contents list shows 9 chapters; confirm the index of all 30 pages exists and is linked.
+- strategy: English labels "Complexity" and "Structure" on the tangle drawing.
+- motion: frames 2, 4 and 6 of the m10 cycle are assumed, not read from stills.
+- logo: the word-mark's letters touch less than in the reference.
