@@ -1,0 +1,63 @@
+/* Icons and illustration: page-only styles. Everything sits on hairlines with square nodes at the crossings. */
+
+.sec { padding-block: clamp(36px, 6vw, 96px) 0; }
+.head { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); gap: var(--gap); align-items: end; padding-bottom: clamp(20px, 3vw, 40px); }
+.no { font-size: 11px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.lead { max-width: 56ch; }
+
+/* hero: a ruled row of icons from the live sprite */
+.hero { position: relative; padding-top: clamp(32px, 6vw, 96px); }
+.heroRow { display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); border-top: var(--hair) solid var(--rule); border-left: var(--hair) solid var(--rule); margin-top: clamp(28px, 5vw, 72px); position: relative; }
+.heroRow > * { display: grid; place-items: center; aspect-ratio: 1; border-right: var(--hair) solid var(--rule); border-bottom: var(--hair) solid var(--rule); position: relative; color: var(--dark-blue); transition: background-color var(--dur-s) var(--ease-out), color var(--dur-s) var(--ease-out); }
+.heroRow > *::after { content: ""; position: absolute; right: 0; bottom: 0; width: var(--node); height: var(--node); background: var(--rule); transform: translate(50%, 50%); z-index: 1; }
+.heroRow > *:first-child::before { content: ""; position: absolute; left: 0; top: 0; width: var(--node); height: var(--node); background: var(--rule); transform: translate(-50%, -50%); }
+.heroRow > *:hover { background: var(--dark-blue); color: var(--active-blue); }
+.heroRow svg { width: 44%; height: auto; }
+
+/* two slides side by side (m14, m15) */
+.pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--gap); }
+.plate { min-width: 0; }
+.plate svg { width: 100%; height: auto; }
+.cap { display: flex; justify-content: space-between; gap: 12px; padding-top: 10px; font-size: 13px; color: var(--muted); }
+.stackGap { display: grid; gap: var(--gap); }
+
+/* the sheet of 32 icons: ruled cells, a node at every crossing, a size switch and a ground switch */
+.controls { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 28px; padding-bottom: 20px; }
+.controls p { margin: 0; }
+.sheet { --line: var(--rule); display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); border-top: var(--hair) solid var(--line); border-left: var(--hair) solid var(--line); background: var(--paper); color: var(--dark-blue); transition: background-color var(--dur-m) var(--ease-out), color var(--dur-m) var(--ease-out); position: relative; }
+.sheetDark { --line: var(--rule-blue); background: var(--dark-blue); color: var(--light-blue); }
+.cell { position: relative; min-width: 0; min-height: 132px; display: grid; grid-template-rows: auto 1fr auto; justify-items: center; padding: 10px 6px 12px; border-right: var(--hair) solid var(--line); border-bottom: var(--hair) solid var(--line); transition: background-color var(--dur-s) var(--ease-out); animation: icons-cell var(--dur-m) var(--ease-out) both; animation-delay: calc(var(--i, 0) * var(--stagger)); }
+.cell::after { content: ""; position: absolute; right: 0; bottom: 0; width: var(--node); height: var(--node); background: var(--line); transform: translate(50%, 50%); z-index: 1; }
+.cell:first-child::before { content: ""; position: absolute; left: 0; top: 0; width: var(--node); height: var(--node); background: var(--line); transform: translate(-50%, -50%); }
+.cell:hover { background: rgba(89, 131, 255, 0.14); }
+.cell .no { justify-self: start; color: var(--muted); }
+.sheetDark .cell .no, .sheetDark .name { color: var(--muted-on-dark); }
+.glyph { width: var(--sz, 32px); height: var(--sz, 32px); align-self: center; transition: width var(--dur-s) var(--ease-move), height var(--dur-s) var(--ease-move); }
+.name { font-size: 11px; line-height: 1.2; text-align: center; overflow-wrap: anywhere; color: var(--muted); }
+@keyframes icons-cell { from { opacity: 0; } to { opacity: 1; } }
+
+/* in use: a four-cell row of figures */
+.useRow { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--gap); }
+.use { margin: 0; min-width: 0; display: grid; gap: 10px; align-content: start; }
+.use svg { width: 100%; height: auto; }
+.use figcaption { display: grid; gap: 2px; border-top: var(--hair) solid var(--rule); padding-top: 10px; }
+
+/* illustrations: three columns, each a light and a dark version stacked */
+.illCols { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--gap); }
+.illCol { display: grid; gap: var(--gap); align-content: start; min-width: 0; }
+.ill { margin: 0; min-width: 0; }
+.ill svg { width: 100%; height: auto; }
+.ill figcaption { padding-top: 8px; font-size: 13px; color: var(--muted); }
+
+@media (max-width: 1100px) {
+  .sheet { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .useRow { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 900px) {
+  .pair, .head, .illCols { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 560px) {
+  .heroRow { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .useRow { grid-template-columns: minmax(0, 1fr); }
+  .cell { min-height: 112px; }
+}
