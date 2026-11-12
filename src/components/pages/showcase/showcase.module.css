@@ -1,0 +1,27 @@
+/* The showcase: four catalogue plates on the dark stage. Colours and motion come from the shared tokens only. */
+.sheet { display: grid; gap: clamp(36px, 6vw, 88px); padding-block: clamp(24px, 4vw, 56px) clamp(48px, 8vw, 112px); }
+.head { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: var(--gap); align-items: end; border-bottom: var(--hair) solid var(--rule); padding-bottom: clamp(18px, 2.4vw, 32px); }
+.headTitle { grid-column: span 6; min-width: 0; }
+.headText { grid-column: span 6; min-width: 0; }
+@media (max-width: 900px) { .headTitle, .headText { grid-column: 1 / -1; } }
+
+.plateSec { display: grid; gap: 14px; min-width: 0; }
+.plateHead { display: flex; align-items: baseline; justify-content: space-between; gap: 8px 24px; flex-wrap: wrap; border-top: var(--hair) solid var(--rule); padding-top: 12px; }
+.no { font-family: var(--font-display); font-size: clamp(28px, 3vw, 44px); letter-spacing: -0.02em; margin-right: 14px; color: var(--blue-ink); }
+.plate { margin: 0; min-width: 0; }
+.plate:focus-within { outline: 2px solid var(--active-blue); outline-offset: 3px; }
+.notes { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; margin: 0; padding: 0; list-style: none; border-top: var(--hair) solid var(--rule-soft); }
+.notes li { padding: 14px 18px 14px 0; display: grid; gap: 4px; align-content: start; border-bottom: var(--hair) solid var(--rule-soft); }
+.notes h3 { margin: 0; font-size: 15px; font-weight: 500; }
+@media (max-width: 760px) { .notes { grid-template-columns: minmax(0, 1fr); } }
+.values { display: grid; gap: 16px; }
+
+/* the plate frame on the page: a hairline and corner nodes, like the guide system */
+.plate :global(.mock) { position: relative; border: var(--hair) solid var(--rule-on-dark); }
+.plate :global(.mock)::before, .plate :global(.mock)::after { content: ""; position: absolute; width: var(--node); height: var(--node); background: var(--active-blue); z-index: 2; pointer-events: none; }
+.plate :global(.mock)::before { left: -3px; top: -3px; }
+.plate :global(.mock)::after { right: -3px; bottom: -3px; }
+.plate :global(.mock-cap) { margin-top: 8px; }
+.notes p { margin: 0; max-width: 60ch; }
+.plateSec > p { margin: 0; }
+@media (max-width: 560px) { .plateHead { gap: 4px; } .no { display: block; margin: 0 0 4px; } }
