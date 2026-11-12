@@ -1,17 +1,9 @@
 // Tablet leaning, phone standing and watch lying, showing the case study's own dashboard screens (m17) on neutral
-// frames. The clock of the status bar is covered: no time is shown. Screen sizes are our own spec values in px.
+// frames. No clock time is drawn. Screen sizes are our own spec values in px.
 import { HEX } from '@/lib/brand';
 import { TabletG, PhoneG, WatchG, ScreenCapacityG, ScreenNodesG, ScreenWatchG } from '@/components/art/Devices';
 import { CalloutG, ShadowG, SheenG } from '@/components/art/Mockup';
 import { Plate } from './plate';
-
-// the status bar of a ready screen without its clock
-const Quiet = ({ children }) => (
-  <g>
-    {children}
-    <rect x="22" y="12" width="70" height="32" fill="#dcdfe6" />
-  </g>
-);
 
 export function DevicesPlate() {
   const idp = 'use-product-devices';
@@ -26,14 +18,14 @@ export function DevicesPlate() {
       <g transform="translate(70 228) rotate(-4 300 220)">
         <TabletG idp={`${idp}-tb`} w={620}>
           <rect width="1180" height="820" fill={HEX.lightBlue} />
-          <g transform="translate(206 5) scale(0.96)"><Quiet><ScreenCapacityG idp={`${idp}-ta`} /></Quiet></g>
-          <g transform="translate(612 5) scale(0.96)"><Quiet><ScreenNodesG /></Quiet></g>
+          <g transform="translate(206 5) scale(0.96)"><ScreenCapacityG idp={`${idp}-ta`} /></g>
+          <g transform="translate(612 5) scale(0.96)"><ScreenNodesG /></g>
           <SheenG idp={idp} d="M0 0H1180L0 560Z" opacity={0.3} />
         </TabletG>
       </g>
       <ShadowG idp={`${idp}-sh2`} cx={880} cy={706} rx={150} ry={20} dir={{ x: 0.7, y: 0.5 }} />
       <PhoneG idp={`${idp}-ph`} x={760} y={228} w={240}>
-        <Quiet><ScreenCapacityG idp={`${idp}-pa`} year="2025" marker={1} /></Quiet>
+        <ScreenCapacityG idp={`${idp}-pa`} year="2025" marker={1} />
         <SheenG idp={idp} d="M0 0H390L0 420Z" opacity={0.3} />
       </PhoneG>
       <ShadowG idp={`${idp}-sh3`} cx={1120} cy={816} rx={170} ry={22} dir={{ x: 0.7, y: 0.5 }} />

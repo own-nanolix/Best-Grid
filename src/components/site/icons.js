@@ -26,9 +26,9 @@ const S = (x0, y0, x1, y1, w = 1) => {
 };
 // An arc band between radii r0 and r1, from a0 to a1 (degrees, 0 = 12 o'clock, clockwise), sampled.
 const pt = (cx, cy, r, deg) => { const a = ((deg - 90) * Math.PI) / 180; return [cx + r * Math.cos(a), cy + r * Math.sin(a)]; };
-const A = (cx, cy, r0, r1, a0, a1, n = 14) => {
+const A = (cx, cy, r0, r1, a0, a1, n = 14, i0 = a0, i1 = a1) => {
   const outer = [], inner = [];
-  for (let i = 0; i <= n; i++) { const a = a0 + ((a1 - a0) * i) / n; outer.push(pt(cx, cy, r1, a)); inner.push(pt(cx, cy, r0, a)); }
+  for (let i = 0; i <= n; i++) { outer.push(pt(cx, cy, r1, a0 + ((a1 - a0) * i) / n)); inner.push(pt(cx, cy, r0, i0 + ((i1 - i0) * i) / n)); }
   return poly([...outer, ...inner.reverse()]);
 };
 const P = (...xy) => { const pts = []; for (let i = 0; i < xy.length; i += 2) pts.push([xy[i], xy[i + 1]]); return poly(pts); };
@@ -42,7 +42,7 @@ export function turbinePath(cx = 16, cy = 16, k = 1) {
   const sc = (pts) => pts.map(([x, y]) => [x * k, y * k]);
   let d = poly(sc([[-0.5, -0.5], [0.5, -0.5], [0.5, 0.5], [-0.5, 0.5]]).map(([x, y]) => [x + cx, y + cy]));
   for (const deg of [0, 120, 240]) d += poly(rot(sc(BLADE), deg, cx, cy)) + poly(rot(sc(TIP), deg, cx, cy));
-  for (const mid of [60, 180, 300]) d += A(cx, cy, 6 * k, 7 * k, mid - 33.5, mid + 33.5);
+  for (const mid of [60, 180, 300]) d += A(cx, cy, 6 * k, 7 * k, mid - 33.5, mid + 33.5, 14, mid - 29.5, mid + 29.5);
   return d;
 }
 
@@ -55,13 +55,13 @@ export const CORE = {
   // a connection: two nodes joined by a stepped line
   line: R(2, 16, 5, 5) + R(17, 3, 5, 5) + H(7, 18, 4) + V(11, 6, 12) + H(12, 5, 5),
   // a transmission tower
-  pylon: R(11, 2, 2, 2) + S(6, 22, 10.6, 4) + S(18, 22, 13.4, 4) + H(4, 7, 16) + H(6, 12, 12) + V(4, 8, 2) + V(19, 8, 2) + V(6, 13, 2) + V(17, 13, 2),
+  pylon: R(11, 2, 2, 2) + S(6, 21.8, 10.6, 4) + S(18, 21.8, 13.4, 4) + H(4, 7, 16) + H(6, 12, 12) + V(4, 8, 2) + V(19, 8, 2) + V(6, 13, 2) + V(17, 13, 2),
   // a substation: fenced yard, two transformers, a gantry with open crossings
   substation: F(2, 10, 20, 12) + R(6, 14, 4, 5) + R(14, 14, 4, 5) + H(5, 5, 2) + H(8, 5, 8) + H(17, 5, 2) + V(7, 3, 2) + V(7, 6, 4) + V(16, 3, 2) + V(16, 6, 4),
   // the turbine of m14, scaled to the 24 grid
-  wind: turbinePath(12, 13.6, 0.9),
+  wind: turbinePath(12, 12.75, 1),
   // the solar panel of m15, on its stand
-  solar: F(1.5, 4, 21, 10) + [6.5, 11.5, 16.5].map((x) => V(x, 5, 2) + V(x, 8, 2) + V(x, 11, 2)).join('') + [7, 10].map((y) => H(2.5, y, 4) + H(7.5, y, 4) + H(12.5, y, 4) + H(17.5, y, 4)).join('') + V(11.5, 14, 3) + H(7.5, 17, 4) + H(12.5, 17, 4),
+  solar: F(2, 4, 20, 10) + [6.5, 11.5, 16.5].map((x) => V(x, 5, 2) + V(x, 8, 2) + V(x, 11, 2)).join('') + [7, 10].map((y) => H(3, y, 3.5) + H(7.5, y, 4) + H(12.5, y, 4) + H(17.5, y, 3.5)).join('') + V(11.5, 14, 3) + H(7.5, 17, 4) + H(12.5, 17, 4),
   // the sun: a stepped disc and eight rays
   sun: F(7.5, 7.5, 9, 9) + V(11.5, 2, 4) + V(11.5, 18, 4) + H(2, 11.5, 4) + H(18, 11.5, 4) + R(4.5, 4.5, 1.5, 1.5) + R(18, 4.5, 1.5, 1.5) + R(4.5, 18, 1.5, 1.5) + R(18, 18, 1.5, 1.5),
   // two battery cells, "+" with an open centre and "−" (m15)
@@ -69,7 +69,7 @@ export const CORE = {
   // a server stack of three units (m15)
   datacenter: [0, 5, 10].map((o) => V(3, 5 + o, 4) + V(20, 5 + o, 4) + H(6, 6.5 + o, 7) + R(15, 6.5 + o, 1, 1) + R(17, 6.5 + o, 1, 1)).join('') + [4, 9, 14, 19].map((y) => H(4, y, 16)).join(''),
   // energy
-  bolt: S(15, 2, 8.4, 12.5) + H(8, 12, 8) + S(15.6, 12.5, 9, 22),
+  bolt: S(15, 2.3, 8.4, 12.5) + H(8, 12, 8) + S(15.6, 12.5, 9, 21.7),
   plug: V(8.5, 2, 5) + V(14.5, 2, 5) + F(6, 7, 12, 8) + V(11.5, 15, 7),
   // documents
   permit: F(4, 2, 16, 20) + H(8, 6, 8) + H(8, 9, 8) + H(8, 12, 5) + S(10.5, 16.5, 12.5, 18.5) + S(12.5, 18.5, 16.5, 14.5),
@@ -83,12 +83,12 @@ export const CORE = {
   // contact
   mail: F(2, 5, 20, 14) + S(3, 6, 12, 13.5) + S(21, 6, 12, 13.5),
   phone: F(6, 2, 12, 20) + H(10, 4, 4) + R(11, 18, 2, 2),
-  user: F(8, 3, 8, 8) + H(7, 15, 10) + R(6, 16, 1, 1) + R(17, 16, 1, 1) + V(5, 17, 4) + V(18, 17, 4),
+  user: F(3, 5, 18, 15) + R(10, 3, 4, 2) + R(6, 9, 4, 4) + H(12, 9, 6) + H(12, 12, 4) + H(6, 16, 12),
   // interface
   search: F(3, 3, 13, 13) + R(15, 15, 2, 2) + R(17, 17, 2, 2) + R(19, 19, 2, 2),
   chart: V(3, 3, 17) + H(4, 20, 17) + V(7, 12, 6) + V(11, 8, 10) + V(15, 10, 8) + V(19, 5, 13),
-  // the crosshair of the website buttons (m16): four short bars around an empty centre
-  crosshair: H(3, 11.5, 6) + H(15, 11.5, 6) + V(11.5, 3, 6) + V(11.5, 15, 6),
+  // the crosshair of the website buttons (m16): four short chunky bars (2.5 thick, as printed) around an empty centre
+  crosshair: H(3, 10.75, 6, 2.5) + H(15, 10.75, 6, 2.5) + V(10.75, 3, 6, 2.5) + V(10.75, 15, 6, 2.5),
   'arrow-right': H(3, 11.5, 17) + S(14, 6, 20, 12) + S(20, 12, 14, 18),
   'arrow-up-right': S(5.5, 18.5, 17.5, 6.5) + H(9, 5, 10) + V(18, 6, 9),
   download: V(11.5, 3, 12) + S(6.5, 10, 12, 15.5) + S(12, 15.5, 17.5, 10) + H(3, 20, 18),
@@ -114,7 +114,7 @@ export const UTIL = {
   filter: H(3, 6, 18) + H(6, 11.5, 12) + H(9, 17, 6),
   alert: S(12, 3, 3, 20) + S(12, 3, 21, 20) + H(3.5, 20, 17) + V(11.5, 9, 6) + R(11.5, 16.5, 1, 1.5),
   clock: F(3, 3, 18, 18) + V(11.5, 7, 5) + H(12.5, 11.5, 4),
-  layers: F(3, 3, 14, 10) + H(6, 15, 12) + V(19, 6, 9) + H(9, 19, 12) + V(22, 10, 9),
+  layers: F(3, 3, 12, 9) + H(6, 15, 12) + V(17, 7, 9) + H(9, 19, 12) + V(20, 11, 9),
   external: H(4, 5, 7) + V(3, 6, 14) + H(4, 20, 14) + V(18, 13, 7) + S(10, 14, 20, 4) + H(13, 3.5, 8) + V(19.5, 4, 7),
   index: F(3, 3, 8, 8) + F(13, 3, 8, 8) + F(3, 13, 8, 8) + F(13, 13, 8, 8),
 };

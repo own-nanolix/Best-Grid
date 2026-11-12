@@ -5,7 +5,7 @@ import Art from '@/components/art/Art';
 import { BrandDefs, TrailsG, IconArtG } from '@/components/art/KeyArt';
 import Button from '@/components/ui/Button';
 import { Rows } from '@/components/ui/Card';
-import { HEX, LINES, WEB_HERO, BUTTONS } from '@/lib/brand';
+import { HEX, LINES, WEB_HERO, BUTTONS, mixHex } from '@/lib/brand';
 import { still } from '@/lib/site';
 import s from './lp-home.module.css';
 
@@ -36,9 +36,9 @@ function SlideArt({ i, exportName }) {
       <rect width="664" height="526" fill={`url(#${idp}-sunset)`} />
       <TrailsG w={664} h={526} count={sl.count} y0={0.12} y1={0.52} sag={sl.sag} />
       {sl.pylons.map(([x, y, size]) => (
-        <IconArtG key={`${x}-${y}`} name="pylon" x={x} y={y} size={size} fill="#141833" />
+        <IconArtG key={`${x}-${y}`} name="pylon" x={x} y={y} size={size} fill={mixHex(HEX.darkBlue, HEX.stage, 0.45)} />
       ))}
-      <rect x="0" y="470" width="664" height="56" fill="#0b0d18" opacity="0.55" />
+      <rect x="0" y="470" width="664" height="56" fill={mixHex(HEX.stageLight, HEX.black, 0.75)} opacity="0.55" />
     </Art>
   );
 }

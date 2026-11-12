@@ -1,4 +1,4 @@
-import { CalloutG, DimensionG, LitG, SheenG } from '@/components/art/Mockup';
+import { CalloutG, DimensionG, LitG, SheenG, CalloutsG } from '@/components/art/Mockup';
 import { MarkG, WordmarkG } from '@/components/art/Mark';
 import { NodeG } from '@/components/art/KeyArt';
 import { HEX, CONTACT } from '@/lib/brand';
@@ -92,10 +92,12 @@ export function TissueBox() {
             <rect x={ix} y={iy} width={iw} height="1.6" fill={HEX.black} opacity="0.5" />
             <SheenG idp={idp} d={`M${ix} ${iy}L${ix + 260} ${iy}L${ix} ${iy + 200}Z`} opacity="0.2" />
           </LitG>
-          <CalloutG x={ix + 300} y={iy + 160} tx={730} ty={130} label="Printed tissue" sub="Mark repeat" i={1} />
-          <CalloutG x={ix + 100} y={iy + 110} tx={230} ty={120} label="Folded corner" side="left" i={2} />
-          <CalloutG x={bx + 8} y={by + 280} tx={170} ty={420} label="Box wall" side="left" i={3} />
-          <CalloutG x={ix + 300} y={iy + 240} tx={740} ty={600} label="Soft crease" i={4} />
+          <CalloutsG>
+            <CalloutG x={ix + 300} y={iy + 160} tx={730} ty={130} label="Printed tissue" sub="Mark repeat" i={1} />
+            <CalloutG x={ix + 100} y={iy + 110} tx={230} ty={120} label="Folded corner" side="left" i={2} />
+            <CalloutG x={bx + 8} y={by + 280} tx={170} ty={420} label="Box wall" side="left" i={3} />
+            <CalloutG x={ix + 300} y={iy + 240} tx={740} ty={600} label="Soft crease" i={4} />
+          </CalloutsG>
           <DimensionG x1={bx} y1={by + bh} x2={bx + bw} y2={by + bh} value="520 mm" offset={34} i={5} />
         </>
       )}
@@ -182,10 +184,12 @@ export function SealSheet() {
             </g>
             <SheenG idp={idp} d={`M${r2(ox - 100)} ${r2(oy - 160)}L${r2(ox + 200)} ${r2(oy - 190)}L${r2(ox + 60)} ${r2(oy + 160)}Z`} opacity="0.12" />
           </LitG>
-          <CalloutG x={rot(pad + s / 2, pad + s / 2)[0]} y={rot(pad + s / 2, pad + s / 2)[1]} tx={480} ty={130} label="Seal sticker" sub="Mark and word-mark" side="right" i={1} />
-          <CalloutG x={rot(pad + (s + gap) * 2 + s - 8, pad + s + gap + s - 8)[0]} y={rot(pad + (s + gap) * 2 + s - 8, pad + s + gap + s - 8)[1]} tx={1000} ty={650} label="Lifted corner" i={2} />
-          <CalloutG x={rot(pad + s / 2, pad + s + gap + s / 2)[0]} y={rot(pad + s / 2, pad + s + gap + s / 2)[1]} tx={500} ty={640} label="Empty slot" side="right" i={3} />
-          <CalloutG x={rot(lw - 6, 90)[0]} y={rot(lw - 6, 90)[1]} tx={1080} ty={150} label="Liner" side="left" i={4} />
+          <CalloutsG>
+            <CalloutG x={rot(pad + s / 2, pad + s / 2)[0]} y={rot(pad + s / 2, pad + s / 2)[1]} tx={480} ty={130} label="Seal sticker" sub="Mark and word-mark" side="right" i={1} />
+            <CalloutG x={rot(pad + (s + gap) * 2 + s - 8, pad + s + gap + s - 8)[0]} y={rot(pad + (s + gap) * 2 + s - 8, pad + s + gap + s - 8)[1]} tx={1000} ty={650} label="Lifted corner" i={2} />
+            <CalloutG x={rot(pad + s / 2, pad + s + gap + s / 2)[0]} y={rot(pad + s / 2, pad + s + gap + s / 2)[1]} tx={500} ty={640} label="Empty slot" side="right" i={3} />
+            <CalloutG x={rot(lw - 6, 90)[0]} y={rot(lw - 6, 90)[1]} tx={1080} ty={150} label="Liner" side="left" i={4} />
+          </CalloutsG>
         </>
       )}
     </Plate>
@@ -266,11 +270,13 @@ export function ShippingLabel() {
             <rect x={lx - 30} y={ly + 14} width="420" height="2" fill={HEX.black} opacity="0.12" />
             <SheenG idp={idp} d={`M${lx - 30} ${ly - 22}h420v38h-420z`} opacity="0.25" />
           </LitG>
-          <CalloutG x={lx + 35} y={ly + 40} tx={240} ty={290} label="Logo" side="left" i={1} />
-          <CalloutG x={lx + 300} y={ly + 110} tx={600} ty={88} label="Contact" i={2} />
-          <CalloutG x={lx + 70} y={ly + 120} tx={240} ty={380} label="Address bars" side="left" i={3} />
-          <CalloutG x={lx + 110} y={ly + 218} tx={240} ty={470} label="Plain bars" side="left" i={4} />
-          <CalloutG x={lx - 28} y={ly - 3} tx={240} ty={190} label="Clear tape" side="left" i={5} />
+          <CalloutsG>
+            <CalloutG x={lx + 35} y={ly + 40} tx={240} ty={290} label="Logo" side="left" i={1} />
+            <CalloutG x={lx + 300} y={ly + 110} tx={600} ty={88} label="Contact" i={2} />
+            <CalloutG x={lx + 70} y={ly + 120} tx={240} ty={380} label="Address bars" side="left" i={3} />
+            <CalloutG x={lx + 110} y={ly + 218} tx={240} ty={470} label="Plain bars" side="left" i={4} />
+            <CalloutG x={lx - 28} y={ly - 3} tx={240} ty={190} label="Clear tape" side="left" i={5} />
+          </CalloutsG>
           <DimensionG x1={lx} y1={ly + 250} x2={lx + 360} y2={ly + 250} value="100 mm" offset={34} i={6} />
         </>
       )}

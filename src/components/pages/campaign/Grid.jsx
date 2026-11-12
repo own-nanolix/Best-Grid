@@ -53,7 +53,7 @@ const TILES = [
   () => (
     <g>
       <rect width={T} height={T} fill={HEX.lightBlue} />
-      <NodeGridG cols={6} rows={6} size={60} seed={11} clusters={5} line="rgba(27,32,67,0.3)" />
+      <NodeGridG cols={6} rows={6} size={60} seed={11} clusters={5} line={HEX.darkBlue} lineOpacity={0.3} />
     </g>
   ),
   () => (

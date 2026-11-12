@@ -3,6 +3,7 @@
 import { r2 } from '@/lib/charts';
 import { StageG, MaterialDefs, CastG, SheenG, CalloutG, DimensionG, SpecColumnG, PlateFrameG, castDir, PLATE } from '@/components/art/Mockup';
 import { PosterDataCentre, PosterGeneration, PosterField, PW } from './Posters';
+import { HEX, mixHex } from '@/lib/brand';
 
 export const PLATE_W = 1600;
 export const PLATE_H = 880;
@@ -40,8 +41,8 @@ export function FramedPosters() {
             <CastG idp={fid} d={outline} dir={dir} depth={22} opacity={0.55} blur={9} />
             <g className="fade-in" style={{ '--i': 4 + i * 2 }}>
               <rect x={x} y={FY} width={FW} height={FH} fill={`url(#${id}-metal-dark)`} />
-              <rect x={x + 0.5} y={FY + 0.5} width={FW - 1} height={FH - 1} fill="none" stroke="#5a65a0" strokeWidth="1" opacity="0.7" />
-              <rect x={x + 14} y={FY + 19} width="302" height="402" fill="#05060f" />
+              <rect x={x + 0.5} y={FY + 0.5} width={FW - 1} height={FH - 1} fill="none" stroke={mixHex(HEX.muted, HEX.blueSoft, 0.3)} strokeWidth="1" opacity="0.7" />
+              <rect x={x + 14} y={FY + 19} width="302" height="402" fill={mixHex(HEX.stage, HEX.black, 0.5)} />
               <clipPath id={`${fid}-clip`}>
                 <rect x={x + 15} y={FY + 20} width="300" height="400" />
               </clipPath>

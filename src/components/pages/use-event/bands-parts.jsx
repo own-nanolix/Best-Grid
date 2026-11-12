@@ -2,15 +2,15 @@
 // standing loop (a cylinder band seen from above, with real wall thickness) and the colourways.
 import { SheenG } from '@/components/art/Mockup';
 import { MarkG, MarkEmbossG, WordmarkFitG } from '@/components/art/Mark';
-import { HEX } from '@/lib/brand';
+import { HEX, mixHex } from '@/lib/brand';
 import { r2 } from '@/lib/charts';
 import { rrect } from './kit';
 
 export const COL = {
-  active: { name: 'Active Blue', c: HEX.activeBlue, ink: HEX.darkBlue, mk: HEX.darkBlue, light: '#ffffff' },
-  dark: { name: 'Dark Blue', c: HEX.darkBlue, ink: HEX.onBlue, mk: HEX.activeBlue, light: '#6a7bd0' },
-  light: { name: 'Light Blue', c: HEX.lightBlue, ink: HEX.darkBlue, mk: HEX.activeBlue, light: '#ffffff' },
-  peri: { name: 'Periwinkle', c: HEX.periwinkle, ink: HEX.darkBlue, mk: HEX.darkBlue, light: '#ffffff' },
+  active: { name: 'Active Blue', c: HEX.activeBlue, ink: HEX.darkBlue, mk: HEX.darkBlue, light: HEX.white },
+  dark: { name: 'Dark Blue', c: HEX.darkBlue, ink: HEX.onBlue, mk: HEX.activeBlue, light: mixHex(HEX.lightBlue, HEX.blueInk, 0.7) },
+  light: { name: 'Light Blue', c: HEX.lightBlue, ink: HEX.darkBlue, mk: HEX.activeBlue, light: HEX.white },
+  peri: { name: 'Periwinkle', c: HEX.periwinkle, ink: HEX.darkBlue, mk: HEX.darkBlue, light: HEX.white },
 };
 
 // A direction rotated into the local frame of an object turned by `deg` (so cast shadows stay consistent).
@@ -27,9 +27,9 @@ export const pt = (cx, cy, deg, x, y) => {
 function Deboss({ idp, c, x, y, w, size, tag }) {
   return (
     <g>
-      <MarkEmbossG idp={`${idp}-m${tag}`} x={x} y={y} size={size} paper={c} shade="#05071a" />
-      <g opacity="0.28" transform="translate(0.9 1)"><WordmarkFitG x={x + size + 8} y={y + size * 0.78} w={w} fill="#05071a" /></g>
-      <g opacity="0.5" transform="translate(-0.7 -0.7)"><WordmarkFitG x={x + size + 8} y={y + size * 0.78} w={w} fill="#ffffff" /></g>
+      <MarkEmbossG idp={`${idp}-m${tag}`} x={x} y={y} size={size} paper={c} shade={mixHex(HEX.stage, HEX.black, 0.25)} />
+      <g opacity="0.28" transform="translate(0.9 1)"><WordmarkFitG x={x + size + 8} y={y + size * 0.78} w={w} fill={mixHex(HEX.stage, HEX.black, 0.25)} /></g>
+      <g opacity="0.5" transform="translate(-0.7 -0.7)"><WordmarkFitG x={x + size + 8} y={y + size * 0.78} w={w} fill={HEX.white} /></g>
       <WordmarkFitG x={x + size + 8} y={y + size * 0.78} w={w} fill={c} />
     </g>
   );
@@ -42,7 +42,7 @@ function Lock({ idp, x, Wd, silicone }) {
       <g>
         {[0, 1].map((i) => (
           <g key={i}>
-            <circle cx={x + 20 + i * 22} cy="0" r="7.5" fill="#000000" opacity="0.35" />
+            <circle cx={x + 20 + i * 22} cy="0" r="7.5" fill={HEX.black} opacity="0.35" />
             <circle cx={x + 20 + i * 22} cy="0" r="6" fill={`url(#${idp}-metal)`} />
           </g>
         ))}
@@ -51,11 +51,11 @@ function Lock({ idp, x, Wd, silicone }) {
   }
   return (
     <g>
-      <path d={rrect(x, -Wd / 2 - 6, 72, Wd + 12, 6)} fill={`url(#${idp}-plastic)`} stroke="#000000" strokeOpacity="0.5" />
-      <rect x={x + 8} y={-Wd / 2 + 4} width="34" height={Wd - 8} fill="#06081a" opacity="0.8" />
-      <circle cx={x + 56} cy="0" r="7" fill={`url(#${idp}-metal)`} stroke="#4d5470" strokeWidth="0.75" />
-      <circle cx={x + 56} cy="0" r="2.2" fill="#2b3159" />
-      <path d={rrect(x + 1, -Wd / 2 - 5, 70, 5, 3)} fill="#ffffff" opacity="0.18" />
+      <path d={rrect(x, -Wd / 2 - 6, 72, Wd + 12, 6)} fill={`url(#${idp}-plastic)`} stroke={HEX.black} strokeOpacity="0.5" />
+      <rect x={x + 8} y={-Wd / 2 + 4} width="34" height={Wd - 8} fill={mixHex(HEX.stage, HEX.black, 0.25)} opacity="0.8" />
+      <circle cx={x + 56} cy="0" r="7" fill={`url(#${idp}-metal)`} stroke={mixHex(HEX.labelGrey, HEX.darkBlue, 0.7)} strokeWidth="0.75" />
+      <circle cx={x + 56} cy="0" r="2.2" fill={mixHex(HEX.darkBlue, HEX.muted, 0.4)} />
+      <path d={rrect(x + 1, -Wd / 2 - 5, 70, 5, 3)} fill={HEX.white} opacity="0.18" />
     </g>
   );
 }
@@ -71,7 +71,7 @@ export function Strip({ idp, tag = 'a', kind = 'fabric', L = 440, Wd = 40, tone 
       <path d={d} fill={t.c} filter={sil ? undefined : `url(#${idp}-weave)`} />
       <path d={d} fill={`url(#${idp}-shade-v)`} opacity={sil ? 0.9 : 0.7} />
       {!sil && <path d={`M${x0 + 5} ${-Wd / 2 + 5}H${-x0 - 80}M${x0 + 5} ${Wd / 2 - 5}H${-x0 - 80}`} stroke={t.ink} strokeOpacity="0.45" strokeWidth="1.2" strokeDasharray="5 3.5" />}
-      {sil && <rect x={x0 + 14} y={-Wd / 2 + 4} width={L - 28} height="3.5" rx="1.7" fill="#ffffff" opacity="0.32" filter={`url(#${idp}-soft)`} />}
+      {sil && <rect x={x0 + 14} y={-Wd / 2 + 4} width={L - 28} height="3.5" rx="1.7" fill={HEX.white} opacity="0.32" filter={`url(#${idp}-soft)`} />}
       {sil ? (
         <Deboss idp={idp} c={t.c} x={x0 + 40} y={-12} w={84} size={24} tag={tag} />
       ) : (
@@ -83,7 +83,7 @@ export function Strip({ idp, tag = 'a', kind = 'fabric', L = 440, Wd = 40, tone 
         ))
       )}
       <Lock idp={idp} x={x0 + L - (sil ? 56 : 72)} Wd={Wd} silicone={sil} />
-      {!sil && <rect x={x0} y={-Wd / 2} width="3" height={Wd} fill="#000000" opacity="0.25" />}
+      {!sil && <rect x={x0} y={-Wd / 2} width="3" height={Wd} fill={HEX.black} opacity="0.25" />}
     </g>
   );
 }
@@ -102,24 +102,24 @@ export function Loop({ idp, tag = 'l', rx = 130, ry = 50, h = 52, thick = 9, ton
   return (
     <g>
       <path d={back} fill={t.c} />
-      <path d={back} fill="#000000" opacity="0.42" />
+      <path d={back} fill={HEX.black} opacity="0.42" />
       <path d={front} fill={t.c} filter={silicone ? undefined : `url(#${idp}-weave)`} />
       <path d={front} fill={shade} />
       <path d={front} fill={`url(#${idp}-shade-v)`} opacity="0.55" />
-      {silicone && <rect x={side === 'l' ? -rx * 0.74 : rx * 0.66} y={-hh + ry * 0.55} width="7" height={h - 12} rx="3.5" fill="#ffffff" opacity="0.34" filter={`url(#${idp}-soft)`} />}
+      {silicone && <rect x={side === 'l' ? -rx * 0.74 : rx * 0.66} y={-hh + ry * 0.55} width="7" height={h - 12} rx="3.5" fill={HEX.white} opacity="0.34" filter={`url(#${idp}-soft)`} />}
       {prints.map((p, i) => {
         const k = Math.sqrt(1 - p * p);
         return (
           <g key={p} transform={`translate(${r2(p * rx)} ${r2(ry * k)}) scale(${r2(k)} 1)`}>
-            {silicone ? <MarkEmbossG idp={`${idp}-m${tag}${i}`} x={-11} y={-11} size={22} paper={t.c} shade="#05071a" /> : <MarkG x={-11} y={-11} size={22} fill={t.mk} />}
+            {silicone ? <MarkEmbossG idp={`${idp}-m${tag}${i}`} x={-11} y={-11} size={22} paper={t.c} shade={mixHex(HEX.stage, HEX.black, 0.25)} /> : <MarkG x={-11} y={-11} size={22} fill={t.mk} />}
           </g>
         );
       })}
       <g transform={`translate(0 ${r2(ry)})`}>
         {silicone ? (
           <g>
-            <g opacity="0.3" transform="translate(0.9 1)"><WordmarkFitG x={-wm / 2} y={6} w={wm} fill="#05071a" /></g>
-            <g opacity="0.5" transform="translate(-0.7 -0.7)"><WordmarkFitG x={-wm / 2} y={6} w={wm} fill="#ffffff" /></g>
+            <g opacity="0.3" transform="translate(0.9 1)"><WordmarkFitG x={-wm / 2} y={6} w={wm} fill={mixHex(HEX.stage, HEX.black, 0.25)} /></g>
+            <g opacity="0.5" transform="translate(-0.7 -0.7)"><WordmarkFitG x={-wm / 2} y={6} w={wm} fill={HEX.white} /></g>
             <WordmarkFitG x={-wm / 2} y={6} w={wm} fill={t.c} />
           </g>
         ) : (
@@ -129,8 +129,8 @@ export function Loop({ idp, tag = 'l', rx = 130, ry = 50, h = 52, thick = 9, ton
       <path d={rim} fill={t.c} fillRule="evenodd" />
       <path d={rim} fill={t.light} opacity="0.22" fillRule="evenodd" />
       <path d={rim} fill={shade} fillRule="evenodd" />
-      <path d={`M${-ix} ${-hh}A${ix} ${iy} 0 1 1 ${ix} ${-hh}A${ix} ${iy} 0 1 1 ${-ix} ${-hh}Z`} fill="none" stroke="#000000" strokeOpacity="0.4" strokeWidth="1.2" />
-      <path d={`M${side === 'l' ? -rx : rx} ${-hh}A${rx} ${ry} 0 0 ${side === 'l' ? 1 : 0} ${r2(rx * (side === 'l' ? -0.35 : 0.35))} ${r2(-hh - ry * 0.94)}`} fill="none" stroke="#ffffff" strokeOpacity="0.45" strokeWidth="1.4" />
+      <path d={`M${-ix} ${-hh}A${ix} ${iy} 0 1 1 ${ix} ${-hh}A${ix} ${iy} 0 1 1 ${-ix} ${-hh}Z`} fill="none" stroke={HEX.black} strokeOpacity="0.4" strokeWidth="1.2" />
+      <path d={`M${side === 'l' ? -rx : rx} ${-hh}A${rx} ${ry} 0 0 ${side === 'l' ? 1 : 0} ${r2(rx * (side === 'l' ? -0.35 : 0.35))} ${r2(-hh - ry * 0.94)}`} fill="none" stroke={HEX.white} strokeOpacity="0.45" strokeWidth="1.4" />
       <SheenG idp={idp} d={front} opacity={silicone ? 0.28 : 0.1} />
     </g>
   );

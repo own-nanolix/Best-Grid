@@ -31,7 +31,7 @@ export default function LandingNav({ current, tone = 'light', className = '' }) 
       <div className="lp-actions" lang="es">
         <Link href={`/${CTA_TARGET}/`} className="lp-cta" aria-current={current === CTA_TARGET ? 'page' : undefined}>
           {NAV_CTA}
-          <Icon name="crosshair" size={16} />
+          <Icon name="crosshair" size={20} />
         </Link>
       </div>
     </nav>

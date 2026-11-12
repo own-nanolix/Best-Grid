@@ -182,7 +182,7 @@ export function Patch({ id, m, sh, s = 90, kind = 'mark' }) {
         {kind === 'mark' && <MarkG x={-h * 0.6} y={-h * 0.6} size={s * 0.6} fill={HEX.activeBlue} />}
         {kind === 'word' && <WordmarkG x={0} y={r2(s * 0.08)} size={r2(s * 0.21)} fill={HEX.onBlue} anchor="middle" />}
         {kind === 'lattice' && <LatticeFieldG cx={0} cy={0} k={r2(s / 90)} rings={3} fill={HEX.activeBlue} />}
-        {kind === 'nodes' && <NodeGridG x={-h * 0.72} y={-h * 0.72} cols={5} rows={5} size={r2(s * 0.29)} seed={4} clusters={4} line="rgba(228,231,239,0.3)" />}
+        {kind === 'nodes' && <NodeGridG x={-h * 0.72} y={-h * 0.72} cols={5} rows={5} size={r2(s * 0.29)} seed={4} clusters={4} line={HEX.lightBlue} lineOpacity={0.3} />}
         <rect x={-h} y={-h} width={s} height={s} fill={sh} />
       </g>
       <rect x={-h + 3.5} y={-h + 3.5} width={s - 7} height={s - 7} fill="none" stroke={c.edge} strokeWidth="7" />

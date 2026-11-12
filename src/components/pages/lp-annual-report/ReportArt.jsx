@@ -1,7 +1,7 @@
 import Art from '@/components/art/Art';
 import { MarkG, WordmarkG } from '@/components/art/Mark';
 import { CrossingBandsG, GuidesG } from '@/components/art/KeyArt';
-import { StageG, MaterialDefs, ShadowG, CalloutG, LitG, PlateFrameG, PLATE } from '@/components/art/Mockup';
+import { StageG, MaterialDefs, ShadowG, CalloutG, LitG, PlateFrameG, PLATE, CalloutsG } from '@/components/art/Mockup';
 import { HEX, REPORT, CAPACITY, LINES } from '@/lib/brand';
 import { scale, r2 } from '@/lib/charts';
 
@@ -50,7 +50,7 @@ function Book({ ox, oy, W, Hh, T, cover, spine, ink, mark, idp, k }) {
     <g>
       <polygon points={pts([o, c, dn(c), dn(o)])} fill={spine} />
       <polygon points={pts([c, b, dn(b), dn(c)])} fill={spine} />
-      <polygon points={pts([c, b, dn(b), dn(c)])} fill="#000000" opacity="0.28" />
+      <polygon points={pts([c, b, dn(b), dn(c)])} fill={HEX.black} opacity="0.28" />
       <polygon points={pts([o, c, dn(c), dn(o)])} fill={`url(#${idp}-shade-v)`} />
       <polygon points={pts([o, a, b, c])} fill={cover} />
       <clipPath id={`${idp}-clip-${k}`}>
@@ -108,9 +108,11 @@ export function StackArt() {
           <Book key={k} k={k} idp={idp} ox={250 - 70 * k} oy={330 + 76 * k} W={320} Hh={450} T={46} {...set[k]} />
         ))}
       </LitG>
-      <CalloutG x={560} y={380} tx={380} ty={96} label="Cover" side="left" i={0} />
-      <CalloutG x={160} y={470} tx={40} ty={720} label="Spine" i={1} />
-      <CalloutG x={790} y={560} tx={820} ty={720} label="Foot edge" side="left" i={2} />
+      <CalloutsG>
+        <CalloutG x={560} y={380} tx={380} ty={96} label="Cover" side="left" i={0} />
+        <CalloutG x={160} y={470} tx={40} ty={720} label="Spine" i={1} />
+        <CalloutG x={790} y={560} tx={820} ty={720} label="Foot edge" side="left" i={2} />
+      </CalloutsG>
       <text x="40" y={H - 40} fontSize="13" fill={PLATE.muted}>Perfect-bound, uncoated board</text>
     </Art>
   );
@@ -258,7 +260,7 @@ export function TreemapArt() {
   const wDev = r2(S * 0.662), hDev = r2(S * 0.672), hCons = r2(S * 0.333);
   const blocks = [
     { p: dev, x: 0, y: S - hDev, w: wDev, h: hDev, fill: HEX.activeBlue, num: 150, sup: 56 },
-    { p: cons, x: wDev, y: S - hCons, w: S - wDev, h: hCons, fill: '#7c9cff', num: 70, sup: 28 },
+    { p: cons, x: wDev, y: S - hCons, w: S - wDev, h: hCons, fill: HEX.blueSoft, num: 70, sup: 28 },
   ];
   return (
     <Art viewBox={`0 0 ${S} ${S}`} title="Treemap, 2025 capacity managed: 68% and 16%, the remainder unlabelled" exportName="lp-annual-report-treemap">

@@ -9,7 +9,7 @@ import Plate, { mmC } from './Plate';
 const W = 800, H = 640;
 
 export const CAPS = [
-  { name: 'cap-dark', title: 'Dark Blue six-panel cap in profile with the mark on the front panel', hat: false, body: HEX.darkBlue, ink: HEX.activeBlue, tone: '#ffffff',
+  { name: 'cap-dark', title: 'Dark Blue six-panel cap in profile with the mark on the front panel', hat: false, body: HEX.darkBlue, ink: HEX.activeBlue, tone: HEX.white,
     t: { x: 40, y: 190, s: 1.1, rot: 0 }, side: 'right', tx: 590, spot: { x: 0.3, y: 0.08 }, no: '01', label: 'Dark Blue cap',
     calls: [
       { lx: 262, ly: 84, label: 'Button' },
@@ -40,7 +40,7 @@ export const CAPS = [
 ];
 
 // The extra headwear plate: the hard hat.
-export const HAT = { name: 'hard-hat', title: 'Active Blue hard hat in profile with the mark and a reflective band', hat: true, body: HEX.activeBlue, ink: HEX.darkBlue, tone: '#ffffff',
+export const HAT = { name: 'hard-hat', title: 'Active Blue hard hat in profile with the mark and a reflective band', hat: true, body: HEX.activeBlue, ink: HEX.darkBlue, tone: HEX.white,
     t: { x: 150, y: 250, s: 1.12, rot: 0 }, side: 'right', tx: 640, spot: { x: 0.52, y: 0.04 }, no: '04', label: 'Hard hat',
     calls: [
       { lx: 268, ly: 96, label: 'Shell ridge' },

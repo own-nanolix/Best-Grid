@@ -6,7 +6,7 @@
 @keyframes lp-wind-rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
 @keyframes lp-wind-fade { from { opacity: 0; } to { opacity: 1; } }
 
-/* ---------- Hero (m01): fog full-bleed, guides at 45.6% and 54.3%, verticals at 4.3% and 97.5% ---------- */
+/* ---------- Hero (m01): fog full-bleed, guides at 45.6% and 54.3%, verticals at 4.3% and 95.7% ---------- */
 .hero {
   --line: var(--paper);
   position: relative;
@@ -32,7 +32,7 @@
   z-index: 1;
 }
 .vLeft { left: 4.3%; }
-.vRight { left: 97.5%; animation-delay: 80ms; }
+.vRight { left: 95.7%; animation-delay: 80ms; }
 .band {
   position: relative;
   display: flex;
@@ -85,9 +85,9 @@
   z-index: 3;
 }
 .nTL { left: 4.3%; top: 0; }
-.nTR { left: 97.5%; top: 0; }
+.nTR { left: 95.7%; top: 0; }
 .nBL { left: 4.3%; top: 100%; }
-.nBR { left: 97.5%; top: 100%; }
+.nBR { left: 95.7%; top: 100%; }
 .foot {
   position: relative;
   z-index: 2;
@@ -134,7 +134,7 @@
 .figureRule::before { top: 0; }
 .figureRule::after { bottom: 0; }
 .fl { left: 4.3%; top: 0; background: var(--active-blue); animation: none; }
-.fr { left: 97.5%; bottom: 0; top: auto; transform: translate(-50%, 50%); background: var(--active-blue); animation: none; }
+.fr { left: 95.7%; bottom: 0; top: auto; transform: translate(-50%, 50%); background: var(--active-blue); animation: none; }
 .figureHead { display: flex; align-items: center; gap: 16px; color: var(--active-blue); }
 .huge {
   display: flex;
@@ -210,7 +210,7 @@
 .closeSide { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
 .cl, .cr { top: 0; animation: none; background: var(--dark-blue); }
 .cl { left: 4.3%; }
-.cr { left: 97.5%; }
+.cr { left: 95.7%; }
 
 
 /* the hero's nodes sit on light guides, light as printed on m01 */

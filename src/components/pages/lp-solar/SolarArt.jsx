@@ -140,7 +140,7 @@ export function NodesArt() {
   return (
     <Art viewBox={`0 0 ${W} ${H}`} title="Node grid with clusters in two strengths" exportName="lp-solar-nodes">
       <rect width={W} height={H} fill={HEX.darkBlue} />
-      <NodeGridG x={40} y={36} cols={cols} rows={rows} size={size} seed={11} clusters={13} line="rgba(228,231,239,0.22)" animate />
+      <NodeGridG x={40} y={36} cols={cols} rows={rows} size={size} seed={11} clusters={13} line={HEX.lightBlue} lineOpacity={0.22} animate />
       <GuidesG w={W} h={H} xs={[40, 680]} ys={[36, 476]} stroke={HEX.activeBlue} weight={1} animate />
     </Art>
   );
@@ -226,7 +226,7 @@ export function BandsArt() {
     <Art viewBox={`0 0 ${W} ${H}`} title="Crossing bands with the connection line" exportName="lp-solar-bands" lang="es">
       <rect width={W} height={H} fill={HEX.darkBlue} />
       <g className="fade-in">
-        <CrossingBandsG idp="lp-solar-bands" w={W} h={H} cx={0.74} cy={0.5} a1={62} a2={-18} band={0.022} r={0.07} />
+        <CrossingBandsG idp="lp-solar-bands" w={W} h={H} cx={0.74} cy={0.5} a1={-62} a2={18} band={0.022} r={0.07} />
       </g>
       <GuidesG w={W} h={H} xs={[96, 1344]} ys={[48, 432]} stroke={HEX.activeBlue} animate />
       <g className="slide-up" style={{ '--i': 6 }} fill={HEX.onBlue}>

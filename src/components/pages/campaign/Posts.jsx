@@ -78,7 +78,7 @@ export function PostCapacity() {
         const h = r2(it.mw * k), x = 90 + i * (w + g);
         return (
           <g key={it.q}>
-            <rect x={x} y={base - h} width={w} height={h} fill={it.peak ? a : '#7c9cff'} className="rise" style={{ '--i': 6 + i * 2 }} />
+            <rect x={x} y={base - h} width={w} height={h} fill={it.peak ? a : HEX.blueSoft} className="rise" style={{ '--i': 6 + i * 2 }} />
             <g className="fade-in" style={{ '--i': 16 + i }} lang="es">
               <text x={x} y={base + 42} fontSize="26" fill={d}>{it.q}</text>
               <text x={x} y={base + 78} fontSize="26" fill={HEX.muted}>{it.value}</text>

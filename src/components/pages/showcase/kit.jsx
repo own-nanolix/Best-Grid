@@ -21,12 +21,6 @@ export function StatusGlyphsG({ w = 390, fill = HEX.darkBlue }) {
   );
 }
 
-// The shared ready screens print a clock time in their status bar; on the showcase phones it is covered with the
-// screen's own ground (place it after the screen, in screen space).
-export function NoClockG({ fill }) {
-  return <rect x="28" y="16" width="56" height="26" fill={fill} style={fill ? undefined : { fill: 'var(--screen)' }} />;
-}
-
 // A leader line from a node on the object (x, y) to the edge of a floating card (tx, ty): one elbow, drawn on.
 export function Leader({ x, y, tx, ty, i = 0, color = PLATE.line }) {
   const ex = tx + (x < tx ? -26 : 26);
@@ -45,7 +39,7 @@ export function Leader({ x, y, tx, ty, i = 0, color = PLATE.line }) {
 export function CardDefs({ idp, dx = 8, dy = 12 }) {
   return (
     <filter id={`${idp}-card-shadow`} x="-20%" y="-20%" width="150%" height="160%">
-      <feDropShadow dx={dx} dy={dy} stdDeviation="9" floodColor="#000000" floodOpacity="0.55" />
+      <feDropShadow dx={dx} dy={dy} stdDeviation="9" floodColor={HEX.black} floodOpacity="0.55" />
     </filter>
   );
 }
@@ -56,7 +50,7 @@ export function CardG({ idp, x, y, w, h, fill = HEX.cardGrey, children, i = 0 })
     <g className="slide-up" style={{ '--i': i, animationDelay: `${600 + i * 120}ms` }}>
       <rect x={x} y={y} width={w} height={h} fill={fill} filter={`url(#${idp}-card-shadow)`} />
       <rect x={x} y={y} width={w} height={h} fill={`url(#${idp}-paper)`} opacity="0.55" />
-      <rect x={x} y={y} width={w} height="2" fill="#ffffff" opacity="0.7" />
+      <rect x={x} y={y} width={w} height="2" fill={HEX.white} opacity="0.7" />
       <g transform={`translate(${x} ${y})`}>{children}</g>
     </g>
   );
@@ -125,9 +119,9 @@ export function ShelfG({ idp, x, y, w, depth = 22, h = 14 }) {
   return (
     <g>
       <rect x={x} y={y} width={w} height={h} fill={`url(#${idp}-metal-dark)`} />
-      <rect x={x} y={y} width={w} height="2" fill="#ffffff" opacity="0.35" />
-      <path d={`M${x} ${y}L${x + 18} ${y - depth * 0.25}H${x + w - 18}L${x + w} ${y}Z`} fill="#ffffff" opacity="0.09" />
-      <rect x={x} y={y + h - 3} width={w} height="3" fill="#000000" opacity="0.4" />
+      <rect x={x} y={y} width={w} height="2" fill={HEX.white} opacity="0.35" />
+      <path d={`M${x} ${y}L${x + 18} ${y - depth * 0.25}H${x + w - 18}L${x + w} ${y}Z`} fill={HEX.white} opacity="0.09" />
+      <rect x={x} y={y + h - 3} width={w} height="3" fill={HEX.black} opacity="0.4" />
     </g>
   );
 }

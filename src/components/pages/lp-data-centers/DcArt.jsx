@@ -10,7 +10,7 @@ import { range } from '@/lib/site';
 // Animations are CSS keyframes (shared classes) that land on the artwork as drawn.
 
 const BLUE = HEX.activeBlue;
-const SOFT = '#7c9cff';
+const SOFT = HEX.blueSoft;
 const INK = HEX.darkBlue;
 
 // One server unit as the icon draws it: top and bottom bars, side bars with the corner pixels left out, one bar and
@@ -76,7 +76,7 @@ export function HallPlanArt() {
   return (
     <Art viewBox="0 0 900 560" title="The plan of a data hall as filled and empty cells (illustration)" exportName="lp-data-centers-hall-plan">
       <GuidesG w={900} h={560} xs={[24, 876]} ys={[24, 536]} stroke={BLUE} weight={1} node={6} animate />
-      <NodeGridG x={58} y={28} cols={14} rows={8} size={55} seed={11} clusters={10} line="rgba(89,131,255,0.35)" full={BLUE} soft={SOFT} animate />
+      <NodeGridG x={58} y={28} cols={14} rows={8} size={55} seed={11} clusters={10} line={HEX.activeBlue} lineOpacity={0.35} full={BLUE} soft={SOFT} animate />
       <text x="58" y="520" fontSize="13" fill={HEX.mutedOnDark}>Hall plan, 14 x 8</text>
     </Art>
   );
@@ -186,7 +186,7 @@ export function CrossingArt() {
   return (
     <Art viewBox={`0 0 ${W} ${H}`} title="Two crossing bands with the mark (secondary graphic)" exportName="lp-data-centers-crossing">
       <GuidesG w={W} h={H} xs={[30, W - 30]} ys={[30, H - 30]} stroke={INK} weight={1} node={6} animate />
-      <CrossingBandsG idp="lp-data-centers-x" x={0} y={0} w={W} h={H} cx={0.52} cy={0.5} a1={72} a2={-21} band={0.05} r={0.1} fill={INK} className="fade-in" />
+      <CrossingBandsG idp="lp-data-centers-x" x={0} y={0} w={W} h={H} cx={0.52} cy={0.5} a1={-72} a2={21} band={0.05} r={0.1} fill={INK} className="fade-in" />
       <MarkG x={64} y={H - 150} size={86} fill={INK} className="fade-in" style={{ '--i': 14 }} />
       <NodeG cx={W * 0.52} cy={H * 0.5} s={14} fill={INK} className="snap" style={{ '--i': 20 }} />
     </Art>

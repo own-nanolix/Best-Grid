@@ -67,7 +67,7 @@ export function ModuleGridArt() {
       <g transform="translate(60 60) scale(1)" color={INK}>
         <IconArtG name="battery" px size={72} fill={INK} className="fade-in" />
       </g>
-      <NodeGridG x={60} y={140} cols={6} rows={10} size={60} seed={5} clusters={8} line="rgba(27,32,67,0.28)" full={BLUE} soft="#7c9cff" animate />
+      <NodeGridG x={60} y={140} cols={6} rows={10} size={60} seed={5} clusters={8} line={HEX.darkBlue} lineOpacity={0.28} full={BLUE} soft={HEX.blueSoft} animate />
       <text x="60" y="772" fontSize="13" fill={HEX.muted}>Module grid, 6 x 10</text>
     </Art>
   );

@@ -11,7 +11,6 @@ export const BRAND_FULL = 'Best Grid Solutions';     // m02 report cover
 export const BRAND_SHORT = 'BGS';                    // m02 spine
 export const BRAND_TAB = 'Best grid solutions';      // m16 browser tab, as printed
 export const DESIGNER = 'Pablo Aeme';
-export const DESIGNER_HANDLE = '@pabloaeme';         // project footer
 export const PROJECT_TITLE = 'Best Grid | Structuring Complexity';
 // The designer's own description of the project (English on the project page).
 export const DESCRIPTION =
@@ -28,16 +27,28 @@ export const PALETTE = [
 ];
 
 // Hex values for SVG attributes. "sampled" = read from the images, not published (SOURCE.md, Palette).
+// Mix two hex colours (t = share of b). Used to derive shades and tints from the tokens below, so no page or shared
+// artwork needs a private hex. The CSS side uses color-mix with the same ratios (globals.css).
+export function mixHex(a, b, t) {
+  const p = (h) => [1, 3, 5].map((i) => parseInt(h.slice(i, i + 2), 16));
+  const [x, y] = [p(a), p(b)];
+  return '#' + x.map((v, i) => Math.round(v + (y[i] - v) * t).toString(16).padStart(2, '0')).join('');
+}
+
 export const HEX = {
   darkBlue: '#1b2043',
   activeBlue: '#5983ff',
   lightBlue: '#e4e7ef',
   white: '#ffffff',
+  stage: '#0c0e1f',          // the mockup stage
+  stageLight: '#2a3266',     // the stage's spotlight centre
   black: '#000000',
   periwinkle: '#cad8ff',     // sampled: ground of every slide
   periwinkleMock: '#c5d9ff', // sampled: ground of the mockups
   paper: '#f6f9ff',          // sampled: letterhead, cards, poster sheets
   cardGrey: '#eef2f7',       // sampled: business card, badge card
+  screen: '#dcdfe6',         // sampled: phone screen ground (m17)
+  chipOff: '#e9ecf2',        // sampled: inactive year chip (m17)
   statCell: '#cddaff',       // sampled: the highlighted stats cell (m16)
   btnFill: '#eef2ff',        // sampled: primary button fill (m16)
   onBlue: '#e6e8ee',         // sampled: light grey-white type on blue grounds
@@ -52,7 +63,21 @@ export const HEX = {
   muted: '#4b5174',          // small secondary text on light grounds
   mutedOnDark: '#a9b2d6',    // small secondary text on Dark Blue
   rule: '#1b2043',           // hairlines on light grounds (Dark Blue)
+  blueSoft: '#7c9cff',       // sampled: the lighter Active Blue (node-grid strength 2, consolidated block, active-blue sheen)
+  greyLine: '#9aa0b3',       // sampled: the grey hairlines of the baseline field (m10)
 };
+// Shades and tints derived from the tokens (stand-in gradients, materials, hovers). Same ratios as globals.css.
+HEX.fogHi = mixHex(HEX.lightBlue, HEX.white, 0.4);          // top of the fog field
+HEX.fogMid = mixHex(HEX.fog, HEX.white, 0.36);
+HEX.fogLow = mixHex(HEX.fog, HEX.plum, 0.55);
+HEX.sunsetMid = mixHex(HEX.darkBlue, HEX.activeBlue, 0.25);
+HEX.sunsetLow = mixHex(HEX.sunset, HEX.plum, 0.25);
+HEX.sunsetEnd = mixHex(HEX.plum, HEX.black, 0.4);
+HEX.darkBlueHover = mixHex(HEX.darkBlue, HEX.activeBlue, 0.12);
+HEX.activeBlueHover = mixHex(HEX.activeBlue, HEX.white, 0.15);
+HEX.bubbleHi = mixHex(HEX.mutedOnDark, HEX.darkBlue, 0.2);
+HEX.bubbleMid = mixHex(HEX.stageLight, HEX.stage, 0.0);
+HEX.bubbleLow = mixHex(HEX.darkBlue, HEX.black, 0.4);
 
 // ---------------------------------------------------------------------------------------------------------------
 // Lines (verbatim). `rows` keep the printed line breaks; `tone` marks the two-tone habit (first part light,
@@ -178,12 +203,11 @@ export const CAPACITY = {
     parts: [
       { key: 'dev', labelRows: ['Desarrollo', 'durante el año'], pct: 68 },
       { key: 'cons', labelRows: ['Capacidad', 'consolidada'], pct: 16 },
-      { key: 'rest', labelRows: [], pct: 16, unlabelled: true }, // the Dark Blue remainder: no label, no figure printed
+      { key: 'rest', labelRows: [], pct: null, unlabelled: true }, // the Dark Blue remainder: no label, no figure printed (the area is the leftover share)
     ],
   },
   nodesTitle: 'Distribución de actividad en nudos de red',
   nodesTitleRows: ['Distribución de actividad', 'en nudos de red'],
-  status: '9:41',
 };
 
 // ---------------------------------------------------------------------------------------------------------------
@@ -238,7 +262,6 @@ export const FIGURES = {
   kpis: CAPACITY.kpis,                                                      // m17 KPI cells
   treemap: [{ label: 'Desarrollo durante el año', value: '68%' }, { label: 'Capacidad consolidada', value: '16%' }], // m17
   years: CAPACITY.years,                                                    // m17 chips (only 2025 has figures)
-  status: CAPACITY.status,                                                  // m17 status bar
   project: TUBE.project, date: TUBE.date,                                   // m07 tube label
   report: { years: REPORT.years, range: REPORT.range, spine: REPORT.spine }, // m02
   badge: { id: PEOPLE.elena.id, numeral: PEOPLE.elena.numeral },            // m08

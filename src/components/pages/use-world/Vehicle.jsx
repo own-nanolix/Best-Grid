@@ -1,10 +1,10 @@
 // Scene 5: the m20 livery on a generic five-door body in side elevation. The mark sits on the rear quarter, the
 // word-mark low on the rear door (the photograph crops it; on the drawn body it sits whole inside the door), the roof
 // panel in Dark Blue. No maker's details.
-import { ShadowG, CalloutG, DimensionG, SpecColumnG, LitG, castDir } from '@/components/art/Mockup';
+import { ShadowG, CalloutG, DimensionG, SpecColumnG, LitG, castDir, CalloutsG } from '@/components/art/Mockup';
 import { MarkG, WordmarkFitG } from '@/components/art/Mark';
 import { Plate, BoltG } from './shared';
-import { HEX } from '@/lib/brand';
+import { HEX, mixHex } from '@/lib/brand';
 import { r2 } from '@/lib/charts';
 
 const IDP = 'use-world-vehicle';
@@ -20,18 +20,18 @@ const GLASS = ['M338 410L384 324L556 324L556 410Z', 'M572 324L730 324L736 410L57
 function Wheel({ cx }) {
   return (
     <g>
-      <circle cx={cx} cy={GROUND - 58} r="68" fill="#07081a" />
+      <circle cx={cx} cy={GROUND - 58} r="68" fill={mixHex(HEX.stage, HEX.black, 0.25)} />
       <circle cx={cx} cy={GROUND - 58} r="58" fill={`url(#${IDP}-rubber)`} />
-      <circle cx={cx} cy={GROUND - 58} r="58" fill="none" stroke="#3a4066" strokeWidth="1.5" />
-      <circle cx={cx} cy={GROUND - 58} r="47" fill="#0d1026" />
+      <circle cx={cx} cy={GROUND - 58} r="58" fill="none" stroke={mixHex(HEX.darkBlue, HEX.muted, 0.7)} strokeWidth="1.5" />
+      <circle cx={cx} cy={GROUND - 58} r="47" fill={mixHex(HEX.darkBlue, HEX.stage, 0.85)} />
       <circle cx={cx} cy={GROUND - 58} r="38" fill={`url(#${IDP}-metal)`} />
       {Array.from({ length: 5 }, (_, i) => {
         const a = (i * 72 - 90) * (Math.PI / 180);
-        return <path key={i} d={`M${cx} ${GROUND - 58}L${r2(cx + Math.cos(a) * 36)} ${r2(GROUND - 58 + Math.sin(a) * 36)}`} stroke="#2a3160" strokeWidth="9" strokeLinecap="butt" />;
+        return <path key={i} d={`M${cx} ${GROUND - 58}L${r2(cx + Math.cos(a) * 36)} ${r2(GROUND - 58 + Math.sin(a) * 36)}`} stroke={mixHex(HEX.stageLight, HEX.black, 0.05)} strokeWidth="9" strokeLinecap="butt" />;
       })}
       <circle cx={cx} cy={GROUND - 58} r="12" fill={`url(#${IDP}-metal-dark)`} />
-      <circle cx={cx} cy={GROUND - 58} r="38" fill="none" stroke="#ffffff" strokeOpacity="0.4" />
-      <path d={`M${cx - 42} ${GROUND - 78}A47 47 0 0 1 ${cx + 20} ${GROUND - 102}`} stroke="#ffffff" strokeOpacity="0.18" strokeWidth="3" fill="none" />
+      <circle cx={cx} cy={GROUND - 58} r="38" fill="none" stroke={HEX.white} strokeOpacity="0.4" />
+      <path d={`M${cx - 42} ${GROUND - 78}A47 47 0 0 1 ${cx + 20} ${GROUND - 102}`} stroke={HEX.white} strokeOpacity="0.18" strokeWidth="3" fill="none" />
     </g>
   );
 }
@@ -42,19 +42,19 @@ export default function Vehicle() {
     <Plate idp={IDP} title="Vehicle wrap on a generic body with the mark and the word-mark" exportName="use-world-vehicle" w={W} h={H} spot={SPOT} floor={0.78} split={0.72} no="05" label="Vehicle wrap">
       <defs>
         <linearGradient id={`${IDP}-paint`} x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stopColor="#ffffff" />
-          <stop offset="0.5" stopColor="#eef1f8" />
-          <stop offset="1" stopColor="#b8bfd2" />
+          <stop offset="0" stopColor={HEX.white} />
+          <stop offset="0.5" stopColor={mixHex(HEX.paper, HEX.lightBlue, 0.45)} />
+          <stop offset="1" stopColor={mixHex(HEX.paper, HEX.stageLight, 0.3)} />
         </linearGradient>
         <linearGradient id={`${IDP}-glassfill`} x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0" stopColor="#3a4580" />
-          <stop offset="0.5" stopColor="#1b2043" />
-          <stop offset="1" stopColor="#0d1026" />
+          <stop offset="0" stopColor={mixHex(HEX.activeBlue, HEX.stageLight, 0.8)} />
+          <stop offset="0.5" stopColor={HEX.darkBlue} />
+          <stop offset="1" stopColor={mixHex(HEX.darkBlue, HEX.stage, 0.85)} />
         </linearGradient>
         <linearGradient id={`${IDP}-streak`} x1="0" y1="0" x2="1" y2="0">
-          <stop offset="0" stopColor="#ffffff" stopOpacity="0" />
-          <stop offset="0.5" stopColor="#ffffff" stopOpacity="0.32" />
-          <stop offset="1" stopColor="#ffffff" stopOpacity="0" />
+          <stop offset="0" stopColor={HEX.white} stopOpacity="0" />
+          <stop offset="0.5" stopColor={HEX.white} stopOpacity="0.32" />
+          <stop offset="1" stopColor={HEX.white} stopOpacity="0" />
         </linearGradient>
         <clipPath id={`${IDP}-body`}><path d={BODY} /></clipPath>
         <clipPath id={`${IDP}-door`}><rect x="574" y="410" width="164" height="140" /></clipPath>
@@ -63,23 +63,23 @@ export default function Vehicle() {
         <clipPath id={`${IDP}-glass-c`}><path d={GLASS[2]} /></clipPath>
       </defs>
 
-      <rect x="28" y={GROUND - 2} width="1344" height="1.5" fill="#ffffff" opacity="0.12" />
+      <rect x="28" y={GROUND - 2} width="1344" height="1.5" fill={HEX.white} opacity="0.12" />
       <ShadowG idp={`${IDP}-sh`} cx={526} cy={GROUND + 4} rx={470} ry={20} dir={dir} opacity={0.85} blur={12} />
 
       <LitG>
         {/* body in white paint, shaded to the ground, with the Dark Blue roof panel */}
         <path d={BODY} fill={`url(#${IDP}-paint)`} />
         <g clipPath={`url(#${IDP}-body)`}>
-          <path d={ROOF} fill="#2a3266" />
+          <path d={ROOF} fill={HEX.stageLight} />
           <path d={ROOF} fill={`url(#${IDP}-metal-dark)`} opacity="0.5" />
-          <path d={ROOF} fill="none" stroke="#5a66a8" strokeWidth="3" opacity="0.9" />
-          <rect x="92" y="528" width="868" height="34" fill="#2a3160" opacity="0.85" />
-          <rect x="92" y="528" width="868" height="2" fill="#ffffff" opacity="0.25" />
+          <path d={ROOF} fill="none" stroke={mixHex(HEX.muted, HEX.blueSoft, 0.35)} strokeWidth="3" opacity="0.9" />
+          <rect x="92" y="528" width="868" height="34" fill={mixHex(HEX.stageLight, HEX.black, 0.05)} opacity="0.85" />
+          <rect x="92" y="528" width="868" height="2" fill={HEX.white} opacity="0.25" />
           {/* panel shoulder line and the door seams */}
-          <path d="M96 470L300 440L920 440" stroke="#9aa2ba" strokeWidth="1.2" fill="none" opacity="0.8" />
-          {[340, 566, 742].map((x) => <path key={x} d={`M${x} 410L${x} 530`} stroke="#8a92ac" strokeWidth="1.6" />)}
-          <path d="M742 410Q760 520 820 530" stroke="#8a92ac" strokeWidth="1.6" fill="none" />
-          <path d="M92 484L160 480M880 470L960 486" stroke="#d6dbe8" strokeWidth="2" />
+          <path d="M96 470L300 440L920 440" stroke={mixHex(HEX.paper, HEX.stageLight, 0.45)} strokeWidth="1.2" fill="none" opacity="0.8" />
+          {[340, 566, 742].map((x) => <path key={x} d={`M${x} 410L${x} 530`} stroke={mixHex(HEX.cardGrey, HEX.stageLight, 0.5)} strokeWidth="1.6" />)}
+          <path d="M742 410Q760 520 820 530" stroke={mixHex(HEX.cardGrey, HEX.stageLight, 0.5)} strokeWidth="1.6" fill="none" />
+          <path d="M92 484L160 480M880 470L960 486" stroke={mixHex(HEX.lightBlue, HEX.mutedOnDark, 0.25)} strokeWidth="2" />
           <rect x="92" y="338" width="868" height="224" fill={`url(#${IDP}-shade-v)`} opacity="0.7" />
 
           {/* the livery (m20): a small mark on the rear quarter above the wheel arch, the word-mark low on the rear door */}
@@ -96,28 +96,30 @@ export default function Vehicle() {
             <g clipPath={`url(#${IDP}-glass-${['a', 'b', 'c'][i]})`}>
               <rect x={400 + i * 170} y="300" width="60" height="120" fill={`url(#${IDP}-streak)`} transform={`skewX(-24)`} opacity="0.9" className="mock-sheen" />
             </g>
-            <path d={d} fill="none" stroke="#c9cfe0" strokeWidth="2" />
+            <path d={d} fill="none" stroke={mixHex(HEX.lightBlue, HEX.mutedOnDark, 0.5)} strokeWidth="2" />
           </g>
         ))}
         <path d="M352 404L330 400L322 388L350 392Z" fill={HEX.darkBlue} />
         {[[452, 436], [630, 436]].map(([x, y]) => <rect key={x} x={x} y={y} width="40" height="6" fill={`url(#${IDP}-metal)`} />)}
-        <path d="M940 446L956 458L958 500L936 500Z" fill="#3a3f5c" />
-        <path d="M940 446L956 458L958 470L938 462Z" fill="#ffffff" opacity="0.28" />
-        <path d="M96 470L94 492L124 488L126 466Z" fill="#cfd5e3" />
-        <rect x="90" y="552" width="40" height="10" fill="#10132b" />
-        <rect x="900" y="552" width="62" height="10" fill="#10132b" />
-        <path d="M402 290L800 290" stroke="#b7bdcc" strokeWidth="3" />
+        <path d="M940 446L956 458L958 500L936 500Z" fill={mixHex(HEX.darkBlue, HEX.lightBlue, 0.15)} />
+        <path d="M940 446L956 458L958 470L938 462Z" fill={HEX.white} opacity="0.28" />
+        <path d="M96 470L94 492L124 488L126 466Z" fill={mixHex(HEX.cardGrey, HEX.stageLight, 0.15)} />
+        <rect x="90" y="552" width="40" height="10" fill={mixHex(HEX.stage, HEX.activeBlue, 0.05)} />
+        <rect x="900" y="552" width="62" height="10" fill={mixHex(HEX.stage, HEX.activeBlue, 0.05)} />
+        <path d="M402 290L800 290" stroke={mixHex(HEX.labelGrey, HEX.stageLight, 0.1)} strokeWidth="3" />
         {WHEELS.map((cx) => <Wheel key={cx} cx={cx} />)}
         {[[250, 4], [780, 4]].map(([cx]) => <BoltG key={cx} x={cx} y={GROUND - 58} r={3} />)}
-        <path d={BODY} fill="none" stroke="#ffffff" strokeOpacity="0.5" strokeWidth="1.5" />
+        <path d={BODY} fill="none" stroke={HEX.white} strokeOpacity="0.5" strokeWidth="1.5" />
       </LitG>
 
       <DimensionG x1={92} y1={GROUND + 6} x2={960} y2={GROUND + 6} value="4 400 mm" offset={44} i={0} />
       <DimensionG x1={1010} y1={GROUND} x2={1010} y2={290} value="1 670 mm" offset={-22} i={1} />
 
-      <CalloutG x={866} y={464} tx={1000} ty={720} side="left" label="Mark on the rear quarter" i={3} />
-      <CalloutG x={650} y={496} tx={450} ty={645} side="left" label="Word-mark on the rear door" i={4} />
-      <CalloutG x={600} y={296} tx={500} ty={210} side="left" label="Roof panel, Dark Blue" i={5} />
+      <CalloutsG>
+        <CalloutG x={866} y={464} tx={1000} ty={720} side="left" label="Mark on the rear quarter" i={3} />
+        <CalloutG x={650} y={496} tx={450} ty={645} side="left" label="Word-mark on the rear door" i={4} />
+        <CalloutG x={600} y={296} tx={500} ty={210} side="left" label="Roof panel, Dark Blue" i={5} />
+      </CalloutsG>
 
       <SpecColumnG x={1090} y={150} w={250} title="Vehicle wrap" rowH={46} i={6} rows={[
         { k: 'Film', v: 'Cast vinyl, 80 µm' },

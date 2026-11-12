@@ -1,8 +1,8 @@
 import Art from '@/components/art/Art';
 import { MarkG, WordmarkG } from '@/components/art/Mark';
 import { BrandDefs, FogFieldG, PhotoBlockG, IconArtG, TrailsG, NodeGridG } from '@/components/art/KeyArt';
-import { StageG, MaterialDefs, ShadowG, CalloutG, DimensionG, LitG, SheenG, PlateFrameG } from '@/components/art/Mockup';
-import { HEX, LINES, CONTACT, TUBE, BADGE } from '@/lib/brand';
+import { StageG, MaterialDefs, ShadowG, CalloutG, DimensionG, LitG, SheenG, PlateFrameG, CalloutsG } from '@/components/art/Mockup';
+import { HEX, LINES, CONTACT, TUBE, BADGE, mixHex } from '@/lib/brand';
 import { r2 } from '@/lib/charts';
 
 // ---------------------------------------------------------------------------------------------------------------
@@ -94,14 +94,16 @@ export function TubeArt() {
         </g>
         <path d={label} fill={`url(#${idp}-shade)`} opacity="0.45" />
         <WordmarkVertical x={318} y={758} size={52} fill={HEX.onBlue} />
-        <path d={body} fill="none" stroke="#000" strokeOpacity="0.15" />
+        <path d={body} fill="none" stroke={HEX.black} strokeOpacity="0.15" />
         <SheenG idp={idp} d={body} opacity={0.22} />
       </LitG>
       <DimensionG x1={cx - rx} y1={bot + 14} x2={cx + rx} y2={bot + 14} value="Ø 90 mm" offset={34} i={4} />
-      <CalloutG x={cx + 62} y={top + 12} tx={600} ty={118} label="Mark on the lid" i={0} />
-      <CalloutG x={lx + LABEL.w - 6} y={ly + 150} tx={600} ty={300} label="Grey label" i={1} />
-      <CalloutG x={lx + 16} y={ly + LABEL.h + 8} tx={600} ty={420} label={TUBE.project} lang="es" i={3} />
-      <CalloutG x={cx + rx - 1} y={600} tx={600} ty={540} label="Rigid card, grained" i={2} />
+      <CalloutsG>
+        <CalloutG x={cx + 62} y={top + 12} tx={600} ty={118} label="Mark on the lid" i={0} />
+        <CalloutG x={lx + LABEL.w - 6} y={ly + 150} tx={600} ty={300} label="Grey label" i={1} />
+        <CalloutG x={lx + 16} y={ly + LABEL.h + 8} tx={600} ty={420} label={TUBE.project} lang="es" i={3} />
+        <CalloutG x={cx + rx - 1} y={600} tx={600} ty={540} label="Rigid card, grained" i={2} />
+      </CalloutsG>
     </Art>
   );
 }
@@ -176,7 +178,7 @@ export function VehicleArt() {
         <rect x="640" y="344" width="46" height="8" rx="4" fill={HEX.cardGrey} stroke={HEX.labelGrey} />
         {wheels.map((x) => (
           <g key={x}>
-            <circle cx={x} cy={470} r="74" fill="#0d1026" />
+            <circle cx={x} cy={470} r="74" fill={mixHex(HEX.darkBlue, HEX.stage, 0.85)} />
             <circle cx={x} cy={ground - 58} r="62" fill={`url(#${idp}-rubber)`} />
             <circle cx={x} cy={ground - 58} r="38" fill={`url(#${idp}-metal)`} />
             <circle cx={x} cy={ground - 58} r="10" fill={`url(#${idp}-metal-dark)`} />
@@ -186,9 +188,11 @@ export function VehicleArt() {
         <MarkG x={842} y={352} size={54} fill={HEX.darkBlue} />
       </LitG>
       <DimensionG x1={842} y1={414} x2={896} y2={414} value="270 mm" offset={22} i={3} color={HEX.darkBlue} text={HEX.darkBlue} size={12} />
-      <CalloutG x={869} y={378} tx={790} ty={96} label="Mark, rear quarter" i={0} />
-      <CalloutG x={625} y={405} tx={470} ty={150} label="Word-mark, rear door" side="left" i={1} />
-      <CalloutG x={420} y={262} tx={250} ty={200} label="Dark Blue roof" side="left" i={2} />
+      <CalloutsG>
+        <CalloutG x={869} y={378} tx={790} ty={96} label="Mark, rear quarter" i={0} />
+        <CalloutG x={625} y={405} tx={470} ty={150} label="Word-mark, rear door" side="left" i={1} />
+        <CalloutG x={420} y={262} tx={250} ty={200} label="Dark Blue roof" side="left" i={2} />
+      </CalloutsG>
     </Art>
   );
 }
@@ -210,9 +214,9 @@ export function BillboardArt() {
         <rect x={751} y={19} width={310} height={306} />
       </clipPath>
       <StageG idp={idp} w={W} h={H} spot={spot} floor={0.72} intensity={1.1} />
-      <rect x="0" y="0" width={W} height="120" fill="#161a3a" />
+      <rect x="0" y="0" width={W} height="120" fill={mixHex(HEX.darkBlue, HEX.black, 0.15)} />
       {Array.from({ length: 9 }, (_, i) => (
-        <path key={i} d={`M${40 + i * 150} 120 L${68 + i * 150} 78 L${150 + i * 150} 78 L${130 + i * 150} 120 Z`} fill="#0c0e1f" opacity="0.8" />
+        <path key={i} d={`M${40 + i * 150} 120 L${68 + i * 150} 78 L${150 + i * 150} 78 L${130 + i * 150} 120 Z`} fill={HEX.stage} opacity="0.8" />
       ))}
       <ShadowG idp={`${idp}-s1`} cx={354} cy={628} rx={46} ry={9} />
       <ShadowG idp={`${idp}-s2`} cx={885} cy={628} rx={46} ry={9} />
@@ -229,7 +233,7 @@ export function BillboardArt() {
           <MarkG x={646} y={8} size={42} fill={HEX.onBlue} />
           <g fontSize="11.5" lang="es">
             {LINES.billboard.rows.map((t, i) => (
-              <text key={t} x="22" y={186 + i * 17} fill="#ffffff">{t}</text>
+              <text key={t} x="22" y={186 + i * 17} fill={HEX.white}>{t}</text>
             ))}
             <text x="685" y="186" textAnchor="end" fill={HEX.onBlue}>{CONTACT.handle}</text>
             <text x="685" y="203" textAnchor="end" fill={HEX.darkBlue}>{CONTACT.web}</text>
@@ -257,9 +261,11 @@ export function BillboardArt() {
           </g>
         ))}
       </LitG>
-      <CalloutG x={250} y={450} tx={150} ty={652} label="Word-mark, very large" i={0} />
-      <CalloutG x={300} y={168} tx={120} ty={62} label="Two-tone line" i={1} />
-      <CalloutG x={950} y={440} tx={1010} ty={664} label="Photo stand-in" side="left" i={2} />
+      <CalloutsG>
+        <CalloutG x={250} y={450} tx={150} ty={652} label="Word-mark, very large" i={0} />
+        <CalloutG x={300} y={168} tx={120} ty={62} label="Two-tone line" i={1} />
+        <CalloutG x={950} y={440} tx={1010} ty={664} label="Photo stand-in" side="left" i={2} />
+      </CalloutsG>
     </Art>
   );
 }
@@ -335,9 +341,11 @@ export function BadgeArt() {
         ))}
         <SheenG idp={idp} d={`M${hx} ${hy} H${hx + hw} V${hy + hh} H${hx} Z`} opacity={0.14} />
       </LitG>
-      <CalloutG x={hx + 150} y="120" tx={400} ty={120} label="Active Blue strap" i={0} />
-      <CalloutG x={hx + hw - 6} y={hy + 120} tx={400} ty={330} label="Matte Dark Blue holder" i={1} />
-      <CalloutG x={cx + cw - 20} y={cy + 300} tx={400} ty={540} label="Card, light grey-blue" i={2} />
+      <CalloutsG>
+        <CalloutG x={hx + 150} y="120" tx={400} ty={120} label="Active Blue strap" i={0} />
+        <CalloutG x={hx + hw - 6} y={hy + 120} tx={400} ty={330} label="Matte Dark Blue holder" i={1} />
+        <CalloutG x={cx + cw - 20} y={cy + 300} tx={400} ty={540} label="Card, light grey-blue" i={2} />
+      </CalloutsG>
     </Art>
   );
 }

@@ -4,7 +4,7 @@
 // at its foot, a spec column beneath. Spot overhead. The photographs of m22 are not reproduced: the side screens
 // are flat Dark Blue blocks at 75% with line art from the icons. The designer's colours stay inside the artwork.
 import Art from '@/components/art/Art';
-import { StageG, MaterialDefs, ShadowG, LitG, CalloutG, DimensionG, SpecColumnG, PlateFrameG, PLATE } from '@/components/art/Mockup';
+import { StageG, MaterialDefs, ShadowG, LitG, CalloutG, DimensionG, SpecColumnG, PlateFrameG, PLATE, CalloutsG } from '@/components/art/Mockup';
 import { MarkG, WordmarkG } from '@/components/art/Mark';
 import { PhotoBlockG, IconArtG } from '@/components/art/KeyArt';
 import { HEX, LINES, CONTACT } from '@/lib/brand';
@@ -26,7 +26,7 @@ function Truss({ y, x0 = 60, x1 = 1540 }) {
       <rect x={x0} y={y - 3} width={x1 - x0} height="6" fill={PLATE.line} opacity="0.8" />
       <rect x={x0} y={y + 27} width={x1 - x0} height="6" fill={PLATE.line} opacity="0.8" />
       <path d={web} fill="none" stroke={PLATE.line} strokeWidth="2" opacity="0.6" />
-      <rect x={x0} y={y - 3} width={x1 - x0} height="1.5" fill="#ffffff" opacity="0.5" />
+      <rect x={x0} y={y - 3} width={x1 - x0} height="1.5" fill={HEX.white} opacity="0.5" />
     </g>
   );
 }
@@ -76,11 +76,11 @@ export default function SceneStage() {
       <MaterialDefs idp={idp} />
       <defs>
         <pattern id={`${idp}-led`} width="6" height="6" patternUnits="userSpaceOnUse">
-          <rect x="2" y="2" width="2" height="2" fill="#ffffff" opacity="0.07" />
+          <rect x="2" y="2" width="2" height="2" fill={HEX.white} opacity="0.07" />
         </pattern>
         <radialGradient id={`${idp}-glow`} cx="0.5" cy="0.4" r="0.7">
-          <stop offset="0" stopColor="#ffffff" stopOpacity="0.14" />
-          <stop offset="1" stopColor="#ffffff" stopOpacity="0" />
+          <stop offset="0" stopColor={HEX.white} stopOpacity="0.14" />
+          <stop offset="1" stopColor={HEX.white} stopOpacity="0" />
         </radialGradient>
         <linearGradient id={`${idp}-spill`} x1="0" y1="0" x2="0" y2="1">
           <stop offset="0" stopColor={HEX.activeBlue} stopOpacity="0.5" />
@@ -96,8 +96,8 @@ export default function SceneStage() {
       <path d={deckTop} fill={`url(#${idp}-metal-dark)`} />
       <path d={deckTop} fill={`url(#${idp}-spill)`} />
       <rect x={DECK.f0} y={DECK.front} width={DECK.f1 - DECK.f0} height={DECK.face} fill={`url(#${idp}-board-dark)`} />
-      <rect x={DECK.f0} y={DECK.front} width={DECK.f1 - DECK.f0} height="2" fill="#ffffff" opacity="0.4" />
-      <rect x={DECK.f0} y={DECK.front + DECK.face - 6} width={DECK.f1 - DECK.f0} height="6" fill="#000000" opacity="0.5" />
+      <rect x={DECK.f0} y={DECK.front} width={DECK.f1 - DECK.f0} height="2" fill={HEX.white} opacity="0.4" />
+      <rect x={DECK.f0} y={DECK.front + DECK.face - 6} width={DECK.f1 - DECK.f0} height="6" fill={HEX.black} opacity="0.5" />
 
       <LitG>
         <rect x={WX - 8} y={WY - 8} width={WW + 16} height={WH + 8} fill={`url(#${idp}-metal-dark)`} />
@@ -105,17 +105,19 @@ export default function SceneStage() {
           <WallArtG idp={idp} />
         </g>
         <rect x={WX} y={WY} width={WW} height={WH} fill={`url(#${idp}-glow)`} className="mock-sheen" />
-        <rect x={WX} y={WY} width={WW} height="2" fill="#ffffff" opacity="0.4" />
+        <rect x={WX} y={WY} width={WW} height="2" fill={HEX.white} opacity="0.4" />
       </LitG>
 
       <DimensionG x1={WX} y1={WY} x2={WX + WW} y2={WY} value="12 000 mm" offset={-22} i={4} />
       <DimensionG x1={WX} y1={WY + WH} x2={WX} y2={WY} value="2 200 mm" offset={-30} i={5} />
 
       {/* callouts on the right, every node on the right part of the object, top to bottom */}
-      <CalloutG x={at(1516, 60)[0]} y={at(1516, 60)[1]} tx={1420} ty={150} label="LED wall" side="right" i={0} />
-      <CalloutG x={at(1480, 200)[0]} y={at(1480, 200)[1]} tx={1420} ty={262} label="Side screen" side="right" i={1} />
-      <CalloutG x={DECK.x1 + 6} y={DECK.back + 46} tx={1420} ty={DECK.back + 46} label="Stage deck" side="right" i={2} />
-      <CalloutG x={DECK.f1 - 4} y={DECK.front + DECK.face / 2} tx={1420} ty={DECK.front + DECK.face / 2} label="Stage edge" side="right" i={3} />
+      <CalloutsG>
+        <CalloutG x={at(1516, 60)[0]} y={at(1516, 60)[1]} tx={1420} ty={150} label="LED wall" side="right" i={0} />
+        <CalloutG x={at(1480, 200)[0]} y={at(1480, 200)[1]} tx={1420} ty={262} label="Side screen" side="right" i={1} />
+        <CalloutG x={DECK.x1 + 6} y={DECK.back + 46} tx={1420} ty={DECK.back + 46} label="Stage deck" side="right" i={2} />
+        <CalloutG x={DECK.f1 - 4} y={DECK.front + DECK.face / 2} tx={1420} ty={DECK.front + DECK.face / 2} label="Stage edge" side="right" i={3} />
+      </CalloutsG>
 
       <SpecColumnG x={100} y={560} w={520} title="Stage" rows={[{ k: 'Wall width', v: '12 000 mm' }, { k: 'Wall height', v: '2 200 mm' }, { k: 'Deck depth', v: '6 000 mm' }]} />
     </Art>

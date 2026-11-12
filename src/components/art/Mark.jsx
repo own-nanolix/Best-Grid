@@ -11,6 +11,7 @@
 // The solid is the star outline minus 20 holes (5 per quadrant: two triangles at the tip, two trapezoids,
 // one square), with right-angle corners rounded r 1.5, acute corners r 0.4 (fill-rule evenodd).
 import { r2 } from '@/lib/charts';
+import { HEX } from '@/lib/brand';
 
 export const MARK = {
   B: 5.23,
@@ -141,7 +142,7 @@ export function MarkG({ x = 0, y = 0, size = 100, fill = 'currentColor', classNa
 
 // Blind emboss of the mark (business cards m05 / m06, card back): a light edge upper left and a shadow lower
 // right, on the paper colour. Needs idp.
-export function MarkEmbossG({ idp, x = 0, y = 0, size = 100, paper = '#eef2f7', light = '#ffffff', shade = '#1b2043', ...rest }) {
+export function MarkEmbossG({ idp, x = 0, y = 0, size = 100, paper = HEX.cardGrey, light = HEX.white, shade = HEX.darkBlue, ...rest }) {
   const k = r2(size / 100);
   return (
     <g transform={`translate(${x} ${y}) scale(${k})`} {...rest}>
@@ -160,11 +161,11 @@ export function MarkEmbossG({ idp, x = 0, y = 0, size = 100, paper = '#eef2f7', 
 // word space, so it is SVG <text> in the brand font stack (outlined later in a design tool), never redrawn.
 // Measured on the reference (crop_wordmark_grid, m19): width : cap height = 5.54 : 1, "Best" : "Grid" = 740 : 711,
 // gap between "t" and "G" = 0.2 cap height. The site's stand-in face (Inter Tight) is narrower than the brand cut,
-// so the word-mark is set at weight 540, tracking -0.045 em (letters touch, as printed), the word gap is set
-// explicitly (no space glyph: dx 0.15 em) and the line is scaled 1.1 horizontally. Overlaid on the reference it
+// so the word-mark is set at weight 540, tracking -0.015 em (only "s" and "t" touch, as printed), the word gap is set
+// explicitly (no space glyph: dx 0.09 em) and the line is scaled 1.1 horizontally. Overlaid on the reference it
 // spans the same width within 1% (5.5 : 1); "Grid" stays a little narrower than the brand cut's. At font size 1:
 // cap height 0.73, visible width about 4.0.
-export const WORDMARK = { weight: 540, tracking: -0.045, gap: 0.15, stretch: 1.1, cap: 0.73, width: 4.0 };
+export const WORDMARK = { weight: 540, tracking: -0.015, gap: 0.09, stretch: 1.1, cap: 0.73, width: 4.1 };
 
 // <WordmarkG x y size fill anchor /> : baseline at y; size is the font size (cap height = 0.73 x size).
 export function WordmarkG({ x = 0, y = 0, size = 40, fill = 'currentColor', anchor = 'start', className = '', ...rest }) {
@@ -276,7 +277,7 @@ export function LockupFooterG({ x = 0, y = 0, w = 900, h = 120, fill = 'currentC
 }
 
 // App icon: a Dark Blue tile with the Active Blue mark (as m21). radius in tile units of 100.
-export function AppIconG({ x = 0, y = 0, size = 100, radius = 22, tile = '#1b2043', fill = '#5983ff', ...rest }) {
+export function AppIconG({ x = 0, y = 0, size = 100, radius = 0, tile = HEX.darkBlue, fill = HEX.activeBlue, ...rest }) {
   return (
     <g transform={`translate(${x} ${y}) scale(${r2(size / 100)})`} {...rest}>
       <rect width="100" height="100" rx={radius} fill={tile} />
@@ -287,7 +288,7 @@ export function AppIconG({ x = 0, y = 0, size = 100, radius = 22, tile = '#1b204
 
 // The mark cropped large inside a w x h panel (a cover graphic grown from the mark). Needs idp.
 // zoom: mark size as a multiple of w; dx / dy shift the mark in units of w / h.
-export function MarkCropG({ idp, x = 0, y = 0, w = 300, h = 400, zoom = 1.6, dx = -0.3, dy = -0.2, fill = '#5983ff', ...rest }) {
+export function MarkCropG({ idp, x = 0, y = 0, w = 300, h = 400, zoom = 1.6, dx = -0.3, dy = -0.2, fill = HEX.activeBlue, ...rest }) {
   const id = `${idp}-crop`;
   return (
     <g transform={`translate(${x} ${y})`} {...rest}>

@@ -4,7 +4,7 @@
 // encode nothing, the web address), measured from the badge's own card and set into the 55 x 85 format. Back: a dark
 // strip, the small word-mark, the contact details of the brand and quiet bars where a name or a number would go.
 import { r2, seeded } from '@/lib/charts';
-import { HEX, CONTACT, BADGE, PEOPLE } from '@/lib/brand';
+import { HEX, CONTACT, BADGE, PEOPLE, mixHex } from '@/lib/brand';
 import { WordmarkFitG } from '@/components/art/Mark';
 import { CalloutG, DimensionG, SpecColumnG, CastG, SheenG } from '@/components/art/Mockup';
 import { Plate } from './plate';
@@ -17,7 +17,7 @@ const SIZE = 20; // callout type, so the plates stay legible in a three-column r
 
 const VARIANTS = {
   light: { name: 'card-light', face: 'card', edge: HEX.activeBlue, word: HEX.activeBlue, ink: HEX.activeBlue, line: HEX.activeBlue, numeral: [HEX.white, 0.62], strip: HEX.darkBlue, text: HEX.darkBlue, bar: HEX.darkBlue, tone: 'Light grey-blue card, Active Blue print, as printed' },
-  dark: { name: 'card-dark', face: 'board-dark', edge: HEX.activeBlue, word: HEX.activeBlue, ink: HEX.lightBlue, line: HEX.activeBlue, numeral: [HEX.white, 0.12], strip: '#06070f', text: HEX.lightBlue, bar: HEX.lightBlue, tone: 'Dark Blue card, Light Blue print' },
+  dark: { name: 'card-dark', face: 'board-dark', edge: HEX.activeBlue, word: HEX.activeBlue, ink: HEX.lightBlue, line: HEX.activeBlue, numeral: [HEX.white, 0.12], strip: mixHex(HEX.stage, HEX.black, 0.5), text: HEX.lightBlue, bar: HEX.lightBlue, tone: 'Dark Blue card, Light Blue print' },
   active: { name: 'card-active', face: 'board', edge: HEX.darkBlue, word: HEX.onBlue, ink: HEX.darkBlue, line: HEX.darkBlue, numeral: [HEX.white, 0.3], strip: HEX.darkBlue, text: HEX.darkBlue, bar: HEX.darkBlue, tone: 'Active Blue card, Dark Blue print' },
 };
 
@@ -82,7 +82,7 @@ function Card({ idp, id, v, side, x, y, r }) {
         {side === 'front' ? <FrontArt v={v} /> : <BackArt v={v} />}
         <rect width={W} height={H} fill={`url(#${idp}-shade-v)`} opacity="0.3" />
       </g>
-      <rect width={W} height={H} fill="none" stroke="#ffffff" strokeOpacity="0.28" />
+      <rect width={W} height={H} fill="none" stroke={HEX.white} strokeOpacity="0.28" />
       {side === 'front' && <SheenG idp={idp} d={`M0 0H${W}V${H * 0.45}L0 ${H * 0.7}Z`} opacity={0.22} />}
     </g>
   );

@@ -16,8 +16,8 @@ const LINEUP = [
   { w: 400, hem: 442, top: 52, name: 'Hoodie, Dark Blue', draw: (p) => <Hoodie {...p} body={HEX.darkBlue} art={hoodieArt('mark', HEX.activeBlue, HEX.activeBlue)} /> },
   { w: 400, hem: 442, top: 52, name: 'Hoodie, Light Blue', draw: (p) => <Hoodie {...p} body={HEX.lightBlue} tone={HEX.darkBlue} cord={HEX.darkBlue} art={hoodieArt('lattice', HEX.darkBlue, HEX.activeBlue)} /> },
   { w: 400, hem: 442, top: 52, name: 'Hoodie, Active Blue', draw: (p) => <Hoodie {...p} body={HEX.activeBlue} tone={HEX.darkBlue} cord={HEX.darkBlue} art={hoodieArt('word', HEX.lightBlue, HEX.lightBlue)} /> },
-  { ...TEE('a', HEX.darkBlue, HEX.activeBlue, HEX.activeBlue, '#ffffff'), name: 'T-shirt, Dark Blue' },
-  { ...TEE('b', HEX.activeBlue, HEX.lightBlue, HEX.darkBlue, '#ffffff'), name: 'T-shirt, Active Blue' },
+  { ...TEE('a', HEX.darkBlue, HEX.activeBlue, HEX.activeBlue, HEX.white), name: 'T-shirt, Dark Blue' },
+  { ...TEE('b', HEX.activeBlue, HEX.lightBlue, HEX.darkBlue, HEX.white), name: 'T-shirt, Active Blue' },
   { ...TEE('c', HEX.lightBlue, HEX.darkBlue, HEX.activeBlue, HEX.darkBlue), name: 'T-shirt, Light Blue' },
 ];
 
@@ -34,7 +34,7 @@ export default function Collection({ idp = 'use-apparel-collection' }) {
         return (
           <>
             <rect x="44" y={RAIL - 4} width="920" height="8" fill={`url(#${idp}-metal)`} />
-            <rect x="44" y={RAIL - 4} width="920" height="2" fill="#ffffff" opacity="0.5" />
+            <rect x="44" y={RAIL - 4} width="920" height="2" fill={HEX.white} opacity="0.5" />
             {[44, 964].map((x) => (
               <rect key={x} x={x - 3} y={RAIL - 26} width="6" height="46" fill={`url(#${idp}-metal-dark)`} />
             ))}
@@ -60,7 +60,7 @@ export default function Collection({ idp = 'use-apparel-collection' }) {
             })}
             <DimensionG x1={d0.x} y1={d0.y} x2={d1.x} y2={d1.y} value="740 mm" offset={36} i={8} size={15} />
             <rect x="60" y="626" width="880" height="14" fill={`url(#${idp}-metal-dark)`} />
-            <rect x="60" y="626" width="880" height="2" fill="#ffffff" opacity="0.35" />
+            <rect x="60" y="626" width="880" height="2" fill={HEX.white} opacity="0.35" />
             {[0, 1, 2, 3].map((i) => {
               const t = { x: 100 + i * 212, y: 626 - 290 * 0.3, s: 0.3, rot: 0 };
               const common = { idp, id: `${idp}-k${i}`, t, spot, cast: cast(t.x + 70, t.y + 80, 8) };

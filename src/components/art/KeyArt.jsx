@@ -50,14 +50,27 @@ export function LiveAreaG({ w, h, m = w * 0.067, rows = [], cols = [], stroke = 
 
 // ---------------------------------------------------------------------------------------------------------------
 // The baseline field of the poster grid (m10). Columns of horizontal hairlines, alternating Active Blue and grey,
-// with gutters left clear; `step` is the line spacing (0.55% of the sheet height in m10).
-export function BaselineFieldG({ idp, x = 0, y = 0, w, h, cols = 6, gutter = w * 0.008, step = h * 0.0055, colorA = HEX.activeBlue, colorB = '#9aa0b3', weight = 0.6, opacity = 1, ...rest }) {
+// with gutters left clear. As measured on m10: one line pair (Active Blue, then grey) every 0.63% of the sheet height,
+// in blocks of 18 pairs with one empty pitch between blocks. Passing `step` (the spacing of ONE line) draws a plain
+// repeating pair instead (no blocks).
+export function BaselineFieldG({ idp, x = 0, y = 0, w, h, cols = 6, gutter = w * 0.008, step, pitch = h * 0.0063, block = 18, colorA = HEX.activeBlue, colorB = HEX.greyLine, weight = 0.6, opacity = 1, ...rest }) {
   const cw = (w - gutter * (cols - 1)) / cols;
+  const plain = step != null;
+  const ph = plain ? step * 2 : pitch * (block + 1);
   return (
     <g transform={`translate(${r2(x)} ${r2(y)})`} opacity={opacity} {...rest}>
-      <pattern id={`${idp}-base`} width={r2(cw + gutter)} height={r2(step * 2)} patternUnits="userSpaceOnUse">
-        <rect y={0} width={r2(cw)} height={weight} fill={colorA} />
-        <rect y={r2(step)} width={r2(cw)} height={weight} fill={colorB} />
+      <pattern id={`${idp}-base`} width={r2(cw + gutter)} height={r2(ph)} patternUnits="userSpaceOnUse">
+        {plain ? (
+          <>
+            <rect y={0} width={r2(cw)} height={weight} fill={colorA} />
+            <rect y={r2(step)} width={r2(cw)} height={weight} fill={colorB} />
+          </>
+        ) : Array.from({ length: block }, (_, i) => (
+          <g key={i}>
+            <rect y={r2(i * pitch)} width={r2(cw)} height={weight} fill={colorA} />
+            <rect y={r2(i * pitch + pitch / 2)} width={r2(cw)} height={weight} fill={colorB} />
+          </g>
+        ))}
       </pattern>
       <rect width={r2(w)} height={r2(h)} fill={`url(#${idp}-base)`} />
     </g>
@@ -66,7 +79,7 @@ export function BaselineFieldG({ idp, x = 0, y = 0, w, h, cols = 6, gutter = w *
 
 // ---------------------------------------------------------------------------------------------------------------
 // The crossing bands of the folder (m05): two straight bands across a w x h panel, crossing at (cx, cy), with large
-// fillets in the four inside corners. a1 / a2: angles of the bands in degrees (m05: 72 and -21 from horizontal);
+// fillets in the four inside corners. a1 / a2: angles of the bands in degrees (m05: -72 and 21 from horizontal, the mirror of the first reading);
 // band: band width; r: fillet radius. Returns one path (fill).
 export function crossingPath({ w, h, cx, cy, a1 = 72, a2 = -21, band = 12, r = 40 }) {
   const dir = (a) => [Math.cos((a * Math.PI) / 180), -Math.sin((a * Math.PI) / 180)];
@@ -107,8 +120,8 @@ export function crossingPath({ w, h, cx, cy, a1 = 72, a2 = -21, band = 12, r = 4
 }
 
 // <CrossingBandsG idp w h /> : the folder graphic clipped to its panel. Defaults measured on m05: crossing at
-// (48%, 46%), bands at 72 and -21 degrees, band 2% of the width, fillet about 6% of the width.
-export function CrossingBandsG({ idp, x = 0, y = 0, w = 600, h = 860, cx = 0.48, cy = 0.46, a1 = 72, a2 = -21, band = 0.02, r = 0.06, fill = HEX.activeBlue, className, ...rest }) {
+// (48%, 46%), bands at -72 and 21 degrees, band 2% of the width, fillet about 6% of the width.
+export function CrossingBandsG({ idp, x = 0, y = 0, w = 600, h = 860, cx = 0.48, cy = 0.46, a1 = -72, a2 = 21, band = 0.02, r = 0.06, fill = HEX.activeBlue, className, ...rest }) {
   const d = crossingPath({ w, h, cx: w * cx, cy: h * cy, a1, a2, band: w * band, r: w * r });
   return (
     <g transform={`translate(${r2(x)} ${r2(y)})`} {...rest}>
@@ -216,7 +229,7 @@ export function nodeCells({ cols = 10, rows = 18, seed = 3, clusters = 9 } = {})
   return cells;
 }
 
-export function NodeGridG({ x = 0, y = 0, cols = 10, rows = 18, size = 34, seed = 3, clusters = 9, line = 'rgba(27,32,67,0.22)', full = HEX.activeBlue, soft = '#7c9cff', animate = false, ...rest }) {
+export function NodeGridG({ x = 0, y = 0, cols = 10, rows = 18, size = 34, seed = 3, clusters = 9, line = HEX.darkBlue, lineOpacity = 0.22, full = HEX.activeBlue, soft = HEX.blueSoft, animate = false, ...rest }) {
   const cells = nodeCells({ cols, rows, seed, clusters });
   return (
     <g transform={`translate(${r2(x)} ${r2(y)})`} {...rest}>
@@ -227,7 +240,7 @@ export function NodeGridG({ x = 0, y = 0, cols = 10, rows = 18, size = 34, seed 
           <g key={`${r}-${c}`}>
             {v > 0 && <rect x={cx} y={cy} width={size} height={size} fill={v === 1 ? full : soft} className={animate ? 'fill-in' : undefined} style={animate ? { '--i': (r + c) % 12 } : undefined} />}
             {q > 0 && <rect x={qx} y={qy} width={hs} height={hs} fill={full} />}
-            <rect x={cx + 0.5} y={cy + 0.5} width={size - 1} height={size - 1} fill="none" stroke={line} strokeWidth="1" />
+            <rect x={cx + 0.5} y={cy + 0.5} width={size - 1} height={size - 1} fill="none" stroke={line} strokeOpacity={lineOpacity} strokeWidth="1" />
           </g>
         );
       })}
@@ -265,30 +278,30 @@ export function BrandDefs({ idp, grain = 0.06 }) {
         </feMerge>
       </filter>
       <linearGradient id={`${idp}-fog`} x1="0.15" y1="0" x2="0.6" y2="1">
-        <stop offset="0" stopColor="#e9edf2" />
-        <stop offset="0.28" stopColor="#e6d3c8" />
+        <stop offset="0" stopColor={HEX.fogHi} />
+        <stop offset="0.28" stopColor={HEX.fogMid} />
         <stop offset="0.52" stopColor={HEX.fog} />
-        <stop offset="0.78" stopColor="#8f6a62" />
+        <stop offset="0.78" stopColor={HEX.fogLow} />
         <stop offset="1" stopColor={HEX.plum} />
       </linearGradient>
       <radialGradient id={`${idp}-fog-light`} cx="0.12" cy="0.1" r="0.7">
-        <stop offset="0" stopColor="#ffffff" stopOpacity="0.8" />
-        <stop offset="1" stopColor="#ffffff" stopOpacity="0" />
+        <stop offset="0" stopColor={HEX.white} stopOpacity="0.8" />
+        <stop offset="1" stopColor={HEX.white} stopOpacity="0" />
       </radialGradient>
       <linearGradient id={`${idp}-sunset`} x1="0" y1="0" x2="0" y2="1">
         <stop offset="0" stopColor={HEX.darkBlue} />
-        <stop offset="0.45" stopColor="#3b3d6e" />
-        <stop offset="0.72" stopColor="#b8603e" />
+        <stop offset="0.45" stopColor={HEX.sunsetMid} />
+        <stop offset="0.72" stopColor={HEX.sunsetLow} />
         <stop offset="0.86" stopColor={HEX.sunset} />
-        <stop offset="1" stopColor="#2a1c24" />
+        <stop offset="1" stopColor={HEX.sunsetEnd} />
       </linearGradient>
       <radialGradient id={`${idp}-bubble-cell`} cx="0.35" cy="0.3" r="0.7">
-        <stop offset="0" stopColor="#8d96c4" />
-        <stop offset="0.35" stopColor="#2b3160" />
-        <stop offset="1" stopColor="#0f1230" />
+        <stop offset="0" stopColor={HEX.bubbleHi} />
+        <stop offset="0.35" stopColor={HEX.bubbleMid} />
+        <stop offset="1" stopColor={HEX.bubbleLow} />
       </radialGradient>
       <pattern id={`${idp}-bubble`} width="34" height="29.4" patternUnits="userSpaceOnUse">
-        <rect width="34" height="29.4" fill="#0f1230" />
+        <rect width="34" height="29.4" fill={HEX.bubbleLow} />
         <path d="M8.5 0L17 4.9V14.7L8.5 19.6L0 14.7V4.9Z" fill={`url(#${idp}-bubble-cell)`} />
         <path d="M25.5 14.7L34 19.6V29.4L25.5 34.3L17 29.4V19.6Z" fill={`url(#${idp}-bubble-cell)`} />
         <path d="M25.5 -4.9L34 0V9.8L25.5 14.7L17 9.8V0Z" fill={`url(#${idp}-bubble-cell)`} />
@@ -304,7 +317,7 @@ export function FogFieldG({ idp, w, h, ...rest }) {
       <rect width={w} height={h} fill={`url(#${idp}-fog)`} />
       <rect width={w} height={h} fill={`url(#${idp}-fog-light)`} />
       {[0.32, 0.4, 0.62].map((t, i) => (
-        <rect key={t} x={0} y={r2(h * t)} width={w} height={r2(h * 0.03)} fill="#ffffff" opacity={0.08 + i * 0.03} />
+        <rect key={t} x={0} y={r2(h * t)} width={w} height={r2(h * 0.03)} fill={HEX.white} opacity={0.08 + i * 0.03} />
       ))}
     </g>
   );

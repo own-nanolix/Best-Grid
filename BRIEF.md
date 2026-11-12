@@ -56,7 +56,7 @@ nothing bounces. The only published motion is a hard-cut cycle at 100 ms per fra
      (m16); quarters Q1 3.200, Q2 4.100, Q3 5.200, Q4 2.920 MW, "Total anual" 15.420 MW, axis 1.000 to 7.000 MW,
      year chips 2023 / 2024 / 2025 with figures for **2025 only**; KPI cells Proyectos gestionados 128, Nudos
      analizados 46, Accesos concedidos 72; treemap 2025 "Capacidad gestionada": Desarrollo durante el año 68%,
-     Capacidad consolidada 16% (the Dark Blue remainder has no label and no figure); status 9:41 (m17); Proyecto
+     Capacidad consolidada 16% (the Dark Blue remainder has no label and no figure); (the status-bar clock of m17 is never drawn); Proyecto
      Nº 35, 02.05.2025 (m07); IDAA, [24 – 25], 2024 / 2025 (m02); ID : BG356945 and the badge numeral 25 (m08);
      the contacts. They may be used on any page (dashboards, charts, feature, campaign) as long as each figure keeps
      its own meaning and reads the same everywhere. Charts of other kinds may re-plot these figures; they may never

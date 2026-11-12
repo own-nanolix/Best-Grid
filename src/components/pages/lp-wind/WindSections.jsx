@@ -10,7 +10,7 @@ import { FogHero, TurbineBuild, WindFarm, Collector, FieldBlock, RotorCycle, Cla
 import s from './lp-wind.module.css';
 
 // Hero: the fog field full-bleed (m01), two horizontal guides at 45.6% and 54.3% of the height, two vertical guides
-// at 4.3% and 97.5% of the width, nodes at the crossings; the line left between the horizontals, the mark right.
+// at 4.3% and 95.7% of the width, nodes at the crossings; the line left between the horizontals, the mark right.
 export function WindHero() {
   return (
     <header className={s.hero} aria-labelledby="lp-wind-h1">

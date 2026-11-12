@@ -37,7 +37,7 @@ const TEE_FOLDS = {
   back: ['M96 200Q130 250 120 310', 'M304 200Q270 250 282 310', 'M112 326Q200 336 288 322', 'M26 144Q52 150 72 170', 'M374 144Q348 150 328 170'],
 };
 
-export function Tee({ idp, id, t, spot, view = 'front', body, art, tone = '#ffffff', cast }) {
+export function Tee({ idp, id, t, spot, view = 'front', body, art, tone = HEX.white, cast }) {
   const d = view === 'front' ? TEE_F : TEE_B;
   const neck = view === 'front' ? 'M146 18Q200 78 254 18' : 'M146 18Q200 38 254 18';
   const items = art[view];
@@ -48,22 +48,22 @@ export function Tee({ idp, id, t, spot, view = 'front', body, art, tone = '#ffff
       <clipPath id={`${id}-clip`}>
         <path d={d} />
       </clipPath>
-      <path d="M66 50L14 150L80 176L84 190Q100 116 66 50Z" fill="#000000" opacity="0.12" />
-      <path d="M334 50L386 150L320 176L316 190Q300 116 334 50Z" fill="#000000" opacity="0.12" />
+      <path d="M66 50L14 150L80 176L84 190Q100 116 66 50Z" fill={HEX.black} opacity="0.12" />
+      <path d="M334 50L386 150L320 176L316 190Q300 116 334 50Z" fill={HEX.black} opacity="0.12" />
       <g filter={`url(#${idp}-weave)`}>
         <ArtG items={items.filter((a) => a.k !== 'word')} clip={`${id}-clip`} />
       </g>
       <ArtG items={items.filter((a) => a.k === 'word')} clip={`${id}-clip`} />
       <FoldsG idp={idp} paths={TEE_FOLDS[view]} spot={spot} t={t} />
       <RibStroke d={neck} w={view === 'front' ? 14 : 12} body={body} />
-      <path d={neck} fill="none" stroke="#000000" strokeWidth="0.8" opacity="0.4" transform="translate(0 -7)" />
+      <path d={neck} fill="none" stroke={HEX.black} strokeWidth="0.8" opacity="0.4" transform="translate(0 -7)" />
       <LightG id={id} d={d} spot={spot} t={t} body={body} c={{ x: 200, y: 190 }} />
       <SeamG d="M66 50Q104 116 84 190" tone={tone} />
       <SeamG d="M334 50Q296 116 316 190" tone={tone} />
       <SeamG d="M22 138L82 162" tone={tone} />
       <SeamG d="M378 138L318 162" tone={tone} />
       <SeamG d="M82 334H318" tone={tone} />
-      <path d={d} fill="none" stroke="#000000" strokeWidth="1" opacity="0.35" />
+      <path d={d} fill="none" stroke={HEX.black} strokeWidth="1" opacity="0.35" />
     </g>
   );
 }
@@ -82,7 +82,7 @@ export function hoodieArt(kind, ink, ink2) {
   return [{ k: 'mark', x: 169, y: 150, size: 62, fill: ink }];
 }
 
-export function Hoodie({ idp, id, t, spot, body, art, tone = '#ffffff', cast, dim = 0, cord = HEX.lightBlue }) {
+export function Hoodie({ idp, id, t, spot, body, art, tone = HEX.white, cast, dim = 0, cord = HEX.lightBlue }) {
   return (
     <g transform={place(t)}>
       {cast && <CastG idp={`${id}-cast`} d={`${H_BODY}${H_HOOD}`} dir={cast.dir} depth={cast.depth / t.s} opacity={0.55} />}
@@ -90,8 +90,8 @@ export function Hoodie({ idp, id, t, spot, body, art, tone = '#ffffff', cast, di
       <clipPath id={`${id}-clip`}>
         <path d={H_BODY} />
       </clipPath>
-      <path d="M72 64Q34 92 24 200L10 372L68 386L86 262L92 226Q100 130 72 64Z" fill="#000000" opacity="0.13" />
-      <path d="M328 64Q366 92 376 200L390 372L332 386L314 262L308 226Q300 130 328 64Z" fill="#000000" opacity="0.13" />
+      <path d="M72 64Q34 92 24 200L10 372L68 386L86 262L92 226Q100 130 72 64Z" fill={HEX.black} opacity="0.13" />
+      <path d="M328 64Q366 92 376 200L390 372L332 386L314 262L308 226Q300 130 328 64Z" fill={HEX.black} opacity="0.13" />
       <g filter={`url(#${idp}-weave)`}>
         <ArtG items={art.filter((a) => a.k !== 'word')} clip={`${id}-clip`} />
       </g>
@@ -101,30 +101,30 @@ export function Hoodie({ idp, id, t, spot, body, art, tone = '#ffffff', cast, di
       <RibPoly id={`${id}-cr`} d="M390 372L332 386L335 410L394 396Z" body={body} />
       <RibPoly id={`${id}-hm`} d="M90 412H310V442H90Z" body={body} />
       <path d={H_HOOD} fill={body} filter={`url(#${idp}-weave)`} />
-      <path d={H_HOOD} fill="#000000" opacity="0.06" />
-      <path d={H_LINING} fill="#000000" opacity="0.62" />
+      <path d={H_HOOD} fill={HEX.black} opacity="0.06" />
+      <path d={H_LINING} fill={HEX.black} opacity="0.62" />
       <path d={H_LINING} fill={body} opacity="0.35" />
-      <path d="M152 46Q148 6 200 -2Q252 6 248 46" fill="none" stroke="#ffffff" strokeWidth="1.2" opacity="0.2" />
-      <path d="M118 36Q160 70 200 98" fill="none" stroke="#000000" strokeWidth="6" opacity="0.18" filter={`url(#${idp}-fold-s)`} />
-      <path d="M116 296H284L300 398H100Z" fill="#000000" opacity="0.08" />
-      <path d="M116 296L100 398M284 296L300 398" stroke="#000000" strokeWidth="3" opacity="0.4" fill="none" />
-      <path d="M100 398H300" stroke="#000000" strokeWidth="2" opacity="0.3" />
+      <path d="M152 46Q148 6 200 -2Q252 6 248 46" fill="none" stroke={HEX.white} strokeWidth="1.2" opacity="0.2" />
+      <path d="M118 36Q160 70 200 98" fill="none" stroke={HEX.black} strokeWidth="6" opacity="0.18" filter={`url(#${idp}-fold-s)`} />
+      <path d="M116 296H284L300 398H100Z" fill={HEX.black} opacity="0.08" />
+      <path d="M116 296L100 398M284 296L300 398" stroke={HEX.black} strokeWidth="3" opacity="0.4" fill="none" />
+      <path d="M100 398H300" stroke={HEX.black} strokeWidth="2" opacity="0.3" />
       <SeamG d="M122 304H278" tone={tone} />
       <SeamG d="M108 392H292" tone={tone} />
       <SeamG d="M72 64Q106 150 92 226" tone={tone} />
       <SeamG d="M328 64Q294 150 308 226" tone={tone} />
       <g fill="none" strokeLinecap="round">
-        <path d="M182 92Q176 134 179 190M218 92Q224 134 221 190" stroke="#000000" strokeWidth="5" opacity="0.28" transform="translate(1.5 2)" />
+        <path d="M182 92Q176 134 179 190M218 92Q224 134 221 190" stroke={HEX.black} strokeWidth="5" opacity="0.28" transform="translate(1.5 2)" />
         <path d="M182 92Q176 134 179 190M218 92Q224 134 221 190" stroke={cord} strokeWidth="3.4" />
-        <path d="M182 92Q176 134 179 190M218 92Q224 134 221 190" stroke="#000000" strokeWidth="3.4" strokeDasharray="1 2.6" opacity="0.28" />
+        <path d="M182 92Q176 134 179 190M218 92Q224 134 221 190" stroke={HEX.black} strokeWidth="3.4" strokeDasharray="1 2.6" opacity="0.28" />
       </g>
-      <rect x="176" y="186" width="6" height="16" fill="#ffffff" opacity="0.8" />
-      <rect x="218" y="186" width="6" height="16" fill="#ffffff" opacity="0.8" />
+      <rect x="176" y="186" width="6" height="16" fill={HEX.white} opacity="0.8" />
+      <rect x="218" y="186" width="6" height="16" fill={HEX.white} opacity="0.8" />
       <EyeletG idp={idp} cx={184} cy={92} />
       <EyeletG idp={idp} cx={216} cy={92} />
       <LightG id={id} d={`${H_BODY}${H_HOOD}`} spot={spot} t={t} body={body} c={{ x: 200, y: 200 }} reach={280} />
-      {dim > 0 && <path d={`${H_BODY}${H_HOOD}`} fill="#000000" opacity={dim} />}
-      <path d={H_BODY} fill="none" stroke="#000000" strokeWidth="1" opacity="0.35" />
+      {dim > 0 && <path d={`${H_BODY}${H_HOOD}`} fill={HEX.black} opacity={dim} />}
+      <path d={H_BODY} fill="none" stroke={HEX.black} strokeWidth="1" opacity="0.35" />
     </g>
   );
 }
@@ -147,38 +147,38 @@ export function Vest({ idp, id, t, spot, body = HEX.activeBlue, bind = HEX.darkB
       </clipPath>
       <g clipPath={`url(#${id}-clip)`}>
         <pattern id={`${id}-prism`} width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
-          <rect width="2" height="5" fill="#000000" opacity="0.16" />
+          <rect width="2" height="5" fill={HEX.black} opacity="0.16" />
         </pattern>
         {[...strips, ...bands].map((d, i) => (
           <g key={i}>
             <path d={d} fill={tape} />
             <path d={d} fill={`url(#${idp}-metal)`} opacity="0.55" />
             <path d={d} fill={`url(#${id}-prism)`} />
-            <path d={d} fill="none" stroke="#000000" strokeWidth="0.8" opacity="0.35" />
+            <path d={d} fill="none" stroke={HEX.black} strokeWidth="0.8" opacity="0.35" />
           </g>
         ))}
         <ArtG items={[{ k: 'mark', x: 206, y: 118, size: 38, fill: bind }]} />
-        <path d="M80 436V176" stroke="#000000" strokeWidth="14" opacity="0.1" />
+        <path d="M80 436V176" stroke={HEX.black} strokeWidth="14" opacity="0.1" />
       </g>
       <FoldsG idp={idp} paths={['M110 200Q150 232 138 258', 'M290 200Q250 232 262 258', 'M120 380Q200 396 280 378']} spot={spot} t={t} />
       {[[98, 372], [228, 372]].map(([x, y], i) => (
         <g key={i}>
-          <path d={`M${x} ${y}H${x + 76}V${y + 46}H${x}Z`} fill="#000000" opacity="0.14" />
+          <path d={`M${x} ${y}H${x + 76}V${y + 46}H${x}Z`} fill={HEX.black} opacity="0.14" />
           <path d={`M${x} ${y}H${x + 76}V${y + 22}L${x + 38} ${y + 28}L${x} ${y + 22}Z`} fill={body} />
-          <path d={`M${x} ${y}H${x + 76}V${y + 22}L${x + 38} ${y + 28}L${x} ${y + 22}Z`} fill="#000000" opacity="0.14" />
+          <path d={`M${x} ${y}H${x + 76}V${y + 22}L${x + 38} ${y + 28}L${x} ${y + 22}Z`} fill={HEX.black} opacity="0.14" />
           <SeamG d={`M${x + 4} ${y + 4}H${x + 72}`} />
         </g>
       ))}
       <path d="M200 70V436" stroke={bind} strokeWidth="7" />
-      <path d="M200 70V436" stroke="#ffffff" strokeWidth="7" strokeDasharray="1.2 2.4" opacity="0.5" />
-      <rect x="194" y="76" width="12" height="26" fill={`url(#${idp}-metal)`} stroke="#000000" strokeOpacity="0.4" strokeWidth="0.6" />
+      <path d="M200 70V436" stroke={HEX.white} strokeWidth="7" strokeDasharray="1.2 2.4" opacity="0.5" />
+      <rect x="194" y="76" width="12" height="26" fill={`url(#${idp}-metal)`} stroke={HEX.black} strokeOpacity="0.4" strokeWidth="0.6" />
       <EyeletG idp={idp} cx={200} cy={92} r={3.4} />
       <RibStroke d="M170 14Q200 70 230 14" w={12} body={bind} rib={0.05} />
       <RibStroke d="M108 60Q102 122 84 176M292 60Q298 122 316 176" w={8} body={bind} rib={0.05} />
       <RibStroke d="M80 432H320" w={9} body={bind} rib={0.05} />
       <LightG id={id} d={V_BODY} spot={spot} t={t} body={body} c={{ x: 200, y: 220 }} />
-      {dim > 0 && <path d={V_BODY} fill="#000000" opacity={dim} />}
-      <path d={V_BODY} fill="none" stroke="#000000" strokeWidth="1" opacity="0.35" />
+      {dim > 0 && <path d={V_BODY} fill={HEX.black} opacity={dim} />}
+      <path d={V_BODY} fill="none" stroke={HEX.black} strokeWidth="1" opacity="0.35" />
     </g>
   );
 }

@@ -1,8 +1,8 @@
 // Three feather flags of falling height (curved pole, sleeve, cross base) and a hanging banner (rail, cables,
 // eyelets, pole pocket). Artwork is only the mark, the word-mark and lines printed in the case study.
-import { CalloutG, DimensionG, ShadowG, CastG, LitG, castDir } from '@/components/art/Mockup';
+import { CalloutG, DimensionG, ShadowG, CastG, LitG, castDir, CalloutsG } from '@/components/art/Mockup';
 import { MarkG, WordmarkVerticalG, WordmarkFitG } from '@/components/art/Mark';
-import { HEX, LINES } from '@/lib/brand';
+import { HEX, LINES, mixHex } from '@/lib/brand';
 import { r2 } from '@/lib/charts';
 import { Plate, idOf, EsG, rrect } from './kit';
 import { COL } from './bands-parts';
@@ -43,19 +43,19 @@ function flagGeom({ H, bow, side, wmax, t0 = 0.2, n = 40 }) {
 function CrossBase({ idp, w = 120 }) {
   const bar = (x1, y1, x2, y2, k) => (
     <g key={k}>
-      <path d={`M${x1} ${y1 + 3}L${x2} ${y2 + 3}`} stroke="#000000" strokeOpacity="0.55" strokeWidth="9" strokeLinecap="round" />
-      <path d={`M${x1} ${y1}L${x2} ${y2}`} stroke="#8d95ab" strokeWidth="8" strokeLinecap="round" />
-      <path d={`M${x1} ${y1 - 1.5}L${x2} ${y2 - 1.5}`} stroke="#e6e9f2" strokeWidth="2.2" strokeLinecap="round" opacity="0.8" />
-      {[[x1, y1], [x2, y2]].map(([x, y]) => <ellipse key={x} cx={x} cy={y + 2} rx="6" ry="3.4" fill="#10132b" />)}
+      <path d={`M${x1} ${y1 + 3}L${x2} ${y2 + 3}`} stroke={HEX.black} strokeOpacity="0.55" strokeWidth="9" strokeLinecap="round" />
+      <path d={`M${x1} ${y1}L${x2} ${y2}`} stroke={mixHex(HEX.labelGrey, HEX.muted, 0.45)} strokeWidth="8" strokeLinecap="round" />
+      <path d={`M${x1} ${y1 - 1.5}L${x2} ${y2 - 1.5}`} stroke={mixHex(HEX.paper, HEX.lightBlue, 0.85)} strokeWidth="2.2" strokeLinecap="round" opacity="0.8" />
+      {[[x1, y1], [x2, y2]].map(([x, y]) => <ellipse key={x} cx={x} cy={y + 2} rx="6" ry="3.4" fill={mixHex(HEX.stage, HEX.activeBlue, 0.05)} />)}
     </g>
   );
   return (
     <g>
       {bar(-w, -14, w, 14, 'a')}
       {bar(-w, 14, w, -14, 'b')}
-      <ellipse cx="0" cy="3" rx="17" ry="8" fill="#000000" opacity="0.45" />
-      <ellipse cx="0" cy="0" rx="15" ry="7" fill={`url(#${idp}-metal)`} stroke="#59607a" strokeWidth="0.75" />
-      <ellipse cx="0" cy="-1" rx="6.5" ry="3" fill="#10132b" />
+      <ellipse cx="0" cy="3" rx="17" ry="8" fill={HEX.black} opacity="0.45" />
+      <ellipse cx="0" cy="0" rx="15" ry="7" fill={`url(#${idp}-metal)`} stroke={mixHex(HEX.cardGrey, HEX.darkBlue, 0.7)} strokeWidth="0.75" />
+      <ellipse cx="0" cy="-1" rx="6.5" ry="3" fill={mixHex(HEX.stage, HEX.activeBlue, 0.05)} />
     </g>
   );
 }
@@ -75,9 +75,9 @@ function FlagPlate({ id, no, title, tone, H, bow, side, wmax, spot, bx, by, chil
         <CastG idp={`${idp}-c`} d={g.blade} dir={{ x: cd.x, y: 0.12 }} depth={46} opacity={0.3} blur={8} />
         <CrossBase idp={idp} />
         <LitG>
-          <path d={g.pole} stroke="#000000" strokeOpacity="0.4" strokeWidth="6.5" fill="none" transform="translate(1.5 1.5)" />
-          <path d={g.pole} stroke="#a3aabf" strokeWidth="5" fill="none" />
-          <path d={g.pole} stroke="#ffffff" strokeOpacity="0.7" strokeWidth="1.3" fill="none" transform={`translate(${side > 0 ? -1.1 : 1.1} 0)`} />
+          <path d={g.pole} stroke={HEX.black} strokeOpacity="0.4" strokeWidth="6.5" fill="none" transform="translate(1.5 1.5)" />
+          <path d={g.pole} stroke={mixHex(HEX.lightBlue, HEX.stageLight, 0.35)} strokeWidth="5" fill="none" />
+          <path d={g.pole} stroke={HEX.white} strokeOpacity="0.7" strokeWidth="1.3" fill="none" transform={`translate(${side > 0 ? -1.1 : 1.1} 0)`} />
           <clipPath id={`${idp}-blade`}><path d={g.blade} /></clipPath>
           <path d={g.blade} fill={c.c} filter={`url(#${idp}-weave)`} />
           <g clipPath={`url(#${idp}-blade)`}>
@@ -88,12 +88,12 @@ function FlagPlate({ id, no, title, tone, H, bow, side, wmax, spot, bx, by, chil
             <path d={g.blade} fill={shade} />
             <path d={g.blade} fill={`url(#${idp}-shade-v)`} opacity="0.4" />
           </g>
-          <path d={g.sleeve} stroke="#000000" strokeOpacity="0.35" strokeWidth="7" fill="none" strokeLinecap="round" />
-          <path d={g.pole} stroke="#a3aabf" strokeWidth="4" fill="none" strokeDasharray="0.1 0" opacity="0.5" />
+          <path d={g.sleeve} stroke={HEX.black} strokeOpacity="0.35" strokeWidth="7" fill="none" strokeLinecap="round" />
+          <path d={g.pole} stroke={mixHex(HEX.lightBlue, HEX.stageLight, 0.35)} strokeWidth="4" fill="none" strokeDasharray="0.1 0" opacity="0.5" />
           {[0.33, 0.66].map((t) => (
-            <circle key={t} cx={g.B(t)[0]} cy={g.B(t)[1]} r="3.6" fill={`url(#${idp}-metal)`} stroke="#59607a" strokeWidth="0.6" />
+            <circle key={t} cx={g.B(t)[0]} cy={g.B(t)[1]} r="3.6" fill={`url(#${idp}-metal)`} stroke={mixHex(HEX.cardGrey, HEX.darkBlue, 0.7)} strokeWidth="0.6" />
           ))}
-          <circle cx={g.B(1)[0]} cy={g.B(1)[1]} r="4.5" fill={`url(#${idp}-metal)`} stroke="#59607a" strokeWidth="0.6" />
+          <circle cx={g.B(1)[0]} cy={g.B(1)[1]} r="4.5" fill={`url(#${idp}-metal)`} stroke={mixHex(HEX.cardGrey, HEX.darkBlue, 0.7)} strokeWidth="0.6" />
         </LitG>
       </g>
       {children({ g, at: (x, y) => [r2(bx + x), r2(by + y)] })}
@@ -109,10 +109,12 @@ export function FlagA() {
       {({ g, at }) => (
         <g>
           <DimensionG x1={90} y1={by} x2={90} y2={by - 405} value="4500 mm" offset={26} i={6} />
-          <CalloutG x={at(...g.at(0.9, 0.3))[0]} y={at(...g.at(0.9, 0.3))[1]} tx={400} ty={95} label="Mark" i={0} />
-          <CalloutG x={at(...g.at(0.45, 0.6))[0]} y={at(...g.at(0.45, 0.6))[1]} tx={400} ty={200} label="Flag blade" sub="knitted fabric, 650 mm" i={1} />
-          <CalloutG x={at(...g.B(0.12))[0]} y={at(...g.B(0.12))[1]} tx={400} ty={330} label="Curved pole" sub="fibreglass" i={2} />
-          <CalloutG x={bx + 80} y={by + 7} tx={400} ty={420} label="Cross base" sub="steel, 900 mm" i={3} />
+          <CalloutsG>
+            <CalloutG x={at(...g.at(0.9, 0.3))[0]} y={at(...g.at(0.9, 0.3))[1]} tx={400} ty={95} label="Mark" i={0} />
+            <CalloutG x={at(...g.at(0.45, 0.6))[0]} y={at(...g.at(0.45, 0.6))[1]} tx={400} ty={200} label="Flag blade" sub="knitted fabric, 650 mm" i={1} />
+            <CalloutG x={at(...g.B(0.12))[0]} y={at(...g.B(0.12))[1]} tx={400} ty={330} label="Curved pole" sub="fibreglass" i={2} />
+            <CalloutG x={bx + 80} y={by + 7} tx={400} ty={420} label="Cross base" sub="steel, 900 mm" i={3} />
+          </CalloutsG>
         </g>
       )}
     </FlagPlate>
@@ -127,10 +129,12 @@ export function FlagB() {
       {({ g, at }) => (
         <g>
           <DimensionG x1={bx + 130} y1={by} x2={bx + 130} y2={by - 325} value="3500 mm" offset={-26} i={6} />
-          <CalloutG x={at(...g.at(0.9, 0.3))[0]} y={at(...g.at(0.9, 0.3))[1]} tx={150} ty={150} label="Mark" side="left" i={0} />
-          <CalloutG x={at(...g.at(0.4, 0.7))[0]} y={at(...g.at(0.4, 0.7))[1]} tx={150} ty={250} label="Word-mark" side="left" i={1} />
-          <CalloutG x={at(...g.B(0.1))[0]} y={at(...g.B(0.1))[1]} tx={150} ty={350} label="Pole sleeve" side="left" i={2} />
-          <CalloutG x={bx - 80} y={by - 7} tx={150} ty={435} label="Cross base" side="left" i={3} />
+          <CalloutsG>
+            <CalloutG x={at(...g.at(0.9, 0.3))[0]} y={at(...g.at(0.9, 0.3))[1]} tx={150} ty={150} label="Mark" side="left" i={0} />
+            <CalloutG x={at(...g.at(0.4, 0.7))[0]} y={at(...g.at(0.4, 0.7))[1]} tx={150} ty={250} label="Word-mark" side="left" i={1} />
+            <CalloutG x={at(...g.B(0.1))[0]} y={at(...g.B(0.1))[1]} tx={150} ty={350} label="Pole sleeve" side="left" i={2} />
+            <CalloutG x={bx - 80} y={by - 7} tx={150} ty={435} label="Cross base" side="left" i={3} />
+          </CalloutsG>
         </g>
       )}
     </FlagPlate>
@@ -145,9 +149,11 @@ export function FlagC() {
       {({ g, at }) => (
         <g>
           <DimensionG x1={bx - 150} y1={by} x2={bx - 150} y2={by - 250} value="2500 mm" offset={26} i={6} />
-          <CalloutG x={at(...g.at(0.85, 0.5))[0]} y={at(...g.at(0.85, 0.5))[1]} tx={440} ty={190} label="Printed blade" i={0} />
-          <CalloutG x={at(...g.B(1))[0]} y={at(...g.B(1))[1]} tx={170} ty={150} label="Pole tip" side="left" i={1} />
-          <CalloutG x={bx} y={by + 2} tx={440} ty={440} label="Cross base" sub="foot plates" i={2} />
+          <CalloutsG>
+            <CalloutG x={at(...g.at(0.85, 0.5))[0]} y={at(...g.at(0.85, 0.5))[1]} tx={440} ty={190} label="Printed blade" i={0} />
+            <CalloutG x={at(...g.B(1))[0]} y={at(...g.B(1))[1]} tx={170} ty={150} label="Pole tip" side="left" i={1} />
+            <CalloutG x={bx} y={by + 2} tx={440} ty={440} label="Cross base" sub="foot plates" i={2} />
+          </CalloutsG>
         </g>
       )}
     </FlagPlate>
@@ -166,13 +172,13 @@ export function Banner() {
   const c = COL.active;
   return (
     <Plate id="banner" title="Hanging banner on cables" w={560} h={520} spot={spot} no="19">
-      <rect x="170" y="52" width="362" height="12" fill={`url(#${idp}-metal)`} stroke="#59607a" strokeWidth="0.75" />
-      <path d="M170 76L190 64L210 76L230 64L250 76L270 64L290 76L310 64L330 76L350 64L370 76L390 64L410 76L430 64L450 76L470 64L490 76L510 64L530 76" stroke="#8d95ab" strokeWidth="1.6" fill="none" />
-      <rect x="170" y="76" width="362" height="5" fill="#59607a" />
+      <rect x="170" y="52" width="362" height="12" fill={`url(#${idp}-metal)`} stroke={mixHex(HEX.cardGrey, HEX.darkBlue, 0.7)} strokeWidth="0.75" />
+      <path d="M170 76L190 64L210 76L230 64L250 76L270 64L290 76L310 64L330 76L350 64L370 76L390 64L410 76L430 64L450 76L470 64L490 76L510 64L530 76" stroke={mixHex(HEX.labelGrey, HEX.muted, 0.45)} strokeWidth="1.6" fill="none" />
+      <rect x="170" y="76" width="362" height="5" fill={mixHex(HEX.cardGrey, HEX.darkBlue, 0.7)} />
       <ShadowG idp={`${idp}-g`} cx={x0 + bw / 2} cy={y0 + bh + 30} rx={100} ry={10} dir={cd} opacity={0.25} blur={9} />
       <CastG idp={`${idp}-c`} d={d} dir={{ x: cd.x, y: 0.1 }} depth={34} opacity={0.34} blur={9} />
       <g>
-        <path d={`M${x0 + 14} 81L${x0 + 14} ${y0 + 6}M${x0 + bw - 14} 81L${x0 + bw - 14} ${y0 + 6}`} stroke="#c7ccd6" strokeWidth="1.6" fill="none" />
+        <path d={`M${x0 + 14} 81L${x0 + 14} ${y0 + 6}M${x0 + bw - 14} 81L${x0 + bw - 14} ${y0 + 6}`} stroke={HEX.labelGrey} strokeWidth="1.6" fill="none" />
         <LitG>
           <path d={d} fill={c.c} filter={`url(#${idp}-weave)`} />
           <clipPath id={`${idp}-cloth`}><path d={d} /></clipPath>
@@ -186,26 +192,28 @@ export function Banner() {
             <WordmarkFitG x={x0 + 16} y={y0 + bh - 44} w={118} fill={HEX.onBlue} />
             <rect x={x0} y={y0} width={bw} height={bh} fill={`url(#${idp}-shade)`} />
             {[0.22, 0.5, 0.78].map((k) => (
-              <rect key={k} x={r2(x0 + bw * k)} y={y0} width="5" height={bh} fill="#000000" opacity="0.07" filter={`url(#${idp}-soft)`} />
+              <rect key={k} x={r2(x0 + bw * k)} y={y0} width="5" height={bh} fill={HEX.black} opacity="0.07" filter={`url(#${idp}-soft)`} />
             ))}
           </g>
-          <path d={rrect(x0 - 2, y0 + bh - 18, bw + 4, 18, 4)} fill="#000000" opacity="0.22" />
+          <path d={rrect(x0 - 2, y0 + bh - 18, bw + 4, 18, 4)} fill={HEX.black} opacity="0.22" />
           <rect x={x0 - 6} y={y0 + bh - 12} width="8" height="12" fill={`url(#${idp}-metal)`} />
           <rect x={x0 + bw - 2} y={y0 + bh - 12} width="8" height="12" fill={`url(#${idp}-metal)`} />
           {[x0 + 14, x0 + bw - 14].map((x) => (
             <g key={x}>
               <circle cx={x} cy={y0 + 12} r="8" fill="none" stroke={`url(#${idp}-metal)`} strokeWidth="3.4" />
-              <circle cx={x} cy={y0 + 12} r="5" fill="#0c0e1f" opacity="0.8" />
+              <circle cx={x} cy={y0 + 12} r="5" fill={HEX.stage} opacity="0.8" />
             </g>
           ))}
         </LitG>
       </g>
       <DimensionG x1={x0} y1={y0 + bh} x2={x0 + bw} y2={y0 + bh} value="600 mm" offset={44} i={6} />
       <DimensionG x1={x0 + bw} y1={y0 + bh} x2={x0 + bw} y2={y0} value="1320 mm" offset={34} i={7} />
-      <CalloutG x={x0 + 14} y={y0 + 12} tx={150} ty={250} label="Eyelet" sub="metal ring" side="left" i={0} />
-      <CalloutG x={x0 + 14} y={96} tx={150} ty={180} label="Cable" side="left" i={1} />
-      <CalloutG x={x0 + bw / 2} y={y0 + bh - 9} tx={150} ty={400} label="Pole pocket" sub="aluminium rod" side="left" i={2} />
-      <CalloutG x={250} y={64} tx={150} ty={110} label="Rail" side="left" i={3} />
+      <CalloutsG>
+        <CalloutG x={x0 + 14} y={y0 + 12} tx={150} ty={250} label="Eyelet" sub="metal ring" side="left" i={0} />
+        <CalloutG x={x0 + 14} y={96} tx={150} ty={180} label="Cable" side="left" i={1} />
+        <CalloutG x={x0 + bw / 2} y={y0 + bh - 9} tx={150} ty={400} label="Pole pocket" sub="aluminium rod" side="left" i={2} />
+        <CalloutG x={250} y={64} tx={150} ty={110} label="Rail" side="left" i={3} />
+      </CalloutsG>
     </Plate>
   );
 }

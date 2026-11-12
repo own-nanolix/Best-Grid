@@ -47,7 +47,7 @@ export function GarmentDefs({ idp }) {
 // A light overlay: lit on the side that faces the spot, shaded on the far side, with a rim of light on the lit edge.
 // body (a HEX) tunes the strength: dark cloth needs more light, pale cloth less shade.
 export function LightG({ id, d, spot, t, body, c = { x: 200, y: 200 }, reach = 260, lit, dark }) {
-  const n = parseInt((body || '#5983ff').slice(1), 16), lum = (0.3 * (n >> 16) + 0.59 * ((n >> 8) & 255) + 0.11 * (n & 255)) / 255;
+  const n = parseInt((body || HEX.activeBlue).slice(1), 16), lum = (0.3 * (n >> 16) + 0.59 * ((n >> 8) & 255) + 0.11 * (n & 255)) / 255;
   const lt = lit ?? (lum < 0.3 ? 0.5 : lum > 0.7 ? 0.2 : 0.32), dk = dark ?? (lum > 0.7 ? 0.3 : 0.46);
   const p = localSpot(spot, t), vx = p.x - c.x, vy = p.y - c.y, l = Math.hypot(vx, vy) || 1;
   const ux = vx / l, uy = vy / l;
@@ -55,14 +55,14 @@ export function LightG({ id, d, spot, t, body, c = { x: 200, y: 200 }, reach = 2
   return (
     <g>
       <linearGradient id={`${id}-light`} {...g}>
-        <stop offset="0" stopColor="#ffffff" stopOpacity={lt} />
-        <stop offset="0.45" stopColor="#ffffff" stopOpacity="0" />
-        <stop offset="0.55" stopColor="#000000" stopOpacity="0" />
-        <stop offset="1" stopColor="#000000" stopOpacity={dk} />
+        <stop offset="0" stopColor={HEX.white} stopOpacity={lt} />
+        <stop offset="0.45" stopColor={HEX.white} stopOpacity="0" />
+        <stop offset="0.55" stopColor={HEX.black} stopOpacity="0" />
+        <stop offset="1" stopColor={HEX.black} stopOpacity={dk} />
       </linearGradient>
       <linearGradient id={`${id}-rim`} {...g}>
-        <stop offset="0" stopColor="#ffffff" stopOpacity="0.7" />
-        <stop offset="0.5" stopColor="#ffffff" stopOpacity="0" />
+        <stop offset="0" stopColor={HEX.white} stopOpacity="0.7" />
+        <stop offset="0.5" stopColor={HEX.white} stopOpacity="0" />
       </linearGradient>
       <path d={d} fill={`url(#${id}-light)`} />
       <path d={d} fill="none" stroke={`url(#${id}-rim)`} strokeWidth="1.8" />
@@ -78,8 +78,8 @@ export function FoldsG({ idp, paths, spot, t, w = 9, o = 0.22 }) {
     <g>
       {paths.map((d, i) => (
         <g key={i} fill="none" strokeLinecap="round">
-          <path d={d} stroke="#ffffff" strokeWidth={r2(w * 0.7)} opacity={r2(o * 0.55)} transform={`translate(${hx} ${hy})`} filter={`url(#${idp}-fold)`} />
-          <path d={d} stroke="#000000" strokeWidth={w} opacity={o} filter={`url(#${idp}-fold)`} />
+          <path d={d} stroke={HEX.white} strokeWidth={r2(w * 0.7)} opacity={r2(o * 0.55)} transform={`translate(${hx} ${hy})`} filter={`url(#${idp}-fold)`} />
+          <path d={d} stroke={HEX.black} strokeWidth={w} opacity={o} filter={`url(#${idp}-fold)`} />
         </g>
       ))}
     </g>
@@ -92,9 +92,9 @@ export function RibStroke({ d, w = 14, body, rib = 0.16, step = 2.6 }) {
   return (
     <g fill="none">
       <path d={d} stroke={body} strokeWidth={w} />
-      <path d={d} stroke="#000000" strokeWidth={w} opacity={rib} />
-      <path d={d} stroke="#000000" strokeWidth={w} strokeDasharray={`0.9 ${step}`} opacity="0.3" />
-      <path d={d} stroke="#ffffff" strokeWidth={w} strokeDasharray={`0.6 ${r2(step + 0.9)}`} strokeDashoffset="1.2" opacity="0.14" />
+      <path d={d} stroke={HEX.black} strokeWidth={w} opacity={rib} />
+      <path d={d} stroke={HEX.black} strokeWidth={w} strokeDasharray={`0.9 ${step}`} opacity="0.3" />
+      <path d={d} stroke={HEX.white} strokeWidth={w} strokeDasharray={`0.6 ${r2(step + 0.9)}`} strokeDashoffset="1.2" opacity="0.14" />
     </g>
   );
 }
@@ -102,21 +102,21 @@ export function RibPoly({ d, body, id, rib = 0.16, dir = 'v' }) {
   return (
     <g>
       <path d={d} fill={body} />
-      <path d={d} fill="#000000" opacity={rib} />
+      <path d={d} fill={HEX.black} opacity={rib} />
       <pattern id={`${id}-rib`} width={dir === 'v' ? 3.2 : 100} height={dir === 'v' ? 100 : 3.2} patternUnits="userSpaceOnUse">
-        {dir === 'v' ? <rect width="1.1" height="100" fill="#000000" opacity="0.32" /> : <rect width="100" height="1.1" fill="#000000" opacity="0.32" />}
+        {dir === 'v' ? <rect width="1.1" height="100" fill={HEX.black} opacity="0.32" /> : <rect width="100" height="1.1" fill={HEX.black} opacity="0.32" />}
       </pattern>
       <path d={d} fill={`url(#${id}-rib)`} />
-      <path d={d} fill="none" stroke="#000000" strokeWidth="0.8" opacity="0.35" />
+      <path d={d} fill="none" stroke={HEX.black} strokeWidth="0.8" opacity="0.35" />
     </g>
   );
 }
 
 // A stitched seam: dashed, with a pale twin beside it so it reads as thread in the fabric.
-export function SeamG({ d, tone = '#ffffff', o = 0.5, w = 1.1, dash = '4.5 3' }) {
+export function SeamG({ d, tone = HEX.white, o = 0.5, w = 1.1, dash = '4.5 3' }) {
   return (
     <g fill="none">
-      <path d={d} stroke="#000000" strokeWidth={w} strokeDasharray={dash} opacity="0.28" transform="translate(0.8 0.9)" />
+      <path d={d} stroke={HEX.black} strokeWidth={w} strokeDasharray={dash} opacity="0.28" transform="translate(0.8 0.9)" />
       <path d={d} stroke={tone} strokeWidth={w} strokeDasharray={dash} opacity={o} />
     </g>
   );
@@ -140,9 +140,9 @@ export function ArtG({ items = [], id, clip }) {
 export function EyeletG({ idp, cx, cy, r = 4.4 }) {
   return (
     <g>
-      <circle cx={cx} cy={cy} r={r} fill={`url(#${idp}-metal)`} stroke="#000000" strokeOpacity="0.4" strokeWidth="0.6" />
-      <circle cx={cx} cy={cy} r={r * 0.5} fill="#000000" opacity="0.85" />
-      <circle cx={r2(cx - r * 0.35)} cy={r2(cy - r * 0.4)} r={r * 0.18} fill="#ffffff" opacity="0.9" />
+      <circle cx={cx} cy={cy} r={r} fill={`url(#${idp}-metal)`} stroke={HEX.black} strokeOpacity="0.4" strokeWidth="0.6" />
+      <circle cx={cx} cy={cy} r={r * 0.5} fill={HEX.black} opacity="0.85" />
+      <circle cx={r2(cx - r * 0.35)} cy={r2(cy - r * 0.4)} r={r * 0.18} fill={HEX.white} opacity="0.9" />
     </g>
   );
 }

@@ -3,7 +3,7 @@
 // is Active Blue aluminium (m13); the plinth is Dark Blue anodised. The leader lines reach the object from its left
 // edges only, so none of them crosses the laptop or another line.
 import Art from '@/components/art/Art';
-import { StageG, MaterialDefs, ShadowG, CastG, LitG, CalloutG, DimensionG, SpecColumnG, PlateFrameG, castDir } from '@/components/art/Mockup';
+import { StageG, MaterialDefs, ShadowG, CastG, LitG, CalloutG, DimensionG, SpecColumnG, PlateFrameG, castDir, CalloutsG } from '@/components/art/Mockup';
 import { ScreenWebG } from '@/components/art/Devices';
 import { r2 } from '@/lib/charts';
 import { HEX } from '@/lib/brand';
@@ -49,32 +49,32 @@ export default function SceneLaptop() {
       {/* the plinth */}
       <g>
         <rect x={FL[0]} y={FL[1]} width={FR[0] - FL[0]} height={FLb[1] - FL[1]} fill={`url(#${idp}-plastic)`} />
-        <rect x={FL[0]} y={FL[1]} width={FR[0] - FL[0]} height={FLb[1] - FL[1]} fill="#000000" opacity="0.18" />
+        <rect x={FL[0]} y={FL[1]} width={FR[0] - FL[0]} height={FLb[1] - FL[1]} fill={HEX.black} opacity="0.18" />
         <path d={right} fill={`url(#${idp}-plastic)`} />
-        <path d={right} fill="#ffffff" opacity="0.1" />
+        <path d={right} fill={HEX.white} opacity="0.1" />
         <path d={top} fill={`url(#${idp}-metal-dark)`} />
-        <path d={top} fill="#ffffff" opacity="0.2" />
-        <path d={`M${FL[0]} ${FL[1]}L${FR[0]} ${FR[1]}L${BR[0]} ${BR[1]}`} fill="none" stroke="#ffffff" strokeOpacity="0.5" strokeWidth="1.5" />
-        <path d={`M${FR[0]} ${FR[1]}V${FRb[1]}`} stroke="#ffffff" strokeOpacity="0.25" strokeWidth="1" />
-        <rect x={FL[0]} y={FLb[1] - 6} width={FR[0] - FL[0]} height="6" fill="#000000" opacity="0.45" />
+        <path d={top} fill={HEX.white} opacity="0.2" />
+        <path d={`M${FL[0]} ${FL[1]}L${FR[0]} ${FR[1]}L${BR[0]} ${BR[1]}`} fill="none" stroke={HEX.white} strokeOpacity="0.5" strokeWidth="1.5" />
+        <path d={`M${FR[0]} ${FR[1]}V${FRb[1]}`} stroke={HEX.white} strokeOpacity="0.25" strokeWidth="1" />
+        <rect x={FL[0]} y={FLb[1] - 6} width={FR[0] - FL[0]} height="6" fill={HEX.black} opacity="0.45" />
       </g>
 
       {/* the laptop's contact shadow on the plinth top, pushed away from the spot (lower left) */}
-      <path d={poly([add(deck(0, 0), [-14, 4]), add(deck(1, 0), [-6, 2]), add(deck(1, 1), [-10, 5]), add(deck(0, 1), [-20, 6])])} fill="#000000" opacity="0.55" filter={`url(#${idp}-soft)`} />
+      <path d={poly([add(deck(0, 0), [-14, 4]), add(deck(1, 0), [-6, 2]), add(deck(1, 1), [-10, 5]), add(deck(0, 1), [-20, 6])])} fill={HEX.black} opacity="0.55" filter={`url(#${idp}-soft)`} />
 
       {/* the laptop, turned to the light */}
       <LitG>
         {/* the deck: Active Blue aluminium seen from above, keyboard well and trackpad (no legends), front edge */}
         <path d={poly([deck(0, 0), deck(1, 0), deck(1, 1), deck(0, 1)])} fill={`url(#${idp}-board)`} />
         <path d={poly([deck(0, 0), deck(1, 0), deck(1, 1), deck(0, 1)])} fill={`url(#${idp}-shade-r)`} opacity="0.35" />
-        <path d={poly([deck(0.1, 0.12), deck(0.9, 0.12), deck(0.9, 0.5), deck(0.1, 0.5)])} fill="#000000" opacity="0.22" />
+        <path d={poly([deck(0.1, 0.12), deck(0.9, 0.12), deck(0.9, 0.5), deck(0.1, 0.5)])} fill={HEX.black} opacity="0.22" />
         {Array.from({ length: 5 }, (_, k) => (
-          <path key={k} d={`M${deck(0.1, 0.12 + k * 0.076 + 0.076).join(' ')}L${deck(0.9, 0.12 + k * 0.076 + 0.076).join(' ')}`} stroke="#ffffff" strokeOpacity="0.12" strokeWidth="0.6" />
+          <path key={k} d={`M${deck(0.1, 0.12 + k * 0.076 + 0.076).join(' ')}L${deck(0.9, 0.12 + k * 0.076 + 0.076).join(' ')}`} stroke={HEX.white} strokeOpacity="0.12" strokeWidth="0.6" />
         ))}
-        <path d={poly([deck(0.36, 0.6), deck(0.64, 0.6), deck(0.64, 0.92), deck(0.36, 0.92)])} fill="#ffffff" opacity="0.12" />
+        <path d={poly([deck(0.36, 0.6), deck(0.64, 0.6), deck(0.64, 0.92), deck(0.36, 0.92)])} fill={HEX.white} opacity="0.12" />
         <path d={poly([F0, F1, add(F1, [0, 6]), add(F0, [0, 6])])} fill={`url(#${idp}-board)`} />
-        <path d={poly([F0, F1, add(F1, [0, 6]), add(F0, [0, 6])])} fill="#000000" opacity="0.3" />
-        <path d={`M${F0.join(' ')}L${F1.join(' ')}`} stroke="#ffffff" strokeOpacity="0.35" strokeWidth="1" />
+        <path d={poly([F0, F1, add(F1, [0, 6]), add(F0, [0, 6])])} fill={HEX.black} opacity="0.3" />
+        <path d={`M${F0.join(' ')}L${F1.join(' ')}`} stroke={HEX.white} strokeOpacity="0.35" strokeWidth="1" />
 
         {/* the lid's right edge, lit by the spot, then the lid itself with the website on its screen */}
         <path d={poly([H1, T1, add(T1, [5, 2]), add(H1, [5, 2])])} fill={`url(#${idp}-board)`} />
@@ -89,7 +89,7 @@ export default function SceneLaptop() {
           <rect x="30" y="30" width="1440" height="900" fill={`url(#${idp}-glass)`} opacity="0.55" className="mock-sheen" />
           <rect x="30" y="30" width="1440" height="900" fill={`url(#${idp}-shade-r)`} opacity="0.3" />
         </g>
-        <path d={`M${H0.join(' ')}L${H1.join(' ')}`} stroke="#000000" strokeOpacity="0.5" strokeWidth="2" />
+        <path d={`M${H0.join(' ')}L${H1.join(' ')}`} stroke={HEX.black} strokeOpacity="0.5" strokeWidth="2" />
       </LitG>
 
       <DimensionG x1={T0[0]} y1={T0[1]} x2={T1[0]} y2={T1[1]} value="310 mm" offset={-26} i={5} />
@@ -97,11 +97,13 @@ export default function SceneLaptop() {
       <DimensionG x1={FLb[0]} y1={FLb[1]} x2={FRb[0]} y2={FRb[1]} value="300 mm" offset={30} i={7} />
 
       {/* callouts, top to bottom in the order of their nodes, every node on the object's left edge */}
-      <CalloutG x={lid(110, 330)[0]} y={lid(110, 330)[1]} tx={720} ty={330} label="Display" side="left" i={0} />
-      <CalloutG x={H0[0] - 1} y={H0[1]} tx={720} ty={430} label="Hinge" side="left" i={1} />
-      <CalloutG x={deck(0.04, 0.7)[0]} y={deck(0.04, 0.7)[1]} tx={720} ty={520} label="Aluminium body" side="left" i={2} />
-      <CalloutG x={972} y={648} tx={720} ty={600} label="Top face" side="left" i={3} />
-      <CalloutG x={968} y={724} tx={720} ty={690} label="Dark Blue plinth" side="left" i={4} />
+      <CalloutsG>
+        <CalloutG x={lid(110, 330)[0]} y={lid(110, 330)[1]} tx={720} ty={330} label="Display" side="left" i={0} />
+        <CalloutG x={H0[0] - 1} y={H0[1]} tx={720} ty={430} label="Hinge" side="left" i={1} />
+        <CalloutG x={deck(0.04, 0.7)[0]} y={deck(0.04, 0.7)[1]} tx={720} ty={520} label="Aluminium body" side="left" i={2} />
+        <CalloutG x={972} y={648} tx={720} ty={600} label="Top face" side="left" i={3} />
+        <CalloutG x={968} y={724} tx={720} ty={690} label="Dark Blue plinth" side="left" i={4} />
+      </CalloutsG>
 
       <SpecColumnG x={110} y={110} w={300} title="Laptop on plinth" rows={[{ k: 'Laptop width', v: '310 mm' }, { k: 'Laptop closed', v: '14 mm' }, { k: 'Turn', v: '30°' }, { k: 'Plinth', v: '300 × 300 mm' }, { k: 'Plinth height', v: '120 mm' }]} />
     </Art>

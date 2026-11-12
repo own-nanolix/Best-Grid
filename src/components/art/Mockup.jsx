@@ -6,14 +6,15 @@
 // Each mockup is ONE <Art> SVG: stage, shadows, object, materials, shading, brand artwork and callouts, in one
 // viewBox. Every page arranges its plate differently (LAYOUTS.md). Dimensions in callouts are our production
 // values in plain mm (BRIEF.md): they are allowed; brand facts are not invented.
+import { Children, cloneElement, isValidElement } from 'react';
 import { r2 } from '@/lib/charts';
-import { HEX } from '@/lib/brand';
+import { HEX, mixHex } from '@/lib/brand';
 
 // ---------------------------------------------------------------------------------------------------------------
 // The stage. spot: { x, y } as fractions of the plate (default upper left of centre), r: spotlight radius as a
 // fraction of the larger side, floor: where the floor meets the back wall (fraction of h; null for a seamless
 // stage). Needs idp. Put it first in the SVG.
-export const STAGE = { ground: '#0c0e1f', wall: '#12152c', light: '#2f3870', glow: '#4a58a8' };
+export const STAGE = { ground: HEX.stage, wall: mixHex(HEX.stage, HEX.darkBlue, 0.22), light: mixHex(HEX.stageLight, HEX.activeBlue, 0.1), glow: mixHex(HEX.stageLight, HEX.activeBlue, 0.45) };
 
 export function StageG({ idp, w, h, spot = { x: 0.36, y: 0.22 }, r = 0.62, floor = 0.7, intensity = 1, ...rest }) {
   const R = Math.max(w, h) * r;
@@ -22,7 +23,7 @@ export function StageG({ idp, w, h, spot = { x: 0.36, y: 0.22 }, r = 0.62, floor
       <linearGradient id={`${idp}-stage`} x1="0" y1="0" x2="0" y2="1">
         <stop offset="0" stopColor={STAGE.wall} />
         <stop offset={floor === null ? 1 : floor} stopColor={STAGE.ground} />
-        {floor !== null && <stop offset={Math.min(1, floor + 0.02)} stopColor="#151935" />}
+        {floor !== null && <stop offset={Math.min(1, floor + 0.02)} stopColor={mixHex(HEX.stage, HEX.stageLight, 0.15)} />}
         <stop offset="1" stopColor={STAGE.ground} />
       </linearGradient>
       <radialGradient id={`${idp}-spot`} gradientUnits="userSpaceOnUse" cx={r2(w * spot.x)} cy={r2(h * spot.y)} r={r2(R)} fx={r2(w * spot.x)} fy={r2(h * spot.y)}>
@@ -59,8 +60,8 @@ export function ShadowG({ idp, cx, cy, rx, ry = rx * 0.16, dir = { x: 0.3, y: 0.
       <filter id={id} x="-50%" y="-200%" width="200%" height="500%">
         <feGaussianBlur stdDeviation={blur} />
       </filter>
-      <ellipse cx={r2(cx + dir.x * rx * 0.12)} cy={r2(cy + dir.y * ry * 0.4)} rx={rx} ry={r2(ry)} fill="#000000" opacity={opacity} filter={`url(#${id})`} />
-      <ellipse cx={cx} cy={cy} rx={r2(rx * 0.8)} ry={r2(ry * 0.4)} fill="#000000" opacity={r2(opacity * 0.7)} />
+      <ellipse cx={r2(cx + dir.x * rx * 0.12)} cy={r2(cy + dir.y * ry * 0.4)} rx={rx} ry={r2(ry)} fill={HEX.black} opacity={opacity} filter={`url(#${id})`} />
+      <ellipse cx={cx} cy={cy} rx={r2(rx * 0.8)} ry={r2(ry * 0.4)} fill={HEX.black} opacity={r2(opacity * 0.7)} />
     </g>
   );
 }
@@ -72,7 +73,7 @@ export function CastG({ idp, d, dir = { x: 0.6, y: 0.3 }, depth = 30, opacity = 
       <filter id={`${idp}-cast`} x="-20%" y="-20%" width="140%" height="140%">
         <feGaussianBlur stdDeviation={blur} />
       </filter>
-      <path d={d} transform={`translate(${r2(dir.x * depth)} ${r2(dir.y * depth)})`} fill="#000000" opacity={opacity} filter={`url(#${idp}-cast)`} />
+      <path d={d} transform={`translate(${r2(dir.x * depth)} ${r2(dir.y * depth)})`} fill={HEX.black} opacity={opacity} filter={`url(#${idp}-cast)`} />
     </g>
   );
 }
@@ -110,25 +111,25 @@ export function MaterialDefs({ idp }) {
   );
   return (
     <defs>
-      {lin('board', [[0, '#6b90ff'], [0.45, HEX.activeBlue], [1, '#3f63d8']])}
-      {lin('board-dark', [[0, '#2a3160'], [0.5, HEX.darkBlue], [1, '#10132b']])}
-      {lin('paper', [[0, '#ffffff'], [0.6, HEX.paper], [1, '#e2e7f2']])}
-      {lin('card', [[0, '#f4f7fb'], [1, '#dfe4ee']])}
-      {lin('metal', [[0, '#f2f4f8'], [0.3, '#b7bdcc'], [0.52, '#eceff5'], [0.76, '#949bb0'], [1, '#cfd4df']])}
-      {lin('metal-dark', [[0, '#3c4475'], [0.42, HEX.darkBlue], [0.62, '#2b3263'], [1, '#0d1026']])}
-      {lin('glass', [[0, '#ffffff', 0.5], [0.36, '#ffffff', 0.06], [0.64, '#ffffff', 0], [1, '#ffffff', 0.18]])}
+      {lin('board', [[0, mixHex(HEX.activeBlue, HEX.white, 0.12)], [0.45, HEX.activeBlue], [1, mixHex(HEX.activeBlue, HEX.black, 0.15)]])}
+      {lin('board-dark', [[0, HEX.stageLight], [0.5, HEX.darkBlue], [1, mixHex(HEX.darkBlue, HEX.black, 0.4)]])}
+      {lin('paper', [[0, HEX.white], [0.6, HEX.paper], [1, mixHex(HEX.lightBlue, HEX.white, 0.0)]])}
+      {lin('card', [[0, mixHex(HEX.cardGrey, HEX.white, 0.5)], [1, mixHex(HEX.lightBlue, HEX.cardGrey, 0.2)]])}
+      {lin('metal', [[0, mixHex(HEX.lightBlue, HEX.white, 0.7)], [0.3, mixHex(HEX.labelGrey, HEX.mutedOnDark, 0.35)], [0.52, mixHex(HEX.lightBlue, HEX.white, 0.5)], [0.76, mixHex(HEX.greyLine, HEX.mutedOnDark, 0.1)], [1, mixHex(HEX.labelGrey, HEX.lightBlue, 0.4)]])}
+      {lin('metal-dark', [[0, mixHex(HEX.stageLight, HEX.activeBlue, 0.12)], [0.42, HEX.darkBlue], [0.62, HEX.stageLight], [1, HEX.stage]])}
+      {lin('glass', [[0, HEX.white, 0.5], [0.36, HEX.white, 0.06], [0.64, HEX.white, 0], [1, HEX.white, 0.18]])}
       <radialGradient id={`${idp}-ceramic`} cx="0.3" cy="0.25" r="0.95">
-        <stop offset="0" stopColor="#ffffff" />
-        <stop offset="0.6" stopColor="#eef1f7" />
-        <stop offset="1" stopColor="#bfc6d6" />
+        <stop offset="0" stopColor={HEX.white} />
+        <stop offset="0.6" stopColor={HEX.cardGrey} />
+        <stop offset="1" stopColor={mixHex(HEX.labelGrey, HEX.lightBlue, 0.0)} />
       </radialGradient>
-      {lin('rubber', [[0, '#2c3150'], [1, '#121528']])}
-      {lin('plastic', [[0, '#2b3159'], [0.55, HEX.darkBlue], [1, '#141733']])}
-      {lin('fabric-blue', [[0, '#6c8fff'], [1, '#4b74ee']], 0, 1)}
-      {lin('fabric-dark', [[0, '#272d58'], [1, '#161a38']], 0, 1)}
-      {lin('shade', [[0, '#ffffff', 0.28], [0.3, '#ffffff', 0], [0.62, '#000000', 0], [1, '#000000', 0.42]], 1, 0)}
-      {lin('shade-r', [[0, '#000000', 0.42], [0.38, '#000000', 0], [0.7, '#ffffff', 0], [1, '#ffffff', 0.28]], 1, 0)}
-      {lin('shade-v', [[0, '#ffffff', 0.2], [0.4, '#000000', 0], [1, '#000000', 0.34]], 0, 1)}
+      {lin('rubber', [[0, mixHex(HEX.darkBlue, HEX.stageLight, 0.3)], [1, mixHex(HEX.stage, HEX.darkBlue, 0.3)]])}
+      {lin('plastic', [[0, mixHex(HEX.darkBlue, HEX.stageLight, 0.45)], [0.55, HEX.darkBlue], [1, mixHex(HEX.stage, HEX.darkBlue, 0.45)]])}
+      {lin('fabric-blue', [[0, mixHex(HEX.activeBlue, HEX.white, 0.1)], [1, mixHex(HEX.activeBlue, HEX.black, 0.07)]], 0, 1)}
+      {lin('fabric-dark', [[0, mixHex(HEX.darkBlue, HEX.stageLight, 0.25)], [1, mixHex(HEX.stage, HEX.darkBlue, 0.5)]], 0, 1)}
+      {lin('shade', [[0, HEX.white, 0.28], [0.3, HEX.white, 0], [0.62, HEX.black, 0], [1, HEX.black, 0.42]], 1, 0)}
+      {lin('shade-r', [[0, HEX.black, 0.42], [0.38, HEX.black, 0], [0.7, HEX.white, 0], [1, HEX.white, 0.28]], 1, 0)}
+      {lin('shade-v', [[0, HEX.white, 0.2], [0.4, HEX.black, 0], [1, HEX.black, 0.34]], 0, 1)}
       {noise('weave', '0.9 0.35', 2, 0.28, 5)}
       {noise('fibre', 1.3, 1, 0.08, 11)}
       {noise('grit', 0.6, 3, 0.14, 9, true)}
@@ -155,7 +156,7 @@ export function LitG({ children, ...rest }) {
 
 // ---------------------------------------------------------------------------------------------------------------
 // Catalogue-plate parts (drawn in the brand's guide-line language: hairlines and square nodes).
-export const PLATE = { line: '#8b96c8', text: '#e4e7ef', muted: '#a9b2d6', accent: HEX.activeBlue, size: 15 };
+export const PLATE = { line: mixHex(HEX.mutedOnDark, HEX.darkBlue, 0.15), text: HEX.lightBlue, muted: HEX.mutedOnDark, accent: HEX.activeBlue, size: 15 };
 
 // A callout: a node on the object at (x, y), a leader line with one elbow to (tx, ty), then the label running
 // along a short rule. side: 'right' | 'left' (which way the label reads). i: order of the draw-on.
@@ -250,4 +251,29 @@ export function PlateFrameG({ w, h, m = 28, split, no, label, color = PLATE.line
 // Helper: positions for n objects along a row from x0 to x1 at y (for line-ups inside a plate).
 export function lineup(n, x0, x1, y = 0) {
   return Array.from({ length: n }, (_, i) => ({ x: Math.round(n === 1 ? x0 : x0 + ((x1 - x0) * i) / (n - 1)), y, i }));
+}
+
+// Ordering for callouts, so leader lines never cross: wrap a run of <CalloutG> (or any element with x, y, tx, ty and
+// an optional side) in <CalloutsG>. Within each group that shares a side and a label column (same tx), the callouts
+// are sorted by the y of their target on the object and given the label slots (the ty values) in that same order.
+// Callouts that are not numeric, or sit alone in their column, pass through unchanged.
+export function CalloutsG({ children }) {
+  const kids = Children.toArray(children);
+  const num = (v) => (typeof v === 'number' ? v : typeof v === 'string' && v.trim() !== '' ? Number(v) : NaN);
+  const info = kids.map((k) => (isValidElement(k) ? { x: num(k.props.x), y: num(k.props.y), tx: num(k.props.tx), ty: num(k.props.ty), side: k.props.side || 'right' } : null));
+  const groups = new Map();
+  info.forEach((n, i) => {
+    if (!n || ![n.x, n.y, n.tx, n.ty].every(Number.isFinite)) return;
+    const key = `${n.side}:${Math.round(n.tx)}`;
+    if (!groups.has(key)) groups.set(key, []);
+    groups.get(key).push(i);
+  });
+  const slot = info.map((n) => (n ? n.ty : null));
+  for (const idx of groups.values()) {
+    if (idx.length < 2) continue;
+    const byY = [...idx].sort((a, b) => info[a].y - info[b].y || info[a].x - info[b].x || a - b);
+    const slots = idx.map((i) => info[i].ty).sort((a, b) => a - b);
+    byY.forEach((i, k) => { slot[i] = slots[k]; });
+  }
+  return <>{kids.map((k, i) => (info[i] && slot[i] !== info[i].ty ? cloneElement(k, { ty: slot[i] }) : k))}</>;
 }

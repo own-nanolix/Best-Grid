@@ -21,7 +21,7 @@
 /* flat print artwork on periwinkle */
 .flats { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 250px), 1fr)); gap: 16px; list-style: none; margin: 0; padding: 0; }
 .flat { margin: 0; background: var(--periwinkle); display: grid; place-items: center; padding: 22px; min-height: 300px; min-width: 0; }
-.flat svg { display: block; height: 240px; width: auto; max-width: 100%; filter: drop-shadow(0 6px 10px rgba(27, 32, 67, 0.22)); }
+.flat svg { display: block; height: 240px; width: auto; max-width: 100%; filter: drop-shadow(0 6px 10px color-mix(in srgb, var(--dark-blue) 22%, transparent)); }
 .flatCap { margin: 8px 0 0; font-size: 13px; color: var(--muted); }
 
 @media (max-width: 900px) {

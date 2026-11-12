@@ -2,7 +2,7 @@
 import { MARK_D, MarkG, MarkEmbossG, WordmarkG } from '@/components/art/Mark';
 import { CrossingBandsG, LatticeFieldG, NodeGridG } from '@/components/art/KeyArt';
 import { CastG, SheenG } from '@/components/art/Mockup';
-import { HEX, LINES } from '@/lib/brand';
+import { HEX, LINES, mixHex } from '@/lib/brand';
 import { r2 } from '@/lib/charts';
 import { NEUTRAL, Stitch, Bar, url } from './kit';
 
@@ -123,14 +123,14 @@ export function DeskMat({ id, m, ox = 0, oy = 0, sc = 0.72 }) {
   return (
     <g>
       <path d={`M${P(0, V, 0)}L${P(U, V, 0)}L${P(U, 0, 0)}L${P(U + 40, 0, 0)}L${P(U + 40, V + 40, 0)}L${P(0, V + 40, 0)}Z`} fill={HEX.black} opacity="0.5" filter={url(m, 'soft')} transform="translate(26 14)" />
-      <IsoSlab P={P} sc={sc} u0={0} v0={0} du={U} dv={V} z={0} th={5} edge="#0d1026" edge2="#171b3b">
+      <IsoSlab P={P} sc={sc} u0={0} v0={0} du={U} dv={V} z={0} th={5} edge={mixHex(HEX.darkBlue, HEX.stage, 0.85)} edge2={mixHex(HEX.darkBlue, HEX.stage, 0.25)}>
         <linearGradient id={`${id}-g`} gradientUnits="userSpaceOnUse" x1={U} y1="0" x2="0" y2={V}>
           <stop offset="0" stopColor={HEX.white} stopOpacity="0.16" />
           <stop offset="0.5" stopColor={HEX.white} stopOpacity="0" />
           <stop offset="1" stopColor={HEX.black} stopOpacity="0.4" />
         </linearGradient>
         <rect width={U} height={V} fill={HEX.darkBlue} filter={url(m, 'weave')} />
-        <CrossingBandsG idp={`${id}-x`} w={U} h={V} cx={0.45} cy={0.5} a1={72} a2={-14} band={0.026} r={0.05} />
+        <CrossingBandsG idp={`${id}-x`} w={U} h={V} cx={0.45} cy={0.5} a1={-72} a2={14} band={0.026} r={0.05} />
         <Stitch d={`M10 10H${U - 10}V${V - 10}H10Z`} color={HEX.onBlue} w={1.4} dash="7 5" />
         <WordmarkG x={34} y={V - 34} size={46} fill={HEX.onBlue} />
         <MarkG x={U - 92} y={26} size={58} fill={HEX.onBlue} />
@@ -142,7 +142,7 @@ export function DeskMat({ id, m, ox = 0, oy = 0, sc = 0.72 }) {
       <g transform="translate(14 -7)" opacity="0.5">
         <path d={`M${P(pad.u0, pad.v0 + pad.dv, 5)}L${P(pad.u0 + pad.du, pad.v0 + pad.dv, 5)}L${P(pad.u0 + pad.du, pad.v0, 5)}L${P(pad.u0 + pad.du + 18, pad.v0 - 4, 5)}L${P(pad.u0 + pad.du + 18, pad.v0 + pad.dv + 18, 5)}L${P(pad.u0, pad.v0 + pad.dv + 18, 5)}Z`} fill={HEX.black} filter={url(m, 'soft')} />
       </g>
-      <IsoSlab P={P} sc={sc} {...pad} z={5} th={7} edge={NEUTRAL.rubber} edge2="#0e1124">
+      <IsoSlab P={P} sc={sc} {...pad} z={5} th={7} edge={NEUTRAL.rubber} edge2={mixHex(HEX.darkBlue, HEX.stage, 0.85)}>
         <rect width={pad.du} height={pad.dv} fill={HEX.activeBlue} filter={url(m, 'weave')} />
         <MarkG x={pad.du / 2 - 36} y={pad.dv / 2 - 52} size={72} fill={HEX.darkBlue} />
         <WordmarkG x={pad.du / 2} y={pad.dv - 22} size={22} fill={HEX.darkBlue} anchor="middle" />
@@ -164,7 +164,7 @@ export function MousePad({ id, m, sh, cd = CD }) {
       </clipPath>
       <rect x="-100" y="-85" width="200" height="170" fill={HEX.darkBlue} filter={url(m, 'weave')} />
       <g clipPath={`url(#${id}-c)`}>
-        <CrossingBandsG idp={`${id}-x`} x={-100} y={-85} w={200} h={170} cx={0.5} cy={0.5} a1={72} a2={-18} band={0.03} r={0.08} />
+        <CrossingBandsG idp={`${id}-x`} x={-100} y={-85} w={200} h={170} cx={0.5} cy={0.5} a1={-72} a2={18} band={0.03} r={0.08} />
         <MarkG x={-26} y={-52} size={52} fill={HEX.onBlue} />
         <WordmarkG x={0} y={52} size={20} fill={HEX.onBlue} anchor="middle" />
         <rect x="-100" y="-85" width="200" height="170" fill={sh} />
@@ -182,7 +182,7 @@ export function GiftFront({ id, m, sh, cd = CD }) {
   return (
     <g>
       <CastG idp={id} d={`M${-w / 2} ${-h / 2}H${w / 2}V${h / 2}H${-w / 2}Z`} dir={cd} depth={12} />
-      <rect x={-w / 2 + 1} y={-h / 2 + 3} width={w} height={h} fill="#0d1026" />
+      <rect x={-w / 2 + 1} y={-h / 2 + 3} width={w} height={h} fill={mixHex(HEX.darkBlue, HEX.stage, 0.85)} />
       <rect x={-w / 2} y={-h / 2} width={w} height={h} fill={url(m, 'plastic')} filter={url(m, 'fibre')} />
       {/* as the card back of m05 (re-measured on crop_m05_cardback, as fractions of the card width): word-mark top
           right, 51.5% wide, 3.4% in; blind-embossed mark bottom left, 10.8% wide; the line bottom right, 2% high */}
@@ -201,7 +201,7 @@ export function GiftBack({ id, m, sh, cd = CD }) {
   return (
     <g>
       <CastG idp={id} d={`M${-w / 2} ${-h / 2}H${w / 2}V${h / 2}H${-w / 2}Z`} dir={cd} depth={12} />
-      <rect x={-w / 2 + 1} y={-h / 2 + 3} width={w} height={h} fill="#aab2c6" />
+      <rect x={-w / 2 + 1} y={-h / 2 + 3} width={w} height={h} fill={mixHex(HEX.lightBlue, HEX.stageLight, 0.3)} />
       <rect x={-w / 2} y={-h / 2} width={w} height={h} fill={url(m, 'card')} filter={url(m, 'fibre')} />
       <rect x={-w / 2} y={-h / 2 + 22} width={w} height="26" fill={HEX.darkBlue} />
       <Bar x={x0} y={-h / 2 + 68} w={80} h={12} fill={HEX.darkBlue} opacity={0.14} />
@@ -223,10 +223,10 @@ export function Carrier({ id, m, sh, cd = CD, card = true }) {
   return (
     <g>
       <CastG idp={id} d={`M${-pw} ${-ph / 2}H${pw}V${ph / 2}H${-pw}Z`} dir={cd} depth={14} />
-      <rect x={-pw} y={-ph / 2 + 2} width={pw * 2} height={ph} fill="#aab2c6" />
+      <rect x={-pw} y={-ph / 2 + 2} width={pw * 2} height={ph} fill={mixHex(HEX.lightBlue, HEX.stageLight, 0.3)} />
       <rect x={-pw} y={-ph / 2} width={pw} height={ph} fill={url(m, 'paper')} filter={url(m, 'fibre')} />
       <rect x="0" y={-ph / 2} width={pw} height={ph} fill={HEX.darkBlue} filter={url(m, 'fibre')} />
-      <CrossingBandsG idp={`${id}-x`} x={0} y={-ph / 2} w={pw} h={ph} cx={0.5} cy={0.5} a1={72} a2={-20} band={0.034} r={0.1} />
+      <CrossingBandsG idp={`${id}-x`} x={0} y={-ph / 2} w={pw} h={ph} cx={0.5} cy={0.5} a1={-72} a2={20} band={0.034} r={0.1} />
       <WordmarkG x={pw - 18} y={-ph / 2 + 36} size={22} fill={HEX.onBlue} anchor="end" />
       <MarkG x={18} y={ph / 2 - 56} size={38} fill={HEX.onBlue} />
       {card && (

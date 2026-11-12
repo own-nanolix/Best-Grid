@@ -11,17 +11,23 @@
 //                    "Total anual 15.420 MW", year chips, three KPI cells, the 2025 treemap
 //   ScreenNodesG     the back phone of m17 (390 x 844): "Distribución de actividad en nudos de red" over the node grid
 //   ScreenWebG       the website of m16 (1440 x 900): nav cells, hero, buttons, slider, the four technology tiles
-import { r2, jagged, bands, scale, linePath, areaPath } from '@/lib/charts';
-import { HEX, CAPACITY, TECH, WEB_HERO, NAV, NAV_CTA, BUTTONS } from '@/lib/brand';
+import { r2, bands, linePath, areaPath } from '@/lib/charts';
+import { HEX, mixHex, CAPACITY, TECH, WEB_HERO, NAV, NAV_CTA, BUTTONS } from '@/lib/brand';
 import { MarkG } from './Mark';
-import { NodeGridG, BrandDefs, TrailsG, IconArtG, PhotoBlockG } from './KeyArt';
+import { BrandDefs, TrailsG, IconArtG, PhotoBlockG } from './KeyArt';
+import { GRID_CELLS } from './node-grid';
 import { PIXEL32, CORE } from '@/components/site/icons';
 
 export const SCREEN = { phone: [390, 844], tablet: [1180, 820], laptop: [1440, 900], monitor: [1600, 1000], window: [1440, 900], watch: [184, 224] };
-const METAL = '#2a2f4d';
-const BEZEL = '#0b0d18';
+// frame colours, derived from the tokens
+const METAL = mixHex(HEX.stageLight, HEX.darkBlue, 0.4);
+const BEZEL = HEX.stage;
+const CAMERA = HEX.darkBlue;
+const CHROME = HEX.screen;                              // browser bar
+const CHROME_HI = mixHex(HEX.cardGrey, HEX.white, 0.5); // tab and address field
+const CHROME_LINE = HEX.labelGrey;
 
-export function PhoneG({ idp, x = 0, y = 0, w = 300, children, screenFill = '#dcdfe6', ...rest }) {
+export function PhoneG({ idp, x = 0, y = 0, w = 300, children, screenFill = HEX.screen, ...rest }) {
   const k = w / 430; // frame 430 x 884 around a 390 x 844 screen
   return (
     <g transform={`translate(${r2(x)} ${r2(y)}) scale(${r2(k * 1000) / 1000})`} {...rest}>
@@ -37,8 +43,8 @@ export function PhoneG({ idp, x = 0, y = 0, w = 300, children, screenFill = '#dc
         <g transform="translate(20 20)">{children}</g>
       </g>
       <circle cx="215" cy="46" r="9" fill={BEZEL} />
-      <circle cx="215" cy="46" r="3.5" fill="#1d2140" />
-      <path d="M66 6h298a60 60 0 0 1 60 60v80" fill="none" stroke="#ffffff" strokeOpacity="0.28" strokeWidth="2" />
+      <circle cx="215" cy="46" r="3.5" fill={CAMERA} />
+      <path d="M66 6h298a60 60 0 0 1 60 60v80" fill="none" stroke={HEX.white} strokeOpacity="0.28" strokeWidth="2" />
     </g>
   );
 }
@@ -56,7 +62,7 @@ export function TabletG({ idp, x = 0, y = 0, w = 600, children, screenFill = HEX
       <g clipPath={`url(#${idp}-tb)`}>
         <g transform="translate(40 40)">{children}</g>
       </g>
-      <circle cx="630" cy="20" r="5" fill="#1d2140" />
+      <circle cx="630" cy="20" r="5" fill={CAMERA} />
     </g>
   );
 }
@@ -74,8 +80,8 @@ export function LaptopG({ idp, x = 0, y = 0, w = 900, children, screenFill = HEX
         <g transform="translate(200 30)">{children}</g>
       </g>
       <path d="M0 960h1840v26a30 30 0 0 1-30 30H30a30 30 0 0 1-30-30z" fill={body === 'url(#none)' ? METAL : body} />
-      <path d="M0 960h1840v8H0z" fill="#ffffff" opacity="0.18" />
-      <path d="M800 960h240v10a10 10 0 0 1-10 10H810a10 10 0 0 1-10-10z" fill="#000000" opacity="0.35" />
+      <path d="M0 960h1840v8H0z" fill={HEX.white} opacity="0.18" />
+      <path d="M800 960h240v10a10 10 0 0 1-10 10H810a10 10 0 0 1-10-10z" fill={HEX.black} opacity="0.35" />
     </g>
   );
 }
@@ -90,9 +96,9 @@ export function MonitorG({ idp, x = 0, y = 0, w = 800, children, screenFill = HE
       {stand && (
         <g>
           <path d="M760 1040h120v230H760z" fill={METAL} />
-          <path d="M760 1040h120v50H760z" fill="#000000" opacity="0.35" />
+          <path d="M760 1040h120v50H760z" fill={HEX.black} opacity="0.35" />
           <path d="M560 1270h520v18H560z" fill={METAL} />
-          <path d="M560 1288h520v12H560z" fill="#14172b" />
+          <path d="M560 1288h520v12H560z" fill={mixHex(HEX.stage, HEX.darkBlue, 0.3)} />
         </g>
       )}
       <rect width="1640" height="1040" rx="6" fill={BEZEL} />
@@ -114,13 +120,13 @@ export function WindowG({ idp, x = 0, y = 0, w = 900, children, tab, address, sc
         <rect x="0" y="56" width="1440" height="900" />
       </clipPath>
       <rect width="1440" height="956" fill={screenFill} />
-      <rect width="1440" height="56" fill="#d9dce4" />
-      <path d="M24 56V14a6 6 0 0 1 6-6h300a6 6 0 0 1 6 6v42z" fill="#f4f5f8" />
+      <rect width="1440" height="56" fill={CHROME} />
+      <path d="M24 56V14a6 6 0 0 1 6-6h300a6 6 0 0 1 6 6v42z" fill={CHROME_HI} />
       <MarkG x={40} y={22} size={16} fill={HEX.darkBlue} />
       {tab && <text x="66" y="35" fontSize="13" fill={HEX.darkBlue}>{tab}</text>}
-      <rect x="352" y="16" width="1064" height="26" rx="13" fill="#f4f5f8" />
+      <rect x="352" y="16" width="1064" height="26" rx="13" fill={CHROME_HI} />
       {address && <text x="374" y="33.5" fontSize="12" fill={HEX.muted}>{address}</text>}
-      <rect x="0" y="55.5" width="1440" height="1" fill="#c3c7d2" />
+      <rect x="0" y="55.5" width="1440" height="1" fill={CHROME_LINE} />
       <g clipPath={`url(#${idp}-wn)`}>
         <g transform="translate(0 56)">{children}</g>
       </g>
@@ -149,19 +155,41 @@ export function WatchG({ idp, x = 0, y = 0, w = 180, children, band = HEX.active
 }
 
 // ---------------------------------------------------------------------------------------------------------------
-// Screens
+// Screens. The two phone screens below carry the measurements of reference/m17.png (front screen 834 px wide = 390
+// units, 1 unit = 2.1385 px), copied from the page that measured them. Rules applied (BRIEF.md): no clock time is
+// ever drawn; small labels on Active Blue are Dark Blue and the active year chip's label is Dark Blue (printed
+// white), for contrast; the large numerals keep the printed light grey.
 
-// A neutral status bar: "9:41" and three plain status glyphs (bars, a fan of arcs, a battery).
+// A neutral status bar: signal bars, a fan of arcs and a battery (positions measured on m17). No clock time, no text.
 export function StatusBarG({ w = 390, fill = HEX.darkBlue }) {
+  const o = w - 390;
   return (
-    <g fill={fill}>
-      <text x="34" y="35" fontSize="17" fontWeight="500">{CAPACITY.status}</text>
+    <g fill={fill} aria-hidden="true">
       {[0, 1, 2, 3].map((i) => (
-        <rect key={i} x={w - 108 + i * 6} y={r2(30 - i * 3)} width="4" height={r2(5 + i * 3)} />
+        <rect key={i} x={r2(o + 280.5 + i * 4.9)} y={r2(36.5 - (i + 1) * 2.3)} width="3.2" height={r2((i + 1) * 2.3)} />
       ))}
-      <path d={`M${w - 76} 27a10 10 0 0 1 16 0l-2 2a7 7 0 0 0-12 0Z M${w - 72} 30.5a5 5 0 0 1 8 0l-4 4Z`} />
-      <rect x={w - 52} y="22" width="22" height="11" rx="2.5" />
+      <path d={`M${o + 306} 30.5a12 12 0 0 1 17.5 0l-1.9 2a9.3 9.3 0 0 0-13.7 0Z M${o + 309.6} 34.1a7 7 0 0 1 10.3 0l-5.15 5.2Z`} />
+      <rect x={o + 334} y="30.6" width="21" height="8.6" rx="2" />
     </g>
+  );
+}
+
+const XL = 36.7, XR = 352.8;                       // the live area of both phone screens
+const YB = 309.8, STEP = 23.07;                    // chart baseline (0 MW) and 1.000 MW
+const XS = [57.5, 155.4, 253.5, 351.2];            // the Q1 to Q4 nodes on the baseline
+const yOf = (mw) => r2(YB - (mw / 1000) * STEP);
+const SOFT_OVER_BLUE = 0.2;                        // white over Active Blue: the lighter treemap block
+// The printed area outline, traced from the reference every 2.5 units from Q1 to Q4, on the MW axis. It is the
+// drawing of the chart (it meets the Q3 marker at 5.200 MW and ends at Q4), not data of its own.
+const TRACE = [3101,3061,3040,3081,3121,3000,2898,2736,2676,2757,2696,2554,2676,2838,2939,3000,3101,3162,3121,3121,3223,3304,3426,3466,3507,3385,3263,3243,3243,3344,3446,3608,3689,3648,3628,3648,3730,3851,3953,4054,3973,3851,3730,3628,3709,3811,3871,3871,3770,3790,3871,3953,3993,4074,4155,4236,4338,4216,4155,4216,4277,4317,4358,4419,4480,4561,4601,4601,4601,4601,4621,4682,4723,4763,4824,4905,5027,5128,5200,5128,5067,4844,4601,4601,4642,4581,4520,4419,4317,4216,4155,4135,3993,3851,3750,3689,3730,3811,3851,3892,3730,3588,3486,3426,3486,3466,3344,3263,3203,3243,3304,3263,3203,3162,3101,3040,2980,2959,2920];
+const traced = () => TRACE.map((v, i) => [r2(Math.min(XS[0] + i * 2.5, XR)), yOf(v)]);
+
+function TitleRows({ rows }) {
+  return (
+    <text x={XL} y="87.5" fontSize="16" fill={HEX.darkBlue} lang="es">
+      <tspan x={XL}>{rows[0]}</tspan>
+      <tspan x={XL} dy="19.5">{rows[1]}</tspan>
+    </text>
   );
 }
 
@@ -169,122 +197,139 @@ export function StatusBarG({ w = 390, fill = HEX.darkBlue }) {
 // (2023 and 2024 have no figures). marker: index of the quarter with the vertical marker (default the Q3 peak).
 export function ScreenCapacityG({ idp, year = CAPACITY.year, marker = 2 }) {
   const has = year === CAPACITY.year;
-  const X0 = 36, X1 = 353, Yt = 153, Yb = 312;
-  const xs = [57, 155, 253, 352];
-  const y = scale(0, CAPACITY.axisMax, Yb, Yt);
-  const anchors = CAPACITY.quarters.map((q, i) => ({ x: xs[i], v: q.mw }));
-  const pts = has ? jagged(anchors, 9, 0.05, 11).map(([px, v]) => [px, y(v)]) : [];
-  const rows = CAPACITY.axis.map((label, i) => ({ label, y: r2(Yt + ((Yb - Yt) * i) / 7) }));
-  const tm = { x: 36, y: 508, w: 317, h: 318 };
+  const pts = traced();
+  const kx = [36.5, 142, 247.4, 353.1];
+  const qEnd = [false, false, true, true];
+  const qX = [56.6, 153.8, 256.3, 353.1];
+  const [dev, cons] = CAPACITY.treemap.parts;
   return (
     <g>
-      <rect width="390" height="844" fill="#dcdfe6" />
+      <rect width="390" height="844" fill={HEX.screen} />
       <StatusBarG />
-      <text x="36" y="84" fontSize="16" fill={HEX.darkBlue} lang="es">
-        <tspan x="36">{CAPACITY.titleRows[0]}</tspan>
-        <tspan x="36" dy="19.5">{CAPACITY.titleRows[1]}</tspan>
-      </text>
-      {/* chart: gridlines and labels */}
-      {rows.map((r) => (
-        <g key={r.label}>
-          <rect x={X0} y={r.y} width={X1 - X0} height="0.5" fill="#1b2043" opacity="0.14" />
-          <text x={X0} y={r2(r.y + 5.5)} fontSize="3.6" fill={HEX.muted}>{r.label}</text>
-        </g>
-      ))}
+      <TitleRows rows={CAPACITY.titleRows} />
+      {CAPACITY.axis.map((label, i) => {
+        const y = yOf((7 - i) * 1000);
+        return (
+          <g key={label}>
+            <rect x={XL} y={y} width={r2(XR - XL)} height="0.5" fill={HEX.darkBlue} opacity="0.14" />
+            <text x="37" y={r2(y + 5.3)} fontSize="3.1" fill={HEX.muted} lang="es">{label}</text>
+          </g>
+        );
+      })}
       {has ? (
         <g>
           <clipPath id={`${idp}-area`}>
-            <path d={areaPath(pts, Yb)} />
+            <path d={areaPath(pts, YB)} />
           </clipPath>
           <g clipPath={`url(#${idp}-area)`}>
-            {bands(xs[0], X1, 30, 0.42, 0.52).map((b) => (
-              <rect key={b.x} x={b.x} y={Yt} width={b.w} height={Yb - Yt} fill={HEX.activeBlue} opacity={b.o} />
+            <rect x={XS[0]} y={yOf(7000)} width={r2(XR - XS[0])} height={r2(YB - yOf(7000))} fill={HEX.activeBlue} opacity="0.36" />
+            {bands(XS[0], XR, 30).filter((b, i) => i % 2).map((b) => (
+              <rect key={b.x} x={b.x} y={yOf(7000)} width={r2(b.w - 0.5)} height={r2(YB - yOf(7000))} fill={HEX.activeBlue} opacity="0.07" />
             ))}
           </g>
           <path d={linePath(pts)} fill="none" stroke={HEX.activeBlue} strokeWidth="0.8" opacity="0.7" />
-          <rect x={r2(xs[marker] - 0.3)} y={r2(y(CAPACITY.quarters[marker].mw))} width="0.6" height={r2(Yb - y(CAPACITY.quarters[marker].mw))} fill={HEX.activeBlue} />
+          <rect x={r2(XS[marker] - 0.45)} y={yOf(CAPACITY.quarters[marker].mw)} width="0.9" height={r2(YB - yOf(CAPACITY.quarters[marker].mw))} fill={HEX.activeBlue} />
         </g>
       ) : (
-        <text x={(X0 + X1) / 2} y={(Yt + Yb) / 2} fontSize="9" fill={HEX.muted} textAnchor="middle">No figures published for this year</text>
+        <text x={r2((XL + XR) / 2)} y={r2((yOf(7000) + YB) / 2)} fontSize="9" fill={HEX.muted} textAnchor="middle">No figures published for this year</text>
       )}
-      <rect x={X0 - 2} y={Yb} width={X1 - X0 + 4} height="0.8" fill={HEX.darkBlue} />
+      <rect x={XL} y={r2(YB - 0.3)} width={r2(XR - XL)} height="0.6" fill={HEX.darkBlue} />
       {CAPACITY.quarters.map((q, i) => (
-        <g key={q.q}>
-          <rect x={xs[i] - 1.6} y={Yb - 1.2} width="3.2" height="3.2" fill={HEX.darkBlue} />
-          <text x={xs[i]} y={Yb + 9} fontSize="3.4" fill={HEX.darkBlue} textAnchor={i === 3 ? 'end' : 'middle'}>{q.q}</text>
-          {has && <text x={i === 3 ? xs[i] : xs[i] - 2} y={Yb + 16} fontSize="5.6" fill={HEX.darkBlue} textAnchor={i === 3 ? 'end' : 'start'}>{q.value}</text>}
+        <g key={q.q} lang="es" fill={HEX.darkBlue}>
+          <rect x={r2(XS[i] - 1.5)} y={r2(YB - 1.5)} width="3" height="3" />
+          <text x={i === 3 ? 352.6 : r2(XS[i] - 1.4)} y="318.7" fontSize="3.3" textAnchor={i === 3 ? 'end' : 'start'}>{q.q}</text>
+          {has && <text x={qX[i]} y="326.6" fontSize="5.1" textAnchor={qEnd[i] ? 'end' : 'start'}>{q.value}</text>}
         </g>
       ))}
       {/* total */}
-      <text x="36" y="349" fontSize="5.6" fill={HEX.darkBlue} lang="es">{CAPACITY.totalLabel}</text>
+      <text x="36.9" y="348.1" fontSize="5.1" fill={HEX.darkBlue} lang="es">{CAPACITY.totalLabel}</text>
       {has ? (
         <g>
-          <text x="34" y="384" fontSize="37" fill={HEX.activeBlue} letterSpacing="-1" className="display">{CAPACITY.totalValue}</text>
-          <path d="M228 359l4 -6l4 6z" fill={HEX.activeBlue} />
+          <text x="38.9" y="381.8" fontSize="36" fill={HEX.activeBlue} letterSpacing="0.5" className="display" lang="es">{CAPACITY.totalValue}</text>
+          <path d="M225 361.7l4 -6.1l4 6.1z" fill={HEX.activeBlue} />
         </g>
       ) : (
-        <rect x="36" y="362" width="150" height="14" fill={HEX.darkBlue} opacity="0.1" />
+        <rect x="38.9" y="362" width="150" height="14" fill={HEX.darkBlue} opacity="0.1" />
       )}
-      {/* year chips */}
+      {/* year chips: the active label is Dark Blue (printed white) */}
       {CAPACITY.years.map((yy, i) => {
-        const cx = [118, 195, 271][i];
-        const on = yy === year;
+        const cx = [118.5, 194.5, 270.7][i];
         return (
           <g key={yy}>
-            <rect x={cx - 24} y="408" width="48" height="16" rx="8" fill={on ? HEX.activeBlue : '#e8eaf0'} />
-            <text x={cx} y="418.6" fontSize="5.6" fill={on ? HEX.white : HEX.darkBlue} textAnchor="middle">{yy}</text>
+            <rect x={r2(cx - 23.5)} y="406" width="47" height="15.3" rx="7.65" fill={yy === year ? HEX.activeBlue : HEX.chipOff} />
+            <text x={cx} y="415.3" fontSize="4.3" fill={HEX.darkBlue} textAnchor="middle">{yy}</text>
           </g>
         );
       })}
       {/* KPI cells */}
-      <rect x="0" y="443" width="390" height="0.6" fill={HEX.darkBlue} opacity="0.5" />
-      <rect x="0" y="482" width="390" height="0.6" fill={HEX.darkBlue} opacity="0.5" />
-      {[36, 142, 247, 353].map((cx) => (
-        <g key={cx}>
-          <rect x={cx - 0.3} y="443" width="0.6" height="39" fill={HEX.darkBlue} opacity="0.5" />
-          <rect x={cx - 1.6} y="441.4" width="3.2" height="3.2" fill={HEX.darkBlue} />
-          <rect x={cx - 1.6} y="480.4" width="3.2" height="3.2" fill={HEX.darkBlue} />
+      <rect x="0" y="439.5" width="390" height="0.6" fill={HEX.darkBlue} opacity="0.5" />
+      <rect x="0" y="478.1" width="390" height="0.6" fill={HEX.darkBlue} opacity="0.5" />
+      {kx.map((x) => (
+        <g key={x} fill={HEX.darkBlue}>
+          <rect x={r2(x - 0.3)} y="439.8" width="0.6" height="38.6" opacity="0.5" />
+          <rect x={r2(x - 1.5)} y="438.3" width="3" height="3" />
+          <rect x={r2(x - 1.5)} y="476.9" width="3" height="3" />
         </g>
       ))}
       {CAPACITY.kpis.map((k, i) => (
         <g key={k.label} lang="es">
-          <text x={[52, 157, 263][i]} y="456" fontSize="5" fill={HEX.darkBlue}>{k.label}</text>
-          {has ? <text x={[51, 156, 262][i]} y="476" fontSize="18" fill={HEX.activeBlue}>{k.value}</text> : <rect x={[52, 157, 263][i]} y="465" width="30" height="9" fill={HEX.darkBlue} opacity="0.1" />}
+          <text x={[53.3, 155.3, 260.9][i]} y="452.9" fontSize="5.1" fill={HEX.darkBlue}>{k.label}</text>
+          {has
+            ? <text x={[50.2, 154.6, 260.4][i]} y="472.1" fontSize="17.5" fill={HEX.activeBlue}>{k.value}</text>
+            : <rect x={[53.3, 155.3, 260.9][i]} y="461" width="30" height="9" fill={HEX.darkBlue} opacity="0.1" />}
         </g>
       ))}
-      {/* treemap: Dark Blue field, Desarrollo 68% and Capacidad consolidada 16% (the remainder unlabelled) */}
+      {/* treemap: Dark Blue field, Desarrollo 68% and Capacidad consolidada 16% (the remainder unlabelled, no figure) */}
       {has && (
         <g lang="es">
-          <rect x={tm.x} y={tm.y} width={tm.w} height={tm.h} fill={HEX.darkBlue} />
-          <text x={tm.x + 6} y={tm.y + 9} fontSize="4.6" fill={HEX.white}>{CAPACITY.treemap.year}</text>
-          <text x={tm.x + 6} y={tm.y + 14.5} fontSize="4.6" fill={HEX.white}>{CAPACITY.treemap.title}</text>
-          <rect x={tm.x} y="613" width="210" height="213" fill="#5282f5" />
-          <text x={tm.x + 6} y="622" fontSize="4.6" fill={HEX.white}>{CAPACITY.treemap.parts[0].labelRows[0]}</text>
-          <text x={tm.x + 6} y="627.5" fontSize="4.6" fill={HEX.white}>{CAPACITY.treemap.parts[0].labelRows[1]}</text>
-          <text x="226" y="815" fontSize="78" fill="#e6e8ee" textAnchor="end" letterSpacing="-2" className="display">68</text>
-          <text x="227" y="768" fontSize="30" fill="#e6e8ee">%</text>
-          <rect x="246" y="721" width="107" height="105" fill="#7097f2" />
-          <text x="252" y="730" fontSize="4.6" fill={HEX.white}>{CAPACITY.treemap.parts[1].labelRows[0]}</text>
-          <text x="252" y="735.5" fontSize="4.6" fill={HEX.white}>{CAPACITY.treemap.parts[1].labelRows[1]}</text>
-          <text x="334" y="815" fontSize="33" fill="#e6e8ee" textAnchor="end" letterSpacing="-0.8" className="display">16</text>
-          <text x="335" y="796" fontSize="13" fill="#e6e8ee">%</text>
+          <rect x={XL} y="504.8" width={r2(XR - XL)} height="317.5" fill={HEX.darkBlue} />
+          <text x="43.5" y="514.6" fontSize="3.9" fill={HEX.white}>{CAPACITY.treemap.year}</text>
+          <text x="43.5" y="519.8" fontSize="3.9" fill={HEX.white}>{CAPACITY.treemap.title}</text>
+          <rect x={XL} y="609.1" width="209.1" height="213.2" fill={HEX.activeBlue} />
+          <text fontSize="3.9" fill={HEX.darkBlue}>
+            {dev.labelRows.map((r, i) => <tspan key={r} x="43.5" y={r2(618.4 + i * 5.2)}>{r}</tspan>)}
+          </text>
+          <text x="203" y="810.2" fontSize="69.5" fill={HEX.onBlue} textAnchor="end" letterSpacing="-1.6" className="display">{dev.pct}</text>
+          <text x="205.6" y="783.5" fontSize="31.6" fill={HEX.onBlue} className="display">%</text>
+          <rect x="245.8" y="717.1" width="107" height="105.2" fill={HEX.activeBlue} />
+          <rect x="245.8" y="717.1" width="107" height="105.2" fill={HEX.white} opacity={SOFT_OVER_BLUE} />
+          <text fontSize="3.9" fill={HEX.darkBlue}>
+            {cons.labelRows.map((r, i) => <tspan key={r} x="252.5" y={r2(727.4 + i * 5.6)}>{r}</tspan>)}
+          </text>
+          <text x="333.8" y="810.2" fontSize="34.1" fill={HEX.onBlue} textAnchor="end" letterSpacing="1.5" className="display">{cons.pct}</text>
+          <text x="332.6" y="798.5" fontSize="17.7" fill={HEX.onBlue} className="display">%</text>
         </g>
       )}
     </g>
   );
 }
 
-// m17 back phone: the node grid. Drawing only, no data.
-export function ScreenNodesG({ seed = 5, animate = false }) {
+// m17 back phone: the node grid, 20 columns of 15.85 units from x 36.3 by 41 rows of 15.69 from y 153.2, read cell by
+// cell (node-grid.js). Drawing only, no data.
+const GX = 36.3, GY = 153.2, CW = 15.85, CH = 15.69;
+const QOFF = [[0, 0], [1, 0], [0, 1], [1, 1]];
+export function ScreenNodesG({ animate = false }) {
   return (
     <g>
-      <rect width="390" height="844" fill="#dcdfe6" />
+      <rect width="390" height="844" fill={HEX.screen} />
       <StatusBarG />
-      <text x="36" y="84" fontSize="16" fill={HEX.darkBlue} lang="es">
-        <tspan x="36">{CAPACITY.nodesTitleRows[0]}</tspan>
-        <tspan x="36" dy="19.5">{CAPACITY.nodesTitleRows[1]}</tspan>
-      </text>
-      <NodeGridG x={35} y={128} cols={20} rows={42} size={16} seed={seed} clusters={34} animate={animate} />
+      <TitleRows rows={CAPACITY.nodesTitleRows} />
+      {GRID_CELLS.map(({ r, c, q }) => {
+        const x = GX + c * CW, y = GY + r * CH;
+        const anim = animate ? { className: 'fill-in', style: { '--i': (r + c) % 12 } } : {};
+        if (q[0] !== '.' && q.every((v) => v === q[0])) {
+          return <rect key={`${r}-${c}`} x={r2(x)} y={r2(y)} width={CW} height={CH} fill={HEX.activeBlue} fillOpacity={q[0] === 'S' ? 0.75 : 1} {...anim} />;
+        }
+        return q.map((v, k) => (v === '.' ? null : (
+          <rect key={`${r}-${c}-${k}`} x={r2(x + (QOFF[k][0] * CW) / 2)} y={r2(y + (QOFF[k][1] * CH) / 2)} width={r2(CW / 2)} height={r2(CH / 2)} fill={HEX.activeBlue} fillOpacity={v === 'S' ? 0.75 : 1} {...anim} />
+        )));
+      })}
+      {Array.from({ length: 21 }, (_, c) => (
+        <rect key={`v${c}`} x={r2(GX + c * CW - 0.25)} y={GY} width="0.5" height={r2(41 * CH)} fill={HEX.darkBlue} opacity="0.22" />
+      ))}
+      {Array.from({ length: 42 }, (_, r) => (
+        <rect key={`h${r}`} x={GX} y={r2(GY + r * CH - 0.25)} width={r2(20 * CW)} height="0.5" fill={HEX.darkBlue} opacity="0.22" />
+      ))}
     </g>
   );
 }
@@ -332,7 +377,7 @@ export function ScreenWebG({ idp, active = 0 }) {
         <rect x="36" y="496" width="128" height="29" fill={HEX.btnFill} />
         <text x="48" y="514.5" fontSize="10.5" fill={HEX.darkBlue}>{BUTTONS.evaluate}</text>
         <path d={CORE.crosshair} transform="translate(141 503) scale(0.62)" fill={HEX.activeBlue} />
-        <rect x="187.5" y="496.5" width="112" height="28" fill="none" stroke="#ffffff" strokeWidth="1" />
+        <rect x="187.5" y="496.5" width="112" height="28" fill="none" stroke={HEX.white} strokeWidth="1" />
         <text x="199" y="514.5" fontSize="10.5" fill={HEX.darkBlue}>{BUTTONS.services}</text>
         <path d={CORE.crosshair} transform="translate(275 503) scale(0.62)" fill={HEX.activeBlue} />
       </g>
@@ -344,17 +389,17 @@ export function ScreenWebG({ idp, active = 0 }) {
         <rect x="747" y="84" width="664" height="526" fill={`url(#${idp}-sunset)`} />
         <g transform="translate(747 84)">
           <TrailsG w={664} h={526} count={8} y0={0.12} y1={0.52} sag={0.06} />
-          <IconArtG name="pylon" x={80} y={140} size={300} fill="#141833" />
-          <IconArtG name="pylon" x={360} y={230} size={190} fill="#141833" />
-          <IconArtG name="pylon" x={520} y={270} size={150} fill="#141833" />
+          <IconArtG name="pylon" x={80} y={140} size={300} fill={mixHex(HEX.stage, HEX.darkBlue, 0.5)} />
+          <IconArtG name="pylon" x={360} y={230} size={190} fill={mixHex(HEX.stage, HEX.darkBlue, 0.5)} />
+          <IconArtG name="pylon" x={520} y={270} size={150} fill={mixHex(HEX.stage, HEX.darkBlue, 0.5)} />
         </g>
-        <rect x="747" y="560" width="664" height="50" fill="#0b0d18" opacity="0.5" />
+        <rect x="747" y="560" width="664" height="50" fill={BEZEL} opacity="0.5" />
       </g>
       {[0, 1, 2, 3].map((i) => {
         const x0 = 776 + i * 8 + (i > active ? 22 : 0);
-        return i === active ? <rect key={i} x={x0} y="576" width="26" height="4" rx="2" fill={HEX.activeBlue} /> : <circle key={i} cx={x0 + 2} cy="578" r="2" fill="#ffffff" />;
+        return i === active ? <rect key={i} x={x0} y="576" width="26" height="4" rx="2" fill={HEX.activeBlue} /> : <circle key={i} cx={x0 + 2} cy="578" r="2" fill={HEX.white} />;
       })}
-      <circle cx="1370" cy="578" r="10" fill="#ffffff" />
+      <circle cx="1370" cy="578" r="10" fill={HEX.white} />
       <rect x="1366.5" y="573.5" width="2" height="9" fill={HEX.darkBlue} />
       <rect x="1371.5" y="573.5" width="2" height="9" fill={HEX.darkBlue} />
       {/* technology tiles */}

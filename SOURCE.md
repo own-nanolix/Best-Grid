@@ -35,7 +35,7 @@ copies are `mNN_1.png` / `mNN_2.png`; enlarged crops are `reference/crop_*.png`;
 
 - **m01** Hero photograph: a single wind turbine rising out of fog at dawn, peach to plum gradient light, a few
   birds top right. Overlaid: thin light guide lines (two horizontals at about 45.6% and 54.3% of the height, two
-  verticals at about 4.3% and 97.5% of the width) with small square nodes where they cross. Between the
+  verticals at about 4.3% and 95.7% of the width; the right guide was first read as 97.5%, corrected in the review round) with small square nodes where they cross. Between the
   horizontals, left: "Convertimos complejidad en avance." / "Dando estructura a lo que hoy bloquea los proyectos."
   (light grey-white, Regular, two lines); right: the mark in light grey-white. Spanish.
 - **m02** Three stacked perfect-bound reports, isometric, on periwinkle. Covers alternate Active Blue and Dark Blue;
@@ -116,6 +116,9 @@ copies are `mNN_1.png` / `mNN_2.png`; enlarged crops are `reference/crop_*.png`;
   Criterio · Validación", "Intervenimos en campo para evaluar, validar y estructurar / la conexión a red en
   proyectos eólicos, aportando criterio / técnico en cada fase del desarrollo.", "ingo@bestgrid.com" (as
   printed), "bestgrid.com". Spanish.
+  Frame order (left sheet | right sheet, A = headline poster, B = mark column with two photo blocks, C = field poster,
+  D = centred line with the three-cell footer): A|B, C|B, C|D, B|D, B|A, D|A, D|C, A|C (corrected in the review round;
+  the build already cycles in this order).
 - **m11** Two 3:4 posters on black. Left (Dark Blue): "Best Grid" white top centre; light guide frame with nodes;
   a square photo (a person in a hard hat and hi-vis vest facing a wind turbine; not reproduced) with "Análisis ·
   Criterio · Validación" in white over it; "Intervenimos en campo para evaluar, validar y estructurar" / "la
@@ -268,8 +271,9 @@ Hex values are published in lower case; keep them so. Sampled, not published (ma
 - **Textures:** fine paper grain on every printed surface (an feTurbulence noise at baseFrequency about 0.9, 2
   octaves, mixed at 4 to 8% opacity); uncoated board grain on the box (coarser, about 0.6); metallic bubble film on
   the mailer (a hexagon pattern with specular highlights).
-- **Baseline field:** horizontal hairlines every 0.55% of the sheet height, alternating Active Blue and grey,
-  interrupted by white column gutters (m10). Redraw as an SVG pattern.
+- **Baseline field:** horizontal hairlines in pairs (one Active Blue, one grey), one pair every 0.63% of the sheet
+  height, in blocks of 18 pairs (the first reading, 0.55%, was corrected in the review round), interrupted by white
+  column gutters (m10). Redraw as an SVG pattern.
 - **Photo stand-ins in the system:** flat Dark Blue rectangles at about 75% opacity over the grid (m10).
 - **Presentation grounds:** periwinkle for objects, black for posters and screens, Dark Blue for icon slides.
 

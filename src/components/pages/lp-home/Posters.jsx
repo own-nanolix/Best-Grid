@@ -1,7 +1,7 @@
 import Art from '@/components/art/Art';
 import { MarkG, WordmarkG } from '@/components/art/Mark';
 import { GuidesG, NodeG, PhotoBlockG, IconArtG, BrandDefs } from '@/components/art/KeyArt';
-import { HEX, LINES, CONTACT, POSTERS } from '@/lib/brand';
+import { HEX, LINES, CONTACT, POSTERS, mixHex } from '@/lib/brand';
 import { seeded, r2 } from '@/lib/charts';
 
 // The poster sheets of m09 and m11 rebuilt as exportable artwork (3:4, 600 x 800), plus the event screen of m22.
@@ -162,12 +162,12 @@ export function EventScreen() {
       ))}
       {[260, 940].map((x) => (
         <g key={x}>
-          <rect x={x - 1} y="53" width="2" height="22" fill="#2a2f52" />
-          <rect x={x - 12} y="75" width="24" height="20" fill="#2a2f52" />
+          <rect x={x - 1} y="53" width="2" height="22" fill={mixHex(HEX.darkBlue, HEX.muted, 0.3)} />
+          <rect x={x - 12} y="75" width="24" height="20" fill={mixHex(HEX.darkBlue, HEX.muted, 0.3)} />
         </g>
       ))}
       {/* the wall: three panels */}
-      <rect x="24" y="144" width="1152" height="214" fill="#0b0d18" />
+      <rect x="24" y="144" width="1152" height="214" fill={mixHex(HEX.stageLight, HEX.black, 0.75)} />
       <rect x="30" y="150" width="377" height="202" fill={HEX.activeBlue} filter={`url(#${idp}-grain)`} />
       <PhotoBlockG x={36} y={156} w={365} h={190} />
       <IconArtG name="solar" px x={158} y={186} size={130} fill={HEX.activeBlue} />
@@ -197,7 +197,7 @@ export function EventScreen() {
         <WordmarkG x={52} y={777} size={146} fill={HEX.onBlue} />
       </g>
       {/* the stage */}
-      <rect x="0" y="372" width="1200" height="148" fill="#070912" />
+      <rect x="0" y="372" width="1200" height="148" fill={mixHex(HEX.stage, HEX.black, 0.4)} />
       <rect x="0" y="372" width="1200" height="1.2" fill={HEX.activeBlue} opacity="0.3" />
     </Art>
   );

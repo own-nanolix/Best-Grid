@@ -1,8 +1,8 @@
 // Two staff ID cards sliding half out of one clear holder, flat from above. Two colourways, two arrangements.
 // Names and roles are only the two printed in the case study (m05, m08); no photographs, no portraits.
-import { CalloutG, DimensionG, ShadowG, CastG, SheenG, LitG, castDir } from '@/components/art/Mockup';
+import { CalloutG, DimensionG, ShadowG, CastG, SheenG, LitG, castDir, CalloutsG } from '@/components/art/Mockup';
 import { WordmarkFitG, MarkG } from '@/components/art/Mark';
-import { HEX, PEOPLE } from '@/lib/brand';
+import { HEX, PEOPLE, mixHex } from '@/lib/brand';
 import { r2 } from '@/lib/charts';
 import { Plate, idOf, PaleBarsG, EsG, rrect } from './kit';
 
@@ -28,8 +28,8 @@ function Card({ idp, x, y, tone, person, flip }) {
   return (
     <g>
       <rect x={x} y={y} width={CW} height={CH} fill={t.bg} filter={`url(#${idp}-fibre)`} />
-      <rect x={x} y={y} width={CW} height={CH} fill="none" stroke="#000000" strokeOpacity="0.3" strokeWidth="1" />
-      {!flip && <rect x={r2(x + CW / 2 - 13)} y={vy + 9} width="26" height="6" rx="3" fill="#000000" opacity="0.55" />}
+      <rect x={x} y={y} width={CW} height={CH} fill="none" stroke={HEX.black} strokeOpacity="0.3" strokeWidth="1" />
+      {!flip && <rect x={r2(x + CW / 2 - 13)} y={vy + 9} width="26" height="6" rx="3" fill={HEX.black} opacity="0.55" />}
       <MarkG x={x + 12} y={vy + 24} size={22} fill={t.mk} />
       <WordmarkFitG x={x + 40} y={vy + 41} w={64} fill={t.fg} />
       <rect x={x + 12} y={vy + 52} width={CW - 24} height="1" fill={t.fg} opacity="0.5" />
@@ -52,16 +52,16 @@ function IdSet({ idp, flip, tones, people }) {
   const xs = [-HW / 2 + 6, HW / 2 - CW - 6];
   return (
     <g>
-      <rect x={-HW / 2} y={top} width={HW} height={HH} fill="#ffffff" opacity="0.07" />
+      <rect x={-HW / 2} y={top} width={HW} height={HH} fill={HEX.white} opacity="0.07" />
       {[0, 1].map((i) => <Card key={i} idp={idp} x={xs[i]} y={ys[i]} tone={tones[i]} person={people[i]} flip={flip} />)}
       {/* the clear front pocket, lying over the lower part of both cards */}
-      <rect x={-HW / 2} y={top} width={HW} height={HH} rx="6" fill="#dfe6f7" opacity="0.16" stroke="#ffffff" strokeOpacity="0.55" strokeWidth="1.5" />
-      <rect x={-HW / 2} y={flip ? top + HH - 6 : top} width={HW} height="6" fill="#ffffff" opacity="0.38" />
-      <rect x={-HW / 2 + 5} y={top + 5} width={HW - 10} height={HH - 10} rx="3" fill="none" stroke="#ffffff" strokeOpacity="0.18" strokeWidth="1" />
+      <rect x={-HW / 2} y={top} width={HW} height={HH} rx="6" fill={mixHex(HEX.cardGrey, HEX.activeBlue, 0.1)} opacity="0.16" stroke={HEX.white} strokeOpacity="0.55" strokeWidth="1.5" />
+      <rect x={-HW / 2} y={flip ? top + HH - 6 : top} width={HW} height="6" fill={HEX.white} opacity="0.38" />
+      <rect x={-HW / 2 + 5} y={top + 5} width={HW - 10} height={HH - 10} rx="3" fill="none" stroke={HEX.white} strokeOpacity="0.18" strokeWidth="1" />
       <rect x={-HW / 2} y={top} width={HW} height={HH} rx="6" fill={`url(#${idp}-glass)`} opacity="0.6" />
       <SheenG idp={idp} d={rrect(-HW / 2, top, HW, HH, 6)} opacity={0.3} />
       {/* ring and clip */}
-      <rect x={-HW / 2 - 10} y={-9} width="16" height="18" fill={`url(#${idp}-metal)`} stroke="#6c748c" strokeWidth="0.75" />
+      <rect x={-HW / 2 - 10} y={-9} width="16" height="18" fill={`url(#${idp}-metal)`} stroke={mixHex(HEX.mutedOnDark, HEX.black, 0.35)} strokeWidth="0.75" />
       <circle cx={-HW / 2 - 18} cy="0" r="9" fill="none" stroke={`url(#${idp}-metal)`} strokeWidth="3" />
     </g>
   );
@@ -83,9 +83,11 @@ export function IdPlateA() {
         <LitG><IdSet idp={idp} flip={false} tones={['dark', 'light']} people={['elena', 'lorena']} /></LitG>
       </g>
       <DimensionG x1={h1[0]} y1={h1[1]} x2={h2[0]} y2={h2[1]} value="120 mm" offset={30} i={4} />
-      <CalloutG x={a[0]} y={a[1]} tx={380} ty={200} label="Clear holder" sub="0.5 mm film" i={0} />
-      <CalloutG x={b[0]} y={b[1]} tx={380} ty={290} label="Card" sub="54 × 85 mm" i={1} />
-      <CalloutG x={P(-HW / 2 - 18, 0)[0]} y={P(-HW / 2 - 18, 0)[1]} tx={380} ty={380} label="Strap ring" i={2} />
+      <CalloutsG>
+        <CalloutG x={a[0]} y={a[1]} tx={380} ty={200} label="Clear holder" sub="0.5 mm film" i={0} />
+        <CalloutG x={b[0]} y={b[1]} tx={380} ty={290} label="Card" sub="54 × 85 mm" i={1} />
+        <CalloutG x={P(-HW / 2 - 18, 0)[0]} y={P(-HW / 2 - 18, 0)[1]} tx={380} ty={380} label="Strap ring" i={2} />
+      </CalloutsG>
     </Plate>
   );
 }
@@ -103,9 +105,11 @@ export function IdPlateB() {
         <LitG><IdSet idp={idp} flip tones={['blue', 'dark']} people={['lorena', 'elena']} /></LitG>
       </g>
       <DimensionG x1={cx + HW / 2 + 12} y1={cy - HH / 2} x2={cx + HW / 2 + 12} y2={cy + HH / 2} value="50 mm" offset={-14} i={4} />
-      <CalloutG x={cx - 24} y={cy + 150} tx={150} ty={400} label="Card" sub="54 × 85 mm" side="left" i={0} />
-      <CalloutG x={cx + 80} y={cy - 30} tx={150} ty={110} label="Clear holder" sub="0.5 mm film" side="left" i={1} />
-      <CalloutG x={cx - HW / 2 - 18} y={cy} tx={150} ty={200} label="Strap ring" side="left" i={2} />
+      <CalloutsG>
+        <CalloutG x={cx - 24} y={cy + 150} tx={150} ty={400} label="Card" sub="54 × 85 mm" side="left" i={0} />
+        <CalloutG x={cx + 80} y={cy - 30} tx={150} ty={110} label="Clear holder" sub="0.5 mm film" side="left" i={1} />
+        <CalloutG x={cx - HW / 2 - 18} y={cy} tx={150} ty={200} label="Strap ring" side="left" i={2} />
+      </CalloutsG>
     </Plate>
   );
 }

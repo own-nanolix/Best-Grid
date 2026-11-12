@@ -9,10 +9,10 @@ import { Tee, teeArt } from './Tops';
 const W = 860, H = 540, S = 0.62;
 
 export const TEES = [
-  { k: 'a', name: 'tee-dark', title: 'T-shirt in Dark Blue with the lattice back print, front and back', body: HEX.darkBlue, ink: HEX.activeBlue, ink2: HEX.activeBlue, tone: '#ffffff', order: 'bf', stagger: 0, spot: { x: 0.5, y: 0.1 }, no: '01', label: 'Dark Blue',
+  { k: 'a', name: 'tee-dark', title: 'T-shirt in Dark Blue with the lattice back print, front and back', body: HEX.darkBlue, ink: HEX.activeBlue, ink2: HEX.activeBlue, tone: HEX.white, order: 'bf', stagger: 0, spot: { x: 0.5, y: 0.1 }, no: '01', label: 'Dark Blue',
     calls: { front: [{ lx: 236, ly: 46, label: 'Collar', sub: `${mm(14)} mm rib` }, { lx: 262, ly: 78, label: 'Chest print', item: 0 }, { lx: 372, ly: 158, label: 'Sleeve hem', sub: `${mm(16)} mm hem` }],
       back: [{ lx: 200, ly: 172, label: 'Back print', item: 0 }, { lx: 200, ly: 58, label: 'Nape mark', item: 1 }, { lx: 104, ly: 336, label: 'Hem', sub: `${mm(16)} mm hem` }] } },
-  { k: 'b', name: 'tee-active', title: 'T-shirt in Active Blue with the word-mark chest print and the large mark on the back', body: HEX.activeBlue, ink: HEX.lightBlue, ink2: HEX.darkBlue, tone: '#ffffff', order: 'fb', stagger: 22, spot: { x: 0.16, y: 0.16 }, no: '02', label: 'Active Blue',
+  { k: 'b', name: 'tee-active', title: 'T-shirt in Active Blue with the word-mark chest print and the large mark on the back', body: HEX.activeBlue, ink: HEX.lightBlue, ink2: HEX.darkBlue, tone: HEX.white, order: 'fb', stagger: 22, spot: { x: 0.16, y: 0.16 }, no: '02', label: 'Active Blue',
     calls: { front: [{ lx: 146, ly: 98, label: 'Chest word-mark', item: 0 }, { lx: 164, ly: 46, label: 'Collar', sub: `${mm(14)} mm rib` }, { lx: 40, ly: 150, label: 'Sleeve hem', sub: `${mm(16)} mm hem` }],
       back: [{ lx: 200, ly: 148, label: 'Back mark', item: 0 }, { lx: 232, ly: 30, label: 'Back collar', sub: `${mm(12)} mm rib` }, { lx: 300, ly: 336, label: 'Hem', sub: `${mm(16)} mm hem` }] } },
   { k: 'c', name: 'tee-light', title: 'T-shirt in Light Blue with the lattice chest print and the mark on the back', body: HEX.lightBlue, ink: HEX.darkBlue, ink2: HEX.activeBlue, tone: HEX.darkBlue, order: 'bf', stagger: -18, spot: { x: 0.86, y: 0.14 }, no: '03', label: 'Light Blue',

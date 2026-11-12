@@ -1,9 +1,9 @@
 // Three tickets and the VIP pass. Each ticket carries the logo, one line printed in the case study, a perforated
 // stub, plain bars that encode nothing and quiet pale bars where a date, seat or code would go (we invent none).
-import { CalloutG, DimensionG, ShadowG, CastG, LitG, SheenG, SpecColumnG, castDir, STAGE } from '@/components/art/Mockup';
+import { CalloutG, DimensionG, ShadowG, CastG, LitG, SheenG, SpecColumnG, castDir, STAGE, CalloutsG } from '@/components/art/Mockup';
 import { MarkG, WordmarkFitG } from '@/components/art/Mark';
 import { CrossingBandsG } from '@/components/art/KeyArt';
-import { HEX, LINES } from '@/lib/brand';
+import { HEX, LINES, mixHex } from '@/lib/brand';
 import { r2 } from '@/lib/charts';
 import { Plate, idOf, BarsG, PaleBarsG, EsG, rrect } from './kit';
 import { pt, locDir } from './bands-parts';
@@ -40,7 +40,7 @@ function Ticket({ idp, tone, rows, two, v = false, w, h, stub, thick = 3, tag, f
   const mh = v ? h - stub : h;
   return (
     <g>
-      <path d={d} fill="#000000" opacity="0.5" transform={`translate(0 ${thick})`} />
+      <path d={d} fill={HEX.black} opacity="0.5" transform={`translate(0 ${thick})`} />
       <path d={d} fill={t.fill} filter={`url(#${idp}-fibre)`} />
       <path d={d} fill={`url(#${idp}-shade-v)`} opacity="0.5" />
       <MarkG x={18} y={16} size={24} fill={t.mk} />
@@ -67,7 +67,7 @@ function Ticket({ idp, tone, rows, two, v = false, w, h, stub, thick = 3, tag, f
           </g>
         </g>
       )}
-      <path d={d} fill="none" stroke="#ffffff" strokeOpacity="0.2" />
+      <path d={d} fill="none" stroke={HEX.white} strokeOpacity="0.2" />
       <SheenG idp={idp} d={d} opacity={0.18} />
     </g>
   );
@@ -91,10 +91,12 @@ export function TicketA() {
         <LitG><Ticket idp={idp} tone="paper" rows={[LINES.hero.rows[0]]} w={340} h={140} stub={80} tag={3} fs={12.5} /></LitG>
       </g>
       <DimensionG x1={P(0, 140)[0]} y1={P(0, 140)[1]} x2={P(340, 140)[0]} y2={P(340, 140)[1]} value="130 mm" offset={28} i={5} />
-      <CalloutG x={P(36, 26)[0]} y={P(36, 26)[1]} tx={470} ty={110} label="Logo" i={0} />
-      <CalloutG x={P(260, 40)[0]} y={P(260, 40)[1]} tx={470} ty={190} label="Perforation" sub="tear-off stub, 30 mm" i={1} />
-      <CalloutG x={P(300, 90)[0]} y={P(300, 90)[1]} tx={470} ty={270} label="Plain bars" sub="encode nothing" i={2} />
-      <CalloutG x={P(100, 125)[0]} y={P(100, 125)[1]} tx={470} ty={350} label="Paper" sub="250 g/m² uncoated" i={3} />
+      <CalloutsG>
+        <CalloutG x={P(36, 26)[0]} y={P(36, 26)[1]} tx={470} ty={110} label="Logo" i={0} />
+        <CalloutG x={P(260, 40)[0]} y={P(260, 40)[1]} tx={470} ty={190} label="Perforation" sub="tear-off stub, 30 mm" i={1} />
+        <CalloutG x={P(300, 90)[0]} y={P(300, 90)[1]} tx={470} ty={270} label="Plain bars" sub="encode nothing" i={2} />
+        <CalloutG x={P(100, 125)[0]} y={P(100, 125)[1]} tx={470} ty={350} label="Paper" sub="250 g/m² uncoated" i={3} />
+      </CalloutsG>
     </Plate>
   );
 }
@@ -114,10 +116,12 @@ export function TicketB() {
         <LitG><Ticket idp={idp} tone="dark" rows={LINES.clarity.rows} v w={180} h={310} stub={70} tag={5} /></LitG>
       </g>
       <DimensionG x1={P(180, 0)[0]} y1={P(180, 0)[1]} x2={P(180, 310)[0]} y2={P(180, 310)[1]} value="120 mm" offset={-26} i={5} />
-      <CalloutG x={P(36, 28)[0]} y={P(36, 28)[1]} tx={170} ty={90} label="Logo" side="left" i={0} />
-      <CalloutG x={P(165, 96)[0]} y={P(165, 96)[1]} tx={170} ty={170} label="Printed line" side="left" i={1} />
-      <CalloutG x={P(0, 240)[0]} y={P(0, 240)[1]} tx={170} ty={265} label="Perforation" side="left" i={2} />
-      <CalloutG x={P(90, 285)[0]} y={P(90, 285)[1]} tx={170} ty={345} label="Plain bars" sub="encode nothing" side="left" i={3} />
+      <CalloutsG>
+        <CalloutG x={P(36, 28)[0]} y={P(36, 28)[1]} tx={170} ty={90} label="Logo" side="left" i={0} />
+        <CalloutG x={P(165, 96)[0]} y={P(165, 96)[1]} tx={170} ty={170} label="Printed line" side="left" i={1} />
+        <CalloutG x={P(0, 240)[0]} y={P(0, 240)[1]} tx={170} ty={265} label="Perforation" side="left" i={2} />
+        <CalloutG x={P(90, 285)[0]} y={P(90, 285)[1]} tx={170} ty={345} label="Plain bars" sub="encode nothing" side="left" i={3} />
+      </CalloutsG>
     </Plate>
   );
 }
@@ -137,10 +141,12 @@ export function TicketC() {
         <LitG><Ticket idp={idp} tone="blue" rows={LINES.connect.rows} two w={420} h={150} stub={90} thick={5} tag={9} /></LitG>
       </g>
       <DimensionG x1={at(0, 0)[0]} y1={at(0, 0)[1]} x2={at(420, 0)[0]} y2={at(420, 0)[1]} value="160 mm" offset={-26} i={5} />
-      <CalloutG x={at(36, 28)[0]} y={at(36, 28)[1]} tx={80} ty={340} label="Logo" i={0} />
-      <CalloutG x={at(150, 60)[0]} y={at(150, 60)[1]} tx={210} ty={340} label="Printed line" i={1} />
-      <CalloutG x={at(330, 75)[0]} y={at(330, 75)[1]} tx={480} ty={340} label="Perforation" i={2} />
-      <CalloutG x={at(200, 148)[0]} y={at(200, 148)[1]} tx={360} ty={340} label="Edge" sub="0.5 mm" i={3} />
+      <CalloutsG>
+        <CalloutG x={at(36, 28)[0]} y={at(36, 28)[1]} tx={80} ty={340} label="Logo" i={0} />
+        <CalloutG x={at(150, 60)[0]} y={at(150, 60)[1]} tx={210} ty={340} label="Printed line" i={1} />
+        <CalloutG x={at(330, 75)[0]} y={at(330, 75)[1]} tx={480} ty={340} label="Perforation" i={2} />
+        <CalloutG x={at(200, 148)[0]} y={at(200, 148)[1]} tx={360} ty={340} label="Edge" sub="0.5 mm" i={3} />
+      </CalloutsG>
     </Plate>
   );
 }
@@ -158,13 +164,13 @@ export function VipPass() {
         <path d={`M${px + pw - 6} ${py + 20}L${px + pw + 46} ${py + ph - 8}L${px + pw + 30} ${py + ph + 6}L${px + pw - 6} ${py + ph - 60}Z`} fill={`url(#${idp}-metal-dark)`} />
         <LitG>
           <CastG idp={`${idp}-c`} d={rrect(px, py, pw, ph, 6)} dir={{ x: -cd.x * 0.5, y: 0.2 }} depth={22} opacity={0.4} blur={8} />
-          <path d={rrect(px, py + 3, pw, ph, 6)} fill="#000000" opacity="0.45" />
+          <path d={rrect(px, py + 3, pw, ph, 6)} fill={HEX.black} opacity="0.45" />
           <path d={rrect(px, py, pw, ph, 6)} fill={`url(#${idp}-board-dark)`} filter={`url(#${idp}-fibre)`} />
           <clipPath id={`${idp}-clip`}><rect x={px} y={py} width={pw} height={ph} /></clipPath>
           <g clipPath={`url(#${idp}-clip)`}>
             <CrossingBandsG idp={idp} x={px} y={py} w={pw} h={ph} cx={0.62} cy={0.58} band={0.05} r={0.16} />
           </g>
-          <rect x={px + pw / 2 - 18} y={py + 12} width="36" height="8" rx="4" fill="#05071a" opacity="0.8" />
+          <rect x={px + pw / 2 - 18} y={py + 12} width="36" height="8" rx="4" fill={mixHex(HEX.stage, HEX.black, 0.25)} opacity="0.8" />
           <MarkG x={px + 16} y={py + 34} size={30} fill={HEX.activeBlue} />
           <WordmarkFitG x={px + 54} y={py + 56} w={70} fill={HEX.onBlue} />
           <text x={px + 16} y={py + ph - 24} fontSize="64" fontWeight="600" fill={HEX.onBlue} letterSpacing="2">VIP</text>
@@ -172,17 +178,19 @@ export function VipPass() {
           <BarsG x={px + pw - 70} y={py + ph - 42} w={54} h={28} fill={HEX.activeBlue} seed={4} />
           <SheenG idp={idp} d={rrect(px, py, pw, ph, 6)} opacity={0.2} />
         </LitG>
-        <path d={`M${px - 16} ${py + ph - 34}H${px + pw + 16}V${py + ph + 10}H${px - 16}Z`} fill={`url(#${idp}-glass)`} stroke="#ffffff" strokeOpacity="0.4" />
-        <path d={`M${px - 16} ${py + ph + 10}H${px + pw + 16}L${px + pw + 22} ${py + ph + 16}H${px - 22}Z`} fill="#ffffff" opacity="0.22" />
-        <rect x={px + pw / 2 - 22} y={py - 12} width="44" height="14" fill={`url(#${idp}-metal)`} stroke="#6c748c" strokeWidth="0.75" />
+        <path d={`M${px - 16} ${py + ph - 34}H${px + pw + 16}V${py + ph + 10}H${px - 16}Z`} fill={`url(#${idp}-glass)`} stroke={HEX.white} strokeOpacity="0.4" />
+        <path d={`M${px - 16} ${py + ph + 10}H${px + pw + 16}L${px + pw + 22} ${py + ph + 16}H${px - 22}Z`} fill={HEX.white} opacity="0.22" />
+        <rect x={px + pw / 2 - 22} y={py - 12} width="44" height="14" fill={`url(#${idp}-metal)`} stroke={mixHex(HEX.mutedOnDark, HEX.black, 0.35)} strokeWidth="0.75" />
         <circle cx={px + pw / 2} cy={py - 22} r="11" fill="none" stroke={`url(#${idp}-metal)`} strokeWidth="3.5" />
       </g>
       <DimensionG x1={px} y1={py + ph + 30} x2={px + pw} y2={py + ph + 30} value="90 mm" offset={24} i={5} />
       <DimensionG x1={px} y1={py + ph} x2={px} y2={py} value="135 mm" offset={-34} i={6} />
-      <CalloutG x={px + pw / 2} y={py - 22} tx={400} ty={80} label="Metal ring" i={0} />
-      <CalloutG x={px + 60} y={py + ph - 48} tx={400} ty={160} label="VIP" i={1} />
-      <CalloutG x={px + 140} y={py + 130} tx={400} ty={240} label="Crossing bands" i={2} />
-      <CalloutG x={px + pw + 12} y={py + ph - 14} tx={400} ty={320} label="Clear stand" sub="acrylic, 4 mm" i={3} />
+      <CalloutsG>
+        <CalloutG x={px + pw / 2} y={py - 22} tx={400} ty={80} label="Metal ring" i={0} />
+        <CalloutG x={px + 60} y={py + ph - 48} tx={400} ty={160} label="VIP" i={1} />
+        <CalloutG x={px + 140} y={py + 130} tx={400} ty={240} label="Crossing bands" i={2} />
+        <CalloutG x={px + pw + 12} y={py + ph - 14} tx={400} ty={320} label="Clear stand" sub="acrylic, 4 mm" i={3} />
+      </CalloutsG>
       <SpecColumnG x={400} y={366} w={160} rows={[{ k: 'Card', v: '90 × 135 mm' }]} rowH={34} size={13} />
     </Plate>
   );

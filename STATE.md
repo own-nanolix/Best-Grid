@@ -31,8 +31,8 @@ their fixes are applied here from the start.
 - [x] 3. Study it and write `SOURCE.md`
 - [x] 4. `LAYOUTS.md`, `pages.json`, shared system, 30 stub routes, `BRIEF.md` (dev server: address below; start it before wave 1)
 - [x] 5. Build team, two waves; check reports 30 of 30 `ok`
-- [ ] 6. Review team; shared fixes applied
-- [ ] 7. Verify in the browser; SVG export
+- [x] 6. Review team; shared fixes applied
+- [x] 7. Verify in the browser; SVG export
 - [ ] 8. `REPORT.md` and `README.md`
 - [ ] 9. Final independent review, then one push (standing orders, points 5 and 6)
 
@@ -139,3 +139,9 @@ http://localhost:3105 (start with `npx next dev -p 3105`; stop it before `npm ru
 - Accessibility changes that altered the look (R1, R5): the overview cover's band is darker (text 2.6 to 5.1:1); swatch-card small text and treemap labels are Dark Blue; small poster, tube and tile text uses the blue ink; the lp-wind hero line and mark are back to the printed light grey at 24 px or larger.
 - R7, `src/components/art/Devices.jsx`: `StatusBarG` and the screens that use it must never draw a clock time (remove it outright, or default `clock={false}`); pages currently cover it. R7, `src/components/art/Mockup.jsx` callouts: sort leader lines by y so they never cross. R7: many material-shade hexes in page mockups are private colours: where they shade a brand colour, derive them from tokens (color-mix) or shared material defs.
 - R8, `src/components/art/Mark.jsx` `AppIconG`: defaults to a 22 rounded radius, which contradicts the brand's square corners (nothing uses it): default it to square.
+
+## Review round and verification (done)
+
+- 8 reviewers (Opus) reviewed and fixed all 30 pages; each committed locally. All pending shared fixes above were applied by a fixer (Sonnet): the treemap remainder carries no figure, seven icons corrected (the `user` icon no longer draws a person), shared colours moved to tokens (44 page files derived from tokens), keyframes no longer override opacity attributes, the shared status bar draws no clock, shared phone screens use the measured geometry, LandingNav re-measured against the website image, word-mark spacing corrected, callout lines sorted so they never cross (28 mockup files), `Segmented` takes arrow keys, SOURCE.md corrections.
+- The starter images in `public/` were replaced with the brand's mark and the two named after other companies were renamed `mark-a.svg` and `mark-b.svg`. Stray screenshots and an empty stray file left in the project root by agents were moved out of the project (some had been committed and remain in local history, which is never rewritten).
+- Step 7: lint clean; build passes; check --strict 30 of 30 ok; audit 30 of 30 clean at 1440 and 390 px on the built site, no console errors; export-svg wrote 419 SVGs with 0 warnings.

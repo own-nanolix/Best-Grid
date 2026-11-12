@@ -2,7 +2,7 @@
 import { r2 } from '@/lib/charts';
 import { HEX } from '@/lib/brand';
 import Art from '@/components/art/Art';
-import { CalloutG, DimensionG, PlateFrameG, SpecColumnG, ShadowG, LitG } from '@/components/art/Mockup';
+import { CalloutG, DimensionG, PlateFrameG, SpecColumnG, ShadowG, LitG, CalloutsG } from '@/components/art/Mockup';
 import { Base, CastPoly, EdgeLines, rectPoly, ID } from './kit';
 import { CardFrontG, CardBackG, CARD } from './Print';
 import { NotebookG, PenG, NOTE, PEN } from './Objects';
@@ -50,10 +50,12 @@ export function CardsPlate() {
           <rect width={CARD.w} height={CARD.h} fill={sh} />
         </g>
       </LitG>
-      <CalloutG x={tp(dk, -6, 150)[0]} y={tp(dk, -6, 150)[1]} tx={90} ty={200} label="Painted edge" sub="Active Blue" i={0} />
-      <CalloutG x={tp(wt, 47, 281)[0]} y={tp(wt, 47, 281)[1]} tx={260} ty={600} side="left" label="Blind-embossed mark" sub="No ink" i={1} />
-      <CalloutG x={tp(wt, CARD.w - 60, 40)[0]} y={tp(wt, CARD.w - 60, 40)[1]} tx={640} ty={330} label="Front" sub="Name, role, contact" i={2} />
-      <CalloutG x={tp(dk, 20, 20)[0]} y={tp(dk, 20, 20)[1]} tx={90} ty={120} label="Back" sub="Word-mark and mark" i={3} />
+      <CalloutsG>
+        <CalloutG x={tp(dk, -6, 150)[0]} y={tp(dk, -6, 150)[1]} tx={90} ty={200} label="Painted edge" sub="Active Blue" i={0} />
+        <CalloutG x={tp(wt, 47, 281)[0]} y={tp(wt, 47, 281)[1]} tx={260} ty={600} side="left" label="Blind-embossed mark" sub="No ink" i={1} />
+        <CalloutG x={tp(wt, CARD.w - 60, 40)[0]} y={tp(wt, CARD.w - 60, 40)[1]} tx={640} ty={330} label="Front" sub="Name, role, contact" i={2} />
+        <CalloutG x={tp(dk, 20, 20)[0]} y={tp(dk, 20, 20)[1]} tx={90} ty={120} label="Back" sub="Word-mark and mark" i={3} />
+      </CalloutsG>
       <DimensionG x1={tp(wt, 0, CARD.h)[0]} y1={tp(wt, 0, CARD.h)[1]} x2={tp(wt, CARD.w, CARD.h)[0]} y2={tp(wt, CARD.w, CARD.h)[1]} value="85 mm" offset={34} i={4} />
       <DimensionG x1={wtRight[0][0]} y1={wtRight[0][1]} x2={wtRight[1][0]} y2={wtRight[1][1]} value="55 mm" offset={-30} i={5} />
       <SpecColumnG x={620} y={430} w={290} title="Print spec" rows={[{ k: 'Format', v: '85 × 55 mm' }, { k: 'Stock', v: '600 g/m², duplex' }, { k: 'Edge', v: 'Painted, Active Blue' }, { k: 'Finish', v: 'Blind emboss' }]} />
@@ -110,11 +112,13 @@ export function PenNotebooks() {
           </g>
         </g>
       </LitG>
-      <CalloutG x={pen(480, 0)[0]} y={pen(480, 0)[1]} tx={620} ty={180} label="Pen clip" sub="Metal" i={0} />
-      <CalloutG x={pen(220, 14)[0]} y={pen(220, 14)[1]} tx={620} ty={320} label="Barrel" sub="Matte Dark Blue, word-mark" i={1} />
-      <CalloutG x={rot(uc, -3, 200, 60)[0]} y={rot(uc, -3, 200, 60)[1]} tx={620} ty={110} label="Notebook cover" sub="Active Blue, ruled cells" i={2} />
-      <CalloutG x={rot(lc, 6, 285, 100)[0]} y={rot(lc, 6, 285, 100)[1]} tx={620} ty={250} label="Notebook cover" sub="Dark Blue" i={3} />
-      <CalloutG x={rot(lc, 6, 301, 200)[0]} y={rot(lc, 6, 301, 200)[1]} tx={620} ty={390} label="Stack edge" sub="Page block" i={4} />
+      <CalloutsG>
+        <CalloutG x={pen(480, 0)[0]} y={pen(480, 0)[1]} tx={620} ty={180} label="Pen clip" sub="Metal" i={0} />
+        <CalloutG x={pen(220, 14)[0]} y={pen(220, 14)[1]} tx={620} ty={320} label="Barrel" sub="Matte Dark Blue, word-mark" i={1} />
+        <CalloutG x={rot(uc, -3, 200, 60)[0]} y={rot(uc, -3, 200, 60)[1]} tx={620} ty={110} label="Notebook cover" sub="Active Blue, ruled cells" i={2} />
+        <CalloutG x={rot(lc, 6, 285, 100)[0]} y={rot(lc, 6, 285, 100)[1]} tx={620} ty={250} label="Notebook cover" sub="Dark Blue" i={3} />
+        <CalloutG x={rot(lc, 6, 301, 200)[0]} y={rot(lc, 6, 301, 200)[1]} tx={620} ty={390} label="Stack edge" sub="Page block" i={4} />
+      </CalloutsG>
       <DimensionG x1={upper[0][0]} y1={upper[0][1]} x2={upper[3][0]} y2={upper[3][1]} value="210 mm" offset={30} i={5} />
       <DimensionG x1={upper[0][0]} y1={upper[0][1]} x2={upper[1][0]} y2={upper[1][1]} value="148 mm" offset={-30} i={6} />
       <SpecColumnG x={560} y={450} w={330} title="Print spec" rows={[{ k: 'Notebook', v: 'A5, 148 × 210 mm' }, { k: 'Cover', v: 'Board, wrapped' }, { k: 'Pen', v: '150 mm, metal clip' }]} rowH={38} />

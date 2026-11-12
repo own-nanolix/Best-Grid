@@ -1,5 +1,5 @@
 // Thirteen small single-object plates (400 x 400): one object each, a different side and spotlight every time.
-import { CalloutG, DimensionG, ShadowG, LitG, castDir } from '@/components/art/Mockup';
+import { CalloutG, DimensionG, ShadowG, LitG, castDir, CalloutsG } from '@/components/art/Mockup';
 import { HEX } from '@/lib/brand';
 import { Plate, At, NEUTRAL, url } from './kit';
 import { Tote, Patch, Keychain, UmbrellaSide } from './soft';
@@ -24,9 +24,11 @@ export function ToteSingle() {
               <Tote id={`${idp}-t`} m={idp} sh={sh(271)} fab="light" drop={110} />
             </LitG>
           </At>
-          <Co x={238} y={130} tx={110} ty={90} label="Handle" side="left" i={0} />
-          <Co x={252} y={250} tx={110} ty={190} label="Printed mark" side="left" i={1} />
-          <Co x={207} y={262} tx={110} ty={280} label="Light canvas" side="left" i={2} />
+          <CalloutsG>
+            <Co x={238} y={130} tx={110} ty={90} label="Handle" side="left" i={0} />
+            <Co x={252} y={250} tx={110} ty={190} label="Printed mark" side="left" i={1} />
+            <Co x={207} y={262} tx={110} ty={280} label="Light canvas" side="left" i={2} />
+          </CalloutsG>
           <Dim x1={202} y1={348} x2={340} y2={348} value="380 mm" offset={16} i={3} />
         </>
       )}
@@ -46,9 +48,11 @@ export function MugSingle() {
               <Mug id={`${idp}-m`} m={idp} hl={0.3} base={HEX.lightBlue} ink={HEX.darkBlue} band={HEX.activeBlue} hand={-1} />
             </LitG>
           </At>
-          <Co x={174} y={150} tx={90} ty={90} label="Rim" side="left" i={0} />
-          <Co x={172} y={165} tx={90} ty={160} label="Wrap print" side="left" i={1} />
-          <Co x={126} y={232} tx={90} ty={230} label="Handle" side="left" i={2} />
+          <CalloutsG>
+            <Co x={174} y={150} tx={90} ty={90} label="Rim" side="left" i={0} />
+            <Co x={172} y={165} tx={90} ty={160} label="Wrap print" side="left" i={1} />
+            <Co x={126} y={232} tx={90} ty={230} label="Handle" side="left" i={2} />
+          </CalloutsG>
           <Dim x1={329} y1={148} x2={329} y2={326} value="90 mm" offset={-20} i={3} />
         </>
       )}
@@ -68,9 +72,11 @@ export function BottleSingle() {
               <Bottle id={`${idp}-b`} m={idp} hl={0.3} base={HEX.darkBlue} ink={HEX.activeBlue} cap={NEUTRAL.steel} word={HEX.onBlue} />
             </LitG>
           </At>
-          <Co x={150} y={52} tx={270} ty={50} label="Steel cap" i={0} />
-          <Co x={172} y={150} tx={270} ty={140} label="Powder coat" i={1} />
-          <Co x={165} y={280} tx={270} ty={230} label="Wrap print" i={2} />
+          <CalloutsG>
+            <Co x={150} y={52} tx={270} ty={50} label="Steel cap" i={0} />
+            <Co x={172} y={150} tx={270} ty={140} label="Powder coat" i={1} />
+            <Co x={165} y={280} tx={270} ty={230} label="Wrap print" i={2} />
+          </CalloutsG>
           <Dim x1={80} y1={348} x2={80} y2={42} value="260 mm" offset={-26} i={3} />
         </>
       )}
@@ -89,9 +95,11 @@ export function StickerSingle() {
               <StickerSheet id={`${idp}-s`} m={idp} />
             </LitG>
           </At>
-          <Co x={72} y={92} tx={290} ty={70} label="Die-cut mark" i={0} />
-          <Co x={190} y={130} tx={290} ty={150} label="Word-mark" i={1} />
-          <Co x={226} y={290} tx={280} ty={260} label="Backing sheet" i={2} />
+          <CalloutsG>
+            <Co x={72} y={92} tx={290} ty={70} label="Die-cut mark" i={0} />
+            <Co x={190} y={130} tx={290} ty={150} label="Word-mark" i={1} />
+            <Co x={226} y={290} tx={280} ty={260} label="Backing sheet" i={2} />
+          </CalloutsG>
           <Dim x1={21} y1={366} x2={229} y2={366} value="140 mm" offset={12} i={3} />
         </>
       )}
@@ -110,9 +118,11 @@ export function PinSingle() {
               <PinCard id={`${idp}-p`} m={idp} sh={sh(270)} cd={{ x: -0.5, y: 0.4 }} />
             </LitG>
           </At>
-          <Co x={276} y={98} tx={122} ty={110} label="Hang slot" side="left" i={0} />
-          <Co x={214} y={200} tx={122} ty={190} label="Enamel pin" side="left" i={1} />
-          <Co x={180} y={270} tx={122} ty={280} label="Backing card" side="left" i={2} />
+          <CalloutsG>
+            <Co x={276} y={98} tx={122} ty={110} label="Hang slot" side="left" i={0} />
+            <Co x={214} y={200} tx={122} ty={190} label="Enamel pin" side="left" i={1} />
+            <Co x={180} y={270} tx={122} ty={280} label="Backing card" side="left" i={2} />
+          </CalloutsG>
           <Dim x1={188} y1={346} x2={352} y2={346} value="55 mm" offset={14} i={3} />
         </>
       )}
@@ -131,8 +141,10 @@ export function PatchSingle() {
               <Patch id={`${idp}-p`} m={idp} sh={sh(150)} s={100} kind="lattice" />
             </LitG>
           </At>
-          <Co x={225} y={150} tx={285} ty={80} label="Merrowed edge" i={0} />
-          <Co x={150} y={190} tx={285} ty={190} label="Lattice weave" i={1} />
+          <CalloutsG>
+            <Co x={225} y={150} tx={285} ty={80} label="Merrowed edge" i={0} />
+            <Co x={150} y={190} tx={285} ty={190} label="Lattice weave" i={1} />
+          </CalloutsG>
           <Dim x1={75} y1={340} x2={225} y2={340} value="70 mm" offset={14} i={2} />
         </>
       )}
@@ -152,9 +164,11 @@ export function KeychainSingle() {
               <Keychain id={`${idp}-k`} m={idp} sh={sh(160)} tag={HEX.activeBlue} ink={HEX.darkBlue} />
             </LitG>
           </At>
-          <Co x={160} y={85} tx={290} ty={80} label="Split ring" i={0} />
-          <Co x={160} y={190} tx={290} ty={170} label="Chain" i={1} />
-          <Co x={190} y={290} tx={290} ty={270} label="Tag" i={2} />
+          <CalloutsG>
+            <Co x={160} y={85} tx={290} ty={80} label="Split ring" i={0} />
+            <Co x={160} y={190} tx={290} ty={170} label="Chain" i={1} />
+            <Co x={190} y={290} tx={290} ty={270} label="Tag" i={2} />
+          </CalloutsG>
           <Dim x1={100} y1={203} x2={100} y2={340} value="45 mm" offset={-14} i={3} />
         </>
       )}
@@ -179,8 +193,10 @@ export function CoastersSingle() {
               <Coaster id={`${idp}-c`} m={idp} kind="mark" />
             </LitG>
           </At>
-          <Co x={230} y={120} tx={295} ty={60} label="Cork back" i={0} />
-          <Co x={180} y={250} tx={295} ty={250} label="Printed top" i={1} />
+          <CalloutsG>
+            <Co x={230} y={120} tx={295} ty={60} label="Cork back" i={0} />
+            <Co x={180} y={250} tx={295} ty={250} label="Printed top" i={1} />
+          </CalloutsG>
           <Dim x1={130} y1={316} x2={230} y2={316} value="100 mm" offset={14} i={2} />
         </>
       )}
@@ -199,8 +215,10 @@ export function PadSingle() {
               <MousePad id={`${idp}-p`} m={idp} sh={sh(140)} cd={{ x: -0.5, y: 0.4 }} />
             </LitG>
           </At>
-          <Co x={170} y={290} tx={290} ty={330} label="Rubber base" i={0} />
-          <Co x={200} y={150} tx={290} ty={120} label="Woven top" i={1} />
+          <CalloutsG>
+            <Co x={170} y={290} tx={290} ty={330} label="Rubber base" i={0} />
+            <Co x={200} y={150} tx={290} ty={120} label="Woven top" i={1} />
+          </CalloutsG>
           <Dim x1={40} y1={315} x2={240} y2={315} value="220 mm" offset={14} i={2} />
         </>
       )}
@@ -220,9 +238,11 @@ export function UmbrellaSingle() {
               <UmbrellaSide id={`${idp}-u`} m={idp} sh={sh(165)} />
             </LitG>
           </At>
-          <Co x={165} y={34} tx={300} ty={40} label="Tip" i={0} />
-          <Co x={235} y={130} tx={300} ty={140} label="Panel" i={1} />
-          <Co x={165} y={330} tx={300} ty={280} label="Shaft" i={2} />
+          <CalloutsG>
+            <Co x={165} y={34} tx={300} ty={40} label="Tip" i={0} />
+            <Co x={235} y={130} tx={300} ty={140} label="Panel" i={1} />
+            <Co x={165} y={330} tx={300} ty={280} label="Shaft" i={2} />
+          </CalloutsG>
           <Dim x1={165} y1={170} x2={301} y2={170} value="R 525 mm" offset={36} i={3} />
         </>
       )}
@@ -241,8 +261,10 @@ export function GiftFrontSingle() {
               <GiftFront id={`${idp}-f`} m={idp} sh={sh(200)} />
             </LitG>
           </At>
-          <Co x={300} y={80} tx={290} ty={40} label="Word-mark" side="left" i={0} />
-          <Co x={60} y={232} tx={50} ty={330} label="Embossed mark" side="right" i={1} />
+          <CalloutsG>
+            <Co x={300} y={80} tx={290} ty={40} label="Word-mark" side="left" i={0} />
+            <Co x={60} y={232} tx={50} ty={330} label="Embossed mark" side="right" i={1} />
+          </CalloutsG>
           <Dim x1={55} y1={270} x2={345} y2={270} value="85 mm" offset={30} i={2} />
         </>
       )}
@@ -261,8 +283,10 @@ export function GiftBackSingle() {
               <GiftBack id={`${idp}-b`} m={idp} sh={sh(200)} cd={{ x: -0.5, y: 0.4 }} />
             </LitG>
           </At>
-          <Co x={83} y={175} tx={60} ty={50} label="Value field" side="right" i={0} />
-          <Co x={74} y={193} tx={50} ty={330} label="Number field" side="right" i={1} />
+          <CalloutsG>
+            <Co x={83} y={175} tx={60} ty={50} label="Value field" side="right" i={0} />
+            <Co x={74} y={193} tx={50} ty={330} label="Number field" side="right" i={1} />
+          </CalloutsG>
           <Dim x1={345} y1={100} x2={345} y2={240} value="55 mm" offset={-30} i={2} />
         </>
       )}
@@ -281,8 +305,10 @@ export function CarrierSingle() {
               <Carrier id={`${idp}-c`} m={idp} sh={sh(200)} card={false} />
             </LitG>
           </At>
-          <Co x={120} y={225} tx={80} ty={310} label="Card slots" side="right" i={0} />
-          <Co x={290} y={200} tx={330} ty={330} label="Printed panel" side="left" i={1} />
+          <CalloutsG>
+            <Co x={120} y={225} tx={80} ty={310} label="Card slots" side="right" i={0} />
+            <Co x={290} y={200} tx={330} ty={330} label="Printed panel" side="left" i={1} />
+          </CalloutsG>
           <Dim x1={380} y1={106} x2={20} y2={106} value="220 mm" offset={18} i={2} />
         </>
       )}

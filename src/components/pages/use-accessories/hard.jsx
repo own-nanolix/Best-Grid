@@ -2,7 +2,7 @@
 // highlight sits towards the spotlight (hl); print wraps the body and compresses towards its edges.
 import { MarkG, WordmarkG, WORDMARK } from '@/components/art/Mark';
 import { SheenG } from '@/components/art/Mockup';
-import { HEX } from '@/lib/brand';
+import { HEX, mixHex } from '@/lib/brand';
 import { r2 } from '@/lib/charts';
 import { NEUTRAL, Cyl, mix, url } from './kit';
 
@@ -15,7 +15,7 @@ function WrapBars({ a, y, h, n = 11, fill, bar = 3.2 }) {
 }
 
 // ---- Mug: origin at the centre of the base. hand = 1 right, -1 left ---------------------------------------------------
-export function Mug({ id, m, hl = 0.3, base = '#eef1f7', ink = HEX.darkBlue, band = HEX.activeBlue, hand = 1 }) {
+export function Mug({ id, m, hl = 0.3, base = mixHex(HEX.cardGrey, HEX.lightBlue, 0.05), ink = HEX.darkBlue, band = HEX.activeBlue, hand = 1 }) {
   const body = 'M-75 -170V0A75 14 0 0 0 75 0V-170Z';
   const hd = `M${hand * 72} -142C${hand * 134} -148 ${hand * 134} -44 ${hand * 70} -36`;
   return (
@@ -24,8 +24,8 @@ export function Mug({ id, m, hl = 0.3, base = '#eef1f7', ink = HEX.darkBlue, ban
       <clipPath id={`${id}-c`}>
         <path d={body} />
       </clipPath>
-      <path d={hd} fill="none" stroke={mix(base, '#000000', 0.45)} strokeWidth="21" />
-      <path d={hd} fill="none" stroke={mix(base, '#000000', 0.12)} strokeWidth="16" />
+      <path d={hd} fill="none" stroke={mix(base, HEX.black, 0.45)} strokeWidth="21" />
+      <path d={hd} fill="none" stroke={mix(base, HEX.black, 0.12)} strokeWidth="16" />
       <path d={hd} fill="none" stroke={HEX.white} strokeWidth="2.5" opacity="0.35" transform={`translate(${hl < 0.5 ? -2 : 2} -2)`} />
       <path d={body} fill={`url(#${id}-cyl)`} />
       <g clipPath={`url(#${id}-c)`}>
@@ -38,9 +38,9 @@ export function Mug({ id, m, hl = 0.3, base = '#eef1f7', ink = HEX.darkBlue, ban
         <rect x="-76" y="-12" width="152" height="12" fill={HEX.black} opacity="0.12" />
       </g>
       <SheenG idp={m} d={body} opacity={0.22} />
-      <ellipse cx="0" cy="-170" rx="75" ry="14" fill={mix(base, '#ffffff', 0.3)} />
-      <ellipse cx="0" cy="-170" rx="69" ry="11.5" fill={mix(base, '#000000', 0.4)} />
-      <ellipse cx="0" cy="-166" rx="64" ry="8" fill={mix(base, '#000000', 0.62)} />
+      <ellipse cx="0" cy="-170" rx="75" ry="14" fill={mix(base, HEX.white, 0.3)} />
+      <ellipse cx="0" cy="-170" rx="69" ry="11.5" fill={mix(base, HEX.black, 0.4)} />
+      <ellipse cx="0" cy="-166" rx="64" ry="8" fill={mix(base, HEX.black, 0.62)} />
       <path d="M-75 -170A75 14 0 0 1 75 -170" fill="none" stroke={HEX.white} strokeWidth="1.4" opacity="0.5" />
     </g>
   );
@@ -86,7 +86,7 @@ export function Cup({ id, m, hl = 0.3, sleeve = HEX.activeBlue, ink = HEX.darkBl
   const sl = ring(-86, -34);
   return (
     <g>
-      <Cyl id={`${id}-cyl`} base="#f6f9ff" hl={hl} gloss={0.2} />
+      <Cyl id={`${id}-cyl`} base={HEX.paper} hl={hl} gloss={0.2} />
       <Cyl id={`${id}-sl`} base={sleeve} hl={hl} gloss={0.35} />
       <Cyl id={`${id}-lid`} base={HEX.darkBlue} hl={hl} gloss={0.4} />
       <clipPath id={`${id}-c`}>
@@ -104,8 +104,8 @@ export function Cup({ id, m, hl = 0.3, sleeve = HEX.activeBlue, ink = HEX.darkBl
       <path d={`M${-rx(-86)} -86A${rx(-86)} ${ry(-86)} 0 0 0 ${rx(-86)} -86`} fill="none" stroke={HEX.black} strokeWidth="1.2" opacity="0.3" />
       <path d={`M-49 -120L-48 -128H48L49 -120A49 12.4 0 0 1 -49 -120Z`} fill={`url(#${id}-lid)`} />
       <path d="M-45 -128L-38 -140H38L45 -128Z" fill={`url(#${id}-lid)`} />
-      <ellipse cx="0" cy="-140" rx="38" ry="9.8" fill={mix(HEX.darkBlue, '#ffffff', 0.18)} />
-      <ellipse cx="0" cy="-140" rx="32" ry="7" fill={mix(HEX.darkBlue, '#000000', 0.3)} />
+      <ellipse cx="0" cy="-140" rx="38" ry="9.8" fill={mix(HEX.darkBlue, HEX.white, 0.18)} />
+      <ellipse cx="0" cy="-140" rx="32" ry="7" fill={mix(HEX.darkBlue, HEX.black, 0.3)} />
       <rect x={hl < 0.5 ? 6 : -16} y="-143" width="10" height="4" fill={HEX.black} opacity="0.7" />
       <SheenG idp={m} d={body} opacity={0.18} />
     </g>

@@ -1,10 +1,10 @@
 // The exhibition booth, the opening plate: a back wall carrying the event screen of m22 (rebuilt faithfully, with
 // stand-ins for the photographs), a return wall, a reception counter and a carpet, seen at eye level from the
 // front-left in one-point perspective (the vanishing point sits left of the booth). No people.
-import { CalloutG, DimensionG, ShadowG, SpecColumnG, LitG, castDir } from '@/components/art/Mockup';
+import { CalloutG, DimensionG, ShadowG, SpecColumnG, LitG, castDir, CalloutsG } from '@/components/art/Mockup';
 import { MarkG, WordmarkFitG } from '@/components/art/Mark';
 import { PhotoBlockG, IconArtG } from '@/components/art/KeyArt';
-import { HEX, LINES, CONTACT } from '@/lib/brand';
+import { HEX, LINES, CONTACT, mixHex } from '@/lib/brand';
 import { r2 } from '@/lib/charts';
 import { Plate, idOf, EsG } from './kit';
 
@@ -105,34 +105,34 @@ export default function Booth() {
         {Array.from({ length: 9 }, (_, i) => {
           const u = i / 8;
           const a = [WALL.x + WALL.w * u, fy], b = pr(WALL.x + WALL.w * u, fy, S2);
-          return <path key={`f${i}`} d={`M${a.join(' ')}L${b.join(' ')}`} stroke="#8b96c8" strokeOpacity="0.28" strokeWidth="0.8" />;
+          return <path key={`f${i}`} d={`M${a.join(' ')}L${b.join(' ')}`} stroke={mixHex(HEX.activeBlue, HEX.greyLine, 0.75)} strokeOpacity="0.28" strokeWidth="0.8" />;
         })}
         {[1.1, 1.2, 1.3].map((s) => (
-          <path key={s} d={`M${pr(WALL.x, fy, s).join(' ')}L${pr(WALL.x + WALL.w, fy, s).join(' ')}`} stroke="#8b96c8" strokeOpacity="0.28" strokeWidth="0.8" />
+          <path key={s} d={`M${pr(WALL.x, fy, s).join(' ')}L${pr(WALL.x + WALL.w, fy, s).join(' ')}`} stroke={mixHex(HEX.activeBlue, HEX.greyLine, 0.75)} strokeOpacity="0.28" strokeWidth="0.8" />
         ))}
         <ShadowG idp={`${idp}-g`} cx={747} cy={fy + 52} rx={330} ry={22} dir={cd} opacity={0.5} blur={10} />
         {/* back wall: panels with seams and nodes */}
         <rect x={WALL.x} y={WALL.y} width={WALL.w} height={WALL.h} fill={`url(#${idp}-board-dark)`} />
         <rect x={WALL.x} y={WALL.y} width={WALL.w} height={WALL.h} fill={`url(#${idp}-shade)`} opacity="0.7" />
-        {seamX.map((x) => <rect key={x} x={x - 0.4} y={WALL.y} width="0.8" height={WALL.h} fill="#8b96c8" opacity="0.32" />)}
-        {[180, 330].map((y) => <rect key={y} x={WALL.x} y={y - 0.4} width={WALL.w} height="0.8" fill="#8b96c8" opacity="0.32" />)}
-        {seamX.flatMap((x) => [180, 330].map((y) => <rect key={`${x}${y}`} x={x - 2} y={y - 2} width="4" height="4" fill="#8b96c8" opacity="0.7" />))}
-        <rect x={WALL.x} y={WALL.y + WALL.h - 6} width={WALL.w} height="6" fill="#05071a" opacity="0.7" />
+        {seamX.map((x) => <rect key={x} x={x - 0.4} y={WALL.y} width="0.8" height={WALL.h} fill={mixHex(HEX.activeBlue, HEX.greyLine, 0.75)} opacity="0.32" />)}
+        {[180, 330].map((y) => <rect key={y} x={WALL.x} y={y - 0.4} width={WALL.w} height="0.8" fill={mixHex(HEX.activeBlue, HEX.greyLine, 0.75)} opacity="0.32" />)}
+        {seamX.flatMap((x) => [180, 330].map((y) => <rect key={`${x}${y}`} x={x - 2} y={y - 2} width="4" height="4" fill={mixHex(HEX.activeBlue, HEX.greyLine, 0.75)} opacity="0.7" />))}
+        <rect x={WALL.x} y={WALL.y + WALL.h - 6} width={WALL.w} height="6" fill={mixHex(HEX.stage, HEX.black, 0.25)} opacity="0.7" />
         {/* the screen: m22 rebuilt */}
-        <rect x={sx - 5} y={sy - 5} width={740 + 10} height={r2(380 * k + 10)} fill="#05071a" />
+        <rect x={sx - 5} y={sy - 5} width={740 + 10} height={r2(380 * k + 10)} fill={mixHex(HEX.stage, HEX.black, 0.25)} />
         <g clipPath={`url(#${idp}-screen)`}>
           <g transform={`translate(${sx} ${sy}) scale(${r2(k)})`}><ScreenArt /></g>
           <rect x={sx} y={sy} width="740" height={r2(380 * k)} fill={`url(#${idp}-shade-v)`} opacity="0.25" />
-          {Array.from({ length: 11 }, (_, i) => <rect key={i} x={sx + (740 * (i + 1)) / 12 - 0.3} y={sy} width="0.6" height={r2(380 * k)} fill="#05071a" opacity="0.25" />)}
+          {Array.from({ length: 11 }, (_, i) => <rect key={i} x={sx + (740 * (i + 1)) / 12 - 0.3} y={sy} width="0.6" height={r2(380 * k)} fill={mixHex(HEX.stage, HEX.black, 0.25)} opacity="0.25" />)}
         </g>
         {/* the return wall in perspective */}
         <path d={poly([rt0, rt1, rb1, rb0])} fill={`url(#${idp}-board-dark)`} />
         <path d={poly([rt0, rt1, rb1, rb0])} fill={`url(#${idp}-shade-r)`} opacity="0.55" />
         {seamS.map((s) => {
           const a = pr(WALL.x + WALL.w, WALL.y, s), b = pr(WALL.x + WALL.w, WALL.y + WALL.h, s);
-          return <path key={s} d={`M${a.join(' ')}L${b.join(' ')}`} stroke="#8b96c8" strokeOpacity="0.32" strokeWidth="0.8" />;
+          return <path key={s} d={`M${a.join(' ')}L${b.join(' ')}`} stroke={mixHex(HEX.activeBlue, HEX.greyLine, 0.75)} strokeOpacity="0.32" strokeWidth="0.8" />;
         })}
-        <path d={`M${rt0.join(' ')}L${rt1.join(' ')}M${rb0.join(' ')}L${rb1.join(' ')}M${pr(WALL.x + WALL.w, 330, 1).join(' ')}L${pr(WALL.x + WALL.w, 330, S1).join(' ')}`} stroke="#8b96c8" strokeOpacity="0.32" strokeWidth="0.8" />
+        <path d={`M${rt0.join(' ')}L${rt1.join(' ')}M${rb0.join(' ')}L${rb1.join(' ')}M${pr(WALL.x + WALL.w, 330, 1).join(' ')}L${pr(WALL.x + WALL.w, 330, S1).join(' ')}`} stroke={mixHex(HEX.activeBlue, HEX.greyLine, 0.75)} strokeOpacity="0.32" strokeWidth="0.8" />
         <Face idp={`${idp}-rw`} wall={wall} u0={0.14} u1={0.9} v0={0.14} v1={0.62} aw={300} ah={180}>
           <rect width="300" height="180" fill={HEX.activeBlue} />
           <MarkG x={22} y={20} size={46} fill={HEX.onBlue} />
@@ -141,20 +141,20 @@ export default function Booth() {
           </EsG>
           <WordmarkFitG x={22} y={168} w={92} fill={HEX.onBlue} />
         </Face>
-        <path d={poly([rt0, rt1, rb1, rb0])} fill="none" stroke="#000000" strokeOpacity="0.5" />
+        <path d={poly([rt0, rt1, rb1, rb0])} fill="none" stroke={HEX.black} strokeOpacity="0.5" />
         {/* the header truss with two lamps */}
-        <rect x={WALL.x - 18} y="96" width={WALL.w + 36} height="12" fill={`url(#${idp}-metal)`} stroke="#59607a" strokeWidth="0.6" />
-        <path d={Array.from({ length: 21 }, (_, i) => `${i ? 'L' : 'M'}${WALL.x - 18 + (i * (WALL.w + 36)) / 20} ${i % 2 ? 108 : 96}`).join('')} stroke="#8d95ab" fill="none" strokeWidth="1.2" />
+        <rect x={WALL.x - 18} y="96" width={WALL.w + 36} height="12" fill={`url(#${idp}-metal)`} stroke={mixHex(HEX.cardGrey, HEX.darkBlue, 0.7)} strokeWidth="0.6" />
+        <path d={Array.from({ length: 21 }, (_, i) => `${i ? 'L' : 'M'}${WALL.x - 18 + (i * (WALL.w + 36)) / 20} ${i % 2 ? 108 : 96}`).join('')} stroke={mixHex(HEX.labelGrey, HEX.muted, 0.45)} fill="none" strokeWidth="1.2" />
         {[430, 880].map((x) => (
           <g key={x}>
-            <rect x={x - 3} y="108" width="6" height="12" fill="#59607a" />
-            <path d={`M${x - 16} 120h32l-5 22h-22z`} fill={`url(#${idp}-metal-dark)`} stroke="#8d95ab" strokeWidth="0.6" />
-            <ellipse cx={x} cy="142" rx="11" ry="3" fill="#f4f7ff" opacity="0.85" />
+            <rect x={x - 3} y="108" width="6" height="12" fill={mixHex(HEX.cardGrey, HEX.darkBlue, 0.7)} />
+            <path d={`M${x - 16} 120h32l-5 22h-22z`} fill={`url(#${idp}-metal-dark)`} stroke={mixHex(HEX.labelGrey, HEX.muted, 0.45)} strokeWidth="0.6" />
+            <ellipse cx={x} cy="142" rx="11" ry="3" fill={mixHex(HEX.paper, HEX.lightBlue, 0.05)} opacity="0.85" />
           </g>
         ))}
         {/* the reception counter */}
         <path d={poly(sideL)} fill={`url(#${idp}-board-dark)`} />
-        <path d={poly(sideL)} fill="#000000" opacity="0.35" />
+        <path d={poly(sideL)} fill={HEX.black} opacity="0.35" />
         <path d={poly(front)} fill={`url(#${idp}-board-dark)`} filter={`url(#${idp}-grit)`} />
         <path d={poly(front)} fill={`url(#${idp}-shade)`} opacity="0.6" />
         <path d={poly(topF)} fill={`url(#${idp}-metal)`} />
@@ -163,11 +163,13 @@ export default function Booth() {
       </LitG>
       <DimensionG x1={WALL.x} y1={WALL.y} x2={WALL.x + WALL.w} y2={WALL.y} value="6000 mm" offset={-76} i={6} />
       <DimensionG x1={rt1[0]} y1={rb1[1]} x2={rt1[0]} y2={rt1[1]} value="3000 mm" offset={26} i={7} />
-      <CalloutG x={sx + 20} y={sy + 40} tx={190} ty={250} label="Event screen" sub="back wall graphic" side="left" i={0} />
-      <CalloutG x={seamX[0]} y={330} tx={190} ty={330} label="Panel seam" side="left" i={1} />
-      <CalloutG x={WALL.x - 18} y={102} tx={190} ty={160} label="Header truss" side="left" i={2} />
-      <CalloutG x={front[0][0] + 20} y={front[2][1] - 24} tx={190} ty={620} label="Reception counter" sub="1200 mm wide" side="left" i={3} />
-      <CalloutG x={(rt0[0] + rt1[0]) / 2} y={(rt0[1] + rb0[1]) / 2 - 20} tx={1250} ty={680} label="Return wall graphic" i={4} />
+      <CalloutsG>
+        <CalloutG x={sx + 20} y={sy + 40} tx={190} ty={250} label="Event screen" sub="back wall graphic" side="left" i={0} />
+        <CalloutG x={seamX[0]} y={330} tx={190} ty={330} label="Panel seam" side="left" i={1} />
+        <CalloutG x={WALL.x - 18} y={102} tx={190} ty={160} label="Header truss" side="left" i={2} />
+        <CalloutG x={front[0][0] + 20} y={front[2][1] - 24} tx={190} ty={620} label="Reception counter" sub="1200 mm wide" side="left" i={3} />
+        <CalloutG x={(rt0[0] + rt1[0]) / 2} y={(rt0[1] + rb0[1]) / 2 - 20} tx={1250} ty={680} label="Return wall graphic" i={4} />
+      </CalloutsG>
       <SpecColumnG x={700} y={640} w={420} title="Booth" rows={[{ k: 'Footprint', v: '6000 × 3000 mm' }, { k: 'Wall height', v: '3000 mm' }, { k: 'Carpet', v: 'Dark Blue, tiles' }]} rowH={34} />
     </Plate>
   );

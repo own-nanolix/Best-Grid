@@ -1,4 +1,4 @@
-import { CalloutG, DimensionG, LitG, ShadowG } from '@/components/art/Mockup';
+import { CalloutG, DimensionG, LitG, ShadowG, CalloutsG } from '@/components/art/Mockup';
 import { MarkG, WordmarkG } from '@/components/art/Mark';
 import { CrossingBandsG, NodeG } from '@/components/art/KeyArt';
 import { HEX, CONTACT, LINES } from '@/lib/brand';
@@ -121,11 +121,13 @@ export function BagTall() {
               )}
             />
           </LitG>
-          <CalloutG x={330} y={68} tx={600} ty={90} label="Rope handle" sub="Knotted inside" i={1} />
-          <CalloutG x={G.xr - 60} y={G.yt + 36} tx={600} ty={290} label="Metal eyelet" i={2} />
-          <CalloutG x={G.ex + G.dx / 2} y={G.yt + 14} tx={600} ty={200} label="Folded top" sub="Hem 28 mm" i={3} />
-          <CalloutG x={G.ex + G.dx / 2} y={380} tx={600} ty={380} label="Gusset crease" i={4} />
-          <CalloutG x={265} y={250} tx={600} ty={470} label="Printed mark" i={5} />
+          <CalloutsG>
+            <CalloutG x={330} y={68} tx={600} ty={90} label="Rope handle" sub="Knotted inside" i={1} />
+            <CalloutG x={G.xr - 60} y={G.yt + 36} tx={600} ty={290} label="Metal eyelet" i={2} />
+            <CalloutG x={G.ex + G.dx / 2} y={G.yt + 14} tx={600} ty={200} label="Folded top" sub="Hem 28 mm" i={3} />
+            <CalloutG x={G.ex + G.dx / 2} y={380} tx={600} ty={380} label="Gusset crease" i={4} />
+            <CalloutG x={265} y={250} tx={600} ty={470} label="Printed mark" i={5} />
+          </CalloutsG>
           <DimensionG x1={G.xl - 30} y1={G.yt} x2={G.xl - 30} y2={560} value="500 mm" offset={34} i={6} />
           <DimensionG x1={G.xl} y1={566} x2={G.xr} y2={566} value="290 mm" offset={30} i={7} />
         </>
@@ -159,11 +161,13 @@ export function BagMedium() {
               )}
             />
           </LitG>
-          <CalloutG x={790} y={205} tx={1000} ty={110} label="Ribbon handle" sub="Flat, sewn in" i={1} />
-          <CalloutG x={G.xl + 75} y={G.yt + 40} tx={560} ty={200} label="Eyelet" side="left" i={2} />
-          <CalloutG x={G.ex + G.dx / 2} y={G.yt + 20} tx={560} ty={290} label="Folded top" side="left" i={3} />
-          <CalloutG x={G.ex + G.dx / 2} y={430} tx={560} ty={380} label="Gusset crease" side="left" i={4} />
-          <CalloutG x={780} y={428} tx={1000} ty={470} label="Crossing bands" i={5} />
+          <CalloutsG>
+            <CalloutG x={790} y={205} tx={1000} ty={110} label="Ribbon handle" sub="Flat, sewn in" i={1} />
+            <CalloutG x={G.xl + 75} y={G.yt + 40} tx={560} ty={200} label="Eyelet" side="left" i={2} />
+            <CalloutG x={G.ex + G.dx / 2} y={G.yt + 20} tx={560} ty={290} label="Folded top" side="left" i={3} />
+            <CalloutG x={G.ex + G.dx / 2} y={430} tx={560} ty={380} label="Gusset crease" side="left" i={4} />
+            <CalloutG x={780} y={428} tx={1000} ty={470} label="Crossing bands" i={5} />
+          </CalloutsG>
           <DimensionG x1={G.xr + 34} y1={560} x2={G.xr + 34} y2={G.yt} value="380 mm" offset={30} i={6} />
         </>
       )}
@@ -201,11 +205,13 @@ export function BagSmall() {
               )}
             />
           </LitG>
-          <CalloutG x={G.xl + 70} y={G.yt - 56} tx={250} ty={120} label="Rope handle" side="left" i={1} />
-          <CalloutG x={G.xr - 52} y={G.yt + 36} tx={720} ty={140} label="Eyelet" i={2} />
-          <CalloutG x={G.ex + G.dx / 2} y={G.yt + 18} tx={250} ty={250} label="Folded top" side="left" i={3} />
-          <CalloutG x={G.ex + G.dx / 2} y={470} tx={250} ty={380} label="Gusset crease" side="left" i={4} />
-          <CalloutG x={G.xr - 30} y={G.yt + 150} tx={720} ty={300} label="Guide lines" sub="Hairline with node" i={5} />
+          <CalloutsG>
+            <CalloutG x={G.xl + 70} y={G.yt - 56} tx={250} ty={120} label="Rope handle" side="left" i={1} />
+            <CalloutG x={G.xr - 52} y={G.yt + 36} tx={720} ty={140} label="Eyelet" i={2} />
+            <CalloutG x={G.ex + G.dx / 2} y={G.yt + 18} tx={250} ty={250} label="Folded top" side="left" i={3} />
+            <CalloutG x={G.ex + G.dx / 2} y={470} tx={250} ty={380} label="Gusset crease" side="left" i={4} />
+            <CalloutG x={G.xr - 30} y={G.yt + 150} tx={720} ty={300} label="Guide lines" sub="Hairline with node" i={5} />
+          </CalloutsG>
           <DimensionG x1={G.xr + 30} y1={560} x2={G.xr + 30} y2={G.yt} value="280 mm" offset={34} i={6} />
         </>
       )}

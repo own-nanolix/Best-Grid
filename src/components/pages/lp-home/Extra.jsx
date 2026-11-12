@@ -7,7 +7,7 @@ import { Rows } from '@/components/ui/Card';
 import { MarkG, WordmarkG } from '@/components/art/Mark';
 import { GuidesG, NodeG, NodeGridG } from '@/components/art/KeyArt';
 import { Numeral } from '@/components/ui/Spec';
-import { HEX, REPORT, TUBE, LINES, BRAND_FULL, CAPACITY } from '@/lib/brand';
+import { HEX, REPORT, TUBE, LINES, BRAND_FULL, CAPACITY, mixHex } from '@/lib/brand';
 import { Lines } from './Posters';
 import s from './lp-home.module.css';
 
@@ -19,7 +19,7 @@ function ReportCover() {
   return (
     <Art viewBox="0 0 480 640" title="Annual report cover" exportName="lp-home-report-cover" lang="es">
       <rect width="480" height="640" fill={HEX.periwinkle} />
-      <rect x="70" y="34" width="360" height="572" fill="#000000" opacity="0.14" transform="translate(10 12)" />
+      <rect x="70" y="34" width="360" height="572" fill={HEX.black} opacity="0.14" transform="translate(10 12)" />
       <rect x="70" y="34" width="360" height="572" fill={HEX.activeBlue} />
       <rect x="40" y="34" width="30" height="572" fill={HEX.darkBlue} />
       <MarkG x={46} y={46} size={18} fill={HEX.activeBlue} />
@@ -52,15 +52,15 @@ function TubeArt() {
     <Art viewBox="0 0 360 640" title="Project tube with label" exportName="lp-home-tube" lang="es">
       <defs>
         <linearGradient id={`${idp}-body`} x1="0" x2="1" y1="0" y2="0">
-          <stop offset="0" stopColor="#000000" stopOpacity="0.35" />
-          <stop offset="0.35" stopColor="#000000" stopOpacity="0" />
-          <stop offset="0.8" stopColor="#000000" stopOpacity="0.1" />
-          <stop offset="1" stopColor="#000000" stopOpacity="0.45" />
+          <stop offset="0" stopColor={HEX.black} stopOpacity="0.35" />
+          <stop offset="0.35" stopColor={HEX.black} stopOpacity="0" />
+          <stop offset="0.8" stopColor={HEX.black} stopOpacity="0.1" />
+          <stop offset="1" stopColor={HEX.black} stopOpacity="0.45" />
         </linearGradient>
         <linearGradient id={`${idp}-label`} x1="0" x2="1" y1="0" y2="0">
-          <stop offset="0" stopColor="#ffffff" stopOpacity="0.18" />
-          <stop offset="0.6" stopColor="#ffffff" stopOpacity="0" />
-          <stop offset="1" stopColor="#000000" stopOpacity="0.16" />
+          <stop offset="0" stopColor={HEX.white} stopOpacity="0.18" />
+          <stop offset="0.6" stopColor={HEX.white} stopOpacity="0" />
+          <stop offset="1" stopColor={HEX.black} stopOpacity="0.16" />
         </linearGradient>
       </defs>
       <rect width="360" height="640" fill={HEX.periwinkleMock} />
@@ -69,9 +69,9 @@ function TubeArt() {
       <g transform="translate(116 760) rotate(-90)">
         <WordmarkG x={0} y={0} size={84} fill={HEX.onBlue} opacity="0.92" />
       </g>
-      <ellipse cx="180" cy="150" rx="130" ry="56" fill="#10142c" />
+      <ellipse cx="180" cy="150" rx="130" ry="56" fill={mixHex(HEX.darkBlue, HEX.stage, 0.65)} />
       <ellipse cx="180" cy="146" rx="122" ry="50" fill={HEX.activeBlue} />
-      <ellipse cx="180" cy="150" rx="114" ry="44" fill="#4a73ef" />
+      <ellipse cx="180" cy="150" rx="114" ry="44" fill={mixHex(HEX.activeBlue, HEX.blueInk, 0.3)} />
       <g transform="translate(180 150) scale(1 0.42) rotate(0)">
         <MarkG x={-58} y={-58} size={116} fill={HEX.darkBlue} />
       </g>

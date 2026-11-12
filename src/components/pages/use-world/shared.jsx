@@ -5,7 +5,7 @@ import { MaterialDefs, StageG, PlateFrameG } from '@/components/art/Mockup';
 import { BrandDefs, TrailsG, IconArtG, NodeG } from '@/components/art/KeyArt';
 import { MarkG, WordmarkG } from '@/components/art/Mark';
 import { CORE } from '@/components/site/icons';
-import { HEX, LINES, CONTACT, POSTERS } from '@/lib/brand';
+import { HEX, LINES, CONTACT, POSTERS, mixHex } from '@/lib/brand';
 import { r2 } from '@/lib/charts';
 
 export const LIGHT = HEX.onBlue; // light grey-white type on blue (sampled)
@@ -27,9 +27,9 @@ export function Plate({ idp, title, exportName, w, h, spot, floor = 0.74, split,
 export function BoltG({ x, y, r = 4 }) {
   return (
     <g>
-      <circle cx={x} cy={y} r={r} fill="#2a2f4c" />
-      <circle cx={r2(x - r * 0.2)} cy={r2(y - r * 0.2)} r={r2(r * 0.7)} fill="#b7bdcc" />
-      <path d={`M${r2(x - r * 0.6)} ${y}H${r2(x + r * 0.6)}`} stroke="#3c4475" strokeWidth="1" />
+      <circle cx={x} cy={y} r={r} fill={mixHex(HEX.stage, HEX.muted, 0.5)} />
+      <circle cx={r2(x - r * 0.2)} cy={r2(y - r * 0.2)} r={r2(r * 0.7)} fill={mixHex(HEX.labelGrey, HEX.stageLight, 0.1)} />
+      <path d={`M${r2(x - r * 0.6)} ${y}H${r2(x + r * 0.6)}`} stroke={mixHex(HEX.lightBlue, HEX.stageLight, 0.9)} strokeWidth="1" />
     </g>
   );
 }
@@ -59,7 +59,7 @@ export function SkyFieldG({ idp, x, y, w, h, clip }) {
         <rect x={x} y={y} width={w} height={h} fill={`url(#${idp}-b-sunset)`} />
         <g transform={`translate(${x} ${y})`}><TrailsG w={w} h={h} count={5} y0={0.06} y1={0.5} sag={0.05} /></g>
         <IconArtG name="pylon" x={r2(x + w * 0.16)} y={r2(y + h * 0.18)} size={r2(w * 0.68)} fill={HEX.darkBlue} opacity="0.92" />
-        <rect x={x} y={y} width={w} height={h} fill="#000000" opacity="0.08" />
+        <rect x={x} y={y} width={w} height={h} fill={HEX.black} opacity="0.08" />
       </g>
     </g>
   );
@@ -86,7 +86,7 @@ export function BillboardFaceG({ idp }) {
         <text x="28" y="137" fill={HEX.darkBlue}>{c}</text>
       </g>
       <MarkG x={957} y={43} size={60} fill={LIGHT} opacity="0.95" />
-      <g fontSize="15.5" fill="#ffffff" lang="es">
+      <g fontSize="15.5" fill={HEX.white} lang="es">
         <text x="32" y="276">{t1}</text>
         <text x="32" y="298">{t2}</text>
         <text x="1015" y="276" textAnchor="end" fill={LIGHT}>{CONTACT.handle}</text>
@@ -118,7 +118,7 @@ export function PosterFieldG({ idp, uid = "f" }) {
       <WordmarkG x={360} y={118} size={58} fill={LIGHT} anchor="middle" />
       <SkyFieldG idp={idp} x={75} y={195} w={570} h={570} clip={`${idp}-${uid}-pf-photo`} />
       <rect x={75} y={195} width={570} height={570} fill={HEX.darkBlue} opacity="0.2" />
-      <text x="360" y="722" textAnchor="middle" fontSize="30" fill="#ffffff" lang="es">{p.head}</text>
+      <text x="360" y="722" textAnchor="middle" fontSize="30" fill={HEX.white} lang="es">{p.head}</text>
       <g fontSize="12.5" fill={LIGHT} textAnchor="middle" lang="es">
         {p.body.map((l, i) => <text key={l} x="360" y={870 + i * 15}>{l}</text>)}
       </g>
@@ -189,7 +189,7 @@ export function IconPathG({ name, x, y, size, fill }) {
 
 // Raised letters or a raised mark: a cast shadow that sweeps with the light, a stack of side layers away from the
 // light, a lit edge and the face. `draw(fill)` returns the shape in the given fill. dir = direction shadows fall.
-export function RaisedG({ idp, draw, dir, depth = 5, face, side = '#10132b', shadowClass }) {
+export function RaisedG({ idp, draw, dir, depth = 5, face, side = mixHex(HEX.stage, HEX.activeBlue, 0.05), shadowClass }) {
   const n = Math.max(2, Math.round(depth));
   return (
     <g>
@@ -197,12 +197,12 @@ export function RaisedG({ idp, draw, dir, depth = 5, face, side = '#10132b', sha
         <feGaussianBlur stdDeviation={r2(depth * 0.9)} />
       </filter>
       <g className={shadowClass}>
-        <g transform={`translate(${r2(dir.x * depth * 2.4)} ${r2(dir.y * depth * 2.4)})`} opacity="0.4" filter={`url(#${idp}-raise-blur)`}>{draw('#000000')}</g>
+        <g transform={`translate(${r2(dir.x * depth * 2.4)} ${r2(dir.y * depth * 2.4)})`} opacity="0.4" filter={`url(#${idp}-raise-blur)`}>{draw(HEX.black)}</g>
       </g>
       {Array.from({ length: n }, (_, i) => (
         <g key={i} transform={`translate(${r2(dir.x * (n - i) * 0.9)} ${r2(dir.y * (n - i) * 0.9)})`}>{draw(side)}</g>
       ))}
-      <g transform={`translate(${r2(-dir.x * 0.9)} ${r2(-dir.y * 0.9)})`} opacity="0.65">{draw('#ffffff')}</g>
+      <g transform={`translate(${r2(-dir.x * 0.9)} ${r2(-dir.y * 0.9)})`} opacity="0.65">{draw(HEX.white)}</g>
       {draw(face)}
     </g>
   );

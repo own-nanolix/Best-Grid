@@ -3,7 +3,7 @@
 import { r2 } from '@/lib/charts';
 import { HEX } from '@/lib/brand';
 import Art from '@/components/art/Art';
-import { CalloutG, DimensionG, PlateFrameG, SpecColumnG, ShadowG, LitG } from '@/components/art/Mockup';
+import { CalloutG, DimensionG, PlateFrameG, SpecColumnG, ShadowG, LitG, CalloutsG } from '@/components/art/Mockup';
 import { Base, CastPoly, mat, rectPoly, ID } from './kit';
 import { PanelG, PANEL, ReportCoverG, ReportSpineG, REPORT_FACE } from './Objects';
 import { SLIDES, SLIDE } from './Slides';
@@ -39,10 +39,12 @@ export function Brochure() {
           </g>
         ))}
       </LitG>
-      <CalloutG x={pt(faces[0], 100, 250)[0]} y={pt(faces[0], 100, 250)[1]} tx={660} ty={270} label="Cover panel" sub="Active Blue" i={0} />
-      <CalloutG x={pt(faces[0], PANEL.w, 200)[0]} y={pt(faces[0], PANEL.w, 200)[1]} tx={660} ty={200} label="Fold line" sub="Ridge and valley" i={1} />
-      <CalloutG x={pt(faces[1], 100, 100)[0]} y={pt(faces[1], 100, 100)[1]} tx={660} ty={130} label="Inside panel" sub="Ruled cells" i={2} />
-      <CalloutG x={pt(faces[2], 100, 330)[0]} y={pt(faces[2], 100, 330)[1]} tx={660} ty={340} label="Back panel" sub="Contact details" i={3} />
+      <CalloutsG>
+        <CalloutG x={pt(faces[0], 100, 250)[0]} y={pt(faces[0], 100, 250)[1]} tx={660} ty={270} label="Cover panel" sub="Active Blue" i={0} />
+        <CalloutG x={pt(faces[0], PANEL.w, 200)[0]} y={pt(faces[0], PANEL.w, 200)[1]} tx={660} ty={200} label="Fold line" sub="Ridge and valley" i={1} />
+        <CalloutG x={pt(faces[1], 100, 100)[0]} y={pt(faces[1], 100, 100)[1]} tx={660} ty={130} label="Inside panel" sub="Ruled cells" i={2} />
+        <CalloutG x={pt(faces[2], 100, 330)[0]} y={pt(faces[2], 100, 330)[1]} tx={660} ty={340} label="Back panel" sub="Contact details" i={3} />
+      </CalloutsG>
       {foot.map(([a, b], i) => <DimensionG key={i} x1={a[0]} y1={a[1]} x2={b[0]} y2={b[1]} value="99 mm" offset={26} i={4 + i} />)}
       <DimensionG x1={pt(faces[0], 0, 0)[0]} y1={pt(faces[0], 0, 0)[1]} x2={pt(faces[0], 0, PANEL.h)[0]} y2={pt(faces[0], 0, PANEL.h)[1]} value="210 mm" offset={36} i={7} />
       <SpecColumnG x={620} y={430} w={290} title="Print spec" rows={[{ k: 'Sheet', v: 'A4, 297 × 210 mm' }, { k: 'Fold', v: 'Z-fold, 3 panels' }, { k: 'Stock', v: '170 g/m²' }]} rowH={38} />
@@ -90,9 +92,11 @@ export function ReportPlate() {
           </LitG>
         </g>
       </g>
-      <CalloutG x={sp(reps[0], 20, 32)[0]} y={sp(reps[0], 20, 32)[1]} tx={200} ty={58} label="Spine" sub="Mark, IDAA, [24 – 25], BGS" i={0} />
-      <CalloutG x={at(reps[0], 200, 330)[0]} y={at(reps[0], 200, 330)[1]} tx={690} ty={200} label="Cover" sub="Title, closing line, years" i={1} />
-      <CalloutG x={at(reps[1], 200, 560)[0]} y={at(reps[1], 200, 560)[1]} tx={690} ty={400} label="Dark Blue cover" sub="Light type" i={2} />
+      <CalloutsG>
+        <CalloutG x={sp(reps[0], 20, 32)[0]} y={sp(reps[0], 20, 32)[1]} tx={200} ty={58} label="Spine" sub="Mark, IDAA, [24 – 25], BGS" i={0} />
+        <CalloutG x={at(reps[0], 200, 330)[0]} y={at(reps[0], 200, 330)[1]} tx={690} ty={200} label="Cover" sub="Title, closing line, years" i={1} />
+        <CalloutG x={at(reps[1], 200, 560)[0]} y={at(reps[1], 200, 560)[1]} tx={690} ty={400} label="Dark Blue cover" sub="Light type" i={2} />
+      </CalloutsG>
       <DimensionG x1={sp(reps[2], 0, T)[0]} y1={sp(reps[2], 0, T)[1]} x2={sp(reps[2], ch, T)[0]} y2={sp(reps[2], ch, T)[1]} value="310 mm" offset={26} i={4} />
       <DimensionG x1={sp(reps[2], ch, 0)[0]} y1={sp(reps[2], ch, 0)[1]} x2={sp(reps[2], ch, T)[0]} y2={sp(reps[2], ch, T)[1]} value="18 mm" offset={-24} i={5} />
       <SpecColumnG x={690} y={470} w={220} rows={[{ k: 'Format', v: '220 × 310 mm' }, { k: 'Spine', v: '18 mm' }, { k: 'Binding', v: 'Perfect-bound' }]} rowH={38} />

@@ -1,9 +1,9 @@
 // Plates 4 to 8: the tube open with the drawing half out, the tube in its carton, the second colourway, the
 // connection-study drawing on its own and the grey label flat. All dimensions are our own production values in mm.
 import { r2 } from '@/lib/charts';
-import { HEX } from '@/lib/brand';
+import { HEX, mixHex } from '@/lib/brand';
 import { MarkG, WordmarkG } from '@/components/art/Mark';
-import { CalloutG, DimensionG, SpecColumnG, ShadowG, CastG, LitG } from '@/components/art/Mockup';
+import { CalloutG, DimensionG, SpecColumnG, ShadowG, CastG, LitG, CalloutsG } from '@/components/art/Mockup';
 import { Plate, labelRows } from './plate';
 import { TubeG, LyingTubeG, LabelContentG, T } from './tube';
 import { DrawingG, DRAWING } from './drawing';
@@ -35,15 +35,17 @@ export function OpenPlate() {
         <rect x="700" y="22" width="310" height="256" fill={`url(#${idp}-ao)`} opacity="0.35" />
         <ellipse cx="1010" cy="150" rx="30" ry="128" fill={HEX.cardGrey} />
         {spiral.map((s, i) => <ellipse key={s} cx={1010 - i * 1.5} cy={150} rx={r2(30 * s)} ry={r2(128 * s)} fill="none" stroke={HEX.darkBlue} strokeOpacity="0.45" strokeWidth="0.9" />)}
-        <ellipse cx="1010" cy="150" rx="30" ry="128" fill="none" stroke="#000000" strokeOpacity="0.25" />
+        <ellipse cx="1010" cy="150" rx="30" ry="128" fill="none" stroke={HEX.black} strokeOpacity="0.25" />
       </g>
       <Callouts tx={0} rows={[]} />
-      <CalloutG label="Wound card body" x={P(160, 0)[0]} y={P(160, 0)[1]} tx={P(160, 0)[0] + 24} ty={60} i={0} />
-      <CalloutG label="Printed label" x={P(560, 100)[0]} y={P(560, 100)[1]} tx={P(560, 100)[0] + 24} ty={100} i={1} />
-      <CalloutG label="Tube mouth" x={P(700, -2)[0]} y={P(700, -2)[1]} tx={P(700, -2)[0] + 24} ty={60} i={2} />
-      <CalloutG label="Rolled drawing" x={P(860, 22)[0]} y={P(860, 22)[1]} tx={P(860, 22)[0] + 24} ty={100} i={3} />
-      <CalloutG label="Unrolled sheet" x={P(790, 480)[0]} y={P(790, 480)[1]} tx={P(790, 480)[0] + 24} ty={730} i={4} />
-      <CalloutG label="Lattice study" x={P(935, 363)[0]} y={P(935, 363)[1]} tx={P(935, 363)[0] + 24} ty={690} i={5} />
+      <CalloutsG>
+        <CalloutG label="Wound card body" x={P(160, 0)[0]} y={P(160, 0)[1]} tx={P(160, 0)[0] + 24} ty={60} i={0} />
+        <CalloutG label="Printed label" x={P(560, 100)[0]} y={P(560, 100)[1]} tx={P(560, 100)[0] + 24} ty={100} i={1} />
+        <CalloutG label="Tube mouth" x={P(700, -2)[0]} y={P(700, -2)[1]} tx={P(700, -2)[0] + 24} ty={60} i={2} />
+        <CalloutG label="Rolled drawing" x={P(860, 22)[0]} y={P(860, 22)[1]} tx={P(860, 22)[0] + 24} ty={100} i={3} />
+        <CalloutG label="Unrolled sheet" x={P(790, 480)[0]} y={P(790, 480)[1]} tx={P(790, 480)[0] + 24} ty={730} i={4} />
+        <CalloutG label="Lattice study" x={P(935, 363)[0]} y={P(935, 363)[1]} tx={P(935, 363)[0] + 24} ty={690} i={5} />
+      </CalloutsG>
       <SpecColumnG x={96} y={300} w={380} title="Tube and drawing" rows={[{ k: 'Tube length', v: '306 mm' }, { k: 'Tube inner diameter', v: '114 mm' }, { k: 'Roll diameter', v: '100 mm' }, { k: 'Sheet', v: 'A3, 420 × 297 mm' }]} />
     </Plate>
   );
@@ -60,17 +62,17 @@ export function CartonPlate() {
       <ShadowG idp={`${idp}-sh`} cx={X + 190 * S} cy={Y + Hh * S + 4} rx={300} ry={40} dir={{ x: -0.9, y: 0.1 }} />
       <g transform={`translate(${X} ${Y}) scale(${S})`}>
         <path d={topFace} fill={`url(#${idp}-card)`} />
-        <path d={topFace} fill="#000000" opacity="0.42" />
-        <path d={`M0 0L${dx} ${dy}V0Z`} fill="#000000" opacity="0.25" />
+        <path d={topFace} fill={HEX.black} opacity="0.42" />
+        <path d={`M0 0L${dx} ${dy}V0Z`} fill={HEX.black} opacity="0.25" />
         <path d={topFace} fill={`url(#${idp}-ao)`} opacity="0.9" />
         <TubeG idp={idp} tone="active" x={169} y={-84} k={0.68} right len={600} />
         <path d={`M0 0H${W}V${Hh}H0Z`} fill={`url(#${idp}-card)`} filter={`url(#${idp}-fibre)`} />
-        <path d={`M0 0H${W}V${Hh}H0Z`} fill="#000000" opacity="0.1" />
+        <path d={`M0 0H${W}V${Hh}H0Z`} fill={HEX.black} opacity="0.1" />
         <path d={`M0 0H${W}V${Hh}H0Z`} fill={`url(#${idp}-shade-v)`} opacity="0.5" />
         <path d={rightFace} fill={`url(#${idp}-card)`} filter={`url(#${idp}-fibre)`} />
-        <path d={rightFace} fill="#ffffff" opacity="0.14" />
+        <path d={rightFace} fill={HEX.white} opacity="0.14" />
         <path d={rightFace} fill={`url(#${idp}-shade-r)`} opacity="0.6" />
-        <path d={`M0 0H${W}L${W + dx} ${dy}`} fill="none" stroke="#ffffff" strokeOpacity="0.7" strokeWidth="2.4" />
+        <path d={`M0 0H${W}L${W + dx} ${dy}`} fill="none" stroke={HEX.white} strokeOpacity="0.7" strokeWidth="2.4" />
         <rect x="28" y="0" width="0.8" height={Hh} fill={HEX.darkBlue} opacity="0.5" />
         <rect x="25.5" y="148" width="5.6" height="5.6" fill={HEX.darkBlue} />
         <MarkG x={50} y={110} size={70} fill={HEX.darkBlue} />
@@ -120,7 +122,7 @@ export function DrawingPlate() {
         <CastG idp={`${idp}-cast`} d={sheet} dir={{ x: 0.6, y: 0.6 }} depth={22} opacity={0.55} blur={9} />
         <clipPath id={`${idp}-cut`}><path d={sheet} /></clipPath>
         <g clipPath={`url(#${idp}-cut)`}><DrawingG idp={idp} /></g>
-        <path d={sheet} fill="none" stroke="#000000" strokeOpacity="0.2" />
+        <path d={sheet} fill="none" stroke={HEX.black} strokeOpacity="0.2" />
         <path d={`M${w - 110} ${h}L${w} ${h - 110}L${w - 110} ${h - 110}Z`} fill={`url(#${idp}-card)`} />
         <path d={`M${w - 110} ${h}L${w} ${h - 110}L${w - 110} ${h - 110}Z`} fill={`url(#${idp}-shade-v)`} opacity="0.6" />
       </g>
@@ -147,7 +149,7 @@ export function LabelPlate() {
     <Plate idp={idp} w={1500} h={860} name="label" title="The grey project label laid flat, with every printed line, the mark and a rule with a node" spot={{ x: 0.34, y: 0.12 }} split={0.5} no="08">
       <g transform={`translate(${X} ${Y}) scale(${S})`}>
         <CastG idp={`${idp}-cast`} d={box} dir={{ x: 0.7, y: 0.8 }} depth={4} opacity={0.55} blur={2.4} />
-        <rect x="0.3" y="1" width={L} height={L} fill="#8d93a3" />
+        <rect x="0.3" y="1" width={L} height={L} fill={mixHex(HEX.cardGrey, HEX.darkBlue, 0.45)} />
         <rect width={L} height={L} fill={HEX.labelGrey} filter={`url(#${idp}-fibre)`} />
         <g transform={`translate(${L} 0) rotate(90)`}><LabelContentG /></g>
         <rect width={L} height={L} fill={`url(#${idp}-shade)`} opacity="0.55" />

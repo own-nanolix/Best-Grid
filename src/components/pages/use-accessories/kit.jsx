@@ -3,19 +3,19 @@
 import Art from '@/components/art/Art';
 import { StageG, MaterialDefs, PlateFrameG, LitG } from '@/components/art/Mockup';
 import { MarkG, WordmarkG, WORDMARK } from '@/components/art/Mark';
-import { HEX } from '@/lib/brand';
+import { HEX, mixHex } from '@/lib/brand';
 import { r2 } from '@/lib/charts';
 
 export const ID = 'use-accessories';
 
 // Neutral tones for metal, cork and rubber (rule: palette plus neutrals); everything else is the published palette.
-export const NEUTRAL = { steel: '#c3c8d4', steelDark: '#8d94a8', cork: '#b69b74', corkDark: '#9a7f5a', rubber: '#1c2038', thread: '#e6e8ee' };
+export const NEUTRAL = { steel: mixHex(HEX.cardGrey, HEX.darkBlue, 0.2), steelDark: mixHex(HEX.cardGrey, HEX.darkBlue, 0.45), cork: mixHex(HEX.warmGrey, HEX.sunset, 0.3), corkDark: mixHex(mixHex(HEX.warmGrey, HEX.sunset, 0.3), HEX.plum, 0.25), rubber: mixHex(HEX.stage, HEX.muted, 0.3), thread: HEX.onBlue };
 
 // Fabric options: the material fill id (from MaterialDefs), a solid for straps and edges, the ink printed on it.
 export const FAB = {
-  dark: { fill: 'fabric-dark', solid: HEX.darkBlue, edge: '#10132b', ink: HEX.activeBlue, word: HEX.onBlue },
-  active: { fill: 'fabric-blue', solid: HEX.activeBlue, edge: '#3f63d8', ink: HEX.darkBlue, word: HEX.onBlue },
-  light: { fill: 'paper', solid: HEX.lightBlue, edge: '#b9c0d3', ink: HEX.darkBlue, word: HEX.darkBlue },
+  dark: { fill: 'fabric-dark', solid: HEX.darkBlue, edge: mixHex(HEX.stage, HEX.activeBlue, 0.05), ink: HEX.activeBlue, word: HEX.onBlue },
+  active: { fill: 'fabric-blue', solid: HEX.activeBlue, edge: mixHex(HEX.activeBlue, HEX.blueInk, 0.65), ink: HEX.darkBlue, word: HEX.onBlue },
+  light: { fill: 'paper', solid: HEX.lightBlue, edge: mixHex(HEX.paper, HEX.stageLight, 0.3), ink: HEX.darkBlue, word: HEX.darkBlue },
 };
 
 export const url = (m, n) => `url(#${m}-${n})`;
@@ -29,13 +29,13 @@ export function mix(a, b, t) {
 
 // A round body's horizontal shading: darker at the edges, the highlight at fraction `hl` (towards the spot).
 export function Cyl({ id, base, hl = 0.3, gloss = 0.5 }) {
-  const hi = mix(base, '#ffffff', gloss), lo = mix(base, '#000000', 0.5);
+  const hi = mix(base, HEX.white, gloss), lo = mix(base, HEX.black, 0.5);
   return (
     <linearGradient id={id} x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0" stopColor={hl < 0.5 ? mix(base, '#000000', 0.18) : lo} />
+      <stop offset="0" stopColor={hl < 0.5 ? mix(base, HEX.black, 0.18) : lo} />
       <stop offset={r2(hl)} stopColor={hi} />
       <stop offset={r2(Math.min(0.95, hl + 0.22))} stopColor={base} />
-      <stop offset="1" stopColor={hl < 0.5 ? lo : mix(base, '#000000', 0.18)} />
+      <stop offset="1" stopColor={hl < 0.5 ? lo : mix(base, HEX.black, 0.18)} />
     </linearGradient>
   );
 }

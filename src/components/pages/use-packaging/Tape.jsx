@@ -1,4 +1,4 @@
-import { CalloutG, DimensionG, LitG, ShadowG, SheenG } from '@/components/art/Mockup';
+import { CalloutG, DimensionG, LitG, ShadowG, SheenG, CalloutsG } from '@/components/art/Mockup';
 import { HEX } from '@/lib/brand';
 import { r2 } from '@/lib/charts';
 import { WordmarkG, MarkG } from '@/components/art/Mark';
@@ -112,10 +112,12 @@ export function TapeRollBlue() {
             <SheenG idp={idp} d={`M${cx - rx * 0.6} ${cy - R * 0.85}A${rx} ${R} 0 0 1 ${cx + rx * 0.6} ${cy - R * 0.85}Z`} opacity="0.35" />
           </LitG>
           <DimensionG x1={cx - rx - 22} y1={cy - R} x2={cx - rx - 22} y2={cy + R} value="100 mm" offset={30} i={5} />
-          <CalloutG x={cx + 100} y={cy - 70} tx={590} ty={150} label="Printed film" sub="One colour" i={1} />
-          <CalloutG x={cx + 8} y={cy + 40} tx={590} ty={250} label="Cardboard core" sub="76 mm" i={2} />
-          <CalloutG x={cx - 4} y={cy - 108} tx={170} ty={140} label="Wound layers" side="left" i={3} />
-          <CalloutG x={cx + 470 + 22} y={cy + R + 22} tx={680} ty={640} label="Saw-cut end" i={4} />
+          <CalloutsG>
+            <CalloutG x={cx + 100} y={cy - 70} tx={590} ty={150} label="Printed film" sub="One colour" i={1} />
+            <CalloutG x={cx + 8} y={cy + 40} tx={590} ty={250} label="Cardboard core" sub="76 mm" i={2} />
+            <CalloutG x={cx - 4} y={cy - 108} tx={170} ty={140} label="Wound layers" side="left" i={3} />
+            <CalloutG x={cx + 470 + 22} y={cy + R + 22} tx={680} ty={640} label="Saw-cut end" i={4} />
+          </CalloutsG>
         </>
       )}
     </Plate>
@@ -177,10 +179,12 @@ export function TapeRollDark() {
             <ellipse cx={cx} cy={cy} rx={r2(R * rc * 0.94)} ry={r2(ry * rc * 0.94)} fill="none" stroke={HEX.black} strokeOpacity="0.45" strokeWidth="1.2" />
             <SheenG idp={idp} d={`M${cx - R * 0.7} ${cy + 4}A${R} ${ry} 0 0 1 ${cx + R * 0.3} ${cy - ry * 0.95}L${cx + R * 0.1} ${cy + 2}Z`} opacity="0.3" />
           </LitG>
-          <CalloutG x={cx + 20} y={cy + 12} tx={560} ty={130} label="Core, top face" sub="76 mm" side="left" i={1} />
-          <CalloutG x={cx - R + 30} y={cy - 10} tx={520} ty={240} label="Wound film edge" side="left" i={2} />
-          <CalloutG x={cx + R - 40} y={cy + hh - 40} tx={930} ty={230} label="Printed wall" i={3} />
-          <CalloutG x={cx + 110 + 370 - 14} y={cy + hh + 24} tx={1000} ty={640} label="Folded tab" i={4} />
+          <CalloutsG>
+            <CalloutG x={cx + 20} y={cy + 12} tx={560} ty={130} label="Core, top face" sub="76 mm" side="left" i={1} />
+            <CalloutG x={cx - R + 30} y={cy - 10} tx={520} ty={240} label="Wound film edge" side="left" i={2} />
+            <CalloutG x={cx + R - 40} y={cy + hh - 40} tx={930} ty={230} label="Printed wall" i={3} />
+            <CalloutG x={cx + 110 + 370 - 14} y={cy + hh + 24} tx={1000} ty={640} label="Folded tab" i={4} />
+          </CalloutsG>
           <DimensionG x1={cx - R} y1={cy + hh + 44} x2={cx + R} y2={cy + hh + 44} value="100 mm" offset={34} i={5} />
         </>
       )}
@@ -210,10 +214,12 @@ export function TapeStrips() {
           {strips.map((s) => (
             <FlatStrip key={s.k} idp={idp} k={s.k} m={mat(s)} len={s.len} h={s.h} bg={s.bg} ink={s.ink} fold={s.k === 'c' ? 40 : 0} lift={HEX.labelGrey} creaseAt={0.3 + 0.1 * strips.indexOf(s)} />
           ))}
-          <CalloutG x={190} y={228} tx={90} ty={110} label="Printed film" side="right" i={1} />
-          <CalloutG x={690} y={197} tx={560} ty={110} label="Saw-cut end" i={2} />
-          <CalloutG x={487} y={576} tx={460} ty={650} label="Crease" side="left" i={3} />
-          <CalloutG x={735} y={603} tx={715} ty={650} label="Folded corner" side="left" i={4} />
+          <CalloutsG>
+            <CalloutG x={190} y={228} tx={90} ty={110} label="Printed film" side="right" i={1} />
+            <CalloutG x={690} y={197} tx={560} ty={110} label="Saw-cut end" i={2} />
+            <CalloutG x={487} y={576} tx={460} ty={650} label="Crease" side="left" i={3} />
+            <CalloutG x={735} y={603} tx={715} ty={650} label="Folded corner" side="left" i={4} />
+          </CalloutsG>
           <DimensionG x1={668} y1={198} x2={668} y2={252} value="48 mm" offset={-36} i={5} />
         </>
       )}

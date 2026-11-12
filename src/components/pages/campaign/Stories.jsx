@@ -115,7 +115,7 @@ export function StoryNodes() {
       <rect width={SW} height={SH} fill={HEX.darkBlue} />
       <Lines rows={CAPACITY.nodesTitleRows} x={90} y={170} size={58} lh={1.2} fill={l} />
       <g className="fade-in" style={{ '--i': 3 }}>
-        <NodeGridG x={0} y={330} cols={12} rows={13} size={90} seed={5} clusters={10} line="rgba(228,231,239,0.24)" animate />
+        <NodeGridG x={0} y={330} cols={12} rows={13} size={90} seed={5} clusters={10} line={HEX.lightBlue} lineOpacity={0.24} animate />
       </g>
       <HL y={330} x2={SW} c={l} w={1.2} o={0.6} />
       <HL y={1500} x2={SW} c={l} w={1.2} o={0.6} i={1} />
