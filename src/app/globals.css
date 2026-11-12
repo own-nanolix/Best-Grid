@@ -406,6 +406,7 @@ textarea.input { min-height: 120px; padding: 12px 14px; resize: vertical; }
 .lp-nav-dark .lp-links a:hover, .lp-nav-dark .lp-links a[aria-current="page"] { background: rgba(89, 131, 255, 0.18); }
 .lp-nav-dark .lp-cta { background: var(--active-blue); color: var(--dark-blue); }
 .lp-nav-dark .lp-cta svg { color: var(--dark-blue); }
+.lp-nav.lp-nav-dark .lp-links a[aria-current="page"], .lp-nav.lp-nav-dark .lp-links a:hover { background: rgba(89, 131, 255, 0.18); color: var(--light-blue); }
 @media (max-width: 900px) {
   .lp-nav { grid-template-columns: var(--cell) minmax(0, 1fr) auto; }
   .lp-links { grid-column: 1 / -1; grid-row: 2; border-left: 0; border-top: var(--hair) solid var(--line); overflow-x: auto; scrollbar-width: none; }

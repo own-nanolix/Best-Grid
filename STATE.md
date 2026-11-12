@@ -109,3 +109,5 @@ http://localhost:3105 (start with `npx next dev -p 3105`; stop it before `npm ru
 - Step 4 done: LAYOUTS.md, pages.json, shared system, 30 stub routes, BRIEF.md. Lint clean; build passes; check
   lists 30 stubs and "/". Plumbing (dock, index, reveal, toast, tools, device-frame structure) adapted from the sibling project ../project-3;
   tokens, type, mark, lockups, icons, key art, mockup kit, screens, nav and footer are Best Grid's own.
+- Step 4 committed. Step 5 started: wave 1 launched (B1 to B12, Sonnet). If a session ends here, trust only `npm run build` and `node tools/check.mjs`.
+- Wave 1 done: 12 builders, 17 pages, each committed locally; lint clean, build passes, check 17 of 30 ok; no page under 650 lines. Shared fix: the dark landing nav's current-page link keeps light text. Wave 2 launched (B13 to B24, Sonnet).
