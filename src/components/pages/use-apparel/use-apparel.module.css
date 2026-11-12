@@ -1,0 +1,29 @@
+/* Apparel: page-only styles. Colour and motion come from the shared tokens. */
+
+@keyframes use-apparel-draw { from { transform: scaleX(0); } to { transform: none; } }
+@keyframes use-apparel-node { from { opacity: 0; transform: scale(0.3); } to { opacity: 1; transform: none; } }
+
+.head { padding-top: clamp(32px, 6vw, 88px); padding-bottom: 8px; position: relative; }
+.rule { height: var(--hair); background: var(--rule); transform-origin: left center; margin-top: 28px; animation: use-apparel-draw var(--dur-draw) var(--ease-line) 200ms both; }
+.node { position: absolute; width: var(--node); height: var(--node); background: var(--dark-blue); margin: -3px 0 0 -3px; animation: use-apparel-node var(--dur-xs) var(--ease-out) 900ms both; }
+.lead { max-width: 62ch; margin-top: 20px; }
+
+.section { padding-top: clamp(40px, 6vw, 88px); }
+.section h2 { margin: 0 0 20px; }
+
+.grid3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(16px, 2vw, 28px); align-items: start; }
+.fig { margin: 0; min-width: 0; }
+.fig .name { margin: 0; }
+
+.specRow { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: clamp(20px, 3vw, 48px); align-items: start; }
+.specSide { min-width: 0; }
+.note { margin-top: 14px; max-width: 52ch; }
+
+@media (max-width: 1000px) {
+  .grid3 { grid-template-columns: minmax(0, 1fr); }
+  .specRow { grid-template-columns: minmax(0, 1fr); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rule, .node { animation-duration: 1ms; animation-delay: 0ms; }
+}
