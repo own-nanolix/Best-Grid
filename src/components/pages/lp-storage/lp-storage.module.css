@@ -1,0 +1,152 @@
+/* Landing: Storage. Page-only styles. Colours are shared tokens; keyframes are prefixed lp-storage-. */
+
+/* ---------- Hero: a headline band over three tall cells across the full width ---------- */
+.hero { --line: var(--rule); position: relative; }
+.heroBand {
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  gap: var(--gap);
+  align-items: end;
+  padding: clamp(32px, 5vw, 72px) var(--pad) clamp(28px, 4vw, 56px);
+  border-bottom: var(--hair) solid var(--line);
+  position: relative;
+}
+.heroBand h1 { font-size: clamp(30px, 4.4vw, 68px); line-height: 1.08; letter-spacing: -0.015em; }
+.heroAside { display: grid; gap: 18px; justify-items: start; min-width: 0; }
+.heroTag { display: inline-flex; align-items: center; gap: 10px; }
+.heroLine { position: absolute; left: 0; bottom: -1px; height: var(--hair); width: 100%; background: var(--line); transform-origin: 0 50%; animation: lp-storage-line var(--dur-draw) var(--ease-line) both; }
+@keyframes lp-storage-line { from { transform: scaleX(0); } to { transform: none; } }
+
+.heroCells { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-bottom: var(--hair) solid var(--line); position: relative; }
+.heroCell { position: relative; min-width: 0; border-right: var(--hair) solid var(--line); padding: clamp(6px, 1vw, 16px); }
+.heroCell:last-child { border-right: 0; }
+.heroCell svg { width: 100%; height: auto; display: block; max-height: 78vh; margin-inline: auto; }
+.heroCell::after { content: ""; position: absolute; right: 0; bottom: 0; width: var(--node); height: var(--node); background: var(--line); transform: translate(50%, 50%); z-index: 2; }
+.heroCell:last-child::after { display: none; }
+.heroCap { position: absolute; left: clamp(10px, 1.4vw, 22px); top: clamp(8px, 1.2vw, 18px); font-size: 12px; z-index: 2; }
+
+/* ---------- Rows: two text rows beside one tall artwork (1 : 2 rowspan feel) ---------- */
+.rowX { --line: var(--rule); }
+.rowX > div.stack { padding: 0; gap: 0; justify-content: stretch; }
+.textRow { padding: clamp(24px, 4vw, 64px) var(--pad); display: grid; gap: 16px; align-content: center; flex: 1 1 0; min-width: 0; }
+.textRow + .textRow { border-top: var(--hair) solid var(--line); }
+.rowX .art { align-items: stretch; background: var(--periwinkle); }
+.rowX .art svg { max-height: 820px; }
+.rowFlip { --line: var(--rule); }
+.kicker { display: flex; align-items: center; gap: 10px; font-size: 13px; }
+.kicker i { display: inline-block; width: 24px; height: var(--hair); background: currentColor; transform-origin: 0 50%; }
+.rowBig { font-size: clamp(22px, 2.6vw, 40px); line-height: 1.14; letter-spacing: -0.01em; }
+.rowBody { font-size: clamp(15px, 1.2vw, 18px); line-height: 1.4; max-width: 34em; }
+.note { font-size: 12px; max-width: 30em; }
+
+/* ---------- Charge demo (an illustration; cells fill as the control moves) ---------- */
+.demo { background: var(--dark-blue); color: var(--light-blue); --line: var(--rule-blue); border-block: var(--hair) solid var(--line); }
+.demoGrid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 0; }
+.demoText { padding: clamp(28px, 5vw, 80px) var(--pad); display: grid; gap: 22px; align-content: center; border-right: var(--hair) solid var(--line); min-width: 0; }
+.demoArt { padding: clamp(14px, 3vw, 48px); min-width: 0; display: grid; align-items: center; }
+.demoArt svg { width: 100%; height: auto; display: block; }
+.control { display: grid; gap: 10px; }
+.control label { font-size: 13px; color: var(--active-blue); }
+.range { -webkit-appearance: none; appearance: none; width: 100%; height: 36px; background: transparent; cursor: pointer; margin: 0; }
+.range::-webkit-slider-runnable-track { height: var(--hair); background: var(--active-blue); }
+.range::-moz-range-track { height: var(--hair); background: var(--active-blue); }
+.range::-webkit-slider-thumb { -webkit-appearance: none; width: 20px; height: 20px; margin-top: -10px; background: var(--active-blue); border: 0; border-radius: 0; transition: transform var(--dur-xs) var(--ease-out); }
+.range::-moz-range-thumb { width: 20px; height: 20px; background: var(--active-blue); border: 0; border-radius: 0; }
+.range:hover::-webkit-slider-thumb { transform: scale(1.15); }
+.range:active::-webkit-slider-thumb { transform: scale(0.95); }
+.range:focus-visible { outline: 2px solid var(--active-blue); outline-offset: 4px; }
+.readout { display: flex; justify-content: space-between; gap: 12px; font-size: 13px; color: var(--muted-on-dark); font-variant-numeric: tabular-nums; }
+.readout strong { color: var(--light-blue); font-weight: 400; }
+.steps { display: flex; flex-wrap: wrap; gap: 8px; }
+
+/* ---------- The 3.433 MW tile ---------- */
+.tile { --line: var(--rule); padding: clamp(40px, 6vw, 96px) 0 0; }
+.tileCells { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 5fr) minmax(0, 3fr); border-top: var(--hair) solid var(--line); border-bottom: var(--hair) solid var(--line); position: relative; }
+.tileCells > * { position: relative; min-width: 0; border-right: var(--hair) solid var(--line); }
+.tileCells > *:last-child { border-right: 0; }
+.tileIcon { padding: clamp(10px, 2vw, 32px); display: grid; place-items: center; }
+.tileIcon svg { width: 100%; height: auto; max-height: 360px; }
+.tileFig { background: var(--stat-cell); padding: clamp(24px, 3.4vw, 56px); display: grid; gap: 14px; align-content: center; }
+.tileLabel { display: flex; align-items: center; gap: 12px; font-size: 15px; }
+.tileLine { padding: clamp(18px, 2.4vw, 36px); display: grid; align-content: end; gap: 12px; }
+.tileCells > *::before { content: ""; position: absolute; left: 0; top: 0; width: var(--node); height: var(--node); background: var(--line); transform: translate(-50%, -50%); }
+.tileCells > *:first-child::before { display: none; }
+
+/* ---------- Four ruled cells: the services of the tube label ---------- */
+.strip { --line: var(--rule); padding: clamp(56px, 8vw, 120px) 0 0; }
+.stripHead { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: var(--gap); align-items: end; padding-bottom: clamp(20px, 3vw, 40px); }
+.stripCells { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-top: var(--hair) solid var(--line); border-left: var(--hair) solid var(--line); position: relative; }
+.stripCell { position: relative; min-width: 0; border-right: var(--hair) solid var(--line); border-bottom: var(--hair) solid var(--line); padding: clamp(16px, 2vw, 32px); min-height: clamp(220px, 22vw, 340px); display: flex; flex-direction: column; justify-content: space-between; gap: 28px; background: transparent; transition: background-color var(--dur-s) var(--ease-out); }
+.stripCell:hover { background: var(--periwinkle); }
+.stripCell::after { content: ""; position: absolute; right: 0; bottom: 0; width: var(--node); height: var(--node); background: var(--line); transform: translate(50%, 50%); }
+.stripNo { display: flex; justify-content: space-between; align-items: center; font-size: 13px; }
+.stripBar { height: var(--hair); background: var(--line); transform-origin: 0 50%; transition: transform var(--dur-m) var(--ease-out); }
+.stripCell:hover .stripBar { transform: scaleX(1.0); }
+.stripText { font-size: clamp(16px, 1.5vw, 22px); line-height: 1.2; }
+.stripMark { display: block; width: 100%; height: 4px; background: var(--active-blue); transform-origin: 0 50%; transform: scaleX(0.2); transition: transform var(--dur-m) var(--ease-out); }
+.stripCell:hover .stripMark { transform: scaleX(1); }
+
+/* ---------- Closing band ---------- */
+.closing { margin-top: clamp(56px, 8vw, 120px); background: var(--dark-blue); color: var(--light-blue); --line: var(--rule-blue); border-top: var(--hair) solid var(--line); }
+.closingGrid { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); }
+.closingMain { padding: clamp(32px, 6vw, 96px) var(--pad); display: grid; gap: 24px; border-right: var(--hair) solid var(--line); min-width: 0; }
+.closingSide { padding: clamp(32px, 6vw, 96px) var(--pad); display: grid; gap: 22px; align-content: end; min-width: 0; }
+.closingSide .actions { display: flex; flex-wrap: wrap; gap: 10px; }
+
+@media (max-width: 900px) {
+  .heroBand { grid-template-columns: minmax(0, 1fr); }
+  .demoGrid, .closingGrid, .stripHead { grid-template-columns: minmax(0, 1fr); }
+  .demoText, .closingMain { border-right: 0; border-bottom: var(--hair) solid var(--line); }
+  .tileCells { grid-template-columns: minmax(0, 1fr); }
+  .tileCells > * { border-right: 0; border-bottom: var(--hair) solid var(--line); }
+  .tileCells > *:last-child { border-bottom: 0; }
+  .stripCells { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .rowX > div.stack { flex-direction: column; }
+}
+@media (max-width: 560px) {
+  .stripCells { grid-template-columns: minmax(0, 1fr); }
+  .stripCell { min-height: 160px; }
+  .heroCap { font-size: 10px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .heroLine { animation: none; }
+}
+
+/* ---------- The wide row of banks ---------- */
+.bankRow { --line: var(--rule); padding: clamp(56px, 8vw, 120px) 0 0; }
+.bankHead { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: var(--gap); align-items: end; padding-bottom: clamp(20px, 3vw, 40px); }
+.bankArt { border-block: var(--hair) solid var(--line); background: var(--periwinkle); }
+.bankArt svg { width: 100%; height: auto; display: block; }
+@media (max-width: 900px) { .bankHead { grid-template-columns: minmax(0, 1fr); } }
+
+/* ---------- The poster footer (m11): three ruled cells ---------- */
+.posterFoot { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-top: var(--hair) solid var(--line); font-size: 12px; color: var(--muted-on-dark); }
+.posterFoot > * { padding: 16px var(--pad); }
+.posterFoot > :nth-child(2) { display: grid; place-items: center; border-inline: var(--hair) solid var(--line); color: var(--active-blue); }
+.posterFoot > :nth-child(3) { text-align: right; }
+
+/* ---------- Other technologies ---------- */
+.sibs { --line: var(--rule); padding: clamp(56px, 8vw, 120px) 0 0; }
+.sibCells { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin-top: clamp(20px, 3vw, 40px); border-top: var(--hair) solid var(--line); border-left: var(--hair) solid var(--line); }
+.sibCell { position: relative; min-width: 0; border-right: var(--hair) solid var(--line); border-bottom: var(--hair) solid var(--line); }
+.sibCell::after { content: ""; position: absolute; right: 0; bottom: 0; width: var(--node); height: var(--node); background: var(--line); transform: translate(50%, 50%); }
+.sibLink { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 18px; padding: clamp(18px, 2.4vw, 36px); color: inherit; text-decoration: none; transition: background-color var(--dur-s) var(--ease-out); }
+.sibLink:hover { background: var(--stat-cell); }
+.sibLink:active { background: var(--periwinkle); }
+.sibLink svg:last-child { transition: transform var(--dur-s) var(--ease-move); }
+.sibLink:hover svg:last-child { transform: translateX(6px); }
+@media (max-width: 900px) { .sibCells { grid-template-columns: minmax(0, 1fr); } }
+
+/* ---------- Demo legend ---------- */
+.legend { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px 24px; font-size: 13px; color: var(--muted-on-dark); }
+.legend li { display: inline-flex; align-items: center; gap: 10px; }
+.swatchOn, .swatchOff { display: inline-block; width: 14px; height: 14px; }
+.swatchOn { background: var(--active-blue); }
+.swatchOff { box-shadow: inset 0 0 0 var(--hair) var(--active-blue); }
+.stripCell:focus-within { outline: 2px solid var(--dark-blue); outline-offset: -2px; }
+.sibLink:focus-visible { outline: 2px solid var(--dark-blue); outline-offset: -4px; }
+
+/* Section order of the page, for reference:
+   nav, hero (headline band over three tall cells), row A (two text rows, tall artwork), row B (flipped),
+   charge demo (Dark Blue), bank row (wide artwork), tile (3.433 MW), strip of four, other technologies,
+   closing band with the poster footer, footer. Artwork is exportable SVG; the demo is labelled an illustration. */
