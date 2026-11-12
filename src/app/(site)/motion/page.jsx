@@ -50,7 +50,7 @@ export default function Page() {
         <EaseSection />
       </Block>
 
-      <Block n="02" id="motion-logo" title="The logo in motion." lead="The one animation the designer published, rebuilt from its stills with the shared poster sheets, then the mark drawing on in the same order.">
+      <Block n="02" id="motion-logo" title="The logo in motion." lead="The one animation the designer published, rebuilt frame by frame from its eight frames with the shared poster sheets, then the mark drawing on in the house order.">
         <LogoSection />
       </Block>
 

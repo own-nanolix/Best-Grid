@@ -19,6 +19,9 @@
 .plate { min-width: 0; }
 .plate svg { width: 100%; height: auto; }
 .cap { display: flex; justify-content: space-between; gap: 12px; padding-top: 10px; font-size: 13px; color: var(--muted); }
+.tspec { display: grid; grid-template-columns: max-content minmax(0, 1fr); gap: 6px 16px; margin: 14px 0 0; padding-top: 12px; border-top: var(--hair) solid var(--rule); font-size: 13px; }
+.tspec dt { color: var(--blue-ink); }
+.tspec dd { margin: 0; color: var(--dark-blue); }
 .stackGap { display: grid; gap: var(--gap); }
 
 /* the sheet of 32 icons: ruled cells, a node at every crossing, a size switch and a ground switch */
@@ -29,10 +32,10 @@
 .cell { position: relative; min-width: 0; min-height: 132px; display: grid; grid-template-rows: auto 1fr auto; justify-items: center; padding: 10px 6px 12px; border-right: var(--hair) solid var(--line); border-bottom: var(--hair) solid var(--line); transition: background-color var(--dur-s) var(--ease-out); animation: icons-cell var(--dur-m) var(--ease-out) both; animation-delay: calc(var(--i, 0) * var(--stagger)); }
 .cell::after { content: ""; position: absolute; right: 0; bottom: 0; width: var(--node); height: var(--node); background: var(--line); transform: translate(50%, 50%); z-index: 1; }
 .cell:first-child::before { content: ""; position: absolute; left: 0; top: 0; width: var(--node); height: var(--node); background: var(--line); transform: translate(-50%, -50%); }
-.cell:hover { background: rgba(89, 131, 255, 0.14); }
+.cell:hover { background: color-mix(in srgb, var(--active-blue) 14%, transparent); }
 .cell .no { justify-self: start; color: var(--muted); }
 .sheetDark .cell .no, .sheetDark .name { color: var(--muted-on-dark); }
-.glyph { width: var(--sz, 32px); height: var(--sz, 32px); align-self: center; transition: width var(--dur-s) var(--ease-move), height var(--dur-s) var(--ease-move); }
+.glyph { width: 48px; height: 48px; align-self: center; transform: scale(var(--k, 0.667)); transition: transform var(--dur-s) var(--ease-move); }
 .name { font-size: 11px; line-height: 1.2; text-align: center; overflow-wrap: anywhere; color: var(--muted); }
 @keyframes icons-cell { from { opacity: 0; } to { opacity: 1; } }
 

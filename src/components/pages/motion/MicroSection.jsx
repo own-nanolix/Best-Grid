@@ -137,9 +137,9 @@ function ToastBench() {
   return (
     <>
       <div className={s.col}>
-        <Button size="sm" onClick={() => show('Copied')}>Copied</Button>
-        <Button size="sm" variant="outline" onClick={() => show('Saved')}>Saved</Button>
-        <Button size="sm" variant="ghost" onClick={() => toast('Saved')}>Page toast</Button>
+        <Button size="sm" onClick={() => show('Example toast')}>Show a toast</Button>
+        <Button size="sm" variant="outline" onClick={() => show('A second toast')}>Show another</Button>
+        <Button size="sm" variant="ghost" onClick={() => toast('Example page toast')}>Page toast</Button>
       </div>
       <div className={s.toastBay} role="status" aria-live="polite">
         <AnimatePresence>

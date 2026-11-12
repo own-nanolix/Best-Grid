@@ -15,7 +15,8 @@ import s from './motion.module.css';
 const FRAME_OPTIONS = ['Cycle', ...FRAMES.map((_, i) => String(i + 1))];
 
 // The case study's own animation (m10): a hard-cut cycle of eight frames at 100 ms (--dur-snap, --ease-cut).
-// Rebuilt from the stills reference/m10_1 to m10_5 with the shared sheets; then the storyboard and the mark drawing on.
+// Rebuilt from the eight decoded frames of reference/m10.gif (every frame differs from the one before: one sheet
+// cuts each time); then the storyboard, sampled from the same FRAMES, and the mark drawing on.
 export default function LogoSection() {
   const [run, setRun] = useState(0);
   const [frame, setFrame] = useState('Cycle');
@@ -57,7 +58,7 @@ export default function LogoSection() {
             <li key={st.frames} className={s.stageItem}>
               <span className={`t-num t-num-s ${s.stageNo}`}>{i + 1}</span>
               <div>
-                <p className="t-label">Frames {st.frames} · {st.at}</p>
+                <p className="t-label">Frame {st.frames} · {st.at}</p>
                 <p className="t-body">{st.text}</p>
               </div>
             </li>

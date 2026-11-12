@@ -4,6 +4,12 @@ import Reveal from '@/components/site/Reveal';
 import { HEX } from '@/lib/brand';
 import { r2 } from '@/lib/charts';
 import { mix } from './data';
+import { ease } from '@/lib/motion';
+
+// The shared easing tokens (lib/motion.js) written out as values: an exported SVG carries its own <style>, where
+// CSS variables of the site do not resolve.
+const bez = (p) => `cubic-bezier(${p.join(', ')})`;
+const EASE = { out: bez(ease.out), move: bez(ease.move), line: bez(ease.line), linear: ease.linear, cut: 'steps(1, end)' };
 import s from './gradients.module.css';
 
 const D = HEX.darkBlue, A = HEX.activeBlue, L = HEX.lightBlue;
@@ -24,7 +30,7 @@ function Drift() {
   return (
     <Art viewBox="0 0 600 600" title="Drift: a Dark Blue to Active Blue gradient sliding sideways in a seamless loop" exportName="gradients-motion-drift" className={s.plate}>
       <Css k="gradients-m1">{`
-.gradients-m1-slide { animation: gradients-m1-slide 8s linear infinite both; }
+.gradients-m1-slide { animation: gradients-m1-slide 8s ${EASE.linear} infinite both; }
 @keyframes gradients-m1-slide { from { transform: translateX(-600px); } to { transform: none; } }`}</Css>
       <defs>
         <linearGradient id="gradients-m1-field" x1="0" y1="0" x2="1" y2="0">{stops}</linearGradient>
@@ -46,9 +52,9 @@ function Converge() {
   return (
     <Art viewBox="0 0 600 600" title="Converging: lines drawing in from both sides towards one node, looping" exportName="gradients-motion-converge" className={s.plate}>
       <Css k="gradients-m2">{`
-.gradients-m2-line { animation: gradients-m2-draw 4.4s cubic-bezier(0.45, 0, 0.2, 1) infinite both; }
+.gradients-m2-line { animation: gradients-m2-draw 4.4s ${EASE.line} infinite both; }
 @keyframes gradients-m2-draw { 0% { stroke-dashoffset: 1000px; } 45%, 100% { stroke-dashoffset: 0; } }
-.gradients-m2-node { transform-box: fill-box; transform-origin: center; animation: gradients-m2-snap 4.4s cubic-bezier(0.16, 1, 0.3, 1) infinite both; }
+.gradients-m2-node { transform-box: fill-box; transform-origin: center; animation: gradients-m2-snap 4.4s ${EASE.out} infinite both; }
 @keyframes gradients-m2-snap { 0%, 35% { opacity: 0.2; transform: scale(0.4); } 50%, 100% { opacity: 1; transform: none; } }`}</Css>
       <rect width="600" height="600" fill={L} className="gradients-m2" />
       <g className="gradients-m2" stroke={D} strokeWidth="1" fill="none">
@@ -78,7 +84,7 @@ function Cells() {
   return (
     <Art viewBox="0 0 600 600" title="Cells: a diagonal wave of Active Blue cells filling a ruled grid, looping" exportName="gradients-motion-cells" className={s.plate}>
       <Css k="gradients-m3">{`
-.gradients-m3-cell { animation: gradients-m3-wave 3.6s cubic-bezier(0.16, 1, 0.3, 1) infinite both; }
+.gradients-m3-cell { animation: gradients-m3-wave 3.6s ${EASE.move} infinite both; }
 @keyframes gradients-m3-wave { 0% { opacity: 0; } 30%, 70% { opacity: 1; } 100% { opacity: 0; } }`}</Css>
       <rect width="600" height="600" fill={D} />
       <g className="gradients-m3">
@@ -98,7 +104,7 @@ function HardCut() {
   return (
     <Art viewBox="0 0 600 600" title="Hard cut: eight frames at 100 ms, a marker cell stepping along the diagonal" exportName="gradients-motion-cut" className={s.plate}>
       <Css k="gradients-m4">{`
-.gradients-m4-frame { animation: gradients-m4-cut 800ms step-end infinite both; }
+.gradients-m4-frame { animation: gradients-m4-cut 800ms ${EASE.cut} infinite both; }
 @keyframes gradients-m4-cut { 0% { opacity: 1; } 12.5%, 100% { opacity: 0.18; } }`}</Css>
       <rect width="600" height="600" fill={A} />
       <g className="gradients-m4">

@@ -62,7 +62,7 @@ export default function EaseSection() {
                   </div>
                 </td>
                 <td>
-                  <Button size="sm" variant="outline" cross={false} icon="play" onClick={() => play(e.id)} aria-label={`Play ${e.token}`}>Play</Button>
+                  <Button size="sm" variant="outline" cross={false} icon="play" onClick={() => play(e.id)} aria-label={`Play the ${e.name.toLowerCase()} easing`}>Play</Button>
                 </td>
               </tr>
             ))}

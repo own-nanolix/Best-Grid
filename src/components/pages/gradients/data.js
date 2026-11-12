@@ -19,29 +19,36 @@ export function angleOf({ x1, y1, x2, y2 }) {
 }
 
 // kind: 'linear' uses x1 y1 x2 y2; 'radial' uses cx cy r. tone: whether the field reads dark or light.
-// stops: o = offset 0 to 1, c = colour, n = plain name of the stop.
+// stops: o = offset 0 to 1, c = colour, n = plain description of the stop.
+// The case study publishes no gradient. The first two fields stand in for its photographs: their stops were sampled
+// from the reference images (m01 corner to corner; m16, the slider photo, top to bottom) and matched with mixes of
+// the sampled photo tones and the published blues. HEX.fog / HEX.plum / HEX.sunset are those sampled tones.
+const SKY = mix(HEX.darkBlue, HEX.lightBlue, 0.12);
 export const GRADS = [
   {
-    id: 'fog', name: 'Fog', kind: 'linear', tone: 'light', x1: 0.15, y1: 0, x2: 0.6, y2: 1,
-    light: { cx: 0.12, cy: 0.1, r: 0.7 },
-    source: 'Rebuilt from the hero photograph (m01): peach to plum, light from the top left.',
+    id: 'photo-m01', name: 'Hero photograph field', kind: 'linear', tone: 'light', x1: 0, y1: 0, x2: 1, y2: 1,
+    source: 'Measured from the hero photograph (m01), corner to corner: pale grey at the top left through warm grey to dark brown at the bottom right. A stand-in for the photograph, not a published gradient; the cool sky at the top right is left out.',
     stops: [
-      { o: 0, c: mix(HEX.lightBlue, HEX.white, 0.4), n: 'Light Blue, lifted' },
-      { o: 0.28, c: mix(HEX.fog, HEX.lightBlue, 0.45), n: 'Fog, pale' },
-      { o: 0.52, c: HEX.fog, n: 'Fog' },
-      { o: 0.78, c: mix(HEX.fog, HEX.plum, 0.62), n: 'Fog and Plum' },
-      { o: 1, c: HEX.plum, n: 'Plum' },
+      { o: 0, c: mix(HEX.lightBlue, HEX.darkBlue, 0.1), n: 'Pale grey (sampled, top left)' },
+      { o: 0.22, c: mix(HEX.lightBlue, HEX.fog, 0.2), n: 'Grey-white' },
+      { o: 0.4, c: mix(HEX.fog, HEX.darkBlue, 0.13), n: 'Warm grey' },
+      { o: 0.6, c: mix(HEX.fog, HEX.plum, 0.45), n: 'Grey-brown' },
+      { o: 0.75, c: mix(HEX.fog, HEX.plum, 0.8), n: 'Brown' },
+      { o: 0.9, c: HEX.plum, n: 'Dark brown (sampled)' },
+      { o: 1, c: mix(HEX.plum, HEX.black, 0.36), n: 'Near black (bottom right)' },
     ],
   },
   {
-    id: 'sunset', name: 'Sunset', kind: 'linear', tone: 'dark', x1: 0, y1: 0, x2: 0, y2: 1,
-    source: 'Rebuilt from the sunset fields of the website and the billboard (m16, m19): Dark Blue sky down to orange.',
+    id: 'photo-m16', name: 'Website photograph field', kind: 'linear', tone: 'dark', x1: 0, y1: 0, x2: 0, y2: 1,
+    source: 'Measured from the slider photograph of the website (m16), top to bottom: blue-grey sky, the orange band of the horizon, then the black ground. A stand-in for the photograph, not a published gradient.',
     stops: [
-      { o: 0, c: HEX.darkBlue, n: 'Dark Blue' },
-      { o: 0.45, c: mix(HEX.darkBlue, HEX.activeBlue, 0.22), n: 'Dark Blue, lifted' },
-      { o: 0.72, c: mix(HEX.darkBlue, HEX.sunset, 0.68), n: 'Dark Blue and Sunset' },
-      { o: 0.86, c: HEX.sunset, n: 'Sunset' },
-      { o: 1, c: mix(HEX.plum, HEX.darkBlue, 0.55), n: 'Plum and Dark Blue' },
+      { o: 0, c: SKY, n: 'Blue-grey sky' },
+      { o: 0.45, c: mix(SKY, HEX.activeBlue, 0.1), n: 'Blue-grey' },
+      { o: 0.58, c: mix(HEX.darkBlue, HEX.fog, 0.25), n: 'Grey' },
+      { o: 0.7, c: mix(HEX.sunset, HEX.fog, 0.45), n: 'Pale orange' },
+      { o: 0.81, c: mix(HEX.sunset, HEX.plum, 0.4), n: 'Orange red' },
+      { o: 0.88, c: mix(HEX.plum, HEX.sunset, 0.2), n: 'Dark red' },
+      { o: 0.92, c: HEX.black, n: 'Black ground, to the bottom edge' },
     ],
   },
   {

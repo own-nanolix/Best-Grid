@@ -5,7 +5,7 @@ import { HEX, LINES, CONTACT } from '@/lib/brand';
 import { r2 } from '@/lib/charts';
 import { WordmarkG, MarkG } from '@/components/art/Mark';
 import { NodeG, PhotoBlockG } from '@/components/art/KeyArt';
-import { SHEET_COPY as C } from './data';
+import { SHEET_COPY as C, mix } from './data';
 
 export const SHEET = { w: 300, h: 400, m: 20, top: 21, bottom: 379 };
 const { w: W, m: M, top: TOP, bottom: BOT } = SHEET;
@@ -14,14 +14,17 @@ const COLS = 6;
 const GUT = r2(W * 0.008);
 const CW = r2((W - 2 * M - GUT * (COLS - 1)) / COLS);
 
-// The baseline field pattern: hairlines alternating Active Blue and grey, interrupted by white column gutters.
-// Define once per SVG (id `${idp}-base`).
+// The baseline field pattern, measured on m10: one pale Active Blue and one grey (Light Blue) hairline every 2.5
+// units (0.63% of the sheet height), each line a third of the period, on paper, with paper column gutters; every
+// 18 pairs the grey line is left out, so the field reads in blocks. Define once per SVG (id `${idp}-base`).
+const PERIOD = 2.5, LW = r2(PERIOD / 3), BLOCK = 18;
+const BREAKS = Array.from({ length: Math.floor((BOT - TOP) / (PERIOD * BLOCK)) }, (_, j) => r2(TOP + PERIOD / 2 + (j + 1) * PERIOD * BLOCK));
 export function SheetDefsG({ idp }) {
   return (
     <defs>
-      <pattern id={`${idp}-base`} x={M} y={TOP} width={r2(CW + GUT)} height="4.4" patternUnits="userSpaceOnUse">
-        <rect width={CW} height="0.5" fill={HEX.activeBlue} />
-        <rect y="2.2" width={CW} height="0.5" fill="#9aa0b3" />
+      <pattern id={`${idp}-base`} x={M} y={TOP} width={r2(CW + GUT)} height={PERIOD} patternUnits="userSpaceOnUse">
+        <rect width={CW} height={LW} fill={mix(HEX.activeBlue, HEX.lightBlue, 0.62)} />
+        <rect y={PERIOD / 2} width={CW} height={LW} fill={HEX.lightBlue} />
       </pattern>
     </defs>
   );
@@ -116,20 +119,24 @@ export function SheetG({ kind, x = 0, y = 0, idp }) {
     <g transform={`translate(${x} ${y})`} lang="es">
       <rect width={W} height={SHEET.h} fill={HEX.paper} />
       <rect x={M} y={TOP} width={W - 2 * M} height={BOT - TOP} fill={`url(#${idp}-base)`} />
+      {BREAKS.map((y) => <rect key={y} x={M} y={y} width={W - 2 * M} height={LW} fill={HEX.paper} />)}
       <Body />
     </g>
   );
 }
 
-// The stage: two sheets on the periwinkle ground (640 x 480). The frame group has no transform of its own, so a
-// CSS cycle can run on it.
+// The stage: two sheets on the periwinkle ground (640 x 480 for the 2800 x 2100 frames of m10, k = 0.2286).
+// Measured: left sheet x 119 to 1380, right 1420 to 2681, both y 210 to 1891, so each sheet is 288.2 wide
+// (scale 0.9607 of the 300-unit sheet) at x 27.2 and 324.6, y 48. The frame group has no transform of its own,
+// so a CSS cycle can run on it.
 export const STAGE_W = 640;
 export const STAGE_H = 480;
+const SK = 0.9607, SY = 48;
 export function StageG({ left, right, idp }) {
   return (
     <>
-      <SheetG kind={left} x={20} y={40} idp={idp} />
-      <SheetG kind={right} x={340} y={40} idp={idp} />
+      <g transform={`translate(27.2 ${SY}) scale(${SK})`}><SheetG kind={left} idp={idp} /></g>
+      <g transform={`translate(324.6 ${SY}) scale(${SK})`}><SheetG kind={right} idp={idp} /></g>
     </>
   );
 }

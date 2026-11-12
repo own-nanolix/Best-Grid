@@ -29,7 +29,7 @@ export default function Curve({ e, run = 0, ms }) {
   const name = `motion-curve-${e.id}`;
   const handles = e.pts && [[0, 0, e.pts[0], e.pts[1]], [1, 1, e.pts[2], e.pts[3]]];
   return (
-    <Art viewBox="0 0 200 230" title={`${e.token}: ${EASE_VALUE(e)}`} exportName={name} className={s.curve}>
+    <Art viewBox="0 0 200 230" title={`${e.name} easing curve: ${EASE_VALUE(e)}`} exportName={name} className={s.curve}>
       <rect width="200" height="230" fill={HEX.paper} />
       <path d={`M${X0} ${Y0}V${py(1)}H${px(1)}M${px(1)} ${Y0}V${py(1)}M${X0} ${Y0}H${px(1)}`} stroke={INK} strokeWidth="0.6" fill="none" opacity="0.28" />
       <path d={`M${X0} ${Y0}H${px(1)}V${Y0}`} stroke={INK} strokeWidth="1" fill="none" />

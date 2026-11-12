@@ -30,14 +30,14 @@ export default function Sheet() {
           {`${CORE_NAMES.length} icons, shown at ${px} px: one unit is ${r2(px / 24)} px.`}
         </p>
       </div>
-      <div className={`${s.sheet} ${dark ? s.sheetDark : ''}`} id="icons-sheet" style={{ '--sz': `${px}px` }}>
+      <div className={`${s.sheet} ${dark ? s.sheetDark : ''}`} id="icons-sheet" style={{ '--k': r2(px / 48) }}>
         {CORE_NAMES.map((name, i) => (
           <div className={s.cell} key={name} style={{ '--i': i % 8 }}>
             <span className={s.no}>{String(i + 1).padStart(2, '0')}</span>
             <Art viewBox="0 0 24 24" title={`${plain(name)} icon`} exportName={`icons-${name}`} className={s.glyph}>
               <path d={CORE[name]} fill={fill} />
             </Art>
-            <span className={s.name}>{name}</span>
+            <span className={s.name}>{plain(name)}</span>
           </div>
         ))}
       </div>

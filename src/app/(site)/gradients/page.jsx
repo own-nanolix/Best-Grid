@@ -14,7 +14,7 @@ export const metadata = pageMeta('gradients');
 
 const FACTS = [
   { k: 'Published gradients', v: 'None', t: 'The brand fields are flat: Dark Blue, Active Blue, Light Blue and periwinkle.' },
-  { k: 'Tonal fields shown', v: 'Fog, sunset', t: 'They live in the photographs only. Rebuilt here as SVG gradients, never as photos.' },
+  { k: 'Photographic fields', v: 'Two', t: 'Only the photographs carry gradients. Two are measured here as SVG gradients that stand in for them; no photograph is shown.' },
   { k: 'Surface treatments', v: 'Grain, lines', t: 'Paper and board grain, the baseline field of the poster grid, the bubble film of the mailer.' },
 ];
 
@@ -63,16 +63,16 @@ export default function Page() {
       <div className="wrap">
         <section className={s.section} aria-labelledby="gradients-h-library">
           <Head kicker="01 Library" title={<span id="gradients-h-library">Six named gradients</span>}>
-            Two are rebuilt from the photographs of the case study. Four are restrained fields of the published
-            colours and their tints, each with two stops.
+            Two are measured from the photographs of the case study and stand in for them. Four are extensions:
+            restrained fields of the published colours, each with two stops.
           </Head>
           <Library />
         </section>
 
         <section className={s.section} aria-labelledby="gradients-h-anatomy">
           <Head kicker="02 Anatomy" title={<span id="gradients-h-anatomy">Stops, angle, positions</span>}>
-            The two photographic gradients drawn open: where each stop sits, which colour it holds, and the vector the
-            colour follows.
+            The two photographic fields drawn open: where each stop sits, which colour it holds, and the vector the
+            colour follows. Stops were sampled from the reference images.
           </Head>
           <Anatomy />
         </section>

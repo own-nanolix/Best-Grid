@@ -33,7 +33,7 @@ export function GradSheet({ g, index }) {
   const idp = `gradients-lib${index + 1}`;
   const ink = g.tone === 'dark' ? HEX.lightBlue : HEX.darkBlue;
   return (
-    <Art viewBox="0 0 300 400" title={`${g.name} gradient sheet`} exportName={`gradients-sheet-${g.id}`} className={s.sheet}>
+    <Art viewBox="0 0 300 400" title={`${g.name}: gradient sheet`} exportName={`gradients-sheet-${g.id}`} className={s.sheet}>
       <GradDefs idp={idp} g={g} />
       <rect width="300" height="400" fill={`url(#${idp}-${g.id})`} />
       {g.light && <rect width="300" height="400" fill={`url(#${idp}-${g.id}-light)`} />}

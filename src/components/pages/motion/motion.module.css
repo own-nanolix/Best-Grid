@@ -30,56 +30,56 @@
 .curve { width: 160px; height: auto; border: var(--hair) solid var(--rule-soft); }
 .laneCell { width: 200px; min-width: 150px; }
 .lane { position: relative; height: 26px; overflow: hidden; border-block: var(--hair) solid var(--rule-soft); }
-.laneRun { display: flex; justify-content: flex-end; align-items: center; height: 100%; animation: lane var(--ms, 700ms) var(--ease, var(--ease-out)) both; }
+.laneRun { display: flex; justify-content: flex-end; align-items: center; height: 100%; animation: motion-lane var(--ms, 700ms) var(--ease, var(--ease-out)) both; }
 .laneNode { width: 12px; height: 12px; background: var(--dark-blue); }
-@keyframes lane { from { transform: translateX(-100%); } to { transform: none; } }
-.dotX { animation: dotx var(--ms, 700ms) var(--ease-linear) both; }
-.dotY { animation: doty var(--ms, 700ms) var(--ease, var(--ease-out)) both; }
-@keyframes dotx { from { transform: translateX(-150px); } to { transform: none; } }
-@keyframes doty { from { transform: translateY(150px); } to { transform: none; } }
+@keyframes motion-lane { from { transform: translateX(-100%); } to { transform: none; } }
+.dotX { animation: motion-dotx var(--ms, 700ms) var(--ease-linear) both; }
+.dotY { animation: motion-doty var(--ms, 700ms) var(--ease, var(--ease-out)) both; }
+@keyframes motion-dotx { from { transform: translateX(-150px); } to { transform: none; } }
+@keyframes motion-doty { from { transform: translateY(150px); } to { transform: none; } }
 .durWrap { min-width: 0; }
 .durWrap svg { width: 100%; height: auto; }
-.durBar { transform-box: fill-box; transform-origin: 0 50%; animation: dur calc(var(--d) * var(--k, 1)) var(--ease-out) both; }
-@keyframes dur { from { transform: scaleX(0); } to { transform: none; } }
+.durBar { transform-box: fill-box; transform-origin: 0 50%; animation: motion-dur calc(var(--d) * var(--k, 1)) var(--ease-out) both; }
+@keyframes motion-dur { from { transform: scaleX(0); } to { transform: none; } }
 
 /* ---------- transitions ---------- */
 .pageDemo { position: relative; min-height: 300px; display: grid; grid-template-rows: 56px minmax(0, 1fr); border: var(--hair) solid var(--rule); overflow: hidden; }
 .pgNav { position: relative; display: flex; }
-.pgMark { width: 56px; display: grid; place-items: center; border-right: var(--hair) solid var(--rule); animation: fade var(--dur-m) var(--ease-out) calc(var(--dur-draw) * 0.5) both; }
-.pgLine { position: absolute; left: 0; right: 0; bottom: 0; height: var(--hair); background: var(--rule); transform-origin: 0 50%; animation: grow var(--dur-draw) var(--ease-line) both; }
-.pgNode { position: absolute; bottom: calc(var(--node) / -2); width: var(--node); height: var(--node); background: var(--rule); animation: snap var(--dur-xs) var(--ease-out) calc(var(--dur-draw) - 100ms) both; }
+.pgMark { width: 56px; display: grid; place-items: center; border-right: var(--hair) solid var(--rule); animation: motion-fade var(--dur-m) var(--ease-out) calc(var(--dur-draw) * 0.5) both; }
+.pgLine { position: absolute; left: 0; right: 0; bottom: 0; height: var(--hair); background: var(--rule); transform-origin: 0 50%; animation: motion-grow var(--dur-draw) var(--ease-line) both; }
+.pgNode { position: absolute; bottom: calc(var(--node) / -2); width: var(--node); height: var(--node); background: var(--rule); animation: motion-snap var(--dur-xs) var(--ease-out) calc(var(--dur-draw) - 100ms) both; }
 .pgNodeA { left: 56px; margin-left: calc(var(--node) / -2); }
 .pgNodeB { right: 0; }
 .pgBody { display: grid; gap: 12px; padding: 24px 20px; align-content: start; }
-.pgRise { animation: rise var(--dur-l) var(--ease-out) calc(var(--i, 0) * var(--stagger) + 500ms) both; }
+.pgRise { animation: motion-rise var(--dur-l) var(--ease-out) calc(var(--i, 0) * var(--stagger) + 500ms) both; }
 .pgSmall { margin-top: 12px; }
 .pgCells { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border: var(--hair) solid var(--rule); margin-top: 8px; }
-.pgCell { height: 64px; border-right: var(--hair) solid var(--rule); animation: fade var(--dur-m) var(--ease-out) calc(var(--i, 0) * var(--stagger) + 900ms) both; }
+.pgCell { height: 64px; border-right: var(--hair) solid var(--rule); animation: motion-fade var(--dur-m) var(--ease-out) calc(var(--i, 0) * var(--stagger) + 900ms) both; }
 .pgCell:last-child { border-right: 0; }
-@keyframes grow { from { transform: scaleX(0); } to { transform: none; } }
-@keyframes snap { from { opacity: 0; transform: scale(0.3); } to { opacity: 1; transform: none; } }
-@keyframes rise { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
-@keyframes fade { from { opacity: 0; } to { opacity: 1; } }
+@keyframes motion-grow { from { transform: scaleX(0); } to { transform: none; } }
+@keyframes motion-snap { from { opacity: 0; transform: scale(0.3); } to { opacity: 1; transform: none; } }
+@keyframes motion-rise { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+@keyframes motion-fade { from { opacity: 0; } to { opacity: 1; } }
 
 .demo { position: relative; display: grid; gap: 12px; align-content: start; justify-items: start; }
 .demo > * { max-width: 100%; }
 .demo table { width: 100%; }
-.rowIn { animation: rowin var(--dur-m) var(--ease-out) calc(var(--i, 0) * var(--stagger)) both; }
-@keyframes rowin { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+.rowIn { animation: motion-rowin var(--dur-m) var(--ease-out) calc(var(--i, 0) * var(--stagger)) both; }
+@keyframes motion-rowin { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
 .tile { position: relative; width: 100%; min-height: 96px; display: grid; place-items: center; align-content: center; gap: 6px; border: var(--hair) solid var(--rule); background: var(--paper); color: var(--dark-blue); transition: transform var(--dur-s) var(--ease-move), background-color var(--dur-s) var(--ease-move); }
 .tile:hover { transform: translateY(-2px); background: var(--periwinkle); }
 .tile:active { transform: translateY(1px); transition-duration: var(--dur-xs); transition-timing-function: var(--ease-out); }
 .tile[aria-pressed="true"] { background: var(--stat-cell); }
 .tileNode { position: absolute; left: 0; top: 0; width: var(--node); height: var(--node); margin: calc(var(--node) / -2) 0 0 calc(var(--node) / -2); background: var(--dark-blue); opacity: 0; transform: scale(0.3); transition: opacity var(--dur-xs) var(--ease-out), transform var(--dur-xs) var(--ease-out); }
 .tile:hover .tileNode, .tile:focus-visible .tileNode, .tile[aria-pressed="true"] .tileNode { opacity: 1; transform: none; }
-.cardIn { width: 100%; display: grid; gap: 8px; animation: rise var(--dur-l) var(--ease-out) both; }
+.cardIn { width: 100%; display: grid; gap: 8px; animation: motion-rise var(--dur-l) var(--ease-out) both; }
 .sheetFrame { position: relative; width: 100%; height: 190px; overflow: hidden; border: var(--hair) solid var(--rule); background: var(--paper); }
 .scrim { position: absolute; inset: 0; background: var(--dark-blue); opacity: 0; transition: opacity var(--dur-m) var(--ease-move); }
 .sheet { position: absolute; top: 0; right: 0; bottom: 0; width: 62%; display: grid; gap: 10px; align-content: start; justify-items: start; padding: 16px; background: var(--light-blue); border-left: var(--hair) solid var(--rule); transform: translateX(100%); transition: transform var(--dur-m) var(--ease-move); }
 .sheetFrame[data-open="true"] .scrim { opacity: 0.4; }
 .sheetFrame[data-open="true"] .sheet { transform: none; }
-.panelIn { animation: panel var(--dur-m) var(--ease-out) both; }
-@keyframes panel { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+.panelIn { animation: motion-panel var(--dur-m) var(--ease-out) both; }
+@keyframes motion-panel { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
 
 /* ---------- micro-interactions ---------- */
 .bench { display: grid; gap: 14px; align-content: start; min-width: 0; }
@@ -90,8 +90,8 @@
 .states dd { margin: 0; color: var(--muted); }
 .loader { margin: 0; display: grid; gap: 4px; }
 .loader svg { width: 100%; max-width: 160px; height: auto; border: var(--hair) solid var(--rule-soft); }
-.lBar { transform-box: fill-box; transform-origin: 0 50%; animation: lbar 1.6s var(--ease-linear) infinite; }
-@keyframes lbar { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+.lBar { transform-box: fill-box; transform-origin: 0 50%; animation: motion-lbar 1.6s var(--ease-linear) infinite; }
+@keyframes motion-lbar { from { transform: scaleX(0); } to { transform: scaleX(1); } }
 .toastBay { display: grid; gap: 8px; align-content: start; justify-items: start; min-height: 96px; overflow: hidden; }
 
 /* ---------- do and don't ---------- */
@@ -105,16 +105,16 @@
 .dLine { width: 80%; height: 3px; background: var(--active-blue); transform-origin: 0 50%; }
 .dGuide { position: absolute; left: 0; right: 0; top: 50%; height: var(--hair); background: var(--rule-soft); }
 .dNode { position: relative; width: 24px; height: 24px; background: var(--dark-blue); }
-.doEnter { animation: rise var(--dur-m) var(--ease-out) both; }
-.dontEnter { animation: rise var(--dur-m) var(--ease-linear) both; }
-.doDist { animation: rise var(--dur-m) var(--ease-out) both; }
-.dontDist { animation: far var(--dur-draw) var(--ease-out) both; }
-.doLine { animation: grow var(--dur-draw) var(--ease-line) both; }
-.dontLine { animation: grow var(--dur-draw) var(--ease-cut) both; }
-.doNode { animation: snap var(--dur-xs) var(--ease-out) both; }
-.dontNode { animation: pop var(--dur-m) var(--ease-out) both; }
-@keyframes far { from { opacity: 0; transform: translateY(96px); } to { opacity: 1; transform: none; } }
-@keyframes pop { 0% { opacity: 0; transform: scale(0.3); } 55% { opacity: 1; transform: scale(1.35); } 100% { opacity: 1; transform: none; } }
+.doEnter { animation: motion-rise var(--dur-m) var(--ease-out) both; }
+.dontEnter { animation: motion-rise var(--dur-m) var(--ease-linear) both; }
+.doDist { animation: motion-rise var(--dur-m) var(--ease-out) both; }
+.dontDist { animation: motion-far var(--dur-draw) var(--ease-out) both; }
+.doLine { animation: motion-grow var(--dur-draw) var(--ease-line) both; }
+.dontLine { animation: motion-grow var(--dur-draw) var(--ease-cut) both; }
+.doNode { animation: motion-snap var(--dur-xs) var(--ease-out) both; }
+.dontNode { animation: motion-pop var(--dur-m) var(--ease-out) both; }
+@keyframes motion-far { from { opacity: 0; transform: translateY(96px); } to { opacity: 1; transform: none; } }
+@keyframes motion-pop { 0% { opacity: 0; transform: scale(0.3); } 55% { opacity: 1; transform: scale(1.35); } 100% { opacity: 1; transform: none; } }
 @media (max-width: 600px) {
   .cmp { grid-template-columns: minmax(0, 1fr); }
   .halfDont { border-left: 0; border-top: var(--hair) solid var(--rule); }

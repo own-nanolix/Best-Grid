@@ -1,8 +1,9 @@
 import Art from '@/components/art/Art';
-import { BaselineFieldG, BrandDefs, GuidesG, LiveAreaG } from '@/components/art/KeyArt';
+import { BaselineFieldG, GuidesG, LiveAreaG } from '@/components/art/KeyArt';
 import Reveal from '@/components/site/Reveal';
 import { HEX } from '@/lib/brand';
-import { GRAIN_LEVELS } from './data';
+import { r2 } from '@/lib/charts';
+import { GRAIN_LEVELS, mix } from './data';
 import s from './gradients.module.css';
 
 // Noise laid over the shape it filters (the shared recipe: feTurbulence composited inside the source alpha).
@@ -85,27 +86,78 @@ export function GrainLevels() {
   );
 }
 
+// The baseline field of m10, measured on the still m10_1: the plate is the top of a 3:4 sheet 600 wide (800 tall).
+// Margins 40 (6.7% of the width), six columns with 5-unit paper gutters (0.8%), one Active Blue and one grey
+// hairline every 5 units (0.63% of the sheet height), each line a third of that period, on paper; every 18 pairs the
+// grey line is left out, so the field reads in blocks.
+const BASE = { m: 40, w: 520, top: 40, cols: 6, gutter: 5, period: 5, block: 18 };
+function BaselinePlate() {
+  const { m, w, top, cols, gutter, period, block } = BASE;
+  const h = 400 - top;
+  const lw = r2(period / 3);
+  const breaks = Array.from({ length: Math.floor(h / (period * block)) }, (_, j) => r2(top + period / 2 + (j + 1) * period * block));
+  return (
+    <Art viewBox="0 0 600 400" title="Baseline field: Active Blue and grey hairlines alternating in six columns between paper gutters" exportName="gradients-texture-baseline" className={s.wide}>
+      <rect width="600" height="400" fill={HEX.paper} />
+      <g className="fade-in">
+        <BaselineFieldG idp="gradients-tx1" x={m} y={top} w={w} h={h} cols={cols} gutter={gutter} step={period / 2} weight={lw} colorA={mix(HEX.activeBlue, HEX.lightBlue, 0.62)} colorB={HEX.lightBlue} />
+        {breaks.map((y) => <rect key={y} x={m} y={y} width={w} height={lw} fill={HEX.paper} />)}
+      </g>
+      <GuidesG w={600} h={400} xs={[m, 600 - m]} ys={[top]} stroke={HEX.darkBlue} weight={1} node={6} animate opacity="0.7" />
+    </Art>
+  );
+}
+
+// The metallic bubble film of the mailer (m05): round domes packed in offset columns (about 12 across the mailer),
+// each dark in the middle with a lit upper rim and a soft lit lower edge, on a dark navy film.
+const BUB = { d: 50, px: 47.5, py: 52.5 };
+function BubblePlate() {
+  const { d, px, py } = BUB;
+  const r = d / 2;
+  const domes = [];
+  for (let c = 0; c * px < 600 + px; c++) for (let k = -1; k * py < 400 + py; k++) domes.push([r2(c * px + r / 2), r2(k * py + (c % 2) * (py / 2) + r)]);
+  const lit = mix(HEX.darkBlue, HEX.lightBlue, 0.24);
+  const deep = mix(HEX.darkBlue, HEX.black, 0.5);
+  return (
+    <Art viewBox="0 0 600 400" title="Bubble film: round domes in offset columns with lit rims, on dark navy" exportName="gradients-texture-bubble" className={s.wide}>
+      <defs>
+        <radialGradient id="gradients-tx2-dome" cx="0.5" cy="0.56" r="0.52">
+          <stop offset="0" stopColor={deep} />
+          <stop offset="0.55" stopColor={HEX.darkBlue} />
+          <stop offset="0.86" stopColor={lit} />
+          <stop offset="1" stopColor={mix(lit, HEX.darkBlue, 0.4)} />
+        </radialGradient>
+        <linearGradient id="gradients-tx2-spec" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stopColor={HEX.lightBlue} stopOpacity="0.5" />
+          <stop offset="1" stopColor={HEX.lightBlue} stopOpacity="0" />
+        </linearGradient>
+        <clipPath id="gradients-tx2-clip"><rect width="600" height="400" /></clipPath>
+      </defs>
+      <rect width="600" height="400" fill={mix(HEX.darkBlue, HEX.black, 0.3)} />
+      <g clipPath="url(#gradients-tx2-clip)">
+        {domes.map(([x, y]) => (
+          <g key={`${x}-${y}`}>
+            <circle cx={x} cy={y} r={r} fill="url(#gradients-tx2-dome)" />
+            <path d={`M${r2(x - r * 0.78)} ${r2(y - r * 0.3)}A${r} ${r} 0 0 1 ${r2(x + r * 0.78)} ${r2(y - r * 0.3)}Q${x} ${r2(y - r * 0.62)} ${r2(x - r * 0.78)} ${r2(y - r * 0.3)}Z`} fill="url(#gradients-tx2-spec)" />
+          </g>
+        ))}
+      </g>
+      <LiveAreaG w={600} h={400} m={40} stroke={HEX.lightBlue} weight={1} node={6} opacity="0.5" />
+    </Art>
+  );
+}
+
 // The other two surfaces the case study shows: the baseline field of the poster grid and the metallic bubble film.
 export function SurfacePlates() {
   return (
     <div className={s.pair}>
       <Reveal as="figure" className={s.libItem}>
-        <Art viewBox="0 0 600 400" title="Baseline field: hairlines alternating Active Blue and grey between white gutters" exportName="gradients-texture-baseline" className={s.wide}>
-          <BrandDefs idp="gradients-tx1" />
-          <rect width="600" height="400" fill={HEX.paper} />
-          <BaselineFieldG idp="gradients-tx1" x={40} y={40} w={520} h={320} cols={4} gutter={14} step={4.4} weight={0.9} className="fade-in" />
-          <LiveAreaG w={600} h={400} m={40} stroke={HEX.darkBlue} weight={1} node={6} animate opacity="0.7" />
-        </Art>
-        <figcaption><span className={s.num}>Baseline field</span><span className="t-small muted">Hairlines every 0.55% of the sheet height (m10), as an SVG pattern.</span></figcaption>
+        <BaselinePlate />
+        <figcaption><span className={s.num}>Baseline field</span><span className="t-small muted">Measured on the poster grid (m10): an Active Blue and a grey hairline every 0.63% of the sheet height, six columns, read in blocks of 18. The top of one sheet.</span></figcaption>
       </Reveal>
       <Reveal as="figure" delay={60} className={s.libItem}>
-        <Art viewBox="0 0 600 400" title="Bubble film: a hexagon pattern with specular highlights" exportName="gradients-texture-bubble" className={s.wide}>
-          <BrandDefs idp="gradients-tx2" />
-          <rect width="600" height="400" fill="url(#gradients-tx2-bubble)" />
-          <rect width="600" height="400" fill={HEX.white} opacity="0.04" filter="url(#gradients-tx2-grain)" />
-          <LiveAreaG w={600} h={400} m={40} stroke={HEX.lightBlue} weight={1} node={6} opacity="0.5" />
-        </Art>
-        <figcaption><span className={s.num}>Bubble film</span><span className="t-small muted">The metallic film of the mailer (m05): hexagon cells with a lit upper left.</span></figcaption>
+        <BubblePlate />
+        <figcaption><span className={s.num}>Bubble film</span><span className="t-small muted">The metallic film of the mailer (m05): round domes in offset columns, lit at the upper rim.</span></figcaption>
       </Reveal>
     </div>
   );

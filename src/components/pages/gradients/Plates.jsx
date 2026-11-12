@@ -27,7 +27,7 @@ function LatticePlate() {
       <rect width="1200" height="1200" fill="url(#gradients-k1-glow)" />
       <LatticeFieldG cx={600} cy={600} k={8} rings={4} fill={A} className="lattice-fill" />
       <GuidesG w={1200} h={1200} xs={[80, 1120]} ys={[80, 1120]} stroke={L} weight={1} node={8} opacity="0.55" animate />
-      <text x="80" y="1076" fontSize="40" fill={L} className="display" lang="es">{LINES.hero.rows[0]}</text>
+      <text x="80" y="1092" fontSize="40" fill={L} className="display" lang="es">{LINES.hero.rows[0]}</text>
     </Art>
   );
 }
@@ -43,10 +43,11 @@ function BandsPlate() {
       <CrossingBandsG idp="gradients-k2" w={600} h={1200} fill={D} band={0.03} r={0.1} className="fade-in" />
       <NodeG cx={cx} cy={cy} s={14} fill={L} className="snap" style={{ '--i': 6 }} />
       <GuidesG w={600} h={1200} xs={[40, 560]} ys={[40, 1160]} stroke={D} weight={1} node={8} animate />
-      <g className="display" fontSize="50" lang="es">
-        <text x="40" y="968" fill={HEX.onBlue}>{rows[0]}</text>
-        <text x="40" y="1026" fill={D}>{rows[1]}</text>
-        <text x="40" y="1084" fill={D}>{rows[2]}</text>
+      {/* The line sits in the open lower-right cell between the two bands, so no band crosses it. */}
+      <g className="display" fontSize="40" lang="es" textAnchor="end">
+        <text x="532" y="1004" fill={HEX.onBlue}>{rows[0]}</text>
+        <text x="532" y="1052" fill={D}>{rows[1]}</text>
+        <text x="532" y="1100" fill={D}>{rows[2]}</text>
       </g>
     </Art>
   );
