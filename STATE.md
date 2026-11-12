@@ -30,7 +30,7 @@ their fixes are applied here from the start.
 - [x] 2. Extract the case study
 - [x] 3. Study it and write `SOURCE.md`
 - [x] 4. `LAYOUTS.md`, `pages.json`, shared system, 30 stub routes, `BRIEF.md` (dev server: address below; start it before wave 1)
-- [ ] 5. Build team, two waves; check reports 30 of 30 `ok`
+- [x] 5. Build team, two waves; check reports 30 of 30 `ok`
 - [ ] 6. Review team; shared fixes applied
 - [ ] 7. Verify in the browser; SVG export
 - [ ] 8. `REPORT.md` and `README.md`
@@ -122,3 +122,5 @@ http://localhost:3105 (start with `npx next dev -p 3105`; stop it before `npm ru
 - strategy: English labels "Complexity" and "Structure" on the tangle drawing.
 - motion: frames 2, 4 and 6 of the m10 cycle are assumed, not read from stills.
 - logo: the word-mark's letters touch less than in the reference.
+- showcase: plate 3's callout lines cross the laptop. use-apparel: confirm 3 hoodies (the vest is counted as one of the three hoodie-class pieces). use-world: the vehicle was not re-compared with m20 after the last tweak.
+- Wave 2 done: 12 builders, 13 pages, each committed locally. Lint clean, build passes, check --strict 30 of 30 ok; every page is over 600 lines, so no page was sent back. Step 6 started: 8 reviewers launched (Opus).
