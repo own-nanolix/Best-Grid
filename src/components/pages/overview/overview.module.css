@@ -1,0 +1,235 @@
+/* Overview: page-only styles. Colours are shared tokens; motion uses the shared easing and duration tokens. */
+
+/* ---------- Cover ---------- */
+.cover {
+  position: relative;
+  width: 100%;
+  background: var(--grad-fog);
+  overflow: hidden;
+  animation: overview-enter var(--dur-l) var(--ease-out) both;
+}
+.cover > svg {
+  width: 100%;
+  height: auto;
+}
+@keyframes overview-enter {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: none; }
+}
+.coverNote {
+  position: absolute;
+  left: clamp(16px, 4.3%, 72px);
+  bottom: clamp(14px, 2.4vw, 32px);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+  padding: 7px 14px 7px 10px;
+  background: var(--dark-blue);
+  color: var(--light-blue);
+  font-size: 12px;
+  line-height: 1;
+}
+.coverLine { display: none; }
+.coverDot {
+  width: var(--node);
+  height: var(--node);
+  background: var(--active-blue);
+  animation: overview-blink 2.4s var(--ease-move) infinite;
+}
+@keyframes overview-blink {
+  0%, 60%, 100% { opacity: 1; }
+  80% { opacity: 0.25; }
+}
+
+/* ---------- About: the two-column spec sheet ---------- */
+.about {
+  padding: clamp(40px, 6vw, 96px) 0 clamp(40px, 6vw, 96px);
+  position: relative;
+}
+.aboutGrid {
+  width: 100%;
+  max-width: 1600px;
+  margin-inline: auto;
+  padding-inline: var(--pad);
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  gap: clamp(28px, 5vw, 88px);
+  align-items: start;
+}
+.contents > * + * { margin-top: 14px; }
+.contentsTable { border-top: var(--hair) solid var(--rule); }
+.contentsTable th,
+.contentsTable td { padding: 10px 12px 10px 0; vertical-align: middle; }
+.contentsTable tbody tr { position: relative; }
+.chapterNum {
+  width: 1%;
+  font-size: clamp(44px, 5vw, 76px) !important;
+  padding-top: 12px !important;
+  padding-right: clamp(16px, 2.4vw, 40px) !important;
+  color: var(--dark-blue);
+  transition: color var(--dur-s) var(--ease-out);
+}
+.contentsTable tbody tr:hover .chapterNum { color: var(--active-blue); }
+.chapterLink {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-areas: "t a" "n a";
+  column-gap: 12px;
+  row-gap: 2px;
+  align-items: center;
+  color: inherit;
+  text-decoration: none;
+  padding: 6px 0;
+}
+.chapterLink > :first-child { grid-area: t; }
+.chapterNote { grid-area: n; }
+.chapterArrow {
+  grid-area: a;
+  color: var(--blue-ink);
+  transition: transform var(--dur-s) var(--ease-move);
+}
+.chapterLink:hover .chapterArrow { transform: translateX(6px); }
+.chapterLink:active .chapterArrow { transform: translateX(2px); }
+.contentsFoot { padding-top: 6px; }
+
+.describe > * + * { margin-top: clamp(16px, 2vw, 28px); }
+.title { text-wrap: balance; }
+.description { max-width: 34em; }
+.credit { margin-top: 8px; }
+.lattice {
+  position: relative;
+  width: 100%;
+  max-width: 440px;
+  background: var(--dark-blue);
+}
+.lattice > svg { width: 100%; height: auto; }
+
+/* ---------- Sections ---------- */
+.band { padding-block: clamp(48px, 7vw, 112px); position: relative; }
+.sectionHead { display: grid; gap: 14px; max-width: 760px; margin-bottom: clamp(24px, 4vw, 56px); }
+
+/* ---------- Principles ---------- */
+.principles { border-top: var(--hair) solid var(--rule); background: var(--paper); }
+.principleCells > * { padding: clamp(18px, 2vw, 32px); }
+.principle {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(20px, 3vw, 44px);
+  margin: 0;
+  min-height: 340px;
+  transition: background-color var(--dur-m) var(--ease-out);
+}
+.principle:hover { background: var(--stat-cell); }
+.principleNum { color: var(--active-blue); }
+.quote { margin: 0; flex: 1; text-wrap: balance; }
+.quoteRow { display: block; }
+.quoteSentence { display: block; }
+.quoteSentence + .quoteSentence { color: var(--blue-ink); }
+
+/* ---------- Index of chapters ---------- */
+.index { background: var(--light-blue); }
+.map { margin-bottom: clamp(28px, 4vw, 56px); background: var(--dark-blue); }
+.map > svg { width: 100%; height: auto; }
+.ledger { display: grid; gap: clamp(28px, 4vw, 56px); }
+.ledgerHead {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  padding: 0 0 12px;
+}
+.ledgerCell {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: clamp(10px, 1.4vw, 20px);
+  min-height: 96px;
+  color: inherit;
+  text-decoration: none;
+  transition: background-color var(--dur-s) var(--ease-out), transform var(--dur-s) var(--ease-out);
+}
+.ledgerCell:hover { background: var(--periwinkle); }
+.ledgerCell:active { transform: translateY(1px); }
+.ledgerCell[aria-current="page"] { background: var(--stat-cell); }
+.ledgerNum { color: var(--blue-ink); min-width: 1.6em; }
+.ledgerTitle { min-width: 0; }
+.ledgerArrow {
+  color: var(--blue-ink);
+  transition: transform var(--dur-s) var(--ease-move);
+}
+.ledgerCell:hover .ledgerArrow { transform: translateX(5px); }
+.ledgerFill { background: transparent; }
+
+/* ---------- Index of mockups ---------- */
+.mockups { background: var(--periwinkle); border-top: var(--hair) solid var(--rule); }
+.mockups .sectionHead .muted { color: var(--muted); }
+.tally {
+  list-style: none;
+  margin: 0 0 clamp(28px, 4vw, 56px);
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0;
+  border-top: var(--hair) solid var(--rule);
+  border-left: var(--hair) solid var(--rule);
+}
+.tally li {
+  border-right: var(--hair) solid var(--rule);
+  border-bottom: var(--hair) solid var(--rule);
+  flex: 1 1 140px;
+  min-width: 0;
+}
+.tallyLink {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 14px 16px 16px;
+  color: inherit;
+  text-decoration: none;
+  height: 100%;
+  transition: background-color var(--dur-s) var(--ease-out);
+}
+.tallyLink:hover { background: var(--paper); }
+.tallyNum { color: var(--dark-blue); }
+.tables {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(20px, 4vw, 72px);
+  align-items: start;
+}
+.mockTable th[scope="row"] { font-size: 15px; }
+.mockTable td, .mockTable th { padding-right: 10px; vertical-align: baseline; }
+.plateNo {
+  font-variant-numeric: tabular-nums;
+  color: var(--blue-ink);
+  font-size: 13px !important;
+  width: 1%;
+  white-space: nowrap;
+}
+
+/* ---------- Colophon ---------- */
+.colophon { padding: clamp(40px, 6vw, 96px) 0 calc(clamp(40px, 6vw, 96px) + 160px); margin-bottom: -160px; }
+.footerArt > svg { width: 100%; height: auto; }
+.credit2 { margin: clamp(16px, 2vw, 28px) 0 0; color: var(--muted-on-dark); }
+
+/* ---------- Narrow screens ---------- */
+@media (max-width: 900px) {
+  .aboutGrid { grid-template-columns: minmax(0, 1fr); }
+  .tables { grid-template-columns: minmax(0, 1fr); }
+  .principle { min-height: 0; }
+}
+@media (max-width: 560px) {
+    .coverNote { position: static; justify-self: start; margin: 0; width: 100%; }
+  .coverLine {
+    display: block;
+    margin: 0;
+    padding: 16px var(--pad);
+    background: var(--dark-blue);
+    color: var(--light-blue);
+    font-size: 16px;
+    line-height: 1.35;
+  }
+  .coverLine span { display: block; }
+  .chapterNum { font-size: 40px !important; }
+}
