@@ -1,0 +1,63 @@
+/* Logo page: layouts only. Colour comes from the shared tokens; geometry of the artwork lives in the SVG attributes. */
+
+.hero { padding-top: clamp(40px, 7vw, 112px); padding-bottom: clamp(32px, 5vw, 72px); position: relative; }
+.heroGrid { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: var(--gap); align-items: end; }
+.heroSide { display: grid; gap: 14px; justify-items: start; }
+.heroMark { width: 100%; max-width: 360px; aspect-ratio: 1; background: var(--dark-blue); display: grid; place-items: center; position: relative; }
+.heroMark svg { width: 62%; height: auto; color: var(--active-blue); }
+.heroMark::before, .heroMark::after { content: ""; position: absolute; width: var(--node); height: var(--node); background: var(--dark-blue); }
+.heroMark::before { left: 0; top: 0; transform: translate(-50%, -50%); }
+.heroMark::after { right: 0; bottom: 0; transform: translate(50%, 50%); }
+
+.band { padding-block: clamp(36px, 5vw, 80px); }
+
+.head { position: relative; padding-top: 28px; margin-bottom: clamp(24px, 3vw, 44px); }
+.headGrid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); gap: var(--gap); align-items: end; }
+.lead { max-width: 58ch; }
+
+.fig { margin: 0; min-width: 0; }
+.plate { width: 100%; height: auto; display: block; }
+.cap { display: flex; justify-content: space-between; gap: 12px; padding: 10px 0 0; margin-top: 10px; font-size: 12px; color: var(--muted); border-top: var(--hair) solid var(--rule-soft); }
+.cap span:first-child { color: var(--blue-ink); }
+.capStack { display: grid; gap: 4px; padding: 10px 0 0; margin-top: 10px; border-top: var(--hair) solid var(--rule-soft); }
+
+.pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--gap); }
+.constr { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: clamp(20px, 3vw, 48px); align-items: start; }
+.ratios { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--gap); padding-top: 18px; border-top: var(--hair) solid var(--rule); }
+
+.sizes { --cell-pad: 0; }
+.sizes > * { padding: clamp(10px, 1.4vw, 20px); }
+.size { margin: 0; }
+.size svg { width: 100%; max-width: 200px; margin-inline: auto; }
+
+.colours { gap: clamp(20px, 3vw, 40px); }
+.swatches { list-style: none; padding: 0; margin: 6px 0 0; display: grid; gap: 6px; }
+.swatch { display: grid; grid-template-columns: 22px auto 1fr; gap: 10px; align-items: center; font-size: 13px; }
+.chipSq { width: 22px; height: 22px; box-shadow: inset 0 0 0 var(--hair) var(--rule-soft); }
+
+.family { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 1fr) minmax(0, 2fr); gap: var(--gap); align-items: start; }
+.latRow { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); gap: var(--gap); align-items: start; }
+
+.red { stroke: var(--red-ink); }
+
+.drawWrap { display: grid; gap: 14px; }
+.drawBar { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; padding-top: 10px; border-top: var(--hair) solid var(--rule-soft); }
+
+.close { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--gap); }
+.note { margin: 0; padding-top: 14px; border-top: var(--hair) solid var(--rule); display: grid; gap: 6px; }
+
+@media (max-width: 900px) {
+  .heroGrid, .constr { grid-template-columns: minmax(0, 1fr); }
+  .headGrid { grid-template-columns: minmax(0, 1fr); gap: 8px; }
+  .family { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .latRow { grid-template-columns: minmax(0, 1fr); }
+  .close { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 600px) {
+  .pair, .family { grid-template-columns: minmax(0, 1fr); }
+  .ratios { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .cap { flex-direction: column; gap: 2px; }
+}
+
+.constr :global(.spec-num) { font-size: clamp(32px, 6vw, 72px); }
+.constr :global(.spec td), .constr :global(.spec th) { padding-right: 10px; }
