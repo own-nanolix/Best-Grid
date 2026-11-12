@@ -33,7 +33,7 @@ their fixes are applied here from the start.
 - [x] 5. Build team, two waves; check reports 30 of 30 `ok`
 - [x] 6. Review team; shared fixes applied
 - [x] 7. Verify in the browser; SVG export
-- [ ] 8. `REPORT.md` and `README.md`
+- [x] 8. `REPORT.md` and `README.md`
 - [ ] 9. Final independent review, then one push (standing orders, points 5 and 6)
 
 ## Decisions
