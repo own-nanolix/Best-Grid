@@ -48,3 +48,6 @@ reference/
 .vercel/
 *.log
 audit.json
+
+# stray screenshots
+/*.png
