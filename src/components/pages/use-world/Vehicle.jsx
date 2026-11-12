@@ -1,7 +1,8 @@
 // Scene 5: the m20 livery on a generic five-door body in side elevation. The mark sits on the rear quarter, the
-// word-mark on the rear door (cut by the door frame as printed), the roof panel in Dark Blue. No maker's details.
+// word-mark low on the rear door (the photograph crops it; on the drawn body it sits whole inside the door), the roof
+// panel in Dark Blue. No maker's details.
 import { ShadowG, CalloutG, DimensionG, SpecColumnG, LitG, castDir } from '@/components/art/Mockup';
-import { MarkG, WordmarkG } from '@/components/art/Mark';
+import { MarkG, WordmarkFitG } from '@/components/art/Mark';
 import { Plate, BoltG } from './shared';
 import { HEX } from '@/lib/brand';
 import { r2 } from '@/lib/charts';
@@ -81,10 +82,10 @@ export default function Vehicle() {
           <path d="M92 484L160 480M880 470L960 486" stroke="#d6dbe8" strokeWidth="2" />
           <rect x="92" y="338" width="868" height="224" fill={`url(#${IDP}-shade-v)`} opacity="0.7" />
 
-          {/* the livery: the mark on the rear quarter, the word-mark on the rear door, cut by its frame */}
-          <MarkG x={812} y={448} size={60} fill={HEX.darkBlue} />
+          {/* the livery (m20): a small mark on the rear quarter above the wheel arch, the word-mark low on the rear door */}
+          <MarkG x={848} y={446} size={36} fill={HEX.darkBlue} />
           <g clipPath={`url(#${IDP}-door)`}>
-            <WordmarkG x={512} y={512} size={62} fill={HEX.darkBlue} />
+            <WordmarkFitG x={580} y={508} w={148} fill={HEX.darkBlue} />
           </g>
         </g>
 
@@ -114,14 +115,14 @@ export default function Vehicle() {
       <DimensionG x1={92} y1={GROUND + 6} x2={960} y2={GROUND + 6} value="4 400 mm" offset={44} i={0} />
       <DimensionG x1={1010} y1={GROUND} x2={1010} y2={290} value="1 670 mm" offset={-22} i={1} />
 
-      <CalloutG x={842} y={478} tx={640} ty={150} side="left" label="Mark on the rear quarter" i={3} />
-      <CalloutG x={610} y={500} tx={410} ty={720} side="left" label="Word-mark on the rear door" i={4} />
+      <CalloutG x={866} y={464} tx={1000} ty={720} side="left" label="Mark on the rear quarter" i={3} />
+      <CalloutG x={650} y={496} tx={450} ty={645} side="left" label="Word-mark on the rear door" i={4} />
       <CalloutG x={600} y={296} tx={500} ty={210} side="left" label="Roof panel, Dark Blue" i={5} />
 
       <SpecColumnG x={1090} y={150} w={250} title="Vehicle wrap" rowH={46} i={6} rows={[
         { k: 'Film', v: 'Cast vinyl, 80 µm' },
-        { k: 'Mark', v: '300 mm' },
-        { k: 'Word-mark', v: '1 340 mm' },
+        { k: 'Mark', v: '180 mm' },
+        { k: 'Word-mark', v: '750 mm' },
         { k: 'Roof', v: 'Dark Blue' },
         { k: 'Finish', v: 'Gloss' },
         { k: 'Body', v: 'Generic five-door' },

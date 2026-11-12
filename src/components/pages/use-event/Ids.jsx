@@ -20,14 +20,16 @@ const pt = (cx, cy, deg, x, y) => {
 // One card drawn with its visible end at the top (flip = false) or the bottom (flip = true).
 function Card({ idp, x, y, tone, person, flip }) {
   const t = TONES[tone](idp);
-  const vy = flip ? y + CH - OUT : y; // top of the part that sticks out of the holder
+  // top of the printed block. When the card sticks out at the bottom, the block moves up by the slot band (the slot
+  // stays inside the holder), so every line stays on the visible end of the card.
+  const vy = flip ? y + CH - OUT - 14 : y;
   const p = PEOPLE[person];
   const nameRows = p.nameRows || [p.name];
   return (
     <g>
       <rect x={x} y={y} width={CW} height={CH} fill={t.bg} filter={`url(#${idp}-fibre)`} />
       <rect x={x} y={y} width={CW} height={CH} fill="none" stroke="#000000" strokeOpacity="0.3" strokeWidth="1" />
-      <rect x={r2(x + CW / 2 - 13)} y={vy + 9} width="26" height="6" rx="3" fill="#000000" opacity="0.55" />
+      {!flip && <rect x={r2(x + CW / 2 - 13)} y={vy + 9} width="26" height="6" rx="3" fill="#000000" opacity="0.55" />}
       <MarkG x={x + 12} y={vy + 24} size={22} fill={t.mk} />
       <WordmarkFitG x={x + 40} y={vy + 41} w={64} fill={t.fg} />
       <rect x={x + 12} y={vy + 52} width={CW - 24} height="1" fill={t.fg} opacity="0.5" />
@@ -71,7 +73,7 @@ export function IdPlateA() {
   const [cx, cy, rot] = [190, 300, -12];
   const cd = castDir(spot, 560, 520, cx, cy);
   const P = (x, y) => pt(cx, cy, rot, x, y);
-  const [a, b] = [P(HW / 2 - 20, 20), P(-70, -118)];
+  const [a, b] = [P(HW / 2 - 20, 20), P(-20, -100)];
   const [h1, h2] = [P(-HW / 2, HH / 2), P(HW / 2, HH / 2)];
   return (
     <Plate id="id-a" title="Staff ID cards in a clear holder, Dark Blue and Light Blue" w={560} h={520} spot={spot} no="02">
@@ -101,7 +103,7 @@ export function IdPlateB() {
         <LitG><IdSet idp={idp} flip tones={['blue', 'dark']} people={['lorena', 'elena']} /></LitG>
       </g>
       <DimensionG x1={cx + HW / 2 + 12} y1={cy - HH / 2} x2={cx + HW / 2 + 12} y2={cy + HH / 2} value="50 mm" offset={-14} i={4} />
-      <CalloutG x={cx - 100} y={cy + 140} tx={150} ty={400} label="Card" sub="54 × 85 mm" side="left" i={0} />
+      <CalloutG x={cx - 24} y={cy + 150} tx={150} ty={400} label="Card" sub="54 × 85 mm" side="left" i={0} />
       <CalloutG x={cx + 80} y={cy - 30} tx={150} ty={110} label="Clear holder" sub="0.5 mm film" side="left" i={1} />
       <CalloutG x={cx - HW / 2 - 18} y={cy} tx={150} ty={200} label="Strap ring" side="left" i={2} />
     </Plate>

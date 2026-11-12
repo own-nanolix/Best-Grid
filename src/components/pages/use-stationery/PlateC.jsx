@@ -39,9 +39,9 @@ export function Brochure() {
           </g>
         ))}
       </LitG>
-      <CalloutG x={pt(faces[0], 100, 250)[0]} y={pt(faces[0], 100, 250)[1]} tx={660} ty={130} label="Cover panel" sub="Active Blue" i={0} />
+      <CalloutG x={pt(faces[0], 100, 250)[0]} y={pt(faces[0], 100, 250)[1]} tx={660} ty={270} label="Cover panel" sub="Active Blue" i={0} />
       <CalloutG x={pt(faces[0], PANEL.w, 200)[0]} y={pt(faces[0], PANEL.w, 200)[1]} tx={660} ty={200} label="Fold line" sub="Ridge and valley" i={1} />
-      <CalloutG x={pt(faces[1], 100, 100)[0]} y={pt(faces[1], 100, 100)[1]} tx={660} ty={270} label="Inside panel" sub="Ruled cells" i={2} />
+      <CalloutG x={pt(faces[1], 100, 100)[0]} y={pt(faces[1], 100, 100)[1]} tx={660} ty={130} label="Inside panel" sub="Ruled cells" i={2} />
       <CalloutG x={pt(faces[2], 100, 330)[0]} y={pt(faces[2], 100, 330)[1]} tx={660} ty={340} label="Back panel" sub="Contact details" i={3} />
       {foot.map(([a, b], i) => <DimensionG key={i} x1={a[0]} y1={a[1]} x2={b[0]} y2={b[1]} value="99 mm" offset={26} i={4 + i} />)}
       <DimensionG x1={pt(faces[0], 0, 0)[0]} y1={pt(faces[0], 0, 0)[1]} x2={pt(faces[0], 0, PANEL.h)[0]} y2={pt(faces[0], 0, PANEL.h)[1]} value="210 mm" offset={36} i={7} />
@@ -90,13 +90,12 @@ export function ReportPlate() {
           </LitG>
         </g>
       </g>
-      <CalloutG x={sp(reps[0], 300, 36)[0]} y={sp(reps[0], 300, 36)[1]} tx={690} ty={130} label="Spine" sub="Mark, IDAA, [24 – 25], BGS" i={0} />
+      <CalloutG x={sp(reps[0], 20, 32)[0]} y={sp(reps[0], 20, 32)[1]} tx={200} ty={58} label="Spine" sub="Mark, IDAA, [24 – 25], BGS" i={0} />
       <CalloutG x={at(reps[0], 200, 330)[0]} y={at(reps[0], 200, 330)[1]} tx={690} ty={200} label="Cover" sub="Title, closing line, years" i={1} />
-      <CalloutG x={at(reps[1], 200, 560)[0]} y={at(reps[1], 200, 560)[1]} tx={690} ty={270} label="Dark Blue cover" sub="Light type" i={2} />
-      <CalloutG x={sp(reps[2], 120, 40)[0]} y={sp(reps[2], 120, 40)[1]} tx={690} ty={340} label="Perfect binding" sub="Square spine" i={3} />
+      <CalloutG x={at(reps[1], 200, 560)[0]} y={at(reps[1], 200, 560)[1]} tx={690} ty={400} label="Dark Blue cover" sub="Light type" i={2} />
       <DimensionG x1={sp(reps[2], 0, T)[0]} y1={sp(reps[2], 0, T)[1]} x2={sp(reps[2], ch, T)[0]} y2={sp(reps[2], ch, T)[1]} value="310 mm" offset={26} i={4} />
       <DimensionG x1={sp(reps[2], ch, 0)[0]} y1={sp(reps[2], ch, 0)[1]} x2={sp(reps[2], ch, T)[0]} y2={sp(reps[2], ch, T)[1]} value="18 mm" offset={-24} i={5} />
-      <SpecColumnG x={690} y={430} w={220} rows={[{ k: 'Format', v: '220 × 310 mm' }, { k: 'Spine', v: '18 mm' }, { k: 'Binding', v: 'Perfect-bound' }]} rowH={38} />
+      <SpecColumnG x={690} y={470} w={220} rows={[{ k: 'Format', v: '220 × 310 mm' }, { k: 'Spine', v: '18 mm' }, { k: 'Binding', v: 'Perfect-bound' }]} rowH={38} />
     </Art>
   );
 }

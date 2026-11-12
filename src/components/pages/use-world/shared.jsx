@@ -74,7 +74,12 @@ export function BillboardFaceG({ idp }) {
   return (
     <g>
       <rect width={BOARD.w} height={BOARD.h} fill={HEX.activeBlue} filter={`url(#${idp}-b-board)`} />
-      <Guides xs={[492, 1085]} ys={[327]} nodes={[[1059, 327]]} stroke={LIGHT} node={7} />
+      {/* m19 guides: two full-height verticals, the rule from the left edge to its node */}
+      <g fill={LIGHT} opacity="0.7">
+        {[492, 1085].map((x) => <rect key={x} x={x - 0.5} y="0" width="1" height={BOARD.h} />)}
+        <rect x="0" y="326.5" width="1059" height="1" />
+      </g>
+      <NodeG cx={1059} cy={327} s={7} fill={LIGHT} />
       <g fill={LIGHT} fontSize="32" lang="es">
         <text x="28" y="63">{a}</text>
         <text x="28" y="100">en avance. <tspan fill={HEX.darkBlue}>Dando estructura</tspan></text>

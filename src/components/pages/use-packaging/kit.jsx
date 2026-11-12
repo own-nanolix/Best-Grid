@@ -41,8 +41,8 @@ export function Plate({ name, title, spot, side = 'left', floor = 0.7, children 
         </feMerge>
       </filter>
       <PlateFrameG w={W} h={H} split={left ? 0.7 : 0.3} no={no} label={label} />
-      <SpecColumnG x={x} y={r2((H - h) / 2 + 8)} w={left ? 300 : 280} title="Specification" rows={rows} rowH={rowH} size={24} />
       {children(idp)}
+      <SpecColumnG x={x} y={r2((H - h) / 2 + 8)} w={left ? 300 : 280} title="Specification" rows={rows} rowH={rowH} size={24} />
     </Art>
   );
 }

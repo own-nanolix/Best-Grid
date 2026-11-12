@@ -23,8 +23,8 @@ export function HeroPlate() {
       <Callouts tx={1086} rows={[
         ['Card rim', P(0, -52), 240],
         ['Lid mark', P(0, 11), 330],
-        ['Printed label', P(-45, 250), 430],
-        ['Wound card body', P(140, 330), 520],
+        ['Printed label', P(10, 250), 900],
+        ['Wound card body', P(140, 330), 430],
       ]} />
       <SpecColumnG x={1110} y={620} w={410} title="Project tube" rows={TUBE_SPEC.slice(0, 4)} />
     </Plate>

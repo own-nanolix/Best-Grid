@@ -75,9 +75,9 @@ export default function SiteSign() {
       <DimensionG x1={BX} y1={BY + BH} x2={BX} y2={BY} value="730 mm" offset={-40} i={1} />
       <DimensionG x1={posts[1] + 18} y1={GROUND} x2={posts[1] + 18} y2={BY + BH} value="1 150 mm" offset={60} i={2} />
 
-      <CalloutG x={BX + 130} y={BY + 130} tx={290} ty={120} side="left" label="Printed aluminium board, 3 mm" i={3} />
+      <CalloutG x={BX + 24} y={BY + 170} tx={290} ty={120} side="left" label="Printed aluminium board, 3 mm" i={3} />
       <CalloutG x={posts[0]} y={GROUND - 60} tx={290} ty={730} side="left" label="Steel post, 60 mm" i={4} />
-      <CalloutG x={940} y={GROUND - 270} tx={1190} ty={160} side="right" label="Mesh fencing, 2 000 mm" i={5} />
+      <CalloutG x={1150} y={GROUND - 200} tx={1190} ty={160} side="right" label="Mesh fencing, 2 000 mm" i={5} />
       <CalloutG x={BX + BW - 3} y={BY + BH - 3} tx={1190} ty={730} side="right" label="Stainless fixings" i={6} />
     </Plate>
   );

@@ -162,11 +162,11 @@ export default function Booth() {
         <WordmarkFitG x={front[0][0] + fw * 0.07 + fh * 0.7} y={front[0][1] + fh * 0.6} w={r2(fw * 0.3)} fill={HEX.onBlue} />
       </LitG>
       <DimensionG x1={WALL.x} y1={WALL.y} x2={WALL.x + WALL.w} y2={WALL.y} value="6000 mm" offset={-76} i={6} />
-      <DimensionG x1={WALL.x} y1={WALL.y + WALL.h} x2={WALL.x} y2={WALL.y} value="3000 mm" offset={-40} i={7} />
-      <CalloutG x={sx + 20} y={sy + 40} tx={60} ty={250} label="Event screen" sub="back wall graphic" i={0} />
-      <CalloutG x={seamX[0]} y={330} tx={60} ty={330} label="Panel seam" i={1} />
-      <CalloutG x={WALL.x - 18} y={102} tx={60} ty={160} label="Header truss" i={2} />
-      <CalloutG x={front[0][0] + 20} y={front[2][1] - 24} tx={60} ty={620} label="Reception counter" sub="1200 mm wide" i={3} />
+      <DimensionG x1={rt1[0]} y1={rb1[1]} x2={rt1[0]} y2={rt1[1]} value="3000 mm" offset={26} i={7} />
+      <CalloutG x={sx + 20} y={sy + 40} tx={190} ty={250} label="Event screen" sub="back wall graphic" side="left" i={0} />
+      <CalloutG x={seamX[0]} y={330} tx={190} ty={330} label="Panel seam" side="left" i={1} />
+      <CalloutG x={WALL.x - 18} y={102} tx={190} ty={160} label="Header truss" side="left" i={2} />
+      <CalloutG x={front[0][0] + 20} y={front[2][1] - 24} tx={190} ty={620} label="Reception counter" sub="1200 mm wide" side="left" i={3} />
       <CalloutG x={(rt0[0] + rt1[0]) / 2} y={(rt0[1] + rb0[1]) / 2 - 20} tx={1250} ty={680} label="Return wall graphic" i={4} />
       <SpecColumnG x={700} y={640} w={420} title="Booth" rows={[{ k: 'Footprint', v: '6000 × 3000 mm' }, { k: 'Wall height', v: '3000 mm' }, { k: 'Carpet', v: 'Dark Blue, tiles' }]} rowH={34} />
     </Plate>

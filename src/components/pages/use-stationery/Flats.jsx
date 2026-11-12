@@ -3,7 +3,7 @@ import { HEX } from '@/lib/brand';
 import { MaterialDefs } from '@/components/art/Mockup';
 import { ID } from './kit';
 import { LetterheadG, EnvelopeG, CardFrontG, CardBackG, LETTER, ENVELOPE, CARD } from './Print';
-import { NotebookG, PenG, PanelG, ReportCoverG, NOTE, PEN, PANEL, REPORT_FACE } from './Objects';
+import { NotebookG, PenG, PanelG, ReportSpineG, NOTE, PEN, PANEL } from './Objects';
 
 const pen = `${ID}-pen-flat`;
 
@@ -26,5 +26,9 @@ export const FLATS = [
       <g key={k} transform={`translate(${i * PANEL.w} 0)`}><PanelG kind={k} /><rect x="0" width="0.8" height={PANEL.h} fill={HEX.darkBlue} opacity="0.3" /></g>
     )),
   },
-  { key: 'report-cover', title: 'Report cover', vb: `0 0 ${REPORT_FACE.w} ${REPORT_FACE.h}`, art: <ReportCoverG /> },
+  // The report spines flat (m02): the covers are shown only as the case study crops them, on the report plate.
+  {
+    key: 'report-spines', title: 'Report spines', vb: '0 0 590 224',
+    art: ['active', 'dark', 'active'].map((tone, i) => <g key={i} transform={`translate(0 ${i * 80})`}><ReportSpineG tone={tone} /></g>),
+  },
 ];

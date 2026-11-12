@@ -122,8 +122,8 @@ export function BagTall() {
             />
           </LitG>
           <CalloutG x={330} y={68} tx={600} ty={90} label="Rope handle" sub="Knotted inside" i={1} />
-          <CalloutG x={G.xr - 60} y={G.yt + 36} tx={600} ty={200} label="Metal eyelet" i={2} />
-          <CalloutG x={G.ex + G.dx / 2} y={G.yt + 14} tx={600} ty={290} label="Folded top" sub="Hem 28 mm" i={3} />
+          <CalloutG x={G.xr - 60} y={G.yt + 36} tx={600} ty={290} label="Metal eyelet" i={2} />
+          <CalloutG x={G.ex + G.dx / 2} y={G.yt + 14} tx={600} ty={200} label="Folded top" sub="Hem 28 mm" i={3} />
           <CalloutG x={G.ex + G.dx / 2} y={380} tx={600} ty={380} label="Gusset crease" i={4} />
           <CalloutG x={265} y={250} tx={600} ty={470} label="Printed mark" i={5} />
           <DimensionG x1={G.xl - 30} y1={G.yt} x2={G.xl - 30} y2={560} value="500 mm" offset={34} i={6} />
@@ -160,9 +160,9 @@ export function BagMedium() {
             />
           </LitG>
           <CalloutG x={790} y={205} tx={1000} ty={110} label="Ribbon handle" sub="Flat, sewn in" i={1} />
-          <CalloutG x={G.xl + 75} y={G.yt + 40} tx={420} ty={200} label="Eyelet" i={2} />
-          <CalloutG x={G.ex + G.dx / 2} y={G.yt + 20} tx={420} ty={290} label="Folded top" i={3} />
-          <CalloutG x={G.ex + G.dx / 2} y={430} tx={420} ty={380} label="Gusset crease" i={4} />
+          <CalloutG x={G.xl + 75} y={G.yt + 40} tx={560} ty={200} label="Eyelet" side="left" i={2} />
+          <CalloutG x={G.ex + G.dx / 2} y={G.yt + 20} tx={560} ty={290} label="Folded top" side="left" i={3} />
+          <CalloutG x={G.ex + G.dx / 2} y={430} tx={560} ty={380} label="Gusset crease" side="left" i={4} />
           <CalloutG x={780} y={428} tx={1000} ty={470} label="Crossing bands" i={5} />
           <DimensionG x1={G.xr + 34} y1={560} x2={G.xr + 34} y2={G.yt} value="380 mm" offset={30} i={6} />
         </>

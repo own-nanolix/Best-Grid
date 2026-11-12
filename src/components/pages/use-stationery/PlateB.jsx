@@ -50,11 +50,11 @@ export function CardsPlate() {
           <rect width={CARD.w} height={CARD.h} fill={sh} />
         </g>
       </LitG>
-      <CalloutG x={tp(dk, CARD.w + 6, 40)[0]} y={tp(dk, CARD.w + 6, 40)[1]} tx={640} ty={130} label="Painted edge" sub="Active Blue" i={0} />
-      <CalloutG x={tp(wt, 47, 281)[0]} y={tp(wt, 47, 281)[1]} tx={640} ty={200} label="Blind-embossed mark" sub="No ink" i={1} />
-      <CalloutG x={tp(wt, 300, 150)[0]} y={tp(wt, 300, 150)[1]} tx={640} ty={270} label="Front" sub="Name, role, contact" i={2} />
-      <CalloutG x={tp(dk, 120, 20)[0]} y={tp(dk, 120, 20)[1]} tx={640} ty={340} label="Back" sub="Word-mark and mark" i={3} />
-      <DimensionG x1={wtTop[0][0]} y1={wtTop[0][1]} x2={wtTop[1][0]} y2={wtTop[1][1]} value="85 mm" offset={-34} i={4} />
+      <CalloutG x={tp(dk, -6, 150)[0]} y={tp(dk, -6, 150)[1]} tx={90} ty={200} label="Painted edge" sub="Active Blue" i={0} />
+      <CalloutG x={tp(wt, 47, 281)[0]} y={tp(wt, 47, 281)[1]} tx={260} ty={600} side="left" label="Blind-embossed mark" sub="No ink" i={1} />
+      <CalloutG x={tp(wt, CARD.w - 60, 40)[0]} y={tp(wt, CARD.w - 60, 40)[1]} tx={640} ty={330} label="Front" sub="Name, role, contact" i={2} />
+      <CalloutG x={tp(dk, 20, 20)[0]} y={tp(dk, 20, 20)[1]} tx={90} ty={120} label="Back" sub="Word-mark and mark" i={3} />
+      <DimensionG x1={tp(wt, 0, CARD.h)[0]} y1={tp(wt, 0, CARD.h)[1]} x2={tp(wt, CARD.w, CARD.h)[0]} y2={tp(wt, CARD.w, CARD.h)[1]} value="85 mm" offset={34} i={4} />
       <DimensionG x1={wtRight[0][0]} y1={wtRight[0][1]} x2={wtRight[1][0]} y2={wtRight[1][1]} value="55 mm" offset={-30} i={5} />
       <SpecColumnG x={620} y={430} w={290} title="Print spec" rows={[{ k: 'Format', v: '85 × 55 mm' }, { k: 'Stock', v: '600 g/m², duplex' }, { k: 'Edge', v: 'Painted, Active Blue' }, { k: 'Finish', v: 'Blind emboss' }]} />
     </Art>

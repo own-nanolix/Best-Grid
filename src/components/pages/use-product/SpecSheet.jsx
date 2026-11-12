@@ -14,7 +14,7 @@ const ROWS = [
   { key: 'tube', head: 'Tube', cells: ['Rigid wound card', '3 mm wall', 'Lid band 26 mm'] },
   { key: 'label', head: 'Label', cells: ['Grey label paper', '70 × 70 mm', 'Active Blue print'] },
   { key: 'drawing', head: 'Drawing', cells: ['Uncoated paper', 'A3, 420 × 297 mm', 'Rolled, 100 mm roll'] },
-  { key: 'carton', head: 'Carton', cells: ['Light card', '140 × 140 mm', 'Height 270 mm'] },
+  { key: 'carton', head: 'Carton', cells: ['Light card', '140 × 140 mm', 'Height 320 mm'] },
   { key: 'card', head: 'Access card', cells: ['Card stock, painted edge', '55 × 85 mm', '0.8 mm thick'] },
 ];
 

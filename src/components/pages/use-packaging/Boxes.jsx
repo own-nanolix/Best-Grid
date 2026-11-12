@@ -73,10 +73,10 @@ export function ShippingStack() {
               }}
             />
           </LitG>
-          <CalloutG x={big.P(20, 100, 170)[0]} y={big.P(20, 100, 170)[1]} tx={600} ty={120} label="Sealing tape" sub="48 mm" i={1} />
-          <CalloutG x={big.P(150, 0, 100)[0]} y={big.P(150, 0, 100)[1]} tx={90} ty={170} label="Printed mark" i={2} />
-          <CalloutG x={small.P(70, 110, 60)[0]} y={small.P(70, 110, 60)[1]} tx={660} ty={230} label="Small carton" i={3} />
-          <CalloutG x={big.P(0, 100, 164)[0]} y={big.P(0, 100, 164)[1]} tx={720} ty={420} label="Flap fold" i={4} />
+          <CalloutG x={big.P(0, 100, 100)[0]} y={big.P(0, 100, 100)[1]} tx={720} ty={490} label="Sealing tape" sub="48 mm" i={1} />
+          <CalloutG x={big.P(197, 0, 109)[0]} y={big.P(197, 0, 109)[1]} tx={200} ty={170} label="Printed mark" side="left" i={2} />
+          <CalloutG x={small.P(70, 110, 60)[0]} y={small.P(70, 110, 60)[1]} tx={660} ty={180} label="Small carton" i={3} />
+          <CalloutG x={big.P(0, 100, 164)[0]} y={big.P(0, 100, 164)[1]} tx={720} ty={235} label="Flap fold" i={4} />
           <DimensionG x1={big.P(250, 0, 0)[0]} y1={big.P(250, 0, 0)[1]} x2={440} y2={540} value="500 mm" offset={32} i={5} />
           <DimensionG x1={440} y1={540} x2={big.P(0, 200, 0)[0]} y2={big.P(0, 200, 0)[1]} value="400 mm" offset={32} i={6} />
           <DimensionG x1={big.P(0, 200, 0)[0]} y1={big.P(0, 200, 0)[1]} x2={big.P(0, 200, 170)[0]} y2={big.P(0, 200, 170)[1]} value="340 mm" offset={34} i={7} />
@@ -124,9 +124,9 @@ export function ShippingMailer() {
               }}
             />
           </LitG>
-          <CalloutG x={g.P(0, 200, 70)[0]} y={g.P(0, 200, 70)[1]} tx={1010} ty={110} label="Crossing bands" sub="Two colours" i={1} />
-          <CalloutG x={g.P(60, 40, 120)[0]} y={g.P(60, 40, 120)[1]} tx={1010} ty={210} label="Sealing tape" i={2} />
-          <CalloutG x={g.P(110, 0, 64)[0]} y={g.P(110, 0, 64)[1]} tx={1010} ty={640} label="Printed mark" i={3} />
+          <CalloutG x={g.P(0, 200, 70)[0]} y={g.P(0, 200, 70)[1]} tx={1010} ty={210} label="Crossing bands" sub="Two colours" i={1} />
+          <CalloutG x={g.P(60, 40, 120)[0]} y={g.P(60, 40, 120)[1]} tx={1010} ty={110} label="Sealing tape" i={2} />
+          <CalloutG x={g.P(133, 0, 61)[0]} y={g.P(133, 0, 61)[1]} tx={420} ty={150} label="Printed mark" side="left" i={3} />
           <DimensionG x1={g.P(170, 0, 0)[0]} y1={g.P(170, 0, 0)[1]} x2={650} y2={530} value="260 mm" offset={30} i={4} />
           <DimensionG x1={650} y1={530} x2={g.P(0, 320, 0)[0]} y2={g.P(0, 320, 0)[1]} value="480 mm" offset={30} i={5} />
         </>
@@ -175,10 +175,10 @@ export function ProductLid() {
                       <text x="16" y="76" fill={INK}>{box[2]}</text>
                     </g>
                     <MarkG x={218} y={42} size={44} fill={HEX.warmGrey} />
-                    <g fontSize="7.2" lang="es">
-                      <text x="304" y="50" fill={HEX.warmGrey}>{addr[0]}</text>
-                      <text x="304" y="61" fill={INK}>{addr[1]}</text>
-                      <text x="304" y="72" fill={INK}>{addr[2]}</text>
+                    <g fontSize="5.8" lang="es">
+                      <text x="297" y="50" fill={HEX.warmGrey}>{addr[0]}</text>
+                      <text x="297" y="61" fill={INK}>{addr[1]}</text>
+                      <text x="297" y="72" fill={INK}>{addr[2]}</text>
                     </g>
                   </g>
                 ),
@@ -197,10 +197,10 @@ export function ProductLid() {
             />
           </LitG>
           <CalloutG x={lid.P(200, 258, 28)[0]} y={lid.P(200, 258, 28)[1]} tx={650} ty={110} label="Word-mark" sub="Large across the lid" i={1} />
-          <CalloutG x={base.P(120, 0, 70)[0]} y={base.P(120, 0, 70)[1]} tx={90} ty={600} label="Panel rules" side="right" i={2} />
+          <CalloutG x={base.P(120, 0, 70)[0]} y={base.P(120, 0, 70)[1]} tx={250} ty={600} label="Panel rules" side="left" i={2} />
           <CalloutG x={base.P(30, 0, 128)[0]} y={base.P(30, 0, 128)[1]} tx={410} ty={640} label="Lid overhang" i={3} />
           <CalloutG x={base.P(0, 120, 100)[0]} y={base.P(0, 120, 100)[1]} tx={720} ty={640} label="Board edge" i={4} />
-          <DimensionG x1={base.P(400, 0, 0)[0]} y1={base.P(400, 0, 0)[1]} x2={560} y2={556} value="408 mm" offset={30} i={5} />
+          <DimensionG x1={lid.P(408, 0, 28)[0]} y1={lid.P(408, 0, 28)[1]} x2={lid.P(0, 0, 28)[0]} y2={lid.P(0, 0, 28)[1]} value="408 mm" offset={30} i={5} />
         </>
       )}
     </Plate>
@@ -269,8 +269,8 @@ export function TubeCarton() {
           <IsoBox idp={idp} k="car2" g={g} fill={BOARD} lit="right" faces={['left', 'right']} art={{ right: <rect x="120" y="0" width="60" height="110" fill={BLUE} opacity="0.0" /> }} />
           <CalloutG x={t1[0] + 20} y={t1[1] - 270} tx={690} ty={110} label="Lid with the mark" i={1} />
           <CalloutG x={t1[0] + 52} y={t1[1] - 170} tx={690} ty={200} label="Project label" sub="Grey, one colour" i={2} />
-          <CalloutG x={g.P(300, 0, 70)[0]} y={g.P(300, 0, 70)[1]} tx={90} ty={600} label="Transit carton" side="right" i={3} />
-          <CalloutG x={t2[0] - 70} y={t2[1] - 200} tx={150} ty={170} label="Second tube" side="right" i={4} />
+          <CalloutG x={g.P(400, 0, 60)[0]} y={g.P(400, 0, 60)[1]} tx={150} ty={300} label="Transit carton" side="left" i={3} />
+          <CalloutG x={t2[0] - 70} y={t2[1] - 200} tx={270} ty={170} label="Second tube" side="left" i={4} />
           <DimensionG x1={g.P(440, 0, 0)[0]} y1={g.P(440, 0, 0)[1]} x2={560} y2={560} value="440 mm" offset={30} i={5} />
         </>
       )}

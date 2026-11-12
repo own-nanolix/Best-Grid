@@ -95,9 +95,9 @@ export default function Reception() {
         {[[1194, 278], [1308, 278], [1194, 412], [1308, 412]].map(([x, y]) => <BoltG key={`${x}${y}`} x={x} y={y} r={2.6} />)}
       </LitG>
 
-      <DimensionG x1={120} y1={636} x2={820} y2={636} value="1 800 mm" offset={36} color={WIRE} i={0} />
+      <DimensionG x1={120} y1={455} x2={820} y2={455} value="1 800 mm" offset={-30} color={WIRE} text={HEX.darkBlue} i={0} />
       <DimensionG x1={900} y1={580} x2={900} y2={140} value="1 100 mm" offset={-34} color={WIRE} text={HEX.darkBlue} i={1} />
-      <CalloutG x={420} y={230} tx={180} ty={800} side="right" label="Raised letters, 8 mm deep" color={WIRE} i={2} />
+      <CalloutG x={420} y={230} tx={440} ty={330} side="right" label="Raised letters, 8 mm deep" color={WIRE} text={HEX.darkBlue} i={2} />
       <CalloutG x={760} y={540} tx={560} ty={780} side="right" label="Reception counter" color={WIRE} i={3} />
       <CalloutG x={1020} y={440} tx={900} ty={830} side="right" label="Wayfinding panel, 600 × 1 100 mm" color={WIRE} i={4} />
       <CalloutG x={1251} y={360} tx={1100} ty={730} side="right" label="Room plaque, 325 × 375 mm" color={WIRE} i={5} />

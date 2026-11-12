@@ -77,14 +77,14 @@ export function CartonPlate() {
         <WordmarkG x={W - 14} y={Hh - 24} size={26} anchor="end" fill={HEX.darkBlue} />
       </g>
       <DimensionG x1={X} y1={Y + Hh * S} x2={X + W * S} y2={Y + Hh * S} value="140 mm" offset={44} i={6} />
-      <DimensionG x1={X + (W + dx) * S} y1={Y + dy * S} x2={X + (W + dx) * S} y2={Y + (Hh + dy) * S} value="270 mm" offset={-46} i={7} />
+      <DimensionG x1={X + (W + dx) * S} y1={Y + dy * S} x2={X + (W + dx) * S} y2={Y + (Hh + dy) * S} value="320 mm" offset={-46} i={7} />
       <Callouts tx={560} side="left" rows={[
         ['Tube lid', P(169, -80), 130],
         ['Open carton top', P(42, -16), 250],
         ['Printed carton face', P(60, 300), 420],
         ['Carton edge', P(3, 380), 560],
       ]} />
-      <SpecColumnG x={96} y={650} w={340} title="Carton" rows={[{ k: 'Inside', v: '140 × 140 mm' }, { k: 'Height', v: '270 mm' }, { k: 'Stock', v: 'Light card' }]} />
+      <SpecColumnG x={96} y={650} w={340} title="Carton" rows={[{ k: 'Inside', v: '140 × 140 mm' }, { k: 'Height', v: '320 mm' }, { k: 'Stock', v: 'Light card' }]} />
     </Plate>
   );
 }

@@ -81,7 +81,7 @@ export default function Page() {
         </div>
       </Band>
 
-      <Band id="use-product-card" no="09 · 10 · 11" title="The access card, in three colourways." lead="Front over back: the mark, the word-mark, a contactless symbol and the lattice on the front; a dark strip, the contact details and quiet bars for a name and a number on the back.">
+      <Band id="use-product-card" no="09 · 10 · 11" title="The access card, in three colourways." lead="The staff card of the badge, as printed, in three colourways and set into the 55 × 85 mm card format; on the back a dark strip, the contact details and quiet bars for a name and a number.">
         <div className={s.trio}>
           <Fig name="Access card, light" no="09"><CardPlate variant="light" /></Fig>
           <Fig name="Access card, dark" no="10" delay={80}><CardPlate variant="dark" /></Fig>

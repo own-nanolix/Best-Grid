@@ -46,8 +46,8 @@ export function FlatLay() {
       </g>
       <CalloutG {...{ x: P([140, 300])[0], y: P([140, 300])[1], tx: 286, ty: 210, label: 'Pocket folder', sub: 'Crossing bands', side: 'left', i: 0 }} />
       <CalloutG {...{ x: P([240, 940])[0], y: P([240, 940])[1], tx: 286, ty: 780, label: 'Card stack', sub: 'Painted edges', side: 'left', i: 1 }} />
-      <CalloutG {...{ x: P([480, 700])[0], y: P([480, 700])[1], tx: 286, ty: 560, label: 'Letterhead', sub: 'A4', side: 'left', i: 2 }} />
-      <CalloutG {...{ x: P([870, 160])[0], y: P([870, 160])[1], tx: 1340, ty: 110, label: 'Business cards', sub: '85 × 55 mm', side: 'right', i: 3 }} />
+      <CalloutG {...{ x: P([470, 1150])[0], y: P([470, 1150])[1], tx: 286, ty: 880, label: 'Letterhead', sub: 'A4', side: 'left', i: 2 }} />
+      <CalloutG {...{ x: P([850, 100])[0], y: P([850, 100])[1], tx: 980, ty: 70, label: 'Business cards', sub: '85 × 55 mm', side: 'right', i: 3 }} />
       <CalloutG {...{ x: P([1400, 260])[0], y: P([1400, 260])[1], tx: 1340, ty: 300, label: 'Bubble mailer', sub: 'With card', side: 'right', i: 4 }} />
       <CalloutG {...{ x: P([1450, 1000])[0], y: P([1450, 1000])[1], tx: 1340, ty: 760, label: 'DL envelope', sub: '220 × 110 mm', side: 'right', i: 5 }} />
       <DimensionG x1={P([440, 0])[0]} y1={P([0, 1205])[1]} x2={P([1060, 0])[0]} y2={P([0, 1205])[1]} value="210 mm" offset={26} i={6} />
@@ -84,12 +84,12 @@ export function LetterEnvelope() {
         </g>
       </LitG>
       <CalloutG x={lc[0] - 20} y={lc[1] - 150} tx={580} ty={130} label="Letterhead" sub="Uncoated paper" i={0} />
-      <CalloutG x={lc[0] + 40} y={lc[1] + 20} tx={580} ty={200} label="Guide hairlines" sub="Dark Blue, 0.25 pt" i={1} />
-      <CalloutG x={ec[0] + 40} y={ec[1] - 30} tx={580} ty={270} label="DL envelope" sub="Active Blue stock" i={2} />
-      <CalloutG x={ec[0] + 110} y={ec[1] - 52} tx={580} ty={340} label="Flap" sub="Tone change at the fold" i={3} />
-      <DimensionG x1={lPts[1][0]} y1={lPts[1][1]} x2={lPts[2][0]} y2={lPts[2][1]} value="297 mm" offset={-36} i={4} />
+      <CalloutG x={lc[0] + 40} y={lc[1] + 20} tx={580} ty={220} label="Guide hairlines" sub="Dark Blue, 0.25 pt" i={1} />
+      <CalloutG x={ec[0] + 150} y={ec[1] + 40} tx={580} ty={470} label="DL envelope" sub="Active Blue stock" i={2} />
+      <CalloutG x={ec[0] + 150} y={ec[1] - 12} tx={580} ty={400} label="Flap" sub="Tone change at the fold" i={3} />
+      <DimensionG x1={lPts[0][0]} y1={lPts[0][1]} x2={lPts[3][0]} y2={lPts[3][1]} value="297 mm" offset={24} i={4} />
       <DimensionG x1={ePts[3][0]} y1={ePts[3][1] + 8} x2={ePts[2][0]} y2={ePts[2][1] + 8} value="220 mm" offset={26} i={5} />
-      <SpecColumnG x={560} y={420} w={330} title="Print spec" rows={[{ k: 'Letterhead', v: 'A4, 210 × 297 mm' }, { k: 'Envelope', v: 'DL, 220 × 110 mm' }, { k: 'Stock', v: '100 g/m², uncoated' }, { k: 'Print', v: 'Offset, 2 colours' }]} />
+      <SpecColumnG x={560} y={496} w={330} rowH={32} title="Print spec" rows={[{ k: 'Letterhead', v: 'A4, 210 × 297 mm' }, { k: 'Envelope', v: 'DL, 220 × 110 mm' }, { k: 'Stock', v: '100 g/m², uncoated' }]} />
     </Art>
   );
 }

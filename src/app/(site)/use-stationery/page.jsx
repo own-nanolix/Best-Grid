@@ -73,7 +73,9 @@ export default function Page() {
 
         <div className={s.section}>
           <Head n="03" title="The slide deck in five steps">
-            The case study&apos;s own slides, rebuilt at 1600 × 900: colour, type, logo plate, icon construction and data.
+            The case study&apos;s own slides, rebuilt at 1600 × 900: colour, type, logo plate, icon construction and data. On the colour slide, Light Blue&apos;s
+            RGB (228 | 231 | 239) is computed from its published HEX, because the printed line repeats Active Blue&apos;s;
+            the colour-matching codes and the typeface&apos;s name are left out.
           </Head>
           <ol className={s.strip} role="region" aria-label="Slide deck, five slides" tabIndex={0}>
             {SLIDES.map((sl, i) => (

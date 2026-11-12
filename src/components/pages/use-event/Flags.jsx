@@ -146,7 +146,7 @@ export function FlagC() {
         <g>
           <DimensionG x1={bx - 150} y1={by} x2={bx - 150} y2={by - 250} value="2500 mm" offset={26} i={6} />
           <CalloutG x={at(...g.at(0.85, 0.5))[0]} y={at(...g.at(0.85, 0.5))[1]} tx={440} ty={190} label="Printed blade" i={0} />
-          <CalloutG x={at(...g.B(1))[0]} y={at(...g.B(1))[1]} tx={90} ty={150} label="Pole tip" i={1} />
+          <CalloutG x={at(...g.B(1))[0]} y={at(...g.B(1))[1]} tx={170} ty={150} label="Pole tip" side="left" i={1} />
           <CalloutG x={bx} y={by + 2} tx={440} ty={440} label="Cross base" sub="foot plates" i={2} />
         </g>
       )}
@@ -202,10 +202,10 @@ export function Banner() {
       </g>
       <DimensionG x1={x0} y1={y0 + bh} x2={x0 + bw} y2={y0 + bh} value="600 mm" offset={44} i={6} />
       <DimensionG x1={x0 + bw} y1={y0 + bh} x2={x0 + bw} y2={y0} value="1320 mm" offset={34} i={7} />
-      <CalloutG x={x0 + 14} y={y0 + 12} tx={150} ty={150} label="Eyelet" sub="metal ring" side="left" i={0} />
-      <CalloutG x={x0 + 14} y={96} tx={150} ty={235} label="Cable" side="left" i={1} />
-      <CalloutG x={x0 + bw / 2} y={y0 + bh - 9} tx={150} ty={340} label="Pole pocket" sub="aluminium rod" side="left" i={2} />
-      <CalloutG x={250} y={64} tx={150} ty={425} label="Rail" side="left" i={3} />
+      <CalloutG x={x0 + 14} y={y0 + 12} tx={150} ty={250} label="Eyelet" sub="metal ring" side="left" i={0} />
+      <CalloutG x={x0 + 14} y={96} tx={150} ty={180} label="Cable" side="left" i={1} />
+      <CalloutG x={x0 + bw / 2} y={y0 + bh - 9} tx={150} ty={400} label="Pole pocket" sub="aluminium rod" side="left" i={2} />
+      <CalloutG x={250} y={64} tx={150} ty={110} label="Rail" side="left" i={3} />
     </Plate>
   );
 }

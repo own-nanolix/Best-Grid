@@ -116,7 +116,7 @@ export function ReportCoverG({ tone = 'active', fill, filter }) {
       <Rows rows={['Informe', 'de activida', 'anual']} x={34} y={96} size={58} lh={1.1} fill={ink} />
       <Rows rows={REPORT.lineRows} x={34} y={330} size={12} lh={1.3} fill={ink} />
       <text x="34" y="376" fontSize="12" fill={ink}>{REPORT.signature}</text>
-      <Rows rows={['2024', '202']} x={w - 14} y={h - 70} size={64} lh={1.05} fill={ink} anchor="end" />
+      <Rows rows={['2024', '202']} x={200} y={480} size={72} lh={1.05} fill={ink} />
     </g>
   );
 }
@@ -130,9 +130,9 @@ export function ReportSpineG({ tone = 'active', fill, filter }) {
       <Sheet w={590} h={64} fill={fill || (on ? D : A)} filter={filter} />
       <MarkG x={16} y={14} size={36} fill={on ? A : D} />
       <rect x="72" y="0" width="0.8" height="64" fill={ink} opacity="0.5" />
-      <text x="190" y="38" fontSize="14" fill={on ? L : D}>{REPORT.spine}</text>
-      <text x="290" y="38" fontSize="14" fill={on ? L : D}>{REPORT.range}</text>
-      <text x="520" y="40" fontSize="20" fill={on ? L : D}>{REPORT.short}</text>
+      <text x="190" y="38" fontSize="14" fill={on ? A : D}>{REPORT.spine}</text>
+      <text x="290" y="38" fontSize="14" fill={on ? A : D}>{REPORT.range}</text>
+      <text x="520" y="40" fontSize="20" fill={on ? A : D}>{REPORT.short}</text>
     </g>
   );
 }

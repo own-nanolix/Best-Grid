@@ -77,8 +77,8 @@ export default function Plaque() {
       <CalloutG x={pt(98, 98)[0]} y={pt(98, 98)[1]} tx={900} ty={150} label="Mark, 45 mm" i={2} />
       <CalloutG x={pt(250, 205)[0]} y={pt(250, 205)[1]} tx={900} ty={270} label="Room word, plain English" i={3} />
       <CalloutG x={pt(250, 286)[0]} y={pt(250, 286)[1]} tx={900} ty={390} label="Pale bar where a name would be" i={4} />
-      <CalloutG x={pt(PW - 18, 18)[0]} y={pt(PW - 18, 18)[1]} tx={900} ty={510} label="Fixing screw, 4 mm" i={5} />
-      <CalloutG x={x0 - 8} y={r2((y0 + y3) / 2 + 4)} tx={900} ty={630} label="Dark Blue board, 6 mm" i={6} />
+      <CalloutG x={pt(PW - 18, PH - 18)[0]} y={pt(PW - 18, PH - 18)[1]} tx={900} ty={510} label="Fixing screw, 4 mm" i={5} />
+      <CalloutG x={x2 + 4} y={y2 + 6} tx={900} ty={630} label="Dark Blue board, 6 mm" i={6} />
     </Plate>
   );
 }

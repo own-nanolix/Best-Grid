@@ -32,7 +32,7 @@ function Perf({ x1, y1, x2, y2, r = 7 }) {
 }
 
 // One ticket in local coordinates (top left at 0, 0). v = stub at the foot instead of the right.
-function Ticket({ idp, tone, rows, two, v = false, w, h, stub, thick = 3, tag }) {
+function Ticket({ idp, tone, rows, two, v = false, w, h, stub, thick = 3, tag, fs = 14 }) {
   const t = TONE[tone](idp);
   const R = 8;
   const d = v ? portrait(w, h, h - stub, R) : landscape(w, h, w - stub, R);
@@ -49,7 +49,7 @@ function Ticket({ idp, tone, rows, two, v = false, w, h, stub, thick = 3, tag })
       <rect x="15" y={r2(mh * 0.4 - 3)} width="7" height="7" fill={t.mk} />
       <EsG>
         {rows.map((s, i) => (
-          <text key={s} x="18" y={r2(mh * 0.4 + 24 + i * 17)} fontSize="14" fill={two && i === 0 ? HEX.onBlue : two ? HEX.darkBlue : t.line}>{s}</text>
+          <text key={s} x="18" y={r2(mh * 0.4 + 24 + i * 17)} fontSize={fs} fill={two && i === 0 ? HEX.onBlue : two ? HEX.darkBlue : t.line}>{s}</text>
         ))}
       </EsG>
       <PaleBarsG x={18} y={mh - 38} w={r2((mw - 36) * 0.5)} rows={2} gap={12} h={5} fill={t.ph} opacity={0.22} />
@@ -88,7 +88,7 @@ export function TicketA() {
       <g transform={`translate(${cx} ${cy}) rotate(${rot}) translate(-170 -70)`}>
         <ShadowG idp={`${idp}-g`} cx={170} cy={140} rx={170} ry={12} dir={locDir(cd, rot)} opacity={0.45} />
         <CastG idp={`${idp}-c`} d={dpath} dir={locDir(cd, rot)} depth={14} opacity={0.4} blur={6} />
-        <LitG><Ticket idp={idp} tone="paper" rows={[LINES.hero.rows[0]]} w={340} h={140} stub={80} tag={3} /></LitG>
+        <LitG><Ticket idp={idp} tone="paper" rows={[LINES.hero.rows[0]]} w={340} h={140} stub={80} tag={3} fs={12.5} /></LitG>
       </g>
       <DimensionG x1={P(0, 140)[0]} y1={P(0, 140)[1]} x2={P(340, 140)[0]} y2={P(340, 140)[1]} value="130 mm" offset={28} i={5} />
       <CalloutG x={P(36, 26)[0]} y={P(36, 26)[1]} tx={470} ty={110} label="Logo" i={0} />
@@ -138,9 +138,9 @@ export function TicketC() {
       </g>
       <DimensionG x1={at(0, 0)[0]} y1={at(0, 0)[1]} x2={at(420, 0)[0]} y2={at(420, 0)[1]} value="160 mm" offset={-26} i={5} />
       <CalloutG x={at(36, 28)[0]} y={at(36, 28)[1]} tx={80} ty={340} label="Logo" i={0} />
-      <CalloutG x={at(300, 60)[0]} y={at(300, 60)[1]} tx={210} ty={340} label="Printed line" i={1} />
-      <CalloutG x={at(330, 75)[0]} y={at(330, 75)[1]} tx={360} ty={340} label="Perforation" i={2} />
-      <CalloutG x={at(200, 148)[0]} y={at(200, 148)[1]} tx={480} ty={340} label="Edge" sub="0.5 mm" i={3} />
+      <CalloutG x={at(150, 60)[0]} y={at(150, 60)[1]} tx={210} ty={340} label="Printed line" i={1} />
+      <CalloutG x={at(330, 75)[0]} y={at(330, 75)[1]} tx={480} ty={340} label="Perforation" i={2} />
+      <CalloutG x={at(200, 148)[0]} y={at(200, 148)[1]} tx={360} ty={340} label="Edge" sub="0.5 mm" i={3} />
     </Plate>
   );
 }
@@ -183,7 +183,7 @@ export function VipPass() {
       <CalloutG x={px + 60} y={py + ph - 48} tx={400} ty={160} label="VIP" i={1} />
       <CalloutG x={px + 140} y={py + 130} tx={400} ty={240} label="Crossing bands" i={2} />
       <CalloutG x={px + pw + 12} y={py + ph - 14} tx={400} ty={320} label="Clear stand" sub="acrylic, 4 mm" i={3} />
-      <SpecColumnG x={400} y={350} w={160} rows={[{ k: 'Card', v: '90 × 135 mm' }]} rowH={34} size={13} />
+      <SpecColumnG x={400} y={366} w={160} rows={[{ k: 'Card', v: '90 × 135 mm' }]} rowH={34} size={13} />
     </Plate>
   );
 }

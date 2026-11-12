@@ -88,7 +88,7 @@ export default function Wayfinding() {
 
       <CalloutG x={696} y={156} tx={560} ty={110} side="left" label="Stand-off cap, 25 mm" color={WIRE} i={2} />
       <CalloutG x={712} y={289} tx={560} ty={200} side="left" label="Icon cell, 70 mm" color={WIRE} i={3} />
-      <CalloutG x={966} y={525} tx={560} ty={330} side="left" label="Arrow, 60 mm bar" color={WIRE} i={4} />
+      <CalloutG x={966} y={525} tx={950} ty={650} side="left" label="Arrow, 60 mm bar" color={WIRE} text={HEX.darkBlue} i={4} />
       <CalloutG x={1175} y={500} tx={1230} ty={690} side="left" label="Section words as printed" color={WIRE} text={HEX.darkBlue} i={5} />
 
       <SpecColumnG x={110} y={440} w={410} title="Wayfinding plaque" rowH={46} rows={[

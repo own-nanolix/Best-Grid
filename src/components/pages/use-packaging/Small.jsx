@@ -93,8 +93,8 @@ export function TissueBox() {
             <SheenG idp={idp} d={`M${ix} ${iy}L${ix + 260} ${iy}L${ix} ${iy + 200}Z`} opacity="0.2" />
           </LitG>
           <CalloutG x={ix + 300} y={iy + 160} tx={730} ty={130} label="Printed tissue" sub="Mark repeat" i={1} />
-          <CalloutG x={ix + 100} y={iy + 110} tx={110} ty={120} label="Folded corner" side="right" i={2} />
-          <CalloutG x={bx + 8} y={by + 280} tx={90} ty={420} label="Box wall" side="right" i={3} />
+          <CalloutG x={ix + 100} y={iy + 110} tx={230} ty={120} label="Folded corner" side="left" i={2} />
+          <CalloutG x={bx + 8} y={by + 280} tx={170} ty={420} label="Box wall" side="left" i={3} />
           <CalloutG x={ix + 300} y={iy + 240} tx={740} ty={600} label="Soft crease" i={4} />
           <DimensionG x1={bx} y1={by + bh} x2={bx + bw} y2={by + bh} value="520 mm" offset={34} i={5} />
         </>
@@ -267,7 +267,7 @@ export function ShippingLabel() {
             <SheenG idp={idp} d={`M${lx - 30} ${ly - 22}h420v38h-420z`} opacity="0.25" />
           </LitG>
           <CalloutG x={lx + 35} y={ly + 40} tx={240} ty={290} label="Logo" side="left" i={1} />
-          <CalloutG x={lx + 300} y={ly + 110} tx={772} ty={330} label="Contact" i={2} />
+          <CalloutG x={lx + 300} y={ly + 110} tx={600} ty={88} label="Contact" i={2} />
           <CalloutG x={lx + 70} y={ly + 120} tx={240} ty={380} label="Address bars" side="left" i={3} />
           <CalloutG x={lx + 110} y={ly + 218} tx={240} ty={470} label="Plain bars" side="left" i={4} />
           <CalloutG x={lx - 28} y={ly - 3} tx={240} ty={190} label="Clear tape" side="left" i={5} />
@@ -303,8 +303,6 @@ export function TubeLabelPlate() {
             <g transform={`translate(${ox} ${oy}) scale(${k})`} filter={`url(#${idp}-fibre)`}><TubeLabelG /></g>
             <rect x={ox} y={oy} width={lw} height={lh} fill={`url(#${idp}-ll)`} />
             <rect x={ox} y={oy} width={lw} height="2" fill={HEX.white} opacity="0.7" />
-            <rect x={ox} y={oy + lh * 0.46} width={lw} height="1.2" fill={HEX.black} opacity="0.1" />
-            <rect x={ox} y={oy + lh * 0.46 + 1.2} width={lw} height="1" fill={HEX.white} opacity="0.4" />
             <SheenG idp={idp} d={`M${ox} ${oy}h${lw * 0.6}L${ox} ${oy + lh * 0.5}Z`} opacity="0.18" />
           </LitG>
           {n(35, 218, 1, 'Project number', 530, 510)}

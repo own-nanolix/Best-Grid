@@ -61,7 +61,8 @@ function FlatStrip({ idp, k, m, len, h, bg, ink, fold = 0, creaseAt = 0.55, lift
 export function TapeRollBlue() {
   const spot = { x: 0.24, y: 0.18 };
   const cx = 290, cy = 395, R = 140, rx = 50, wD = 150, dy = -22;
-  const body = [[cx, cy - R], [cx + wD, cy - R + dy], [cx + wD, cy + R + dy], [cx, cy + R]];
+  // the wound body: from the front face to the far end, which shows only as its rounded outer half
+  const bodyD = `M${cx} ${cy - R}L${cx + wD} ${cy - R + dy}A${rx} ${R} 0 0 1 ${cx + wD} ${cy + R + dy}L${cx} ${cy + R}Z`;
   const units = [[-72, 0.88], [78, 0.78]];
   return (
     <Plate
@@ -84,12 +85,10 @@ export function TapeRollBlue() {
               <stop offset="1" stopColor={HEX.black} stopOpacity="0.05" />
             </linearGradient>
             <clipPath id={`${idp}-body`}>
-              <polygon points={pts(body)} />
-              <ellipse cx={cx + wD} cy={cy + dy} rx={rx} ry={R} />
+              <path d={bodyD} />
             </clipPath>
             {/* the wound film: back cap, the cylinder with its printed band, the front face with its layers */}
-            <ellipse cx={cx + wD} cy={cy + dy} rx={rx} ry={R} fill={BLUE} />
-            <polygon points={pts(body)} fill={BLUE} />
+            <path d={bodyD} fill={BLUE} />
             <g clipPath={`url(#${idp}-body)`}>
               {units.map(([yo, c]) => (
                 <g key={yo} transform={`translate(${cx + wD / 2 + 8} ${r2(cy + yo + 108 * c - 11)}) scale(1 ${c}) rotate(-90)`}>
@@ -99,10 +98,8 @@ export function TapeRollBlue() {
               <rect x={cx} y={cy + 28} width={wD + rx} height="1.6" fill={HEX.black} opacity="0.3" transform="rotate(-8.3 290 423)" />
               <rect x={cx} y={cy + 29.6} width={wD + rx} height="1.2" fill={HEX.white} opacity="0.4" transform="rotate(-8.3 290 423)" />
             </g>
-            <ellipse cx={cx + wD} cy={cy + dy} rx={rx} ry={R} fill={`url(#${idp}-cyl)`} />
-            <ellipse cx={cx + wD} cy={cy + dy} rx={rx} ry={R} fill={`url(#${idp}-shade-r)`} opacity="0.55" />
-            <polygon points={pts(body)} fill={`url(#${idp}-cyl)`} />
-            <polygon points={pts(body)} fill={`url(#${idp}-shade-r)`} opacity="0.55" />
+            <path d={bodyD} fill={`url(#${idp}-cyl)`} />
+            <path d={bodyD} fill={`url(#${idp}-shade)`} opacity="0.55" />
             <ellipse cx={cx} cy={cy} rx={rx} ry={R} fill={`url(#${idp}-board)`} />
             {[0.8, 0.86, 0.92, 0.97].map((s) => (
               <ellipse key={s} cx={cx} cy={cy} rx={r2(rx * s)} ry={r2(R * s)} fill="none" stroke={HEX.white} strokeOpacity="0.16" strokeWidth="0.8" />
@@ -214,9 +211,9 @@ export function TapeStrips() {
             <FlatStrip key={s.k} idp={idp} k={s.k} m={mat(s)} len={s.len} h={s.h} bg={s.bg} ink={s.ink} fold={s.k === 'c' ? 40 : 0} lift={HEX.labelGrey} creaseAt={0.3 + 0.1 * strips.indexOf(s)} />
           ))}
           <CalloutG x={190} y={228} tx={90} ty={110} label="Printed film" side="right" i={1} />
-          <CalloutG x={706} y={200} tx={560} ty={110} label="Saw-cut end" i={2} />
-          <CalloutG x={487} y={576} tx={300} ty={650} label="Crease" side="right" i={3} />
-          <CalloutG x={735} y={603} tx={620} ty={650} label="Folded corner" i={4} />
+          <CalloutG x={690} y={197} tx={560} ty={110} label="Saw-cut end" i={2} />
+          <CalloutG x={487} y={576} tx={460} ty={650} label="Crease" side="left" i={3} />
+          <CalloutG x={735} y={603} tx={715} ty={650} label="Folded corner" side="left" i={4} />
           <DimensionG x1={668} y1={198} x2={668} y2={252} value="48 mm" offset={-36} i={5} />
         </>
       )}

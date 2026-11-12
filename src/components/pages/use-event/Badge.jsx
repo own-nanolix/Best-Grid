@@ -51,7 +51,7 @@ export default function Badge() {
             <circle cx={px} cy={py} r="9" fill="#05060f" />
           </g>
         ))}
-        {/* the card, as printed on m08 */}
+        {/* the card, as printed on m08 (the pale numeral sits in the left column, left of the hairline) */}
         <rect x="108" y="160" width="785" height="1435" fill={`url(#${idp}-card)`} filter={`url(#${idp}-fibre)`} />
         <rect x="334" y="160" width="2.6" height="1038" fill={HEX.activeBlue} />
         <rect x="108" y="1196" width="785" height="2.6" fill={HEX.activeBlue} />
@@ -63,7 +63,7 @@ export default function Badge() {
             <text key={t} x="383" y={645 + i * 56} fontSize="46" fill={HEX.activeBlue}>{t}</text>
           ))}
           <text x="383" y="773" fontSize="29" fill={HEX.activeBlue}>{BADGE.dept}</text>
-          <text x="145" y="1090" fontSize="190" fill="#ffffff" fillOpacity="0.62">{BADGE.numeral}</text>
+          <text x="148" y="1091" fontSize="125" fill="#ffffff" fillOpacity="0.62">{BADGE.numeral}</text>
           <text x="387" y="1085" fontSize="42" fill={HEX.activeBlue}>{BADGE.id}</text>
           <text x="382" y="1470" fontSize="29" fill={HEX.activeBlue}>{web}</text>
         </EsG>
@@ -75,9 +75,9 @@ export default function Badge() {
       <DimensionG x1={X0} y1={Y0 + 840} x2={X0} y2={Y0} value="155 mm" offset={-46} i={6} />
       <DimensionG x1={X0} y1={Y0 + 840} x2={X0 + 489} y2={Y0 + 840} value="90 mm" offset={34} i={7} />
       <CalloutG x={lx} y={ly} tx={700} ty={80} label="Lanyard" sub="20 mm wide, woven" i={0} />
-      <CalloutG x={sx} y={sy} tx={700} ty={170} label="Lanyard slot" i={1} />
+      <CalloutG x={sx} y={sy} tx={700} ty={330} label="Lanyard slot" i={1} />
       <CalloutG x={kx} y={ky} tx={700} ty={250} label="Screw boss" i={2} />
-      <CalloutG x={rx} y={ry} tx={700} ty={330} label="Holder radius" sub="R 8 mm" i={3} />
+      <CalloutG x={rx} y={ry} tx={700} ty={170} label="Holder radius" sub="R 8 mm" i={3} />
       <CalloutG x={cx} y={cy} tx={700} ty={520} label="Card window" sub="72 × 132 mm" i={4} />
       <CalloutG x={bx} y={by} tx={700} ty={780} label="Barcode" sub="plain bars, encodes nothing" i={5} />
       <SpecColumnG x={690} y={870} w={210} title="Holder" rows={[{ k: 'Size', v: '90 × 155 mm' }, { k: 'Radius', v: '8 mm' }, { k: 'Card', v: '72 × 132 mm' }]} rowH={36} size={14} />
